@@ -52,12 +52,17 @@ HEAD = """<!doctype html>
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
 <a class="brand" href="index.html" aria-label="GoUnscramble home">@@LOGO52@@<span>Unscramble</span></a>
-<nav class="nav" aria-label="Main">
+<nav class="nav main-nav" aria-label="Main">
+<details class="menu">
+<summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
+<div class="menu-list">
 <a href="index.html"@@CUR_home@@>GoUnscramble</a>
 <a href="tools.html"@@CUR_tools@@>Tools</a>
 <a href="guides.html"@@CUR_guides@@>Guides</a>
 <a href="about.html"@@CUR_about@@>About</a>
 <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Dark mode" hidden></button>
+</div>
+</details>
 </nav>
 </div></header>
 <!--/header-->
