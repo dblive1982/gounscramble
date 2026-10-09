@@ -396,7 +396,7 @@ def asset_version(name):
 
 def build_page(p):
     body = (fill_extras(p["body"])
-            .replace("@@LETTERS@@", letters_input("Find anagrams" if p["page"] == "anagram" else "GoUnscramble"))
+            .replace("@@LETTERS@@", letters_input("Find anagrams" if p["page"] == "anagram" else "Unscramble"))
             .replace("@@DICT@@", DICT_ROW)
             .replace("@@FILTERS@@", FILTERS)
             .replace("@@CHEVRON@@", CHEVRON)
