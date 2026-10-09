@@ -35,7 +35,25 @@
     });
   }
 
+  // Chip for a word, with the letters matched by Starts with / Ends with / Contains picked out.
+  function wordChip(w, f) {
+    var chip = el('span', 'chip');
+    var mask = [], i;
+    for (i = 0; i < w.length; i++) mask.push(false);
+    if (f.starts && w.indexOf(f.starts) === 0) for (i = 0; i < f.starts.length; i++) mask[i] = true;
+    if (f.ends && w.slice(-f.ends.length) === f.ends) for (i = w.length - f.ends.length; i < w.length; i++) mask[i] = true;
+    if (f.contains) { var at = w.indexOf(f.contains); if (at > -1) for (i = at; i < at + f.contains.length; i++) mask[i] = true; }
+    var run = '', on = false;
+    function flush() { if (run) { chip.appendChild(on ? el('span', 'hl', run) : document.createTextNode(run)); run = ''; } }
+    for (i = 0; i < w.length; i++) { if (mask[i] !== on) { flush(); on = mask[i]; } run += w.charAt(i); }
+    flush();
+    return chip;
+  }
+
+  function cleanFilter(s) { return String(s || '').toLowerCase().replace(/[^a-z]/g, ''); }
+
   function renderWords(box, words) {
+    var f = { starts: cleanFilter(val('starts')), ends: cleanFilter(val('ends')), contains: cleanFilter(val('contains')) };
     clear(box);
     if (!words.length) {
       note(box, 'No words found. Try different letters, add a blank (?) or remove a filter.');
@@ -49,7 +67,7 @@
       h.appendChild(el('span', 'count', ' (' + g.words.length + ')'));
       sec.appendChild(h);
       var chips = el('div', 'chips');
-      g.words.forEach(function (w) { chips.appendChild(el('span', 'chip', w)); });
+      g.words.forEach(function (w) { chips.appendChild(wordChip(w, f)); });
       sec.appendChild(chips);
       box.appendChild(sec);
     });
@@ -89,7 +107,6 @@
       }
       note(out, 'Searching…');
       loadWords(dictKey()).then(function (words) {
-        out.classList.toggle('filter-mode', filtersOnly);
         renderWords(out, filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts));
       }).catch(function () {
         note(out, 'The word list could not be loaded. Please try again later.', 'error');

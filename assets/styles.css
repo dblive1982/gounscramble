@@ -202,7 +202,7 @@ a.card:hover { border-color: var(--ink); color: var(--ink); }
 .results .chip, .pill { background: var(--green); }
 
 /* Filter-only searches (no letters typed): white letters on the green chips. */
-.results.filter-mode .chip { color: #fff; }
+.chip .hl { color: #fff; }
 
 /* Text cursor only blinks inside fields you have selected. */
 body { caret-color: transparent; }
