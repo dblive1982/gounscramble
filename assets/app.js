@@ -37,14 +37,12 @@
 
   // Chip for a word, with the letters matched by Starts with / Ends with / Contains picked out.
   function wordChip(w, f) {
-    var look = LOOKUPS[lookupDict];
-    var chip = el(look ? 'a' : 'span', 'chip');
-    if (look) {
-      chip.href = look.url + encodeURIComponent(w);
-      chip.target = '_blank';
-      chip.rel = 'noopener noreferrer';
-      chip.title = 'Look up ' + w.toUpperCase() + ' in ' + look.name + ' (opens in a new tab)';
-    }
+    var chip = el('button', 'chip');
+    chip.type = 'button';
+    chip.setAttribute('data-word', w);
+    chip.setAttribute('aria-pressed', selectedWord === w ? 'true' : 'false');
+    if (selectedWord === w) chip.className += ' sel';
+    chip.addEventListener('click', function () { selectWord(w); });
     var mask = [], i;
     for (i = 0; i < w.length; i++) mask.push(false);
     if (f.starts && w.indexOf(f.starts) === 0) for (i = 0; i < f.starts.length; i++) mask[i] = true;
@@ -63,15 +61,46 @@
   try { var saved = localStorage.getItem('gu-score-game'); if (saved === 'scrabble' || saved === 'wwf' || saved === 'none') scoreGame = saved; } catch (err) { /* storage unavailable */ }
   var lastRender = null;
 
-  var LOOKUPS = {
-    collins: { name: 'Collins Dictionary (UK)', url: 'https://www.collinsdictionary.com/dictionary/english/' },
-    oxford: { name: 'Oxford Learner\'s Dictionaries (UK)', url: 'https://www.oxfordlearnersdictionaries.com/search/english/?q=' },
-    cambridge: { name: 'Cambridge Dictionary (UK)', url: 'https://dictionary.cambridge.org/dictionary/english/' },
-    mw: { name: 'Merriam-Webster (US)', url: 'https://www.merriam-webster.com/dictionary/' },
-    dictcom: { name: 'Dictionary.com (US)', url: 'https://www.dictionary.com/browse/' }
-  };
-  var lookupDict = 'collins';
-  try { var savedLook = localStorage.getItem('gu-lookup'); if (savedLook === 'none' || LOOKUPS[savedLook]) lookupDict = savedLook; } catch (err) { /* storage unavailable */ }
+  var LOOKUPS = [
+    ['Collins Dictionary (UK)', 'https://www.collinsdictionary.com/dictionary/english/'],
+    ['Oxford Learner\'s Dictionaries (UK)', 'https://www.oxfordlearnersdictionaries.com/search/english/?q='],
+    ['Cambridge Dictionary (UK)', 'https://dictionary.cambridge.org/dictionary/english/'],
+    ['Merriam-Webster (US)', 'https://www.merriam-webster.com/dictionary/'],
+    ['Dictionary.com (US)', 'https://www.dictionary.com/browse/']
+  ];
+  var selectedWord = '';
+  var lookupPanel = null;
+
+  function fillLookup() {
+    if (!lookupPanel) return;
+    clear(lookupPanel);
+    lookupPanel.appendChild(el('p', 'lookup-title', 'Look up a word'));
+    if (!selectedWord) {
+      lookupPanel.appendChild(el('p', 'lookup-hint', 'Tap any word above to see where to look it up.'));
+      return;
+    }
+    lookupPanel.appendChild(el('p', 'lookup-hint', 'Look up \u201C' + selectedWord + '\u201D in a dictionary:'));
+    var list = el('div', 'lookup-links');
+    LOOKUPS.forEach(function (d) {
+      var link = el('a', null, d[0] + ' \u2197');
+      link.href = d[1] + encodeURIComponent(selectedWord);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      list.appendChild(link);
+    });
+    lookupPanel.appendChild(list);
+    lookupPanel.appendChild(el('p', 'lookup-note', 'Opens in a new tab. A few Scrabble-only words may not be in a general dictionary.'));
+  }
+
+  function selectWord(w) {
+    selectedWord = w;
+    Array.prototype.forEach.call(document.querySelectorAll('.results .chip'), function (c) {
+      var on = c.getAttribute('data-word') === w;
+      c.classList.toggle('sel', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    fillLookup();
+  }
 
   function segBar(label, options, current, onPick) {
     var bar = el('div', 'scorebar');
@@ -96,28 +125,8 @@
     });
   }
 
-  function lookupBar() {
-    var bar = el('div', 'scorebar');
-    var id = 'lookup-select';
-    var label = el('label', 'scorelabel', 'Look up words in:');
-    label.setAttribute('for', id);
-    bar.appendChild(label);
-    var sel = el('select', 'lookup-select');
-    sel.id = id;
-    Object.keys(LOOKUPS).forEach(function (k) {
-      var o = el('option', null, LOOKUPS[k].name); o.value = k; if (k === lookupDict) o.selected = true; sel.appendChild(o);
-    });
-    var off = el('option', null, 'Off (no links)'); off.value = 'none'; if (lookupDict === 'none') off.selected = true; sel.appendChild(off);
-    sel.addEventListener('change', function () {
-      lookupDict = sel.value;
-      try { localStorage.setItem('gu-lookup', lookupDict); } catch (err) { /* ignore */ }
-      if (lastRender) renderWords(lastRender.box, lastRender.words, lastRender.letters);
-    });
-    bar.appendChild(sel);
-    return bar;
-  }
-
   function renderWords(box, words, letters) {
+    if (!lastRender || lastRender.words !== words) selectedWord = '';
     lastRender = { box: box, words: words, letters: letters || '' };
     var f = { starts: cleanFilter(val('starts')), ends: cleanFilter(val('ends')), contains: cleanFilter(val('contains')) };
     clear(box);
@@ -126,11 +135,7 @@
       return;
     }
     box.appendChild(el('p', 'note strong', 'Found ' + words.length.toLocaleString() + (words.length === 1 ? ' word' : ' words')));
-    var tools = el('div', 'bars');
-    tools.appendChild(scoreBar());
-    tools.appendChild(lookupBar());
-    box.appendChild(tools);
-    if (LOOKUPS[lookupDict]) box.appendChild(el('p', 'note small', 'Tap a word to see its meaning in ' + LOOKUPS[lookupDict].name + '. A few Scrabble-only words may not be in a general dictionary.'));
+    box.appendChild(scoreBar());
     var shown = words.length > MAX_SHOWN ? words.slice(0, MAX_SHOWN) : words;
     GU.groupByLength(shown).forEach(function (g) {
       var sec = el('section', 'group');
@@ -146,9 +151,13 @@
       sec.appendChild(chips);
       box.appendChild(sec);
     });
+    lookupPanel = el('section', 'lookup');
+    lookupPanel.setAttribute('aria-live', 'polite');
+    fillLookup();
     if (shown.length < words.length) {
       box.appendChild(el('p', 'note', 'Showing the longest ' + MAX_SHOWN.toLocaleString() + ' words. Add a filter to narrow the list.'));
     }
+    box.appendChild(lookupPanel);
   }
 
   function submitForm(form) {
