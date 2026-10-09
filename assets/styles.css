@@ -272,3 +272,17 @@ body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
     --tile-bg: #0B0C0F; --error: #FF8A80; color-scheme: dark;
   }
 }
+
+/* Example letters styled like Scrabble tiles: slightly tilted, soft shadow, points in the corner. */
+.letters { gap: 10px; }
+.ltile {
+  position: relative; width: 52px; height: 56px; border-radius: 10px; font-size: 30px;
+  background: linear-gradient(145deg, #FFE27A, var(--yellow));
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28), 0 10px 16px rgba(0, 0, 0, 0.14);
+  transform: rotate(-3deg);
+}
+.ltile:nth-child(even) { transform: rotate(2.5deg) translateY(2px); }
+.ltile:nth-child(3n) { transform: rotate(-1deg) translateY(-1px); }
+.ltile:nth-child(4n) { transform: rotate(3.5deg); }
+.ltile .pt { position: absolute; right: 6px; bottom: 3px; font-family: var(--display); font-weight: 700; font-size: 12px; line-height: 1; }
+@media (max-width: 480px) { .ltile { width: 44px; height: 48px; font-size: 26px; } .letters { gap: 8px; } }

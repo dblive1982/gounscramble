@@ -147,7 +147,11 @@
       var tiles = $('ex-letters'), pills = $('ex-pills');
       if (tiles && pills) {
         clear(tiles); clear(pills);
-        jumble.split('').forEach(function (c) { tiles.appendChild(el('span', 'ltile', c.toUpperCase())); });
+        jumble.split('').forEach(function (c) {
+          var tile = el('span', 'ltile', c.toUpperCase());
+          tile.appendChild(el('span', 'pt', String(GU.scoreWord(c, 'scrabble'))));
+          tiles.appendChild(tile);
+        });
         pick[1].forEach(function (w) { pills.appendChild(el('span', 'pill', w)); });
         example.setAttribute('aria-label', 'Try the example: letters ' + jumble.toUpperCase().split('').join(' '));
         input.placeholder = 'e.g. ' + jumble;
