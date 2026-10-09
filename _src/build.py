@@ -2,6 +2,10 @@
 """Builds every GoUnscramble page from ONE shared layout, so header, footer and head always match.
 Run: python3 build.py   (writes the .html files into ./site, leaves assets/ and words/ alone)"""
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import guides as G
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("GU_OUT") or os.path.join(ROOT, "site")
@@ -46,6 +50,7 @@ HEADER = """<!--header-->
 <nav class="nav" aria-label="Main">
 <a href="index.html"@@CUR_home@@>Unscrambler</a>
 <a href="tools.html"@@CUR_tools@@>Tools</a>
+<a href="guides.html"@@CUR_guides@@>Guides</a>
 <a href="about.html"@@CUR_about@@>About</a>
 </nav>
 </div></header>
@@ -57,6 +62,7 @@ FOOTER = """<!--footer-->
 <div class="foot-brand">@@LOGO32@@<span>&copy; 2026 GoUnscramble</span></div>
 <nav class="nav" aria-label="Footer">
 <a href="credits.html">Credits</a>
+<a href="faq.html">FAQ</a>
 <a href="privacy.html">Privacy</a>
 <a href="contact.html">Contact</a>
 </nav>
@@ -142,6 +148,7 @@ HOME = """<main><div class="wrap">
 <h2>About GoUnscramble</h2>
 <p>GoUnscramble turns jumbled letters into real words, and adds a few handy text tools alongside. Use ? or * for a blank tile, then narrow the list by the letters a word starts with, ends with or contains, or by its length. It works well for word games, crosswords and anagram puzzles. <a href="about.html">Read more</a>.</p>
 </section>
+@@HOME_EXTRA@@
 </div></main>
 """
 
@@ -159,6 +166,7 @@ ANAGRAM = """<main><div class="wrap">
 <h2>How it works</h2>
 <p>An anagram uses all of the letters you give it, once each. Type your letters and the solver lists every word of exactly that length. Add a ? or * for a blank tile that can stand for any letter. To see shorter words too, use the <a href="index.html">word unscrambler</a>.</p>
 </section>
+@@ANAGRAM_EXTRA@@
 <section class="block">
 <h2>More free tools</h2>
 @@CARDS@@
@@ -180,6 +188,7 @@ RANDOM = """<main><div class="wrap">
 </form>
 <section id="results" class="results" aria-live="polite"></section>
 </section>
+@@RANDOM_EXTRA@@
 <section class="block">
 <h2>More free tools</h2>
 @@CARDS@@
@@ -205,6 +214,7 @@ COUNTER = """<main><div class="wrap">
 <p class="hint">Reading time assumes about 200 words a minute.</p>
 </div>
 </section>
+@@COUNTER_EXTRA@@
 <section class="block">
 <h2>More free tools</h2>
 @@CARDS@@
@@ -229,6 +239,7 @@ CASE = """<main><div class="wrap">
 <p id="status" class="status" aria-live="polite"></p>
 </div>
 </section>
+@@CASE_EXTRA@@
 <section class="block">
 <h2>More free tools</h2>
 @@CARDS@@
@@ -244,6 +255,7 @@ TOOLS_PAGE = """<main><div class="wrap">
 <section class="block" style="margin-top:32px">
 @@CARDS@@
 </section>
+@@TOOLS_EXTRA@@
 </div></main>
 """
 
@@ -327,15 +339,29 @@ PAGES = [
 ]
 
 
+GUIDE_WRAP = '<main><div class="wrap"><article class="prose">\n%s\n</article></div></main>\n'
+
+
+def fill_extras(body):
+    faq_home = G.faq_html(G.FAQ_ITEMS[:5])
+    return (body
+            .replace("@@HOME_EXTRA@@", G.HOME_EXTRA.replace("@@FAQ@@", faq_home))
+            .replace("@@ANAGRAM_EXTRA@@", G.ANAGRAM_EXTRA)
+            .replace("@@RANDOM_EXTRA@@", G.RANDOM_EXTRA)
+            .replace("@@COUNTER_EXTRA@@", G.COUNTER_EXTRA)
+            .replace("@@CASE_EXTRA@@", G.CASE_EXTRA)
+            .replace("@@TOOLS_EXTRA@@", G.TOOLS_EXTRA))
+
+
 def build_page(p):
-    body = (p["body"]
+    body = (fill_extras(p["body"])
             .replace("@@LETTERS@@", letters_input("Find anagrams" if p["page"] == "anagram" else "Unscramble"))
             .replace("@@DICT@@", DICT_ROW)
             .replace("@@FILTERS@@", FILTERS)
             .replace("@@CHEVRON@@", CHEVRON)
             .replace("@@CARDS@@", cards(p.get("skip"))))
     header = HEADER.replace("@@LOGO52@@", logo(52))
-    for key in ("home", "tools", "about"):
+    for key in ("home", "tools", "guides", "about"):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
     footer = FOOTER.replace("@@LOGO32@@", logo(32))
     path = "" if p["file"] == "index.html" else p["file"]
@@ -344,12 +370,32 @@ def build_page(p):
     return head + header + body + footer
 
 
+def guide_pages():
+    words_path = os.path.join(OUT, "words", "enable.txt")
+    words = G.load_words(words_path)
+    pages = []
+    for fname, article in G.guide_bodies(words).items():
+        title, desc = G.PAGE_META[fname]
+        pages.append(dict(file=fname, page="guide", nav="guides", body=GUIDE_WRAP % article,
+                          title=title + " | GoUnscramble", desc=desc))
+    return pages
+
+
+def sitemap(pages):
+    urls = [SITE + "/" if p["file"] == "index.html" else SITE + "/" + p["file"] for p in pages]
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join("  <url><loc>%s</loc></url>\n" % u for u in urls) + "</urlset>\n")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for p in PAGES:
+    pages = PAGES + guide_pages()
+    for p in pages:
         with open(os.path.join(OUT, p["file"]), "w", encoding="utf-8") as f:
             f.write(build_page(p))
-    print("built %d pages into %s" % (len(PAGES), OUT))
+    with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write(sitemap(pages))
+    print("built %d pages into %s" % (len(pages), OUT))
 
 
 if __name__ == "__main__":

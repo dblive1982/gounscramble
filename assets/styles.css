@@ -162,3 +162,22 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
 .stat dd { margin: 0; font-family: var(--display); font-weight: 700; font-size: 28px; }
 .btns { display: flex; flex-wrap: wrap; gap: 10px; }
 .status { min-height: 1.6em; font-size: 15px; color: var(--muted); }
+
+/* Guides and reference pages. */
+.prose h3 { margin-top: 12px; font-size: 20px; letter-spacing: 0; }
+.prose ol { margin: 0; padding-left: 24px; display: flex; flex-direction: column; gap: 8px; }
+.prose a { color: var(--ink); text-underline-offset: 3px; }
+.prose .chips { gap: 6px; }
+.prose .chip { padding: 4px 12px; font-size: 17px; color: var(--ink); }
+.notice { background: rgba(255, 210, 63, 0.25); border: 1px solid var(--yellow); border-radius: 14px; padding: 12px 16px; }
+.notice p { font-size: 16px; color: var(--ink); }
+.jump { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.jump a { font-family: var(--display); font-weight: 600; }
+.gloss { margin: 0; display: grid; gap: 12px; }
+.gloss dt { font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--ink); }
+.gloss dd { margin: 2px 0 0; font-size: 18px; color: var(--muted); }
+.guide-cards .card h3 { font-size: 20px; }
+.block.narrow ul.plain { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 18px; color: var(--muted); }
+.block.narrow ol { margin: 0; padding-left: 24px; display: flex; flex-direction: column; gap: 8px; font-size: 18px; color: var(--muted); }
+.block.narrow h3 { font-size: 20px; margin-top: 8px; }
+.block.narrow a { color: var(--ink); }
