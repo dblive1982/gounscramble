@@ -37,7 +37,14 @@
 
   // Chip for a word, with the letters matched by Starts with / Ends with / Contains picked out.
   function wordChip(w, f) {
-    var chip = el('span', 'chip');
+    var look = LOOKUPS[lookupDict];
+    var chip = el(look ? 'a' : 'span', 'chip');
+    if (look) {
+      chip.href = look.url + encodeURIComponent(w);
+      chip.target = '_blank';
+      chip.rel = 'noopener noreferrer';
+      chip.title = 'Look up ' + w.toUpperCase() + ' in ' + look.name + ' (opens in a new tab)';
+    }
     var mask = [], i;
     for (i = 0; i < w.length; i++) mask.push(false);
     if (f.starts && w.indexOf(f.starts) === 0) for (i = 0; i < f.starts.length; i++) mask[i] = true;
@@ -56,21 +63,41 @@
   try { var saved = localStorage.getItem('gu-score-game'); if (saved === 'scrabble' || saved === 'wwf' || saved === 'none') scoreGame = saved; } catch (err) { /* storage unavailable */ }
   var lastRender = null;
 
-  function scoreBar(box) {
+  var LOOKUPS = {
+    collins: { name: 'Collins Dictionary', url: 'https://www.collinsdictionary.com/dictionary/english/' },
+    mw: { name: 'Merriam-Webster', url: 'https://www.merriam-webster.com/dictionary/' }
+  };
+  var lookupDict = 'collins';
+  try { var savedLook = localStorage.getItem('gu-lookup'); if (savedLook === 'collins' || savedLook === 'mw' || savedLook === 'none') lookupDict = savedLook; } catch (err) { /* storage unavailable */ }
+
+  function segBar(label, options, current, onPick) {
     var bar = el('div', 'scorebar');
-    bar.appendChild(el('span', 'scorelabel', 'Points:'));
-    [['scrabble', 'Scrabble'], ['wwf', 'Words With Friends'], ['none', 'Off']].forEach(function (o) {
-      var b = el('button', 'seg' + (scoreGame === o[0] ? ' on' : ''), o[1]);
+    bar.appendChild(el('span', 'scorelabel', label));
+    options.forEach(function (o) {
+      var b = el('button', 'seg' + (current === o[0] ? ' on' : ''), o[1]);
       b.type = 'button';
-      b.setAttribute('aria-pressed', scoreGame === o[0] ? 'true' : 'false');
+      b.setAttribute('aria-pressed', current === o[0] ? 'true' : 'false');
       b.addEventListener('click', function () {
-        scoreGame = o[0];
-        try { localStorage.setItem('gu-score-game', scoreGame); } catch (err) { /* ignore */ }
+        onPick(o[0]);
         if (lastRender) renderWords(lastRender.box, lastRender.words, lastRender.letters);
       });
       bar.appendChild(b);
     });
     return bar;
+  }
+
+  function scoreBar() {
+    return segBar('Points:', [['scrabble', 'Scrabble'], ['wwf', 'Words With Friends'], ['none', 'Off']], scoreGame, function (v) {
+      scoreGame = v;
+      try { localStorage.setItem('gu-score-game', v); } catch (err) { /* ignore */ }
+    });
+  }
+
+  function lookupBar() {
+    return segBar('Look up words in:', [['collins', 'Collins'], ['mw', 'Merriam-Webster'], ['none', 'Off']], lookupDict, function (v) {
+      lookupDict = v;
+      try { localStorage.setItem('gu-lookup', v); } catch (err) { /* ignore */ }
+    });
   }
 
   function renderWords(box, words, letters) {
@@ -82,7 +109,11 @@
       return;
     }
     box.appendChild(el('p', 'note strong', 'Found ' + words.length.toLocaleString() + (words.length === 1 ? ' word' : ' words')));
-    box.appendChild(scoreBar(box));
+    var tools = el('div', 'bars');
+    tools.appendChild(scoreBar());
+    tools.appendChild(lookupBar());
+    box.appendChild(tools);
+    if (LOOKUPS[lookupDict]) box.appendChild(el('p', 'note small', 'Tap a word to see its meaning in ' + LOOKUPS[lookupDict].name + '. A few Scrabble-only words may not be in a general dictionary.'));
     var shown = words.length > MAX_SHOWN ? words.slice(0, MAX_SHOWN) : words;
     GU.groupByLength(shown).forEach(function (g) {
       var sec = el('section', 'group');
