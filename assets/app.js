@@ -362,7 +362,7 @@
       b.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode');
       b.title = d ? 'Light mode' : 'Dark mode';
       var m = document.querySelector('meta[name="theme-color"]');
-      if (m) m.setAttribute('content', d ? '#15171C' : '#F4F5F7');
+      if (m) m.setAttribute('content', d ? '#1B0A33' : '#2A0B4E');
     }
     b.addEventListener('click', function () {
       var next = isDark() ? 'light' : 'dark';

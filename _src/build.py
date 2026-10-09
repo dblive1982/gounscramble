@@ -22,11 +22,10 @@ CHEVRON = ('<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><
 def logo(size):
     return (
         '<svg width="%d" height="%d" viewBox="0 0 100 100" aria-hidden="true">'
-        '<g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect>'
-        '<text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g>'
-        '<g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect>'
-        '<text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g>'
-        '</svg>' % (size, size)
+        '<defs><linearGradient id="lg%d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C13CF0"/><stop offset="1" stop-color="#8E17D6"/></linearGradient></defs>'
+        '<rect x="4" y="4" width="92" height="92" rx="26" fill="url(#lg%d)"></rect>'
+        '<text x="50" y="67" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-style="italic" font-weight="800" font-size="52" letter-spacing="-3" fill="#FFFFFF">Go</text>'
+        '</svg>' % (size, size, size, size)
     )
 
 
@@ -39,14 +38,14 @@ HEAD = """<!doctype html>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="@@CANON@@">
 @@SEO@@
-<meta name="theme-color" content="#F4F5F7">
+<meta name="theme-color" content="#2A0B4E">
 <script>try{var t=localStorage.getItem("gu-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="google-adsense-account" content="ca-pub-6517978259411056">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6517978259411056" crossorigin="anonymous"></script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body data-page="@@PAGE@@">
@@ -159,7 +158,7 @@ def letters_input(button_text):
 
 HOME = """<main><div class="wrap">
 <section class="hero">
-<h1>Unscramble any word in seconds</h1>
+<h1>Unscramble any word <span class="accent">in seconds</span></h1>
 <p class="lede">Type your jumbled letters and see every word they can make.</p>
 <form id="tool-form" class="panel" novalidate>
 @@LETTERS@@
@@ -339,7 +338,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard server logs, such as your IP address and the pages requested, to keep the site running and secure.</p>
 <h2>Fonts</h2>
-<p>Pages load the Fredoka and Nunito fonts from Google Fonts, so your browser contacts Google to fetch them.</p>
+<p>Pages load the Plus Jakarta Sans font from Google Fonts, so your browser contacts Google to fetch them.</p>
 <h2>Advertising and analytics</h2>
 <p>This site is set up to show advertising from Google AdSense. Google and its advertising partners may use cookies and similar technologies to show ads, measure them and, where you allow it, personalise them. In the UK and the European Economic Area you will be asked for your choice through a consent message. You can learn how Google uses data from sites that use its services at <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>, and manage ad personalisation at <a href="https://adssettings.google.com">adssettings.google.com</a>.</p>
 <p>We do not use any other analytics tools at present. If that changes, we will update this page first.</p>
@@ -367,7 +366,7 @@ CREDITS = """<main><div class="wrap"><article class="prose">
 <p>The unscrambler uses ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
 <p>No other word lists are used at present. If licensed lists such as NWL or CSW are added, they will be credited here.</p>
 <h2>Fonts</h2>
-<p>Headings use Fredoka and body text uses Nunito, both released under the SIL Open Font License and served by Google Fonts.</p>
+<p>The site uses Plus Jakarta Sans for headings and text, released under the SIL Open Font License and served by Google Fonts.</p>
 </article></div></main>
 """
 
