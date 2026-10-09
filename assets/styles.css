@@ -286,3 +286,12 @@ body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
 .ltile:nth-child(4n) { transform: rotate(3.5deg); }
 .ltile .pt { position: absolute; right: 6px; bottom: 3px; font-family: var(--display); font-weight: 700; font-size: 12px; line-height: 1; }
 @media (max-width: 480px) { .ltile { width: 44px; height: 48px; font-size: 26px; } .letters { gap: 8px; } }
+
+/* Example row: a little smaller. */
+.example { gap: 12px 18px; }
+.letters { gap: 8px; }
+.ltile { width: 44px; height: 48px; font-size: 25px; border-radius: 9px; }
+.ltile .pt { font-size: 10px; right: 5px; bottom: 3px; }
+.example .arrow { font-size: 22px; }
+.example .pill { padding: 6px 14px; font-size: 16px; }
+@media (max-width: 480px) { .ltile { width: 38px; height: 42px; font-size: 22px; } .letters { gap: 6px; } .example .pill { font-size: 15px; padding: 5px 12px; } }
