@@ -43,6 +43,10 @@
     chip.setAttribute('aria-pressed', selectedWord === w ? 'true' : 'false');
     if (selectedWord === w) chip.className += ' sel';
     chip.addEventListener('click', function () { selectWord(w); });
+    if (canHover) {
+      chip.addEventListener('mouseenter', function () { clearTimeout(popTimer); popTimer = setTimeout(function () { showPop(chip, w); }, 200); });
+      chip.addEventListener('mouseleave', schedulePopHide);
+    }
     var mask = [], i;
     for (i = 0; i < w.length; i++) mask.push(false);
     if (f.starts && w.indexOf(f.starts) === 0) for (i = 0; i < f.starts.length; i++) mask[i] = true;
@@ -71,23 +75,54 @@
   var selectedWord = '';
   var lookupPanel = null;
 
+  function linkList(word) {
+    var list = el('div', 'lookup-links');
+    LOOKUPS.forEach(function (d) {
+      var link = el('a', null, d[0] + ' \u2197');
+      link.href = d[1] + encodeURIComponent(word);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      list.appendChild(link);
+    });
+    return list;
+  }
+
+  // On computers (devices that can hover), show the dictionary links in a small card when the pointer rests on a word.
+  var canHover = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+  var pop = null, popTimer = null;
+
+  function hidePop() { if (pop) { pop.hidden = true; } }
+  function schedulePopHide() { clearTimeout(popTimer); popTimer = setTimeout(hidePop, 250); }
+
+  function showPop(chip, word) {
+    clearTimeout(popTimer);
+    if (!pop) {
+      pop = el('div', 'lookup-pop');
+      pop.setAttribute('role', 'dialog');
+      pop.addEventListener('mouseenter', function () { clearTimeout(popTimer); });
+      pop.addEventListener('mouseleave', schedulePopHide);
+      document.body.appendChild(pop);
+    }
+    clear(pop);
+    pop.appendChild(el('p', 'lookup-title', 'Look up \u201C' + word + '\u201D'));
+    pop.appendChild(linkList(word));
+    pop.hidden = false;
+    var r = chip.getBoundingClientRect();
+    var left = Math.max(8, Math.min(r.left + window.scrollX, window.scrollX + document.documentElement.clientWidth - pop.offsetWidth - 8));
+    pop.style.left = left + 'px';
+    pop.style.top = (r.bottom + window.scrollY + 6) + 'px';
+  }
+
   function fillLookup() {
     if (!lookupPanel) return;
     clear(lookupPanel);
     lookupPanel.appendChild(el('p', 'lookup-title', 'Look up a word'));
     if (!selectedWord) {
-      lookupPanel.appendChild(el('p', 'lookup-hint', 'Tap any word above to see where to look it up.'));
+      lookupPanel.appendChild(el('p', 'lookup-hint', (canHover ? 'Hover over any word above, or click it, to see where to look it up.' : 'Tap any word above to see where to look it up.')));
       return;
     }
     lookupPanel.appendChild(el('p', 'lookup-hint', 'Look up \u201C' + selectedWord + '\u201D in a dictionary:'));
-    var list = el('div', 'lookup-links');
-    LOOKUPS.forEach(function (d) {
-      var link = el('a', null, d[0] + ' \u2197');
-      link.href = d[1] + encodeURIComponent(selectedWord);
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      list.appendChild(link);
-    });
+    var list = linkList(selectedWord);
     lookupPanel.appendChild(list);
     lookupPanel.appendChild(el('p', 'lookup-note', 'Opens in a new tab. A few Scrabble-only words may not be in a general dictionary.'));
   }

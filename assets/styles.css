@@ -311,3 +311,13 @@ button.chip:hover { background: var(--green-dark); }
 .lookup-links a { font-weight: 700; color: var(--ink); text-underline-offset: 3px; }
 .lookup-note { font-size: 13px; color: var(--muted); }
 
+
+/* Hover card with dictionary links (computers only). */
+.lookup-pop {
+  position: absolute; z-index: 40; width: max-content; max-width: min(420px, calc(100vw - 16px)); background: var(--card); color: var(--ink);
+  border: 2px solid var(--ink); border-radius: 14px; padding: 12px 16px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+.lookup-pop[hidden] { display: none; }
+.lookup-pop p { margin: 0 0 6px; }
+.lookup-pop .lookup-links { flex-direction: column; gap: 4px; }
+.lookup-pop .lookup-links a { font-size: 15px; }
