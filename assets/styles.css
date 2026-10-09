@@ -181,3 +181,13 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
 .block.narrow ol { margin: 0; padding-left: 24px; display: flex; flex-direction: column; gap: 8px; font-size: 18px; color: var(--muted); }
 .block.narrow h3 { font-size: 20px; margin-top: 8px; }
 .block.narrow a { color: var(--ink); }
+
+/* Clear all button. */
+.more-row { position: relative; }
+.more-row .clear-btn { position: absolute; right: 0; top: 4px; }
+.row.end { justify-content: flex-end; }
+.btns .clear-btn { margin-left: auto; }
+@media (max-width: 480px) {
+  .more-row .clear-btn { padding: 0 14px; }
+  .more summary { padding: 0 14px; }
+}

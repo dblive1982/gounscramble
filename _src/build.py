@@ -127,6 +127,7 @@ HOME = """<main><div class="wrap">
 <p class="lede">Type your jumbled letters and see every word they can make.</p>
 <form id="tool-form" class="panel" novalidate>
 @@LETTERS@@
+<div class="more-row">
 <details class="more">
 <summary>More options@@CHEVRON@@</summary>
 <div class="opts">
@@ -134,6 +135,8 @@ HOME = """<main><div class="wrap">
 @@FILTERS@@
 </div>
 </details>
+<button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button>
+</div>
 </form>
 <button type="button" id="example" class="example" aria-label="Try the example: letters T E A R">
 <span class="letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
@@ -161,6 +164,7 @@ ANAGRAM = """<main><div class="wrap">
 <form id="tool-form" class="panel" novalidate>
 @@LETTERS@@
 @@DICT@@
+<div class="row end"><button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button></div>
 </form>
 <section id="results" class="results" aria-live="polite"></section>
 </section>
@@ -182,11 +186,11 @@ RANDOM = """<main><div class="wrap">
 <p class="lede">Pull a handful of random words. Leave the length blank for any length.</p>
 <form id="tool-form" class="panel" novalidate>
 <div class="filters" style="border-top:0;padding-top:0">
-<div class="fgroup"><label for="count">How many words</label><input id="count" class="field" type="number" inputmode="numeric" min="1" max="20" value="5"></div>
+<div class="fgroup"><label for="count">How many words</label><input id="count" class="field" type="number" inputmode="numeric" min="1" max="20" value="5" data-default="5"></div>
 <div class="fgroup"><label for="length">Word length</label><input id="length" class="field" type="number" inputmode="numeric" min="2" max="15" placeholder="Any"></div>
 </div>
 @@DICT@@
-<div class="row"><button class="btn" type="submit">Pick words</button></div>
+<div class="row"><button class="btn" type="submit">Pick words</button><button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button></div>
 </form>
 <section id="results" class="results" aria-live="polite"></section>
 </section>
@@ -205,6 +209,7 @@ COUNTER = """<main><div class="wrap">
 <div class="panel">
 <label for="text">Your text</label>
 <textarea id="text" class="field area" spellcheck="true" placeholder="Start typing or paste your text here"></textarea>
+<div class="btns"><button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button></div>
 <dl class="stats">
 <div class="stat"><dt>Words</dt><dd id="s-words">0</dd></div>
 <div class="stat"><dt>Characters</dt><dd id="s-chars">0</dd></div>
@@ -237,6 +242,7 @@ CASE = """<main><div class="wrap">
 <button type="button" class="btn alt" data-case="title">Title Case</button>
 <button type="button" class="btn alt" data-case="sentence">Sentence case</button>
 <button type="button" class="btn" id="copy" style="min-height:48px;padding:0 20px;font-size:18px">Copy</button>
+<button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button>
 </div>
 <p id="status" class="status" aria-live="polite"></p>
 </div>

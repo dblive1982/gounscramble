@@ -33,7 +33,7 @@
 <p class="lede">Pull a handful of random words. Leave the length blank for any length.</p>
 <form id="tool-form" class="panel" novalidate>
 <div class="filters" style="border-top:0;padding-top:0">
-<div class="fgroup"><label for="count">How many words</label><input id="count" class="field" type="number" inputmode="numeric" min="1" max="20" value="5"></div>
+<div class="fgroup"><label for="count">How many words</label><input id="count" class="field" type="number" inputmode="numeric" min="1" max="20" value="5" data-default="5"></div>
 <div class="fgroup"><label for="length">Word length</label><input id="length" class="field" type="number" inputmode="numeric" min="2" max="15" placeholder="Any"></div>
 </div>
 <div class="dict-row">
@@ -44,7 +44,7 @@
 <option value="csw" disabled>UK (CSW), coming soon</option>
 </select>
 </div>
-<div class="row"><button class="btn" type="submit">Pick words</button></div>
+<div class="row"><button class="btn" type="submit">Pick words</button><button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button></div>
 </form>
 <section id="results" class="results" aria-live="polite"></section>
 </section>

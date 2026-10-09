@@ -145,6 +145,23 @@
     });
   }
 
+  function setupClear() {
+    var b = $('clear-all');
+    if (!b) return;
+    b.addEventListener('click', function () {
+      var scope = b.closest('form') || b.closest('.panel') || document;
+      var fields = scope.querySelectorAll('input[type=text], input[type=number], textarea');
+      Array.prototype.forEach.call(fields, function (f) {
+        f.value = f.getAttribute('data-default') || '';
+        f.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      var out = $('results'); if (out) clear(out);
+      var st = $('status'); if (st) st.textContent = '';
+      if (fields.length) fields[0].focus();
+    });
+  }
+
+  setupClear();
   if (page === 'home') setupUnscramble('subset');
   else if (page === 'anagram') setupUnscramble('exact');
   else if (page === 'random') setupRandom();
