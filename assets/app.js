@@ -92,7 +92,7 @@
       var chips = el('div', 'chips');
       g.words.forEach(function (w) {
         var chip = wordChip(w, f);
-        if (scoreGame !== 'none') chip.appendChild(el('sup', 'pts', String(GU.scoreWord(w, scoreGame, lastRender.letters))));
+        if (scoreGame !== 'none') chip.appendChild(el('sub', 'pts', String(GU.scoreWord(w, scoreGame, lastRender.letters))));
         chips.appendChild(chip);
       });
       sec.appendChild(chips);
