@@ -242,10 +242,10 @@ body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
 
 /* Theme toggle in the header. */
 .theme-toggle {
-  font: inherit; font-weight: 700; cursor: pointer; background: none; color: var(--ink); border: 2px solid var(--ink);
-  border-radius: 999px; width: 40px; height: 40px; padding: 0; line-height: 1; font-size: 18px; align-self: center;
+  font: inherit; font-weight: 700; cursor: pointer; background: none; color: var(--ink); border: 0;
+  border-bottom: 3px solid transparent; padding: 10px 0; line-height: inherit;
 }
-.theme-toggle:hover { background: var(--card); }
+.theme-toggle:hover { color: var(--muted); }
 .theme-toggle[hidden] { display: none; }
 
 /* Dark theme: follows the device unless the visitor picks one. */

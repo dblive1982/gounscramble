@@ -245,7 +245,7 @@
     }
     function paint() {
       var d = isDark();
-      b.textContent = d ? '\u2600' : '\u263E';
+      b.textContent = d ? 'Light mode' : 'Dark mode';
       b.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode');
       b.title = d ? 'Light mode' : 'Dark mode';
       var m = document.querySelector('meta[name="theme-color"]');
