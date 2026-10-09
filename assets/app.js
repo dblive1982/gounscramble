@@ -67,15 +67,19 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var letters = input.value.trim();
-      if (GU.parseLetters(letters).total < 2) {
-        note(out, 'Type at least two letters to get started.', 'error');
+      var opts = { mode: mode, starts: val('starts'), ends: val('ends'), contains: val('contains'), length: val('length') };
+      var haveLetters = GU.parseLetters(letters).total >= 2;
+      var filtersOnly = !letters && GU.hasFilters(opts);
+      if (!haveLetters && !filtersOnly) {
+        note(out, GU.hasFilters(opts) || $('starts')
+          ? 'Type at least two letters, or fill in one of the options (starts with, ends with, contains or word length).'
+          : 'Type at least two letters to get started.', 'error');
         input.focus();
         return;
       }
-      var opts = { mode: mode, starts: val('starts'), ends: val('ends'), contains: val('contains'), length: val('length') };
       note(out, 'Searching…');
       loadWords(dictKey()).then(function (words) {
-        renderWords(out, GU.find(words, letters, opts));
+        renderWords(out, filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts));
       }).catch(function () {
         note(out, 'The word list could not be loaded. Please try again later.', 'error');
       });

@@ -255,6 +255,8 @@ FAQ_ITEMS = [
      "Type ? or * in place of the unknown letter. A blank can stand for any letter, but it counts as a tile, so it is used up when it fills a place."),
     ("How many letters can I enter?",
      "Up to 15 letters, including blanks."),
+    ("Can I search without typing any letters?",
+     "Yes. Leave the letters box empty, open More options, and fill in Starts with, Ends with, Contains or Word length. The tool then lists every word that matches, for example all five-letter words that start with a and end with e."),
     ("Where do the filters go?",
      "Press More options on the home page. There you can pick a dictionary and set starts with, ends with, contains and word length."),
     ("Which dictionary does the site use?",
@@ -411,6 +413,7 @@ HOME_EXTRA = """<section class="block narrow">
 <li>Type your letters into the box. You can enter up to 15, and use <strong>?</strong> or <strong>*</strong> for a blank tile.</li>
 <li>Press <em>Unscramble</em>. Words are grouped by length, with the longest first.</li>
 <li>Open <em>More options</em> to pick a dictionary or to narrow the list with <em>Starts with</em>, <em>Ends with</em>, <em>Contains</em> and <em>Word length</em>.</li>
+<li>No letters? Leave the letters box empty and use only those options to list every word that starts with, ends with or contains something, or has a certain length.</li>
 </ol>
 <p>Each letter can be used only as many times as you typed it, so <em>TEAR</em> can make <em>rate</em> but not <em>tree</em>, which needs two <em>E</em>s. Words do not have to use every letter. To find only words that use all of them, use the <a href="anagram-solver.html">anagram solver</a>.</p>
 </section>

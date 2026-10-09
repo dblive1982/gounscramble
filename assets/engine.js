@@ -61,6 +61,30 @@
     return out;
   }
 
+  // True when at least one filter (starts, ends, contains, length) is filled in.
+  function hasFilters(opts) {
+    opts = opts || {};
+    return !!(clean(opts.starts) || clean(opts.ends) || clean(opts.contains) || (parseInt(opts.length, 10) || 0));
+  }
+
+  // Filters only, no letters: every word that starts with, ends with or contains something, or has a given length.
+  function findByFilters(words, opts) {
+    opts = opts || {};
+    if (!hasFilters(opts)) return [];
+    var starts = clean(opts.starts), ends = clean(opts.ends), contains = clean(opts.contains);
+    var length = parseInt(opts.length, 10) || 0, out = [];
+    for (var n = 0; n < words.length; n++) {
+      var w = words[n];
+      if (length && w.length !== length) continue;
+      if (starts && w.lastIndexOf(starts, 0) !== 0) continue;
+      if (ends && w.slice(-ends.length) !== ends) continue;
+      if (contains && w.indexOf(contains) === -1) continue;
+      out.push(w);
+    }
+    out.sort(function (a, b) { return b.length - a.length || (a < b ? -1 : a > b ? 1 : 0); });
+    return out;
+  }
+
   // [{length: 5, words: [...]}, ...] longest first. Input must already be sorted longest first.
   function groupByLength(list) {
     var groups = [], cur = null;
@@ -116,7 +140,7 @@
   }
 
   return {
-    parseLetters: parseLetters, parseWords: parseWords, find: find, groupByLength: groupByLength,
+    parseLetters: parseLetters, parseWords: parseWords, find: find, findByFilters: findByFilters, hasFilters: hasFilters, groupByLength: groupByLength,
     pickRandom: pickRandom, countText: countText, formatReading: formatReading, convertCase: convertCase
   };
 });
