@@ -86,10 +86,10 @@ FOOTER = """<!--footer-->
 """
 
 TOOLS = [
-    ("unscrambler", "index.html", "Un", "Word unscrambler", "Turn jumbled letters into every word they can make."),
-    ("anagram", "anagram-solver.html", "AB", "Anagram solver", "Find words that use every one of your letters."),
+    ("unscrambler", "index.html", "Wu", "Word unscrambler", "Turn jumbled letters into every word they can make."),
+    ("anagram", "anagram-solver.html", "As", "Anagram solver", "Find words that use every one of your letters."),
     ("counter", "word-counter.html", "123", "Word counter", "Count words, characters, sentences and reading time."),
-    ("case", "case-converter.html", "Aa", "Case converter", "Switch text between upper, lower, title and sentence case."),
+    ("case", "case-converter.html", "Cc", "Case converter", "Switch text between upper, lower, title and sentence case."),
     ("random", "random-word-picker.html", "Rnd", "Random word picker", "Pull random words, with an optional length."),
 ]
 
