@@ -14,15 +14,15 @@ OUT = os.environ.get("GU_OUT") or os.path.join(ROOT, "site")
 SITE = "https://gounscramble.com"
 
 CHEVRON = ('<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" '
-           'stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>')
+           'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>')
 
 
 def logo(size):
     return (
         '<svg width="%d" height="%d" viewBox="0 0 100 100" aria-hidden="true">'
-        '<g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect>'
+        '<g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="currentColor" stroke-width="5"></rect>'
         '<text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g>'
-        '<g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect>'
+        '<g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="currentColor" stroke-width="5"></rect>'
         '<text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g>'
         '</svg>' % (size, size)
     )
@@ -37,6 +37,7 @@ HEAD = """<!doctype html>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="@@CANON@@">
 <meta name="theme-color" content="#F4F5F7">
+<script>try{var t=localStorage.getItem("gu-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="google-adsense-account" content="ca-pub-6517978259411056">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6517978259411056" crossorigin="anonymous"></script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -56,6 +57,7 @@ HEADER = """<!--header-->
 <a href="tools.html"@@CUR_tools@@>Tools</a>
 <a href="guides.html"@@CUR_guides@@>Guides</a>
 <a href="about.html"@@CUR_about@@>About</a>
+<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Dark mode" hidden></button>
 </nav>
 </div></header>
 <!--/header-->

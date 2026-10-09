@@ -235,6 +235,34 @@
     });
   }
 
+  function setupTheme() {
+    var b = $('theme-toggle');
+    if (!b) return;
+    var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    function isDark() {
+      var t = document.documentElement.getAttribute('data-theme');
+      return t ? t === 'dark' : !!(mq && mq.matches);
+    }
+    function paint() {
+      var d = isDark();
+      b.textContent = d ? '\u2600' : '\u263E';
+      b.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode');
+      b.title = d ? 'Light mode' : 'Dark mode';
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', d ? '#15171C' : '#F4F5F7');
+    }
+    b.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('gu-theme', next); } catch (err) { /* ignore */ }
+      paint();
+    });
+    if (mq && mq.addEventListener) mq.addEventListener('change', paint);
+    b.hidden = false;
+    paint();
+  }
+
+  setupTheme();
   setupClear();
   if (page === 'home') setupUnscramble('subset');
   else if (page === 'anagram') setupUnscramble('exact');
