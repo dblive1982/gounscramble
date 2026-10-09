@@ -1,0 +1,2 @@
+# Keep source and git folders out of public view.
+RedirectMatch 404 ^/(_src|\.git)(/|$)

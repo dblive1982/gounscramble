@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Counter | GoUnscramble</title>
+<meta name="description" content="Count words, characters, sentences and paragraphs, and see the reading time. Free and private.">
+<link rel="canonical" href="https://gounscramble.com/word-counter.html">
+<meta name="theme-color" content="#F4F5F7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="counter">
+<!--header-->
+<header class="site-header"><div class="wrap">
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><svg width="52" height="52" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect><text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g><g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect><text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g></svg><span>Unscramble</span></a>
+<nav class="nav" aria-label="Main">
+<a href="index.html">Unscrambler</a>
+<a href="tools.html" aria-current="page">Tools</a>
+<a href="about.html">About</a>
+</nav>
+</div></header>
+<!--/header-->
+<main><div class="wrap">
+<section class="hero">
+<h1>Word counter</h1>
+<p class="lede">Paste or type your text. The counts update as you go.</p>
+<div class="panel">
+<label for="text">Your text</label>
+<textarea id="text" class="field area" spellcheck="true" placeholder="Start typing or paste your text here"></textarea>
+<dl class="stats">
+<div class="stat"><dt>Words</dt><dd id="s-words">0</dd></div>
+<div class="stat"><dt>Characters</dt><dd id="s-chars">0</dd></div>
+<div class="stat"><dt>Characters (no spaces)</dt><dd id="s-nospace">0</dd></div>
+<div class="stat"><dt>Sentences</dt><dd id="s-sentences">0</dd></div>
+<div class="stat"><dt>Paragraphs</dt><dd id="s-paragraphs">0</dd></div>
+<div class="stat"><dt>Reading time</dt><dd id="s-reading">0 min</dd></div>
+</dl>
+<p class="hint">Reading time assumes about 200 words a minute.</p>
+</div>
+</section>
+<section class="block">
+<h2>More free tools</h2>
+<div class="cards">
+<a class="card" href="index.html"><div class="tile">Un</div><h3>Word unscrambler</h3><p>Turn jumbled letters into every word they can make.</p></a>
+<a class="card" href="anagram-solver.html"><div class="tile">AB</div><h3>Anagram solver</h3><p>Find words that use every one of your letters.</p></a>
+<a class="card" href="case-converter.html"><div class="tile">Aa</div><h3>Case converter</h3><p>Switch text between upper, lower, title and sentence case.</p></a>
+<a class="card" href="random-word-picker.html"><div class="tile">Rnd</div><h3>Random word picker</h3><p>Pull random words, with an optional length.</p></a>
+</div>
+</section>
+</div></main>
+<!--footer-->
+<footer class="site-footer"><div class="wrap">
+<div class="foot-brand"><svg width="32" height="32" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect><text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g><g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect><text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g></svg><span>&copy; 2026 GoUnscramble</span></div>
+<nav class="nav" aria-label="Footer">
+<a href="credits.html">Credits</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div></footer>
+<!--/footer-->
+<script src="assets/engine.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GoUnscramble: Unscramble Letters Into Words</title>
+<meta name="description" content="Free word unscrambler. Type your jumbled letters and see every word they can make, with filters for starts with, ends with, contains and length.">
+<link rel="canonical" href="https://gounscramble.com/">
+<meta name="theme-color" content="#F4F5F7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="home">
+<!--header-->
+<header class="site-header"><div class="wrap">
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><svg width="52" height="52" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect><text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g><g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect><text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g></svg><span>Unscramble</span></a>
+<nav class="nav" aria-label="Main">
+<a href="index.html" aria-current="page">Unscrambler</a>
+<a href="tools.html">Tools</a>
+<a href="about.html">About</a>
+</nav>
+</div></header>
+<!--/header-->
+<main><div class="wrap">
+<section class="hero">
+<h1>Unscramble any word in seconds</h1>
+<p class="lede">Type your jumbled letters and see every word they can make.</p>
+<form id="tool-form" class="panel" novalidate>
+<label for="letters">Your letters</label>
+<div class="row">
+<input id="letters" class="field big" type="text" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. rteaq" aria-describedby="letters-hint">
+<button class="btn" type="submit">Unscramble</button>
+</div>
+<p id="letters-hint" class="hint">Up to 15 letters. Use ? or * for a blank tile.</p>
+<details class="more">
+<summary>More options<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></summary>
+<div class="opts">
+<div class="dict-row">
+<label for="dictionary">Dictionary</label>
+<select id="dictionary" class="field">
+<option value="enable" selected>ENABLE (general English)</option>
+<option value="nwl" disabled>US and Canada (NWL), coming soon</option>
+<option value="csw" disabled>UK (CSW), coming soon</option>
+</select>
+</div>
+<div class="filters">
+<div class="fgroup"><label for="starts">Starts with</label><input id="starts" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. t"></div>
+<div class="fgroup"><label for="ends">Ends with</label><input id="ends" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. ar"></div>
+<div class="fgroup"><label for="contains">Contains</label><input id="contains" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. ea"></div>
+<div class="fgroup"><label for="length">Word length</label><input id="length" class="field" type="number" inputmode="numeric" min="2" max="15" placeholder="Any"></div>
+</div>
+</div>
+</details>
+</form>
+<button type="button" id="example" class="example" aria-label="Try the example: letters T E A R">
+<span class="letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
+<span class="arrow" aria-hidden="true">&rarr;</span>
+<span class="pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
+</button>
+<section id="results" class="results" aria-live="polite"></section>
+</section>
+<section class="block">
+<h2>More free tools</h2>
+<div class="cards">
+<a class="card" href="index.html"><div class="tile">Un</div><h3>Word unscrambler</h3><p>Turn jumbled letters into every word they can make.</p></a>
+<a class="card" href="anagram-solver.html"><div class="tile">AB</div><h3>Anagram solver</h3><p>Find words that use every one of your letters.</p></a>
+<a class="card" href="word-counter.html"><div class="tile">123</div><h3>Word counter</h3><p>Count words, characters, sentences and reading time.</p></a>
+<a class="card" href="case-converter.html"><div class="tile">Aa</div><h3>Case converter</h3><p>Switch text between upper, lower, title and sentence case.</p></a>
+<a class="card" href="random-word-picker.html"><div class="tile">Rnd</div><h3>Random word picker</h3><p>Pull random words, with an optional length.</p></a>
+</div>
+</section>
+<section class="block narrow">
+<h2>About GoUnscramble</h2>
+<p>GoUnscramble turns jumbled letters into real words, and adds a few handy text tools alongside. Use ? or * for a blank tile, then narrow the list by the letters a word starts with, ends with or contains, or by its length. It works well for word games, crosswords and anagram puzzles. <a href="about.html">Read more</a>.</p>
+</section>
+</div></main>
+<!--footer-->
+<footer class="site-footer"><div class="wrap">
+<div class="foot-brand"><svg width="32" height="32" viewBox="0 0 100 100" aria-hidden="true"><g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect><text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g><g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect><text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g></svg><span>&copy; 2026 GoUnscramble</span></div>
+<nav class="nav" aria-label="Footer">
+<a href="credits.html">Credits</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div></footer>
+<!--/footer-->
+<script src="assets/engine.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
