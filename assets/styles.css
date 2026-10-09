@@ -302,3 +302,8 @@ body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
 a.chip { text-decoration: none; color: var(--on-accent); cursor: pointer; }
 a.chip:hover { background: var(--green-dark); color: var(--on-accent); }
 a.chip:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.lookup-select {
+  font: inherit; font-size: 15px; font-weight: 600; padding: 6px 12px; border-radius: 12px; border: 2px solid var(--ink);
+  background: var(--card); color: var(--ink); max-width: 100%; cursor: pointer;
+}

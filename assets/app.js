@@ -64,11 +64,14 @@
   var lastRender = null;
 
   var LOOKUPS = {
-    collins: { name: 'Collins Dictionary', url: 'https://www.collinsdictionary.com/dictionary/english/' },
-    mw: { name: 'Merriam-Webster', url: 'https://www.merriam-webster.com/dictionary/' }
+    collins: { name: 'Collins Dictionary (UK)', url: 'https://www.collinsdictionary.com/dictionary/english/' },
+    oxford: { name: 'Oxford Learner\'s Dictionaries (UK)', url: 'https://www.oxfordlearnersdictionaries.com/search/english/?q=' },
+    cambridge: { name: 'Cambridge Dictionary (UK)', url: 'https://dictionary.cambridge.org/dictionary/english/' },
+    mw: { name: 'Merriam-Webster (US)', url: 'https://www.merriam-webster.com/dictionary/' },
+    dictcom: { name: 'Dictionary.com (US)', url: 'https://www.dictionary.com/browse/' }
   };
   var lookupDict = 'collins';
-  try { var savedLook = localStorage.getItem('gu-lookup'); if (savedLook === 'collins' || savedLook === 'mw' || savedLook === 'none') lookupDict = savedLook; } catch (err) { /* storage unavailable */ }
+  try { var savedLook = localStorage.getItem('gu-lookup'); if (savedLook === 'none' || LOOKUPS[savedLook]) lookupDict = savedLook; } catch (err) { /* storage unavailable */ }
 
   function segBar(label, options, current, onPick) {
     var bar = el('div', 'scorebar');
@@ -94,10 +97,24 @@
   }
 
   function lookupBar() {
-    return segBar('Look up words in:', [['collins', 'Collins'], ['mw', 'Merriam-Webster'], ['none', 'Off']], lookupDict, function (v) {
-      lookupDict = v;
-      try { localStorage.setItem('gu-lookup', v); } catch (err) { /* ignore */ }
+    var bar = el('div', 'scorebar');
+    var id = 'lookup-select';
+    var label = el('label', 'scorelabel', 'Look up words in:');
+    label.setAttribute('for', id);
+    bar.appendChild(label);
+    var sel = el('select', 'lookup-select');
+    sel.id = id;
+    Object.keys(LOOKUPS).forEach(function (k) {
+      var o = el('option', null, LOOKUPS[k].name); o.value = k; if (k === lookupDict) o.selected = true; sel.appendChild(o);
     });
+    var off = el('option', null, 'Off (no links)'); off.value = 'none'; if (lookupDict === 'none') off.selected = true; sel.appendChild(off);
+    sel.addEventListener('change', function () {
+      lookupDict = sel.value;
+      try { localStorage.setItem('gu-lookup', lookupDict); } catch (err) { /* ignore */ }
+      if (lastRender) renderWords(lastRender.box, lastRender.words, lastRender.letters);
+    });
+    bar.appendChild(sel);
+    return bar;
   }
 
   function renderWords(box, words, letters) {
