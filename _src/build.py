@@ -2,6 +2,7 @@
 """Builds every GoUnscramble page from ONE shared layout, so header, footer and head always match.
 Run: python3 build.py   (writes the .html files into ./site, leaves assets/ and words/ alone)"""
 import os
+import re
 import sys
 import hashlib
 
@@ -280,6 +281,22 @@ ABOUT = """<main><div class="wrap"><article class="prose">
 </article></div></main>
 """
 
+def cardify(body):
+    """Turn each <h2> section of a text page into a card, like the Guides page."""
+    head, _, rest = body.partition("\n<h2>")
+    if not rest:
+        return body
+    rest, _, tail = ("<h2>" + rest).rpartition("</article>")
+    parts = re.split(r"(?=<h2>)", rest)
+    cards = []
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+        m = re.match(r"<h2>(.*?)</h2>\s*(.*)", part, re.S)
+        cards.append('<div class="card"><h3>%s</h3>%s</div>' % (m.group(1), m.group(2).strip()))
+    return head + '\n<div class="cards guide-cards">\n' + "\n".join(cards) + "\n</div>\n</article>" + tail
+
 PRIVACY = """<main><div class="wrap"><article class="prose">
 <h1>Privacy</h1>
 <p>Last updated 9 October 2026.</p>
@@ -302,8 +319,11 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 
 CONTACT = """<main><div class="wrap"><article class="prose">
 <h1>Contact</h1>
-<p>Questions, corrections or word suggestions? Send an email to <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
-<p>If you think a word is missing or wrong, tell us the word and the game or dictionary you are using, and we will take a look. We read every message, but we cannot promise a reply to each one.</p>
+<p>Questions, corrections or word suggestions? We would like to hear from you.</p>
+<div class="cards guide-cards">
+<div class="card"><h3>Email us</h3><p>Send an email to <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p></div>
+<div class="card"><h3>Missing or wrong word?</h3><p>If you think a word is missing or wrong, tell us the word and the game or dictionary you are using, and we will take a look. We read every message, but we cannot promise a reply to each one.</p></div>
+</div>
 </article></div></main>
 """
 
@@ -339,13 +359,13 @@ PAGES = [
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | GoUnscramble",
          desc="About GoUnscramble, a free word unscrambler with a few handy text tools."),
-    dict(file="privacy.html", page="privacy", nav=None, body=PRIVACY,
+    dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | GoUnscramble",
          desc="How GoUnscramble handles what you type and what your browser sends."),
     dict(file="contact.html", page="contact", nav=None, body=CONTACT,
          title="Contact | GoUnscramble",
          desc="Get in touch with GoUnscramble."),
-    dict(file="credits.html", page="credits", nav=None, body=CREDITS,
+    dict(file="credits.html", page="credits", nav=None, body=cardify(CREDITS),
          title="Credits | GoUnscramble",
          desc="Word list and font credits for GoUnscramble."),
 ]

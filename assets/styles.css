@@ -220,3 +220,8 @@ body[data-page="tools"] .block > .cards .card h3 { font-size: 20px; }
 @media (max-width: 640px) { .prose .guide-cards .card { flex: 1 1 100%; } }
 .prose .card p { font-size: 16px; line-height: 1.5; }
 .prose .card h3 { margin-top: 0; }
+.prose .card ul, .prose .card ol { margin: 0; padding-left: 22px; font-size: 16px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.prose .card li { font-size: 16px; line-height: 1.5; }
+.prose .card h3 { font-size: 20px; }
+.prose .card a { overflow-wrap: anywhere; }
+body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
