@@ -3,6 +3,8 @@
 Run: python3 build.py   (writes the .html files into ./site, leaves assets/ and words/ alone)"""
 import os
 import re
+import json
+import datetime
 import sys
 import hashlib
 
@@ -36,6 +38,7 @@ HEAD = """<!doctype html>
 <title>@@TITLE@@</title>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="@@CANON@@">
+@@SEO@@
 <meta name="theme-color" content="#F4F5F7">
 <script>try{var t=localStorage.getItem("gu-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="google-adsense-account" content="ca-pub-6517978259411056">
@@ -402,6 +405,47 @@ def asset_version(name):
         return "0"
 
 
+def seo_tags(p, url):
+    """Open Graph, Twitter card and JSON-LD structured data for one page."""
+    esc = lambda t: t.replace("&", "&amp;").replace('"', "&quot;")
+    img = SITE + "/assets/og.png"
+    tags = [
+        '<meta property="og:type" content="website">',
+        '<meta property="og:site_name" content="GoUnscramble">',
+        '<meta property="og:title" content="%s">' % esc(p["title"]),
+        '<meta property="og:description" content="%s">' % esc(p["desc"]),
+        '<meta property="og:url" content="%s">' % url,
+        '<meta property="og:image" content="%s">' % img,
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta property="og:image:alt" content="GoUnscramble: free word unscrambler">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:title" content="%s">' % esc(p["title"]),
+        '<meta name="twitter:description" content="%s">' % esc(p["desc"]),
+        '<meta name="twitter:image" content="%s">' % img,
+    ]
+    graph = []
+    if p["file"] == "index.html":
+        graph.append({"@type": "WebSite", "name": "GoUnscramble", "url": SITE + "/", "inLanguage": "en"})
+    else:
+        crumbs = [("Home", SITE + "/"), (p["title"].replace(" | GoUnscramble", ""), url)]
+        graph.append({"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]})
+    tools = {"index.html", "anagram-solver.html", "random-word-picker.html", "word-counter.html", "case-converter.html"}
+    if p["file"] in tools:
+        graph.append({"@type": "WebApplication", "name": p["title"].split(" | ")[0].split(":")[0], "url": url,
+                      "description": p["desc"], "applicationCategory": "UtilitiesApplication",
+                      "operatingSystem": "Any", "browserRequirements": "Requires JavaScript",
+                      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}})
+    if p["file"] == "faq.html":
+        graph.append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}}
+            for q, a in G.FAQ_ITEMS]})
+    ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    tags.append('<script type="application/ld+json">%s</script>' % ld.replace("</", "<\\/"))
+    return "\n".join(tags)
+
+
 def build_page(p):
     body = (fill_extras(p["body"])
             .replace("@@LETTERS@@", letters_input("Find anagrams" if p["page"] == "anagram" else "Unscramble"))
@@ -416,6 +460,7 @@ def build_page(p):
     path = "" if p["file"] == "index.html" else p["file"]
     head = (HEAD.replace("@@TITLE@@", p["title"]).replace("@@DESC@@", p["desc"])
             .replace("@@CANON@@", SITE + "/" + path).replace("@@PAGE@@", p["page"]))
+    head = head.replace("@@SEO@@", seo_tags(p, SITE + "/" + path))
     page = head + header + body + footer
     for name in ("styles.css", "engine.js", "app.js"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
@@ -436,7 +481,7 @@ def guide_pages():
 def sitemap(pages):
     urls = [SITE + "/" if p["file"] == "index.html" else SITE + "/" + p["file"] for p in pages]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "".join("  <url><loc>%s</loc></url>\n" % u for u in urls) + "</urlset>\n")
+            + "".join("  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n" % (u, datetime.date.today().isoformat()) for u in urls) + "</urlset>\n")
 
 
 def main():
