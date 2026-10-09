@@ -115,6 +115,21 @@
 
   var hintTimer = null;
 
+  // The look-up box goes away 10 seconds after it appears (it waits while the pointer is on it) and returns when a word is picked.
+  function startHideTimer() {
+    clearTimeout(hintTimer);
+    var panelNow = lookupPanel;
+    hintTimer = setTimeout(function () {
+      if (lookupPanel !== panelNow || !panelNow) return;
+      panelNow.hidden = true;
+      selectedWord = '';
+      Array.prototype.forEach.call(document.querySelectorAll('.results .chip.sel'), function (c) {
+        c.classList.remove('sel');
+        c.setAttribute('aria-pressed', 'false');
+      });
+    }, 10000);
+  }
+
   function fillLookup() {
     if (!lookupPanel) return;
     clearTimeout(hintTimer);
@@ -122,16 +137,15 @@
     clear(lookupPanel);
     lookupPanel.appendChild(el('p', 'lookup-title', 'Look up a word'));
     if (!selectedWord) {
-      // The tip fades away after 10 seconds; it comes back when a word is picked.
-      var panelNow = lookupPanel;
-      hintTimer = setTimeout(function () { if (!selectedWord && lookupPanel === panelNow) panelNow.hidden = true; }, 10000);
       lookupPanel.appendChild(el('p', 'lookup-hint', (canHover ? 'Hover over any word above, or click it, to see where to look it up.' : 'Tap any word above to see where to look it up.')));
+      startHideTimer();
       return;
     }
     lookupPanel.appendChild(el('p', 'lookup-hint', 'Look up \u201C' + selectedWord + '\u201D in a dictionary:'));
     var list = linkList(selectedWord);
     lookupPanel.appendChild(list);
     lookupPanel.appendChild(el('p', 'lookup-note', 'Opens in a new tab. A few Scrabble-only words may not be in a general dictionary.'));
+    startHideTimer();
   }
 
   function selectWord(w) {
@@ -195,6 +209,8 @@
     });
     lookupPanel = el('section', 'lookup');
     lookupPanel.setAttribute('aria-live', 'polite');
+    lookupPanel.addEventListener('mouseenter', function () { clearTimeout(hintTimer); });
+    lookupPanel.addEventListener('mouseleave', startHideTimer);
     fillLookup();
     if (shown.length < words.length) {
       box.appendChild(el('p', 'note', 'Showing the longest ' + MAX_SHOWN.toLocaleString() + ' words. Add a filter to narrow the list.'));
