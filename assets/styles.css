@@ -184,7 +184,7 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
 
 /* Clear all button. */
 .more-row { position: relative; }
-.more-row .clear-btn { position: absolute; right: 0; top: 4px; }
+.more-row .clear-btn { position: absolute; left: 190px; top: 4px; }
 .row.end { justify-content: flex-end; }
 .btns .clear-btn { margin-left: auto; }
 @media (max-width: 480px) {
@@ -192,7 +192,7 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
   .more summary { padding: 0 14px; }
 }
 .more-row { min-height: 52px; }
-.more-row .clear-btn { top: 2px; }
+.more-row .clear-btn { top: 4px; }
 @media (max-width: 480px) {
   .nav { gap: 4px 16px; }
   .site-header .nav a { font-size: 16px; }

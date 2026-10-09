@@ -174,6 +174,10 @@
   function setupClear() {
     var b = $('clear-all');
     if (!b) return;
+    // On the home page, sit Clear all right beside the More options button.
+    var sum = document.querySelector('.more-row .more > summary');
+    function place() { if (sum && sum.offsetWidth) b.style.left = (sum.offsetLeft + sum.offsetWidth + 12) + 'px'; }
+    if (sum) { place(); window.addEventListener('resize', place); if (document.fonts && document.fonts.ready) document.fonts.ready.then(place); }
     b.addEventListener('click', function () {
       var scope = b.closest('form') || b.closest('.panel') || document;
       var fields = scope.querySelectorAll('input[type=text], input[type=number], textarea');
