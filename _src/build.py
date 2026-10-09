@@ -271,14 +271,12 @@ TOOLS_PAGE = """<main><div class="wrap">
 ABOUT = """<main><div class="wrap"><article class="prose">
 <h1>About GoUnscramble</h1>
 <p>GoUnscramble turns jumbled letters into real words. Type the letters you have, add a ? or * for any blank tile, and the unscrambler lists every word they can make, longest first.</p>
-<h2>Narrow the list</h2>
-<p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p>
-<h2>Dictionaries</h2>
-<p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p>
-<h2>Your privacy</h2>
-<p>The tools run in your browser. The letters and text you type stay on your device. See the <a href="privacy.html">privacy page</a> for details.</p>
-<h2>Get in touch</h2>
-<p>Spotted a missing word or a bug? Use the <a href="contact.html">contact page</a>.</p>
+<div class="cards guide-cards">
+<div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
+<div class="card"><h3>Dictionaries</h3><p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p></div>
+<div class="card"><h3>Your privacy</h3><p>The tools run in your browser. The letters and text you type stay on your device. See the <a href="privacy.html">privacy page</a> for details.</p></div>
+<div class="card"><h3>Get in touch</h3><p>Spotted a missing word or a bug? Use the <a href="contact.html">contact page</a>.</p></div>
+</div>
 </article></div></main>
 """
 
