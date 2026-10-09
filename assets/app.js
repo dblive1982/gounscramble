@@ -79,6 +79,7 @@
       }
       note(out, 'Searching…');
       loadWords(dictKey()).then(function (words) {
+        out.classList.toggle('filter-mode', filtersOnly);
         renderWords(out, filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts));
       }).catch(function () {
         note(out, 'The word list could not be loaded. Please try again later.', 'error');

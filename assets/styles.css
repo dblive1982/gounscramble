@@ -200,3 +200,10 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
 
 /* Green word chips in results. */
 .results .chip, .pill { background: var(--green); }
+
+/* Filter-only searches (no letters typed): white letters on the green chips. */
+.results.filter-mode .chip { color: #fff; }
+
+/* Text cursor only blinks inside fields you have selected. */
+body { caret-color: transparent; }
+input, textarea, [contenteditable="true"] { caret-color: auto; }
