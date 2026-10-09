@@ -20,9 +20,9 @@ CHEVRON = ('<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><
 def logo(size):
     return (
         '<svg width="%d" height="%d" viewBox="0 0 100 100" aria-hidden="true">'
-        '<g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="currentColor" stroke-width="5"></rect>'
+        '<g transform="rotate(9 68 46)"><rect x="44" y="22" width="48" height="48" rx="12" fill="#2FBF71" stroke="#111111" stroke-width="5"></rect>'
         '<text x="68" y="57" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="34" fill="#111111">O</text></g>'
-        '<g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="currentColor" stroke-width="5"></rect>'
+        '<g transform="rotate(-10 31 52)"><rect x="6" y="27" width="50" height="50" rx="13" fill="#FFD23F" stroke="#111111" stroke-width="5"></rect>'
         '<text x="31" y="63" text-anchor="middle" font-family="Fredoka, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="35" fill="#111111">G</text></g>'
         '</svg>' % (size, size)
     )
