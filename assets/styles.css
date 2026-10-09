@@ -226,3 +226,15 @@ body[data-page="tools"] .block > .cards .card h3 { font-size: 20px; }
 .prose .card a { overflow-wrap: anywhere; }
 body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
 .field.big::placeholder { letter-spacing: 0; font-weight: 500; }
+
+/* Word points. */
+.scorebar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.scorelabel { font-family: var(--display); font-weight: 600; color: var(--muted); font-size: 15px; }
+.seg { font: inherit; font-size: 15px; font-weight: 600; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--ink); background: var(--card); color: var(--ink); cursor: pointer; }
+.seg.on { background: var(--ink); color: #fff; }
+.chip { position: relative; }
+.chip .pts {
+  position: absolute; top: -8px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; border-radius: 999px;
+  background: var(--ink); color: var(--yellow); font-family: var(--display); font-weight: 700; font-size: 12px; line-height: 1;
+}

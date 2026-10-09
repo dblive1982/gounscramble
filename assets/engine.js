@@ -85,6 +85,26 @@
     return out;
   }
 
+  // Tile values, A to Z, for Scrabble and for Words With Friends.
+  var TILES = {
+    scrabble: [1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10],
+    wwf:      [1, 4, 4, 2, 1, 4, 3, 3, 1, 10, 5, 2, 4, 2, 1, 4, 10, 1, 1, 1, 2, 5, 4, 8, 3, 10]
+  };
+
+  // Points for a word. If the player's letters are given, any letter they do not have must come from a blank tile, which scores 0.
+  function scoreWord(word, game, letters) {
+    var vals = TILES[game];
+    if (!vals) return 0;
+    var have = letters ? parseLetters(letters).counts.slice() : null, s = 0;
+    for (var i = 0; i < word.length; i++) {
+      var c = word.charCodeAt(i) - 97;
+      if (c < 0 || c > 25) continue;
+      if (have) { if (have[c] > 0) { have[c]--; s += vals[c]; } }
+      else s += vals[c];
+    }
+    return s;
+  }
+
   // [{length: 5, words: [...]}, ...] longest first. Input must already be sorted longest first.
   function groupByLength(list) {
     var groups = [], cur = null;
@@ -140,7 +160,7 @@
   }
 
   return {
-    parseLetters: parseLetters, parseWords: parseWords, find: find, findByFilters: findByFilters, hasFilters: hasFilters, groupByLength: groupByLength,
+    parseLetters: parseLetters, parseWords: parseWords, find: find, findByFilters: findByFilters, hasFilters: hasFilters, scoreWord: scoreWord, groupByLength: groupByLength,
     pickRandom: pickRandom, countText: countText, formatReading: formatReading, convertCase: convertCase
   };
 });

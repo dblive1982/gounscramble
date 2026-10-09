@@ -52,7 +52,29 @@
 
   function cleanFilter(s) { return String(s || '').toLowerCase().replace(/[^a-z]/g, ''); }
 
-  function renderWords(box, words) {
+  var scoreGame = 'scrabble';
+  try { var saved = localStorage.getItem('gu-score-game'); if (saved === 'scrabble' || saved === 'wwf' || saved === 'none') scoreGame = saved; } catch (err) { /* storage unavailable */ }
+  var lastRender = null;
+
+  function scoreBar(box) {
+    var bar = el('div', 'scorebar');
+    bar.appendChild(el('span', 'scorelabel', 'Points:'));
+    [['scrabble', 'Scrabble'], ['wwf', 'Words With Friends'], ['none', 'Off']].forEach(function (o) {
+      var b = el('button', 'seg' + (scoreGame === o[0] ? ' on' : ''), o[1]);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', scoreGame === o[0] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        scoreGame = o[0];
+        try { localStorage.setItem('gu-score-game', scoreGame); } catch (err) { /* ignore */ }
+        if (lastRender) renderWords(lastRender.box, lastRender.words, lastRender.letters);
+      });
+      bar.appendChild(b);
+    });
+    return bar;
+  }
+
+  function renderWords(box, words, letters) {
+    lastRender = { box: box, words: words, letters: letters || '' };
     var f = { starts: cleanFilter(val('starts')), ends: cleanFilter(val('ends')), contains: cleanFilter(val('contains')) };
     clear(box);
     if (!words.length) {
@@ -60,6 +82,7 @@
       return;
     }
     box.appendChild(el('p', 'note strong', 'Found ' + words.length.toLocaleString() + (words.length === 1 ? ' word' : ' words')));
+    box.appendChild(scoreBar(box));
     var shown = words.length > MAX_SHOWN ? words.slice(0, MAX_SHOWN) : words;
     GU.groupByLength(shown).forEach(function (g) {
       var sec = el('section', 'group');
@@ -67,7 +90,11 @@
       h.appendChild(el('span', 'count', ' (' + g.words.length + ')'));
       sec.appendChild(h);
       var chips = el('div', 'chips');
-      g.words.forEach(function (w) { chips.appendChild(wordChip(w, f)); });
+      g.words.forEach(function (w) {
+        var chip = wordChip(w, f);
+        if (scoreGame !== 'none') chip.appendChild(el('sup', 'pts', String(GU.scoreWord(w, scoreGame, lastRender.letters))));
+        chips.appendChild(chip);
+      });
       sec.appendChild(chips);
       box.appendChild(sec);
     });
@@ -107,7 +134,7 @@
       }
       note(out, 'Searching…');
       loadWords(dictKey()).then(function (words) {
-        renderWords(out, filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts));
+        renderWords(out, filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts), filtersOnly ? '' : letters);
       }).catch(function () {
         note(out, 'The word list could not be loaded. Please try again later.', 'error');
       });
