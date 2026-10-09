@@ -71,6 +71,28 @@ HEADER = """<!--header-->
 <!--/header-->
 """
 
+# Social accounts: put the full profile URL here when the account exists. Until then the icon
+# shows as a plain (unlinked) badge, so there are no dead links.
+SOCIAL = [
+    ("Facebook", "", '<path d="M13.5 21v-7.5h2.6l.4-3h-3V8.7c0-.9.3-1.5 1.6-1.5h1.5V4.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H7.9v3h2.6V21z" fill="currentColor"/>'),
+    ("Instagram", "", '<rect x="4.5" y="4.5" width="15" height="15" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="16.6" cy="7.4" r="1.1" fill="currentColor"/>'),
+    ("X", "", '<path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'),
+    ("TikTok", "", '<path d="M14 4v10.2a3.2 3.2 0 1 1-3.2-3.2M14 4c.3 2.3 1.8 3.7 4 3.9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'),
+    ("YouTube", "", '<rect x="3.5" y="6.5" width="17" height="11" rx="3.2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M10.4 9.6v4.8l4.2-2.4z" fill="currentColor"/>'),
+]
+
+
+def social_html():
+    out = []
+    for name, url, icon in SOCIAL:
+        svg = '<svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true">%s</svg>' % icon
+        if url:
+            out.append('<a class="social" href="%s" target="_blank" rel="noopener me" aria-label="GoUnscramble on %s">%s</a>' % (url, name, svg))
+        else:
+            out.append('<span class="social" title="%s, coming soon">%s</span>' % (name, svg))
+    return '<div class="socials">' + "".join(out) + "</div>"
+
+
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
 <div class="foot-brand">@@LOGO32@@<span>&copy; 2026 GoUnscramble</span></div>
@@ -80,6 +102,7 @@ FOOTER = """<!--footer-->
 <a href="privacy.html">Privacy</a>
 <a href="contact.html">Contact</a>
 </nav>
+@@SOCIAL@@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js"></script>
@@ -456,7 +479,7 @@ def build_page(p):
     header = HEADER.replace("@@LOGO52@@", logo(52))
     for key in ("home", "tools", "guides", "about"):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
-    footer = FOOTER.replace("@@LOGO32@@", logo(32))
+    footer = FOOTER.replace("@@LOGO32@@", logo(32)).replace("@@SOCIAL@@", social_html())
     path = "" if p["file"] == "index.html" else p["file"]
     head = (HEAD.replace("@@TITLE@@", p["title"]).replace("@@DESC@@", p["desc"])
             .replace("@@CANON@@", SITE + "/" + path).replace("@@PAGE@@", p["page"]))
