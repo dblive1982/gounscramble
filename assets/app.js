@@ -18,6 +18,30 @@
   }
   function note(box, text, cls) { clear(box); box.appendChild(el('p', 'note' + (cls ? ' ' + cls : ''), text)); }
 
+  // Optional family-friendly filter: off by default, remembered between visits.
+  var rude = null, hideRude = false;
+  try { hideRude = localStorage.getItem('gu-hide-rude') === '1'; } catch (err) { /* storage unavailable */ }
+  function loadRude() {
+    if (rude) return Promise.resolve(rude);
+    return fetch('words/offensive.txt').then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }).then(function (t) {
+      var set = {}; t.split(/\s+/).forEach(function (x) { if (x) set[x] = true; });
+      rude = set; return set;
+    });
+  }
+  function applyRude(words) {
+    if (!hideRude) return Promise.resolve(words);
+    return loadRude().then(function (set) { return words.filter(function (w) { return !set[w.toLowerCase()]; }); });
+  }
+  function setupRudeBox() {
+    var cb = $('hide-rude');
+    if (!cb) return;
+    cb.checked = hideRude;
+    cb.addEventListener('change', function () {
+      hideRude = cb.checked;
+      try { localStorage.setItem('gu-hide-rude', hideRude ? '1' : '0'); } catch (err) { /* ignore */ }
+    });
+  }
+
   function dictKey() { var s = $('dictionary'); return s && s.value ? s.value : 'enable'; }
 
   function loadWords(key) {
@@ -212,7 +236,9 @@
       }
       note(out, 'Searching…');
       loadWords(dictKey()).then(function (words) {
-        renderWords(out, filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts), filtersOnly ? '' : letters);
+        return applyRude(filtersOnly ? GU.findByFilters(words, opts) : GU.find(words, letters, opts));
+      }).then(function (found) {
+        renderWords(out, found, filtersOnly ? '' : letters);
       }).catch(function () {
         note(out, 'The word list could not be loaded. Please try again later.', 'error');
       });
@@ -246,6 +272,8 @@
       var length = parseInt(val('length'), 10) || 0;
       note(out, 'Picking…');
       loadWords(dictKey()).then(function (words) {
+        return hideRude ? loadRude().then(function (set) { return words.filter(function (w) { return !set[w.toLowerCase()]; }); }) : words;
+      }).then(function (words) {
         var picks = GU.pickRandom(words, count, length);
         if (!picks.length) { note(out, 'No words of that length. Try a different length.'); return; }
         clear(out);
@@ -357,6 +385,7 @@
   setupMenu();
   setupTheme();
   setupClear();
+  setupRudeBox();
   if (page === 'home') setupUnscramble('subset');
   else if (page === 'anagram') setupUnscramble('exact');
   else if (page === 'random') setupRandom();

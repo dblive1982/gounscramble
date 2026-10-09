@@ -111,6 +111,7 @@ DICT_ROW = """<div class="dict-row">
 <option value="nwl" disabled>US and Canada (NWL), coming soon</option>
 <option value="csw" disabled>UK (CSW), coming soon</option>
 </select>
+<label class="check"><input type="checkbox" id="hide-rude"> Hide offensive words</label>
 </div>"""
 
 FILTERS = """<div class="filters">

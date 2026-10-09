@@ -324,3 +324,5 @@ button.chip:hover { background: var(--green-dark); }
 .brand span { color: var(--heading, var(--ink)); }
 
 .lookup[hidden] { display: none; }
+.check { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
