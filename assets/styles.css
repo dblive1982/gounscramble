@@ -140,7 +140,7 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
   flex: 1 1 300px; min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 20px;
   padding: 24px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: var(--ink);
 }
-.card:hover { border-color: var(--ink); color: var(--ink); }
+a.card:hover { border-color: var(--ink); color: var(--ink); }
 .card p { color: var(--muted); font-size: 16px; line-height: 1.5; }
 .tile {
   width: 52px; height: 52px; border-radius: 14px; background: var(--ink); color: var(--yellow);
