@@ -3,6 +3,7 @@
 Run: python3 build.py   (writes the .html files into ./site, leaves assets/ and words/ alone)"""
 import os
 import sys
+import hashlib
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import guides as G
@@ -366,6 +367,15 @@ def fill_extras(body):
             .replace("@@TOOLS_EXTRA@@", G.TOOLS_EXTRA))
 
 
+def asset_version(name):
+    path = os.path.join(OUT, "assets", name)
+    try:
+        with open(path, "rb") as f:
+            return hashlib.md5(f.read()).hexdigest()[:8]
+    except OSError:
+        return "0"
+
+
 def build_page(p):
     body = (fill_extras(p["body"])
             .replace("@@LETTERS@@", letters_input("Find anagrams" if p["page"] == "anagram" else "Unscramble"))
@@ -380,7 +390,10 @@ def build_page(p):
     path = "" if p["file"] == "index.html" else p["file"]
     head = (HEAD.replace("@@TITLE@@", p["title"]).replace("@@DESC@@", p["desc"])
             .replace("@@CANON@@", SITE + "/" + path).replace("@@PAGE@@", p["page"]))
-    return head + header + body + footer
+    page = head + header + body + footer
+    for name in ("styles.css", "engine.js", "app.js"):
+        page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
+    return page
 
 
 def guide_pages():
