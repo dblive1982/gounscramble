@@ -213,3 +213,8 @@ body[data-page="tools"] .block > .cards { max-width: 720px; }
 body[data-page="tools"] .block > .cards .card { flex: 0 0 calc(50% - 10px); }
 @media (max-width: 640px) { body[data-page="tools"] .block > .cards .card { flex: 1 1 100%; } }
 body[data-page="tools"] .block > .cards .card h3 { font-size: 20px; }
+
+/* About page: text sized to match the Guides page. */
+body[data-page="about"] .prose { gap: 12px; }
+body[data-page="about"] .prose h2 { font-size: 22px; margin-top: 16px; }
+body[data-page="about"] .prose p, body[data-page="about"] .prose li { font-size: 16px; line-height: 1.55; }
