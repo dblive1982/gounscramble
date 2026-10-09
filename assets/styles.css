@@ -207,3 +207,9 @@ select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
 /* Text cursor only blinks inside fields you have selected. */
 body { caret-color: transparent; }
 input, textarea, [contenteditable="true"] { caret-color: auto; }
+
+/* Tools page: cards use the same width and two-column layout as the Guides page. */
+body[data-page="tools"] .block > .cards { max-width: 720px; }
+body[data-page="tools"] .block > .cards .card { flex: 0 0 calc(50% - 10px); }
+@media (max-width: 640px) { body[data-page="tools"] .block > .cards .card { flex: 1 1 100%; } }
+body[data-page="tools"] .block > .cards .card h3 { font-size: 20px; }
