@@ -283,15 +283,16 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Fonts</h2>
 <p>Pages load the Fredoka and Nunito fonts from Google Fonts, so your browser contacts Google to fetch them.</p>
 <h2>Advertising and analytics</h2>
-<p class="placeholder">[If you add advertising, analytics or cookies, describe them here before you switch them on.]</p>
+<p>At the time of writing, this site does not use advertising or analytics cookies. If that changes, we will update this page before they are switched on.</p>
 <h2>Questions</h2>
-<p>Ask through the <a href="contact.html">contact page</a>.</p>
+<p>Ask through the <a href="contact.html">contact page</a> or email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
 </article></div></main>
 """
 
 CONTACT = """<main><div class="wrap"><article class="prose">
 <h1>Contact</h1>
-<p>Questions, corrections or word suggestions? Send an email to <span class="placeholder">[your contact email]</span>.</p>
+<p>Questions, corrections or word suggestions? Send an email to <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
+<p>If you think a word is missing or wrong, tell us the word and the game or dictionary you are using, and we will take a look. We read every message, but we cannot promise a reply to each one.</p>
 </article></div></main>
 """
 
@@ -299,7 +300,7 @@ CREDITS = """<main><div class="wrap"><article class="prose">
 <h1>Credits</h1>
 <h2>Word list</h2>
 <p>The unscrambler uses ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
-<p class="placeholder">[Add credits here for any other word list you licence, such as NWL or CSW.]</p>
+<p>No other word lists are used at present. If licensed lists such as NWL or CSW are added, they will be credited here.</p>
 <h2>Fonts</h2>
 <p>Headings use Fredoka and body text uses Nunito, both released under the SIL Open Font License and served by Google Fonts.</p>
 </article></div></main>
