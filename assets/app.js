@@ -113,11 +113,18 @@
     pop.style.top = (r.bottom + window.scrollY + 6) + 'px';
   }
 
+  var hintTimer = null;
+
   function fillLookup() {
     if (!lookupPanel) return;
+    clearTimeout(hintTimer);
+    lookupPanel.hidden = false;
     clear(lookupPanel);
     lookupPanel.appendChild(el('p', 'lookup-title', 'Look up a word'));
     if (!selectedWord) {
+      // The tip fades away after 10 seconds; it comes back when a word is picked.
+      var panelNow = lookupPanel;
+      hintTimer = setTimeout(function () { if (!selectedWord && lookupPanel === panelNow) panelNow.hidden = true; }, 10000);
       lookupPanel.appendChild(el('p', 'lookup-hint', (canHover ? 'Hover over any word above, or click it, to see where to look it up.' : 'Tap any word above to see where to look it up.')));
       return;
     }

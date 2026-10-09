@@ -322,3 +322,5 @@ button.chip:hover { background: var(--green-dark); }
 .lookup-pop .lookup-links { flex-direction: column; gap: 4px; }
 .lookup-pop .lookup-links a { font-size: 15px; }
 .brand span { color: var(--heading, var(--ink)); }
+
+.lookup[hidden] { display: none; }
