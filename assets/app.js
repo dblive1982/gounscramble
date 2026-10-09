@@ -40,11 +40,10 @@
     var chip = el('button', 'chip');
     chip.type = 'button';
     chip.setAttribute('data-word', w);
-    chip.setAttribute('aria-pressed', selectedWord === w ? 'true' : 'false');
-    if (selectedWord === w) chip.className += ' sel';
-    chip.addEventListener('click', function () { selectWord(w); });
+    chip.setAttribute('aria-pressed', 'false');
+    chip.addEventListener('click', function (e) { e.stopPropagation(); showPop(chip, w, true); });
     if (canHover) {
-      chip.addEventListener('mouseenter', function () { clearTimeout(popTimer); popTimer = setTimeout(function () { showPop(chip, w); }, 200); });
+      chip.addEventListener('mouseenter', function () { clearTimeout(popTimer); popTimer = setTimeout(function () { showPop(chip, w, false); }, 200); });
       chip.addEventListener('mouseleave', schedulePopHide);
     }
     var mask = [], i;
@@ -72,9 +71,6 @@
     ['Merriam-Webster (US)', 'https://www.merriam-webster.com/dictionary/'],
     ['Dictionary.com (US)', 'https://www.dictionary.com/browse/']
   ];
-  var selectedWord = '';
-  var lookupPanel = null;
-
   function linkList(word) {
     var list = el('div', 'lookup-links');
     LOOKUPS.forEach(function (d) {
@@ -91,11 +87,22 @@
   var canHover = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
   var pop = null, popTimer = null;
 
-  function hidePop() { if (pop) { pop.hidden = true; } }
+  function hidePop() {
+    if (pop) pop.hidden = true;
+    Array.prototype.forEach.call(document.querySelectorAll('.results .chip.sel'), function (c) {
+      c.classList.remove('sel');
+      c.setAttribute('aria-pressed', 'false');
+    });
+  }
   function schedulePopHide() { clearTimeout(popTimer); popTimer = setTimeout(hidePop, 250); }
 
-  function showPop(chip, word) {
+  function showPop(chip, word, pin) {
     clearTimeout(popTimer);
+    if (pin) {
+      hidePop();
+      chip.classList.add('sel');
+      chip.setAttribute('aria-pressed', 'true');
+    }
     if (!pop) {
       pop = el('div', 'lookup-pop');
       pop.setAttribute('role', 'dialog');
@@ -111,52 +118,14 @@
     var left = Math.max(8, Math.min(r.left + window.scrollX, window.scrollX + document.documentElement.clientWidth - pop.offsetWidth - 8));
     pop.style.left = left + 'px';
     pop.style.top = (r.bottom + window.scrollY + 6) + 'px';
-  }
-
-  var hintTimer = null;
-
-  // The look-up box goes away 10 seconds after it appears (it waits while the pointer is on it) and returns when a word is picked.
-  function startHideTimer() {
-    clearTimeout(hintTimer);
-    var panelNow = lookupPanel;
-    hintTimer = setTimeout(function () {
-      if (lookupPanel !== panelNow || !panelNow) return;
-      panelNow.hidden = true;
-      selectedWord = '';
-      Array.prototype.forEach.call(document.querySelectorAll('.results .chip.sel'), function (c) {
-        c.classList.remove('sel');
-        c.setAttribute('aria-pressed', 'false');
-      });
-    }, 10000);
-  }
-
-  function fillLookup() {
-    if (!lookupPanel) return;
-    clearTimeout(hintTimer);
-    lookupPanel.hidden = false;
-    clear(lookupPanel);
-    lookupPanel.appendChild(el('p', 'lookup-title', 'Look up a word'));
-    if (!selectedWord) {
-      lookupPanel.appendChild(el('p', 'lookup-hint', (canHover ? 'Hover over any word above, or click it, to see where to look it up.' : 'Tap any word above to see where to look it up.')));
-      startHideTimer();
-      return;
+    if (pin) {
+      var pr = pop.getBoundingClientRect();
+      if (pr.bottom > window.innerHeight) window.scrollBy({ top: pr.bottom - window.innerHeight + 16, behavior: 'smooth' });
     }
-    lookupPanel.appendChild(el('p', 'lookup-hint', 'Look up \u201C' + selectedWord + '\u201D in a dictionary:'));
-    var list = linkList(selectedWord);
-    lookupPanel.appendChild(list);
-    lookupPanel.appendChild(el('p', 'lookup-note', 'Opens in a new tab. A few Scrabble-only words may not be in a general dictionary.'));
-    startHideTimer();
   }
 
-  function selectWord(w) {
-    selectedWord = w;
-    Array.prototype.forEach.call(document.querySelectorAll('.results .chip'), function (c) {
-      var on = c.getAttribute('data-word') === w;
-      c.classList.toggle('sel', on);
-      c.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-    fillLookup();
-  }
+  document.addEventListener('click', function (e) { if (pop && !pop.hidden && !pop.contains(e.target)) hidePop(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hidePop(); });
 
   function segBar(label, options, current, onPick) {
     var bar = el('div', 'scorebar');
@@ -182,7 +151,7 @@
   }
 
   function renderWords(box, words, letters) {
-    if (!lastRender || lastRender.words !== words) selectedWord = '';
+    hidePop();
     lastRender = { box: box, words: words, letters: letters || '' };
     var f = { starts: cleanFilter(val('starts')), ends: cleanFilter(val('ends')), contains: cleanFilter(val('contains')) };
     clear(box);
@@ -207,15 +176,9 @@
       sec.appendChild(chips);
       box.appendChild(sec);
     });
-    lookupPanel = el('section', 'lookup');
-    lookupPanel.setAttribute('aria-live', 'polite');
-    lookupPanel.addEventListener('mouseenter', function () { clearTimeout(hintTimer); });
-    lookupPanel.addEventListener('mouseleave', startHideTimer);
-    fillLookup();
     if (shown.length < words.length) {
       box.appendChild(el('p', 'note', 'Showing the longest ' + MAX_SHOWN.toLocaleString() + ' words. Add a filter to narrow the list.'));
     }
-    box.appendChild(lookupPanel);
   }
 
   function submitForm(form) {
