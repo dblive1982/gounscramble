@@ -117,7 +117,7 @@ FILTERS = """<div class="filters">
 def letters_input(button_text):
     return """<label for="letters">Your letters</label>
 <div class="row">
-<input id="letters" class="field big" type="text" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. rteaq" aria-describedby="letters-hint">
+<input id="letters" class="field big" type="text" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. aertp" aria-describedby="letters-hint">
 <button class="btn" type="submit">%s</button>
 </div>
 <p id="letters-hint" class="hint">Up to 15 letters. Use ? or * for a blank tile.</p>""" % button_text
@@ -141,9 +141,9 @@ HOME = """<main><div class="wrap">
 </div>
 </form>
 <button type="button" id="example" class="example" aria-label="Try the example: letters T E A R">
-<span class="letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
+<span class="letters" id="ex-letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
 <span class="arrow" aria-hidden="true">&rarr;</span>
-<span class="pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
+<span class="pills" id="ex-pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
 </button>
 <section id="results" class="results" aria-live="polite"></section>
 </section>

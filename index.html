@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=f1b87eb0">
+<link rel="stylesheet" href="assets/styles.css?v=24a76ee8">
 </head>
 <body data-page="home">
 <!--header-->
@@ -34,7 +34,7 @@
 <form id="tool-form" class="panel" novalidate>
 <label for="letters">Your letters</label>
 <div class="row">
-<input id="letters" class="field big" type="text" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. rteaq" aria-describedby="letters-hint">
+<input id="letters" class="field big" type="text" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. aertp" aria-describedby="letters-hint">
 <button class="btn" type="submit">Unscramble</button>
 </div>
 <p id="letters-hint" class="hint">Up to 15 letters. Use ? or * for a blank tile.</p>
@@ -62,9 +62,9 @@
 </div>
 </form>
 <button type="button" id="example" class="example" aria-label="Try the example: letters T E A R">
-<span class="letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
+<span class="letters" id="ex-letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
 <span class="arrow" aria-hidden="true">&rarr;</span>
-<span class="pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
+<span class="pills" id="ex-pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
 </button>
 <section id="results" class="results" aria-live="polite"></section>
 </section>
@@ -124,6 +124,6 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=d5bff6dd"></script>
-<script src="assets/app.js?v=1833941a"></script>
+<script src="assets/app.js?v=7e38a30d"></script>
 </body>
 </html>

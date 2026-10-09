@@ -72,7 +72,7 @@ label { font-weight: 700; font-size: 16px; }
   width: 100%; height: 48px; padding: 0 14px; font-family: var(--display); font-weight: 500; font-size: 18px;
   color: var(--ink); background: var(--bg); border: 2px solid var(--ink); border-radius: 12px;
 }
-.field.big { flex: 1 1 260px; width: auto; min-width: 0; height: 56px; padding: 0 20px; font-size: 24px; letter-spacing: 2px; border-radius: 14px; }
+.field.big { flex: 1 1 260px; width: auto; min-width: 0; height: 56px; padding: 0 20px; font-size: 24px; letter-spacing: 1px; border-radius: 14px; }
 .field.area { height: auto; min-height: 220px; padding: 14px; font-family: var(--body); font-weight: 400; font-size: 18px; line-height: 1.5; resize: vertical; }
 select.field { font-family: var(--body); font-weight: 600; font-size: 17px; }
 
@@ -225,3 +225,4 @@ body[data-page="tools"] .block > .cards .card h3 { font-size: 20px; }
 .prose .card h3 { font-size: 20px; }
 .prose .card a { overflow-wrap: anywhere; }
 body[data-page="privacy"] .prose .guide-cards .card { flex: 1 1 100%; }
+.field.big::placeholder { letter-spacing: 0; font-weight: 500; }
