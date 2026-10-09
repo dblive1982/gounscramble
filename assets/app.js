@@ -231,7 +231,10 @@
       });
       var out = $('results'); if (out) clear(out);
       var st = $('status'); if (st) st.textContent = '';
-      if (fields.length) fields[0].focus();
+      // On phones and tablets, focusing a field pops up the keyboard, so only refocus with a mouse.
+      var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      if (touch) { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }
+      else if (fields.length) fields[0].focus();
     });
   }
 
