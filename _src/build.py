@@ -50,7 +50,7 @@ HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
 <a class="brand" href="index.html" aria-label="GoUnscramble home">@@LOGO52@@<span>Unscramble</span></a>
 <nav class="nav" aria-label="Main">
-<a href="index.html"@@CUR_home@@>Unscrambler</a>
+<a href="index.html"@@CUR_home@@>GoUnscramble</a>
 <a href="tools.html"@@CUR_tools@@>Tools</a>
 <a href="guides.html"@@CUR_guides@@>Guides</a>
 <a href="about.html"@@CUR_about@@>About</a>
