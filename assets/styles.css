@@ -534,3 +534,8 @@ body[data-page="tools"] .block > .cards { max-width: none; }
 .user-btn.pic svg{display:none}
 
 .menu-out[hidden]{display:none!important}
+
+/* word list pages */
+.prose .scorelist{list-style:none;padding:0;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px 10px}
+.prose .scorelist li{background:#fff;border:3px solid #000;border-radius:999px;padding:3px 12px;font-size:16px}
+.prose .scorelist span{opacity:.7;font-size:14px}

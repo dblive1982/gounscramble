@@ -501,6 +501,7 @@ GUIDE_LIST = [
     ("wordle-tips.html", "Tips for five-letter puzzles", "Opening guesses, tracking clues and avoiding near-miss traps."),
     ("crossword-help.html", "Crossword and word-search help", "Using patterns, conventions and the basics of cryptic clues."),
     ("prefixes-and-suffixes.html", "Common prefixes and suffixes", "Word beginnings and endings that make unscrambling easier."),
+    ("word-lists.html", "Word lists by length and letter", "Browse words by length and first letter, from two to eight letters."),
     ("two-letter-words.html", "Two-letter words", "Every two-letter word in the ENABLE list."),
     ("three-letter-words.html", "Three-letter words", "Every three-letter word in the ENABLE list, by first letter."),
     ("words-with-q-without-u.html", "Words with Q but no U", "The words to know when you draw a Q and no U."),

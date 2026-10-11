@@ -571,6 +571,10 @@ def guide_pages():
         title, desc = G.PAGE_META[fname]
         pages.append(dict(file=fname, page="guide", nav="guides", body=GUIDE_WRAP % article,
                           title=title + " | GoUnscramble", desc=desc))
+    import wordpages as W
+    for fname, (title, desc, article) in W.build(W.load(os.path.dirname(OUT) if False else OUT)).items():
+        pages.append(dict(file=fname, page="guide", nav="guides", body=GUIDE_WRAP % article,
+                          title=title + " | GoUnscramble", desc=desc))
     return pages
 
 
