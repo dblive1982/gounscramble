@@ -310,4 +310,6 @@ body[data-page="home"]{--hh:264px}
 .hub .hb-dyhint .dh-arrow{flex:none;margin-top:18px;animation:hb-nudge 1.4s ease-in-out infinite}
 @keyframes hb-nudge{0%,100%{translate:0 0}50%{translate:5px 5px}}
 @media (prefers-reduced-motion:reduce){.hub .hb-dyhint .dh-arrow{animation:none}}
-@media (max-width:760px){.hub .hb-dyhint{flex:0 0 100%;margin:0}.hub .hb-dyhint .dh-t{font-size:20px}.hub .hb-dyhint .dh-arrow{margin-top:14px}}
+@media (max-width:760px){.hub .hb-dyhint{flex:0 0 100%;margin:0}.hub .hb-dyhint .dh-t{font-size:20px}.hub .hb-dyhint .dh-arrow{margin:6px 0 0 -4px;rotate:80deg;animation-name:hb-nudge-d}}
+
+@keyframes hb-nudge-d{0%,100%{translate:0 0}50%{translate:0 6px}}
