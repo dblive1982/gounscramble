@@ -229,3 +229,16 @@ body[data-page="home"]{--hh:264px}
 .hm .optrow{justify-content:space-between}
 .free-badge{display:inline-grid;place-items:center;width:66px;height:66px;margin:-14px 6px -14px 0;background:#ffd23f;color:#000;font-family:var(--display,"Fredoka",system-ui,sans-serif);font-weight:700;font-size:16px;letter-spacing:-.02em;transform:rotate(-10deg);clip-path:polygon(100% 50%,87.8% 57.5%,92.7% 70.7%,79% 74.1%,76.5% 88.3%,64.4% 83.6%,57.5% 96.1%,50% 87.2%,41.7% 96.1%,35.6% 83.6%,23.5% 88.3%,21% 74.1%,7.3% 70.7%,12.2% 57.5%,0% 50%,12.2% 42.5%,7.3% 29.3%,21% 25.9%,23.5% 11.7%,35.6% 16.4%,42.5% 3.9%,50% 12.8%,58.3% 3.9%,64.4% 16.4%,76.5% 11.7%,79% 25.9%,92.7% 29.3%,87.8% 42.5%);animation:hb-wob 2.6s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.free-badge{animation:none}}
+
+/* News puzzle tile */
+.hub button.hb-otd{appearance:none;-webkit-appearance:none;font:inherit;width:100%;cursor:default;align-items:center;justify-content:center;min-height:128px}
+.hub button.hb-otd.live{cursor:pointer;background:#fff0b3}
+.hub button.hb-otd.live .nt{font-size:13px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-align:center}
+.hub button.hb-otd.live em{margin:0 0 4px}
+.hub .hb-otd mark{background:#fff;border:2px solid #000;border-radius:6px;padding:0 4px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:12px;color:#000}
+.hub .hb-otd mark.ok{background:#c9eccb;text-transform:none;letter-spacing:0;font-size:inherit}
+.hub .hb-otd small{margin-top:6px;font-weight:700;font-size:11px;opacity:.65}
+.hub .hb-otd{transition:opacity .18s,transform .1s,box-shadow .1s}
+.hub .hb-otd.fade{opacity:0}
+.hub button.hb-otd:disabled{opacity:1}
+@media (prefers-reduced-motion:reduce){.hub .hb-otd{transition:none}}

@@ -86,21 +86,83 @@
       }).catch(function () { /* keep the built-in tile */ });
     }
     if (otd) {
-      var d = new Date(), mm = ("0" + (d.getMonth() + 1)).slice(-2), dd = ("0" + d.getDate()).slice(-2);
-      cache("gu-otd-" + mm + dd, 12 * 3600 * 1000, function () {
-        return getJSON("https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/" + mm + "/" + dd).then(function (j) {
-          var ev = (j.events || []).filter(function (e) { return e.text && e.text.length <= 120 && e.year; });
-          if (!ev.length) throw 0;
-          var day = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5), e = ev[(day * 7) % ev.length];
-          var pg = e.pages && e.pages[0] && e.pages[0].content_urls && e.pages[0].content_urls.desktop && e.pages[0].content_urls.desktop.page;
-          return { y: e.year, t: e.text, u: pg || "" };
+      var d = new Date(), y = d.getFullYear(), mm = ("0" + (d.getMonth() + 1)).slice(-2), dd = ("0" + d.getDate()).slice(-2);
+      var day = Math.floor((d - new Date(y, 0, 0)) / 864e5);
+      function clean(t) { var x = document.createElement("div"); x.innerHTML = t; return (x.textContent || "").replace(/\s+/g, " ").replace(/\s*\(pictured\)/gi, "").trim(); }
+      cache("gu-news-" + mm + dd, 30 * 60 * 1000, function () {
+        var base = "https://en.wikipedia.org/api/rest_v1/feed/";
+        var hist = getJSON(base + "onthisday/events/" + mm + "/" + dd).then(function (j) {
+          return (j.events || []).filter(function (e) { return e.text && e.text.length <= 110 && e.year; })
+            .map(function (e) { return { k: "On this day \u00B7 " + e.year, t: e.text }; });
+        }).catch(function () { return []; });
+        var now = getJSON(base + "featured/" + y + "/" + mm + "/" + dd).then(function (j) {
+          return (j.news || []).map(function (n) { return { k: "In the news", t: clean(n.story || "") }; }).filter(function (n) { return n.t && n.t.length <= 150; });
+        }).catch(function () { return []; });
+        return Promise.all([hist, now]).then(function (r) {
+          var h = r[0], n = r[1], out = [], i;
+          for (i = 0; i < 3; i++) { if (n[i]) out.push(n[i]); if (h.length) out.push(h[(day * 7 + i * 13) % h.length]); }
+          if (!out.length) throw 0; return out;
         });
-      }).then(function (e) {
-        put(otd, e.y, e.t, "On this day");
-        if (e.u && /^https:\/\/en\.wikipedia\.org\//.test(e.u)) otd.href = e.u;
-        otd.classList.add("live");
+      }).then(function (items) {
+        function jumbled(w) { var a = w.split(""), o, n = 0; do { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } o = a.join(""); } while (o.toLowerCase() === w.toLowerCase() && ++n < 8); return o; }
+        function render(it, reveal) {
+          var words = it.t.split(" "), idx = [];
+          words.forEach(function (w, i) { if (/^[A-Za-z]{5,}$/.test(w.replace(/[^A-Za-z]/g, "")) && w.replace(/[^A-Za-z]/g, "").length === w.replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, "").length) idx.push(i); });
+          idx.sort(function (x, y2) { return words[y2].length - words[x].length; });
+          var pick = idx.slice(0, 2);
+          otd.innerHTML = "";
+          var k = document.createElement("em"); k.textContent = it.k; otd.appendChild(k);
+          var p = document.createElement("span"); p.className = "nt";
+          words.forEach(function (w, i) {
+            if (i) p.appendChild(document.createTextNode(" "));
+            if (pick.indexOf(i) >= 0) {
+              var m = /^([^A-Za-z]*)([A-Za-z]+)([^A-Za-z]*)$/.exec(w);
+              if (m) {
+                p.appendChild(document.createTextNode(m[1]));
+                var s2 = document.createElement("mark"); s2.textContent = reveal ? m[2] : jumbled(m[2]); if (reveal) s2.className = "ok"; p.appendChild(s2);
+                p.appendChild(document.createTextNode(m[3])); return;
+              }
+            }
+            p.appendChild(document.createTextNode(w));
+          });
+          otd.appendChild(p);
+          var h2 = document.createElement("small"); h2.textContent = reveal ? "Tap for the next one" : "Tap to unscramble"; otd.appendChild(h2);
+        }
+        var cur = 0, shown = false, timer = null;
+        function show(n) { cur = (n + items.length) % items.length; shown = false; otd.classList.add("fade"); setTimeout(function () { render(items[cur], false); otd.classList.remove("fade"); }, 180); }
+        function tick() { if (!shown && !document.hidden && items.length > 1) show(cur + 1); }
+        otd.setAttribute("aria-label", "News puzzle: tap to unscramble the jumbled words");
+        otd.disabled = false; otd.classList.add("live");
+        render(items[0], false);
+        otd.addEventListener("click", function () { if (!shown) { shown = true; render(items[cur], true); } else show(cur + 1); });
+        timer = setInterval(tick, 8000);
       }).catch(function () { /* keep the built-in tile */ });
     }
+  })();
+  // Third tile: a different word-list number each load.
+  (function () {
+    var el = document.querySelector(".hb-stats > div:nth-child(3)");
+    if (!el) return;
+    var F = [["8,636", "five-letter words"], ["96", "valid two-letter words"], ["28", "letters in the longest word"], ["10", "words typed on one keyboard row"], ["5", "anagrams of LISTEN"], ["12", "words from A, E, P, R, S"]];
+    var f = F[Math.floor(Math.random() * F.length)];
+    el.innerHTML = "<b>" + f[0] + "</b><span>" + f[1] + "</span>";
+  })();
+  // Numbers count up when the page loads.
+  (function () {
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll(".hb-stats > div:not(.hb-wx) b").forEach(function (el) {
+      var txt = el.textContent, n = parseInt(txt.replace(/[^0-9]/g, ""), 10);
+      if (!n || !/^[0-9,]+$/.test(txt)) return;
+      var start = null, dur = 1100;
+      el.textContent = "0";
+      function step(t) {
+        if (start === null) start = t;
+        var k = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(n * e).toLocaleString("en-GB");
+        if (k < 1) requestAnimationFrame(step); else el.textContent = txt;
+      }
+      requestAnimationFrame(step);
+    });
   })();
   if (!G || !$("hb-cal")) return;
   if (f) f.addEventListener("submit", function () { if (r && r.value.replace(/\s/g, "")) { var o = G.get("gs") || {}; o.srch = (o.srch || 0) + 1; G.set("gs", o); } });

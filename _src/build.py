@@ -179,7 +179,7 @@ HUB = """<div class="hub">
 <div><b>172,823</b><span>words in the list</span></div>
 <div class="hb-wx" id="hb-wx" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
 <div><b>300</b><span>word searches</span></div>
-<a class="hb-otd" id="hb-otd" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noopener"><b>0</b><span>vowels in <i>rhythms</i></span></a>
+<button type="button" class="hb-otd" id="hb-otd" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
 </section>
 <section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
 <div class="hb-me">
@@ -428,7 +428,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <p>When you sign in we set one session cookie to keep you signed in. While you are signed in we also use your browser's local storage to keep your game progress and remember that you are signed in. Signing out clears it. These are needed for the features you ask for. Advertising cookies are covered below.</p>
 <h2>Deleting your account</h2>
 <p>You can delete your account yourself at any time from the account page. Deleting it permanently removes your account, profile and saved progress. You can also reset just your game and activity data there, and your account and profile stay. If you cannot sign in, email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a> from the address you signed up with and we will delete it for you.</p>
-<h2>Weather and on this day</h2>
+<h2>Weather, history and news tile</h2>
 <p>The home page shows a small weather tile and an on this day fact. To do this, your browser asks Open-Meteo for the weather for the city in your time zone, and asks Wikipedia for a fact about today's date. Those services can see your IP address, as any website you visit would. We do not send them anything you type, and we do not store the result.</p>
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard server logs, such as your IP address and the pages requested, to keep the site running and secure.</p>
