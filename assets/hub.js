@@ -38,7 +38,7 @@
     });
     list.forEach(function (t) {
       var b = document.createElement("button"); b.type = "button"; b.setAttribute("data-rack", t); b.textContent = t.toUpperCase();
-      chips.insertBefore(b, roll);
+      chips.appendChild(b);
     });
   }
   if (chips) {

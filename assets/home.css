@@ -90,9 +90,9 @@
 .hub .hb-stats b{font-size:clamp(24px,5vw,38px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
 .hub .hb-stats span{font-weight:600;font-size:clamp(13px,2.6vw,16px)}
 .hub .hb-chips{display:flex;flex-wrap:wrap;gap:10px}
-.hub .hb-chips button{background:#fff0b3;border:3px solid #000;border-radius:12px;box-shadow:0 4px 0 #000;padding:8px 16px;font-family:inherit;font-weight:700;font-size:20px;letter-spacing:.12em;color:#000;cursor:pointer;transition:transform .08s,box-shadow .08s}
-.hub .hb-chips button:hover{transform:translateY(-2px);box-shadow:0 6px 0 #000}
-.hub .hb-chips button:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
+.hub .hb-chips button,.hub .hb-rollrow button{background:#fff0b3;border:3px solid #000;border-radius:12px;box-shadow:0 4px 0 #000;padding:8px 16px;font-family:inherit;font-weight:700;font-size:20px;letter-spacing:.12em;color:#000;cursor:pointer;transition:transform .08s,box-shadow .08s}
+.hub .hb-chips button:hover,.hub .hb-rollrow button:hover{transform:translateY(-2px);box-shadow:0 6px 0 #000}
+.hub .hb-chips button:active,.hub .hb-rollrow button:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
 .hub .hb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:16px}
 .hub .hb-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;background:var(--bg,#fff);border:4px solid #000;border-radius:22px;box-shadow:0 6px 0 #000;padding:16px 16px 18px;color:#000;text-decoration:none;transition:transform .1s,box-shadow .1s}
 .hub .hb-card:hover{transform:translateY(-3px);box-shadow:0 9px 0 #000}
@@ -207,7 +207,7 @@ body[data-page="home"]{--hh:264px}
 .hub .hb-btn:focus-visible{outline:3px solid #000;outline-offset:3px}
 .hub [hidden]{display:none!important}
 
-.hub .hb-chips .hb-roll{display:inline-flex;align-items:center;gap:8px;background:#ff6b6b;letter-spacing:0;font-size:17px;animation:none}
+.hub .hb-rollrow .hb-roll{display:inline-flex;align-items:center;gap:8px;background:#ff6b6b;letter-spacing:0;font-size:17px;animation:none}
 .hub .hb-roll svg{flex:none}
 .hub .hb-roll.spin svg{animation:hb-spin .6s cubic-bezier(.3,1.4,.5,1)}
 @keyframes hb-spin{to{transform:rotate(360deg)}}
@@ -267,3 +267,5 @@ body[data-page="home"]{--hh:264px}
 .hub .hb-lock .lock-free{position:absolute;right:9%;top:50%;width:132px;height:132px;margin:0;font-size:32px;translate:0 -50%}
 @media (max-width:640px){.hub .hb-lock .lock-free{width:84px;height:84px;font-size:20px;right:12px;top:14px;translate:none}.hub .hb-lock b{padding-right:84px}}
 .hub .hb-stats>div[data-t]{transition:none}.hub .hb-stats>div[data-t] b,.hub .hb-stats>div[data-t] span{transition:opacity .22s}.hub .hb-stats>div.fade b,.hub .hb-stats>div.fade span{opacity:0}
+
+.hub .hb-rollrow{margin-top:14px}
