@@ -107,6 +107,7 @@ FOOTER = """<!--footer-->
 <a href="credits.html">Credits</a>
 <a href="faq.html">FAQ</a>
 <a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
 <a href="contact.html">Contact</a>
 </nav>
 @@SOCIAL@@
@@ -366,6 +367,37 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 </article></div></main>
 """
 
+TERMS = """<main><div class="wrap"><article class="prose">
+<h1>Terms and conditions</h1>
+<p>Last updated 11 October 2026.</p>
+<p>These terms apply when you use gounscramble.com (the "site"). By using the site or creating an account you agree to them. If you do not agree, please do not use the site.</p>
+<h2>Who we are</h2>
+<p>GoUnscramble is run by its owner, Dee. You can reach us through the <a href="contact.html">contact page</a> or at <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
+<h2>Using the site</h2>
+<p>The word tools and games are free to use for personal, non-commercial purposes. Please do not misuse the site, for example by trying to break or overload it, scraping it at scale, probing it for weaknesses or using it for anything unlawful.</p>
+<h2>Your account</h2>
+<p>An account is optional. You must give accurate details, keep your password safe and tell us if you think someone else has used your account. You are responsible for what happens under your account. You can ask us to delete your account at any time by emailing us from the address you signed up with. We may suspend or remove accounts that break these terms.</p>
+<h2>Your profile and content</h2>
+<p>Your profile picture, bio and other details are yours. Only upload a picture you have the right to use, and do not add anything unlawful, offensive or misleading. We may remove content that breaks these rules.</p>
+<h2>Word lists and accuracy</h2>
+<p>Our word lists and results are provided as a guide. They may not match the dictionary or rules of a particular game or competition, so please check important words against the official list. Word meanings and scores are shown for convenience and may contain mistakes.</p>
+<h2>Our content</h2>
+<p>The site design, logo, text and code belong to us or are used with permission. Word list sources are credited on the <a href="credits.html">credits page</a>. You may not copy or resell the site or its content without our written permission.</p>
+<h2>Advertising and links</h2>
+<p>The site may show advertising and may link to other websites. We do not control other websites and are not responsible for their content or practices.</p>
+<h2>Availability and changes</h2>
+<p>We try to keep the site running but cannot promise it will always be available or error free. We may change, pause or remove features, including saved progress, at any time.</p>
+<h2>Our responsibility</h2>
+<p>The site is provided "as is". To the fullest extent the law allows, we are not liable for any loss arising from using the site. Nothing in these terms limits any right you have as a consumer or excludes liability that cannot lawfully be excluded, such as for death or personal injury caused by negligence or for fraud.</p>
+<h2>Privacy</h2>
+<p>How we handle your data is explained on the <a href="privacy.html">privacy page</a>.</p>
+<h2>Changes and governing law</h2>
+<p>We may update these terms and will change the date above when we do. Continuing to use the site means you accept the updated terms. These terms are governed by the laws of England and Wales, and the courts of England and Wales will have jurisdiction, unless your local consumer law says otherwise.</p>
+<h2>Questions</h2>
+<p>Ask through the <a href="contact.html">contact page</a> or email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
+</article></div></main>
+"""
+
 CONTACT = """<main><div class="wrap"><article class="prose">
 <h1>Contact</h1>
 <p>Questions, corrections or word suggestions? We would like to hear from you.</p>
@@ -420,6 +452,9 @@ PAGES = [
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | GoUnscramble",
          desc="How GoUnscramble handles what you type and what your browser sends."),
+    dict(file="terms.html", page="terms", nav=None, body=cardify(TERMS),
+         title="Terms and Conditions | GoUnscramble",
+         desc="The terms for using GoUnscramble and its free word tools, games and optional accounts."),
     dict(file="contact.html", page="contact", nav=None, body=CONTACT,
          title="Contact | GoUnscramble",
          desc="Get in touch with GoUnscramble."),
