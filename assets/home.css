@@ -313,3 +313,8 @@ body[data-page="home"]{--hh:264px}
 @media (max-width:760px){.hub .hb-dyhint{flex:0 0 100%;margin:0}.hub .hb-dyhint .dh-t{font-size:20px}.hub .hb-dyhint .dh-arrow{margin:6px 0 0 -4px;rotate:80deg;animation-name:hb-nudge-d}}
 
 @keyframes hb-nudge-d{0%,100%{translate:0 0}50%{translate:0 6px}}
+
+/* Options float over the page so nothing below them moves */
+.hm .optrow{position:relative}
+.hero-band .opts{position:absolute;left:0;right:0;top:100%;z-index:30;margin-top:8px;padding:14px;background:#fff;border:4px solid #000;border-radius:22px;box-shadow:0 6px 0 #000}
+.hero-band .opts[hidden]{display:none}
