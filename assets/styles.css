@@ -496,3 +496,6 @@ main { padding-bottom: 56px; }
 
 .hm { padding-bottom: 0; }
 body[data-page="tools"] .block > .cards { max-width: none; }
+.menu-list hr { border: 0; border-top: 3px solid #000; margin: 8px 6px; opacity: .25; width: auto; }
+.main-nav .menu[open] .menu-list { gap: 2px; }
+.menu-list a { padding-top: 10px; padding-bottom: 10px; }

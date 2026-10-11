@@ -55,9 +55,16 @@ HEADER = """<!--header-->
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
 <div class="menu-list">
 <button type="button" class="menu-x" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></button>
-<a href="index.html"@@CUR_home@@>GoUnscramble</a>
-<a href="tools.html"@@CUR_tools@@>Tools</a>
+<a href="index.html"@@CUR_home@@>Word unscrambler</a>
+<a href="anagram-solver.html"@@CUR_anagram@@>Anagram solver</a>
+<a href="games.html"@@CUR_games@@>Puzzles &amp; games</a>
+<hr>
+<a href="word-counter.html"@@CUR_counter@@>Word counter</a>
+<a href="case-converter.html"@@CUR_case@@>Case converter</a>
+<a href="random-word-picker.html"@@CUR_random@@>Random word picker</a>
+<hr>
 <a href="guides.html"@@CUR_guides@@>Guides</a>
+<a href="tools.html"@@CUR_tools@@>All tools</a>
 <a href="about.html"@@CUR_about@@>About</a>
 <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Dark mode" hidden></button>
 </div>
@@ -365,22 +372,27 @@ CREDITS = """<main><div class="wrap"><article class="prose">
 </article></div></main>
 """
 
+GAMES = open(os.path.join(ROOT, "games_body.html"), encoding="utf-8").read()
+
 PAGES = [
     dict(file="index.html", page="home", nav="home", body=HOME,
          title="GoUnscramble: Unscramble Letters Into Words",
          desc="Free word unscrambler. Type your jumbled letters and see every word they can make, with filters for starts with, ends with, contains and length."),
-    dict(file="anagram-solver.html", page="anagram", nav="tools", body=ANAGRAM, skip="anagram",
+    dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
          title="Anagram Solver | GoUnscramble",
          desc="Find the words that use every one of your letters. A free anagram solver with blank tile support."),
-    dict(file="random-word-picker.html", page="random", nav="tools", body=RANDOM, skip="random",
+    dict(file="random-word-picker.html", page="random", nav="random", body=RANDOM, skip="random",
          title="Random Word Picker | GoUnscramble",
          desc="Pull random words from the dictionary, with an optional word length."),
-    dict(file="word-counter.html", page="counter", nav="tools", body=COUNTER, skip="counter",
+    dict(file="word-counter.html", page="counter", nav="counter", body=COUNTER, skip="counter",
          title="Word Counter | GoUnscramble",
          desc="Count words, characters, sentences and paragraphs, and see the reading time. Free and private."),
-    dict(file="case-converter.html", page="case", nav="tools", body=CASE, skip="case",
+    dict(file="case-converter.html", page="case", nav="case", body=CASE, skip="case",
          title="Case Converter | GoUnscramble",
          desc="Switch text between upper case, lower case, title case and sentence case."),
+    dict(file="games.html", page="games", nav="games", body=GAMES,
+         title="Free Puzzles & Games | GoUnscramble",
+         desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Memory match and Hangman."),
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | GoUnscramble",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
@@ -471,7 +483,7 @@ def build_page(p):
             .replace("@@CHEVRON@@", CHEVRON)
             .replace("@@CARDS@@", cards(p.get("skip"))))
     header = HEADER.replace("@@LOGO52@@", logo(52))
-    for key in ("home", "tools", "guides", "about"):
+    for key in ("home", "anagram", "games", "counter", "case", "random", "tools", "guides", "about"):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
     footer = FOOTER.replace("@@LOGO32@@", logo(32)).replace("@@SOCIAL@@", social_html())
     path = "" if p["file"] == "index.html" else p["file"]
@@ -479,11 +491,15 @@ def build_page(p):
             .replace("@@CANON@@", SITE + "/" + path).replace("@@PAGE@@", p["page"]))
     head = head.replace("@@SEO@@", seo_tags(p, SITE + "/" + path))
     home = p["file"] == "index.html"
-    head = head.replace("@@HOMECSS@@", '<link rel="stylesheet" href="assets/home.css">' if home else "")
+    games = p["file"] == "games.html"
+    extra_css = '<link rel="stylesheet" href="assets/home.css">' if home else ('<link rel="stylesheet" href="assets/games.css">' if games else "")
+    head = head.replace("@@HOMECSS@@", extra_css)
     page = head + header + body + footer
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/home.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js"):
+    if games:
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/games.js"></script>')
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     return page
 
