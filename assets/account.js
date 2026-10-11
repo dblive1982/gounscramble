@@ -184,7 +184,7 @@
     });
   });
   $("out").addEventListener("click", function () {
-    api("logout", {}).then(function () { prof = null; try { localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } setUser(null); });
+    api("logout", {}).then(function () { prof = null; try { localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; setUser(null); });
   });
 
   var m = /[?&]reset=([a-f0-9]{64})/.exec(location.search);
@@ -199,7 +199,7 @@
       ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = !g; });
       if (g && d.google_id) startGoogle(d.google_id);
       if (d.user) setUser(d.user);
-      else { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
+      else { try { localStorage.removeItem("gu-in"); localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
     })
     .catch(function () { $("ac-off").hidden = false; show(token ? "reset" : "signin"); });
 })();
