@@ -156,8 +156,8 @@ def build(words):
     return with_toggle(pages)
 
 
-TOGGLE = ('<label class="check rude-toggle"><input type="checkbox" id="hide-rude" checked> Hide offensive words</label>'
-          '<script>(function(){var c=document.getElementById("hide-rude"),d=document.documentElement,k="gu-hide-rude";'
+TOGGLE = ('<label class="check rude-toggle"><input type="checkbox" id="wl-rude" checked> Hide offensive words</label>'
+          '<script>(function(){var c=document.getElementById("wl-rude"),d=document.documentElement,k="gu-wl-rude";'
           'function ap(){d.classList.toggle("show-rude",!c.checked)}'
           'try{if(localStorage.getItem(k)==="0")c.checked=false}catch(e){}ap();'
           'c.addEventListener("change",function(){try{localStorage.setItem(k,c.checked?"1":"0")}catch(e){}ap()})})();</script>')
