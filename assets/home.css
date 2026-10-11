@@ -329,9 +329,9 @@ body[data-page="home"]{--hh:264px}
 .home-res #out .empty{margin-top:0;text-align:center}
 
 /* Doodle between "Your progress" and Sign in */
-.hub .hb-doodle{flex:1;display:flex;justify-content:center;align-items:center;min-width:0;padding:0 14px;overflow:hidden}
+.hub .hb-doodle{flex:1;display:flex;justify-content:flex-end;align-items:center;min-width:0;padding:0 14px;overflow:hidden}
 .hub .hb-doodle[hidden]{display:none!important}
-.hub .hb-doodle svg{width:100%;max-width:520px;height:auto;rotate:-1.5deg}
+.hub .hb-doodle svg{width:100%;max-width:300px;height:auto;rotate:-1.5deg}
 .hub .hb-doodle .dd-s{transform-box:fill-box;transform-origin:center;animation:hb-twinkle 2.4s ease-in-out infinite}
 .hub .hb-doodle .dd-s+.dd-s{animation-delay:1.2s}
 @keyframes hb-twinkle{0%,100%{scale:1;rotate:0deg}50%{scale:1.25;rotate:15deg}}
