@@ -373,7 +373,7 @@ TERMS = """<main><div class="wrap"><article class="prose">
 <p>Last updated 11 October 2026.</p>
 <p>These terms apply when you use gounscramble.com (the "site"). By using the site or creating an account you agree to them. If you do not agree, please do not use the site.</p>
 <h2>Who we are</h2>
-<p>GoUnscramble is run by its owner, Dee. You can reach us through the <a href="contact.html">contact page</a> or at <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
+<p>GoUnscramble is an independent website. You can reach us through the <a href="contact.html">contact page</a> or at <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
 <h2>Using the site</h2>
 <p>The word tools and games are free to use for personal, non-commercial purposes. Please do not misuse the site, for example by trying to break or overload it, scraping it at scale, probing it for weaknesses or using it for anything unlawful.</p>
 <h2>Your account</h2>
