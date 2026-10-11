@@ -547,3 +547,11 @@ body[data-page="tools"] .block > .cards { max-width: none; }
 .foot-secure { display: flex; align-items: flex-start; gap: 8px; margin: 0; font-size: 13px; line-height: 1.4; flex: 1 1 100%; order: 9; opacity: .85; }
 .foot-secure svg { flex: none; margin-top: 1px; }
 .foot-legal { margin: 0; flex: 1 1 100%; order: 10; font-size: 13px; line-height: 1.4; opacity: .85; }
+
+/* Jump links: easy to tap on a phone, comic pill style */
+.jump { gap: 10px; }
+.jump a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 6px 14px; background: #fff; color: #000; border: 3px solid #000; border-radius: 14px; box-shadow: 0 3px 0 #000; font-weight: 700; text-decoration: none; transition: transform .08s, box-shadow .08s; }
+.jump a:hover { background: #fff0b3; transform: translateY(-2px); box-shadow: 0 5px 0 #000; }
+.jump a:active { transform: translateY(2px); box-shadow: 0 1px 0 #000; }
+.jump a:focus-visible { outline: 3px solid #000; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .jump a { transition: none; } }

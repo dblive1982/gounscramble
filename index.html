@@ -29,8 +29,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=74039129">
-<link rel="stylesheet" href="assets/home.css?v=9e0a1d21">
+<link rel="stylesheet" href="assets/styles.css?v=77b67464">
+<link rel="stylesheet" href="assets/home.css?v=e53bcbb5">
 </head>
 <body data-page="home">
 <!--header-->
@@ -101,8 +101,8 @@
 <div class="hb-lock" id="hb-lock" hidden><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
-<p class="hb-sub">Tap a jumble and watch GoUnscramble crack it.</p>
-<div class="hb-chips"><button type="button" data-rack="lesnit">LESNIT</button><button type="button" data-rack="rnaedg">RNAEDG</button><button type="button" data-rack="asrtem">ASRTEM</button><button type="button" data-rack="mektra">MEKTRA</button><button type="button" data-rack="oerangs">OERANGS</button><button type="button" data-rack="scrambl?">SCRAMBL?</button></div>
+<p class="hb-sub">Tap a jumble and watch GoUnscramble crack it, or roll a new set.</p>
+<div class="hb-chips" id="hb-chips"><button type="button" data-rack="lesnit">LESNIT</button><button type="button" data-rack="rnaedg">RNAEDG</button><button type="button" data-rack="asrtem">ASRTEM</button><button type="button" data-rack="mektra">MEKTRA</button><button type="button" data-rack="oerangs">OERANGS</button><button type="button" data-rack="scrambl?">SCRAMBL?</button><button type="button" class="hb-roll" id="hb-roll" aria-label="Show new scrambles"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.4-5.7"/><path d="M20 4v5h-5"/></svg><span>New scrambles</span></button></div>
 </section>
 <section class="hb-sec" aria-labelledby="hb-games"><div class="hb-head"><h2 id="hb-games">Play free games</h2><a href="games.html">See all games &rsaquo;</a></div>
 <div class="hb-grid">
@@ -203,7 +203,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=28a52547"></script>
+<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=2b6e91f7"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}

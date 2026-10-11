@@ -7,16 +7,37 @@
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function signedIn() { try { return localStorage.getItem("gu-in") === "1"; } catch (e) { return false; } }
 
-  // Try a scramble
-  document.querySelectorAll(".hb-chips button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      if (!f || !r) return;
+  // Try a scramble: a fresh set of jumbled real words on every visit, and a button for more.
+  var POOL = "airport anchor balloon basket bedroom blanket blossom brave breeze bridge candle captain castle chapter cherry chicken cloud cottage cricket curtain dance diamond dinner dolphin dragon eagle elephant eleven engine fabric famous father flame flower forest friend garden gentle ghost ginger giraffe guitar hammer harbor heart holiday insect invent island ivory jacket jewel joker journey jungle karma kitchen kitten knight ladder lemon light magnet mango market mirror monkey music nature night noble ocean office olive orange parent peace penguin pepper piano picture pillow planet pocket pumpkin purple queen quest quiet rabbit radio rhythm river rocket sandwich school shine silver simple stone summer sunset teacher thunder ticket tiger tomato trail ultra umbrella unity velvet village vivid water whale window winter wizard yellow yogurt youth zebra zipper".split(" ");
+  var chips = $("hb-chips"), roll = $("hb-roll");
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function jumble(w) { var a = w.split(""), o; for (var n = 0; n < 8; n++) { o = shuffle(a.slice()).join(""); if (o !== w) return o; } return o; }
+  function pick(n) { return shuffle(POOL.slice()).slice(0, n); }
+  function makeChips() {
+    if (!chips) return;
+    var old = chips.querySelectorAll("[data-rack]"); old.forEach(function (b) { b.remove(); });
+    var ws = pick(6), list = ws.map(function (w, i) {
+      if (i === 5) { var a = w.split(""); a[Math.floor(Math.random() * a.length)] = "?"; return jumble(a.join("")).replace(/\?/g, "?"); }
+      return jumble(w);
+    });
+    list.forEach(function (t) {
+      var b = document.createElement("button"); b.type = "button"; b.setAttribute("data-rack", t); b.textContent = t.toUpperCase();
+      chips.insertBefore(b, roll);
+    });
+  }
+  if (chips) {
+    makeChips();
+    chips.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-rack]"); if (!b || !f || !r) return;
       r.value = b.getAttribute("data-rack");
       r.dispatchEvent(new Event("input", { bubbles: true }));
       if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event("submit", { cancelable: true }));
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
-  });
+    if (roll) roll.addEventListener("click", function () {
+      roll.classList.remove("spin"); void roll.offsetWidth; roll.classList.add("spin"); makeChips();
+    });
+  }
   // Cards pop in as they scroll into view.
   (function () {
     var hub = document.querySelector(".hub");

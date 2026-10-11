@@ -206,3 +206,9 @@ body[data-page="home"]{--hh:264px}
 .hub .hb-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
 .hub .hb-btn:focus-visible{outline:3px solid #000;outline-offset:3px}
 .hub [hidden]{display:none!important}
+
+.hub .hb-chips .hb-roll{display:inline-flex;align-items:center;gap:8px;background:#ff6b6b;letter-spacing:0;font-size:17px;animation:none}
+.hub .hb-roll svg{flex:none}
+.hub .hb-roll.spin svg{animation:hb-spin .6s cubic-bezier(.3,1.4,.5,1)}
+@keyframes hb-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.hub .hb-roll.spin svg{animation:none}}

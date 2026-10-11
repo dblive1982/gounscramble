@@ -61,3 +61,12 @@
 .ac .dz-box p{margin:0;font-weight:600}
 .ac .pill.warn{background:#ff6b6b}
 .ac #rs-done{color:#0a7f43;font-weight:700}
+/* spacing fixes */
+.ac #c-data{display:flex;flex-direction:column;gap:0}
+.ac #c-data>.sub{margin:0 0 14px}
+.ac .dz{margin-top:22px;padding-top:22px;gap:12px}
+.ac #c-data>.sub+.dz{margin-top:0;padding-top:0;border-top:0}
+.ac .dz-t{gap:6px}
+.ac .dz-t b{font-size:17px}
+.ac .out-row{padding:18px 0 8px}
+.ac .card+.card,.ac .card+form.card{margin-top:0}
