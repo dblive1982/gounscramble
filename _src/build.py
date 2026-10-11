@@ -20,13 +20,7 @@ CHEVRON = ('<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><
 
 
 def logo(size):
-    return (
-        '<svg width="%d" height="%d" viewBox="0 0 100 100" aria-hidden="true">'
-        '<defs><linearGradient id="lg%d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C13CF0"/><stop offset="1" stop-color="#8E17D6"/></linearGradient></defs>'
-        '<rect x="4" y="4" width="92" height="92" rx="26" fill="url(#lg%d)"></rect>'
-        '<text x="50" y="67" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-style="italic" font-weight="800" font-size="52" letter-spacing="-3" fill="#FFFFFF">Go</text>'
-        '</svg>' % (size, size, size, size)
-    )
+    return '<span class="go-tag" aria-hidden="true">GO</span>'
 
 
 HEAD = """<!doctype html>
@@ -38,14 +32,15 @@ HEAD = """<!doctype html>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="@@CANON@@">
 @@SEO@@
-<meta name="theme-color" content="#2A0B4E">
-<script>try{var t=localStorage.getItem("gu-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="theme-color" content="#0099b5">
 <meta name="google-adsense-account" content="ca-pub-6517978259411056">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6517978259411056" crossorigin="anonymous"></script>
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body data-page="@@PAGE@@">
@@ -53,11 +48,12 @@ HEAD = """<!doctype html>
 
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html" aria-label="GoUnscramble home">@@LOGO52@@<span>Unscramble</span></a>
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="352" height="300" alt="GO! Unscramble!"></a>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
 <div class="menu-list">
+<button type="button" class="menu-x" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></button>
 <a href="index.html"@@CUR_home@@>GoUnscramble</a>
 <a href="tools.html"@@CUR_tools@@>Tools</a>
 <a href="guides.html"@@CUR_guides@@>Guides</a>
@@ -106,6 +102,7 @@ FOOTER = """<!--footer-->
 <!--/footer-->
 <script src="assets/engine.js"></script>
 <script src="assets/app.js"></script>
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();</script>
 </body>
 </html>
 """
@@ -338,7 +335,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard server logs, such as your IP address and the pages requested, to keep the site running and secure.</p>
 <h2>Fonts</h2>
-<p>Pages load the Plus Jakarta Sans font from Google Fonts, so your browser contacts Google to fetch them.</p>
+<p>Pages load the Fredoka and Nunito fonts from Google Fonts, so your browser contacts Google to fetch them.</p>
 <h2>Advertising and analytics</h2>
 <p>This site is set up to show advertising from Google AdSense. Google and its advertising partners may use cookies and similar technologies to show ads, measure them and, where you allow it, personalise them. In the UK and the European Economic Area you will be asked for your choice through a consent message. You can learn how Google uses data from sites that use its services at <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>, and manage ad personalisation at <a href="https://adssettings.google.com">adssettings.google.com</a>.</p>
 <p>We do not use any other analytics tools at present. If that changes, we will update this page first.</p>
@@ -366,7 +363,7 @@ CREDITS = """<main><div class="wrap"><article class="prose">
 <p>The unscrambler uses ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
 <p>No other word lists are used at present. If licensed lists such as NWL or CSW are added, they will be credited here.</p>
 <h2>Fonts</h2>
-<p>The site uses Plus Jakarta Sans for headings and text, released under the SIL Open Font License and served by Google Fonts.</p>
+<p>The site uses Fredoka for headings and Nunito for text, both released under the SIL Open Font License and served by Google Fonts.</p>
 </article></div></main>
 """
 
