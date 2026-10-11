@@ -305,10 +305,10 @@
     var h = $("hb-hi"), acc = $("hb-acc");
     if (signedIn()) {
       h.textContent = name ? "Welcome back, " + name + ". Your games and days are saved to your account." : "Welcome back. Your games and days are saved to your account.";
-      acc.textContent = "Your account ›";
+      acc.textContent = "Your account";
     } else {
       h.textContent = "This is saved in this browser. Sign in free and it follows you to every device.";
-      acc.textContent = "Sign in to save it ›";
+      acc.textContent = "Sign in";
     }
   }
   function draw() {
