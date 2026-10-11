@@ -14,8 +14,8 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
         $t = htmlspecialchars($btnText, ENT_QUOTES, 'UTF-8');
         $btn = '<p style="margin:26px 0 6px"><a href="' . $u . '" style="display:inline-block;background:#FF6B6B;color:#000000;text-decoration:none;font-weight:700;font-size:20px;padding:12px 28px;border:4px solid #000000;border-radius:999px;font-family:Arial,Helvetica,sans-serif">' . $t . '</a></p>';
     }
-    $html = '<!doctype html><html><body style="margin:0;padding:0;background:#E2CF9F">'
-        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#E2CF9F"><tr><td align="center" style="padding:24px 12px">'
+    $html = '<!doctype html><html><head><meta charset="utf-8"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light"></head><body style="margin:0;padding:0;background:#FFFFFF">'
+        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF"><tr><td align="center" style="padding:24px 12px">'
         . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">'
         . '<tr><td align="center" style="background:#0099B5;border:4px solid #000000;border-radius:24px 24px 0 0;padding:18px 12px">'
         . '<img src="' . htmlspecialchars($logo, ENT_QUOTES, 'UTF-8') . '" width="176" height="150" alt="GO! Unscramble!" style="display:block;border:0;height:150px;width:176px"></td></tr>'
