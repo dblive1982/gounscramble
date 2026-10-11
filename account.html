@@ -171,13 +171,13 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=a85c2ad4"></script><script src="assets/account.js?v=66ac2290"></script>
+<script src="assets/progress.js?v=ddfb7b2d"></script><script src="assets/account.js?v=e86ec35a"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}
 if(o)o.hidden=!s;if(a)a.textContent=s?"Your account":"Sign in";
 if(u){u.setAttribute("aria-label",s?"Your account":"Sign in or your account");u.classList.toggle("pic",!!(s&&v));u.style.backgroundImage=(s&&v)?"url("+v+")":""}};
-if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
+if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av");localStorage.removeItem("gu-progress");localStorage.removeItem("gu-ws")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
 window.guMenu()})();</script>
 </body>
 </html>

@@ -107,7 +107,7 @@ function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return fal
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}
 if(o)o.hidden=!s;if(a)a.textContent=s?"Your account":"Sign in";
 if(u){u.setAttribute("aria-label",s?"Your account":"Sign in or your account");u.classList.toggle("pic",!!(s&&v));u.style.backgroundImage=(s&&v)?"url("+v+")":""}};
-if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
+if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av");localStorage.removeItem("gu-progress");localStorage.removeItem("gu-ws")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
 window.guMenu()})();</script>
 </body>
 </html>

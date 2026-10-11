@@ -122,7 +122,7 @@ function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return fal
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}
 if(o)o.hidden=!s;if(a)a.textContent=s?"Your account":"Sign in";
 if(u){u.setAttribute("aria-label",s?"Your account":"Sign in or your account");u.classList.toggle("pic",!!(s&&v));u.style.backgroundImage=(s&&v)?"url("+v+")":""}};
-if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
+if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av");localStorage.removeItem("gu-progress");localStorage.removeItem("gu-ws")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
 window.guMenu()})();</script>
 </body>
 </html>
@@ -187,6 +187,7 @@ HUB = """<div class="hub">
 <ul class="hb-nums" id="hb-nums"></ul>
 <div id="hb-go" class="hb-go"></div></div>
 <div class="hb-cal" id="hb-cal" aria-label="Days you played"></div>
+<div class="hb-lock" id="hb-lock" hidden><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
 <p class="hb-sub">Tap a jumble and watch GoUnscramble crack it.</p>
@@ -422,9 +423,9 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Your profile</h2>
 <p>On your account page you can add a profile picture, a short bio, a location and a favourite game. All of these are optional, are only visible to you, and are stored with your account. You can change or remove them at any time. The picture is resized in your browser before it is saved.</p>
 <h2>Saved progress</h2>
-<p>Your game progress, such as word search puzzles you have started or finished and your Sudoku game, is saved in your browser. If you are signed in, a copy is also saved to your account so it follows you between devices. Signed-out progress stays only on your device.</p>
+<p>Your game progress and activity, such as word search puzzles you have started or finished, your Sudoku game, your scores and your play calendar, is saved to your account while you are signed in, so it follows you between devices. When you sign out, it is removed from your device, and signed-out play is not saved. You can reset it, or delete your account, from the account page at any time.</p>
 <h2>Cookies and browser storage</h2>
-<p>When you sign in we set one session cookie to keep you signed in. We also use your browser's local storage to remember game progress and whether you are signed in. These are needed for the features you ask for. Advertising cookies are covered below.</p>
+<p>When you sign in we set one session cookie to keep you signed in. While you are signed in we also use your browser's local storage to keep your game progress and remember that you are signed in. Signing out clears it. These are needed for the features you ask for. Advertising cookies are covered below.</p>
 <h2>Deleting your account</h2>
 <p>You can delete your account yourself at any time from the account page. Deleting it permanently removes your account, profile and saved progress. You can also reset just your game and activity data there, and your account and profile stay. If you cannot sign in, email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a> from the address you signed up with and we will delete it for you.</p>
 <h2>Server logs</h2>

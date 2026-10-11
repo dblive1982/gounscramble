@@ -5,7 +5,10 @@
   "use strict";
   var KEY = "gu-progress", data = {}, timer = null, listeners = [];
 
+  // Progress is only kept (and shown) while you are signed in. Signed out, it lives in memory for this page only.
+  function forget() { data = {}; try { localStorage.removeItem(KEY); localStorage.removeItem("gu-ws"); } catch (e) { /* ignore */ } }
   function read() {
+    if (!signedIn()) { forget(); return; }
     try { var s = localStorage.getItem(KEY); if (s) data = JSON.parse(s) || {}; } catch (e) { data = {}; }
     // One-off: bring over word search results saved by the first version.
     try {
@@ -13,7 +16,7 @@
       if (old && !(data.ws && data.ws.done)) { data.ws = data.ws || {}; data.ws.done = JSON.parse(old) || {}; data.ws.t = data.ws.t || 1; }
     } catch (e) { /* ignore */ }
   }
-  function write() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { /* storage unavailable */ } }
+  function write() { if (!signedIn()) return; try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { /* storage unavailable */ } }
   function signedIn() { try { return localStorage.getItem("gu-in") === "1"; } catch (e) { return false; } }
 
   function union(a, b) { var s = {}; (a || []).concat(b || []).forEach(function (x) { s[x] = 1; }); return Object.keys(s).map(Number).sort(function (x, y) { return x - y; }); }
@@ -85,7 +88,7 @@
       headers: { "Content-Type": "application/json", "X-GU": "1" },
       body: JSON.stringify({ data: data })
     }).then(function (r) { return r.json(); }).then(function (d) {
-      if (d && d.user === null) { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } }
+      if (d && d.user === null) { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } forget(); }
     }).catch(function () { /* will retry on the next change */ });
   }
   function queue() { if (!signedIn()) return; clearTimeout(timer); timer = setTimeout(push, 1500); }
@@ -104,6 +107,9 @@
   }
 
   var api = {
+    // Called on sign-out: nothing from this account is left behind on the device.
+    clear: function () { clearTimeout(timer); forget(); listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } }); },
+    signedIn: signedIn,
     // Wipe saved games, scores and the calendar here and on the account (other devices follow on their next sync).
     reset: function () {
       clearTimeout(timer); data = { rs: { t: Date.now() } }; write();
@@ -126,7 +132,7 @@
       return fetch("api/progress.php", { credentials: "same-origin" })
         .then(function (r) { return r.json(); })
         .then(function (d) {
-          if (!d || d.user === null) { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } return false; }
+          if (!d || d.user === null) { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } forget(); return false; }
           var before = JSON.stringify(data);
           data = merge(data, d.data || {});
           var changed = JSON.stringify(data) !== before;

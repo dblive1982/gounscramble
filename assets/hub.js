@@ -105,7 +105,12 @@
       acc.textContent = "Sign in to save it ›";
     }
   }
-  function draw() { stats(); calendar(); }
+  function draw() {
+    var si = signedIn(), me = document.querySelector(".hb-me");
+    me.classList.toggle("out", !si);
+    document.querySelector(".hb-mine").hidden = !si; $("hb-cal").hidden = !si; $("hb-lock").hidden = si;
+    if (si) { stats(); calendar(); }
+  }
   hello(""); draw();
   G.onChange(draw);
   if (signedIn()) {
