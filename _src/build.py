@@ -278,8 +278,8 @@ HOME = """<main>
 <label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
 <button class="reset" id="clrf" type="button">Clear</button>
 </div></div>
-<div id="out" aria-live="polite"></div>
 </div></section>
+<div class="hm home-res"><div id="out" aria-live="polite"></div></div>
 <div class="home-extra">
 @@HUB@@
 <div class="hm hm-after">
