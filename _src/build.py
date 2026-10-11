@@ -50,7 +50,7 @@ HEAD = """<!doctype html>
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
 <a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="700" height="595" alt="GO! Unscramble!"></a>
-<a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a>
+<div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><a href="games.html" role="menuitem">Puzzles &amp; games</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
@@ -120,9 +120,23 @@ FOOTER = """<!--footer-->
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}
-if(o)o.hidden=!s;if(a)a.textContent=s?"Your account":"Sign in";
+if(o)o.hidden=!s;if(a)a.textContent=s?"Your account":"Sign in";if(!s){try{sessionStorage.removeItem("gu-nm")}catch(e){}}
 if(u){u.setAttribute("aria-label",s?"Your account":"Sign in or your account");u.classList.toggle("pic",!!(s&&v));u.style.backgroundImage=(s&&v)?"url("+v+")":""}};
-if(o)o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av");localStorage.removeItem("gu-progress");localStorage.removeItem("gu-ws")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)});
+function out(e){if(e)e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av");localStorage.removeItem("gu-progress");localStorage.removeItem("gu-ws");sessionStorage.removeItem("gu-nm")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)}
+if(o)o.addEventListener("click",out);
+var pop=document.getElementById("user-pop"),wrap=document.querySelector(".user-wrap"),po=document.getElementById("up-out"),pn=document.getElementById("up-n");
+function nm(){var n=null;try{n=sessionStorage.getItem("gu-nm")}catch(e){}if(n){pn.textContent="Hi, "+n.split(" ")[0];return}
+if(!on())return;fetch("api/me.php",{credentials:"same-origin"}).then(function(r){return r.json()}).then(function(d){if(d&&d.user&&d.user.name){try{sessionStorage.setItem("gu-nm",d.user.name)}catch(e){}pn.textContent="Hi, "+d.user.name.split(" ")[0]}}).catch(function(){})}
+function show(v){if(!pop)return;pop.hidden=!(v&&on());if(!pop.hidden)nm()}
+if(po)po.addEventListener("click",out);
+if(wrap&&u&&pop){var hov=window.matchMedia&&matchMedia("(hover:hover)").matches,t=null;
+wrap.addEventListener("mouseenter",function(){if(!hov)return;clearTimeout(t);show(true)});
+wrap.addEventListener("mouseleave",function(){if(!hov)return;t=setTimeout(function(){show(false)},200)});
+wrap.addEventListener("focusin",function(e){try{if(e.target.matches(":focus-visible"))show(true)}catch(x){}});
+wrap.addEventListener("focusout",function(){setTimeout(function(){if(!wrap.contains(document.activeElement))show(false)},0)});
+u.addEventListener("click",function(e){if(!on()||hov)return;if(pop.hidden){e.preventDefault();show(true)}});
+document.addEventListener("click",function(e){if(!wrap.contains(e.target))show(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")show(false)})}
 window.guMenu()})();</script>
 </body>
 </html>
