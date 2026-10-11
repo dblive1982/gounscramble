@@ -17,8 +17,19 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
+  // Cards pop in as they scroll into view.
+  (function () {
+    var hub = document.querySelector(".hub");
+    if (!hub || !("IntersectionObserver" in window) || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+    var items = hub.querySelectorAll(".hb-card,.hb-fact,.hb-stats div,.hb-mine,.hb-cal");
+    hub.classList.add("pop");
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    items.forEach(function (el, i) { el.style.setProperty("--d", (i % 4) * 70 + "ms"); io.observe(el); });
+  })();
   if (!G || !$("hb-cal")) return;
-  if (f) f.addEventListener("submit", function () { if (r && r.value.replace(/\s/g, "")) G.mark(); });
+  if (f) f.addEventListener("submit", function () { if (r && r.value.replace(/\s/g, "")) { var o = G.get("gs") || {}; o.srch = (o.srch || 0) + 1; G.set("gs", o); } });
 
   var view = new Date(); view.setDate(1);
 
@@ -58,14 +69,16 @@
   }
 
   function stats() {
-    var ws = G.get("ws") || {}, sd = G.get("sd") || {}, gs = G.get("gs") || {}, done = 0, st = sd.stats || {};
+    var ws = G.get("ws") || {}, sd = G.get("sd") || {}, gs = G.get("gs") || {}, done = 0, st = sd.stats || {}, days = 0, k;
     Object.keys(ws.done || {}).forEach(function (c) { done += ws.done[c].length; });
-    var solved = (st.easy || 0) + (st.medium || 0) + (st.hard || 0), won = (gs.slW || 0) + (gs.c4W || 0) + (gs.hmW || 0);
-    var rows = [[done, "of 300 word searches done"], [solved, solved === 1 ? "Sudoku solved" : "Sudokus solved"], [won, won === 1 ? "game won" : "games won"]];
+    var ad = G.all().ad || {}; for (k in ad) if (k !== "t") days += ad[k].length;
+    var solved = (st.easy || 0) + (st.medium || 0) + (st.hard || 0), played = (gs.gp || 0) + done + solved, s = streak();
+    var rows = [[gs.srch || 0, (gs.srch === 1) ? "word searched" : "words searched"], [played, played === 1 ? "game played" : "games played"],
+      [days, days === 1 ? "day active" : "days active"], [s, s === 1 ? "day streak" : "day streak"]];
     var ul = $("hb-nums"); ul.innerHTML = "";
     rows.forEach(function (x) {
-      var li = document.createElement("li"), b = document.createElement("b"), s = document.createElement("span");
-      b.textContent = x[0]; s.textContent = x[1]; li.appendChild(b); li.appendChild(s); ul.appendChild(li);
+      var li = document.createElement("li"), b = document.createElement("b"), t = document.createElement("span");
+      b.textContent = x[0]; t.textContent = x[1]; li.appendChild(b); li.appendChild(t); ul.appendChild(li);
     });
     var live = [["wordsearch", "Word search", function () { for (var k in (ws.cur || {})) { var p = k.split("|"); if (((ws.done || {})[p[0]] || []).indexOf(+p[1]) < 0) return true; } return false; }],
       ["sudoku", "Sudoku", function () { return !!(sd.sol && !sd.done); }],

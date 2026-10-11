@@ -193,14 +193,14 @@ HUB = """<div class="hub">
 </section>
 <section class="hb-sec" aria-labelledby="hb-games"><div class="hb-head"><h2 id="hb-games">Play free games</h2><a href="games.html">See all games &rsaquo;</a></div>
 <div class="hb-grid">
-<a class="hb-card c-teal" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
+<a class="hb-card c-teal" data-pop="300!" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
 <a class="hb-card c-yellow" href="games.html#sudoku"><span class="hb-ic">9&times;9</span><b>Sudoku</b><span>Three levels, from a gentle warm-up to a proper head-scratcher.</span><em>1 player</em></a>
 <a class="hb-card c-pink" href="games.html#connect4"><span class="hb-ic">4</span><b>Connect 4</b><span>Drop discs and line up four. Beat the computer or a friend.</span><em>1-2 players</em></a>
-<a class="hb-card c-lilac" href="games.html#hangman"><span class="hb-ic">A_</span><b>Hangman</b><span>Guess the word one letter at a time, or set a secret word for a friend.</span><em>1-2 players</em></a>
+<a class="hb-card c-lilac" data-pop="2P!" href="games.html#hangman"><span class="hb-ic">A_</span><b>Hangman</b><span>Guess the word one letter at a time, or set a secret word for a friend.</span><em>1-2 players</em></a>
 <a class="hb-card c-green" href="games.html#memory"><span class="hb-ic">??</span><b>Memory match</b><span>Flip the cards and find every pair in as few moves as you can.</span><em>1-2 players</em></a>
 <a class="hb-card c-orange" href="games.html#snakes"><span class="hb-ic">1-100</span><b>Snakes and ladders</b><span>Climb the ladders, dodge the snakes and race to 100.</span><em>1-2 players</em></a>
 <a class="hb-card c-teal" href="games.html#ttt"><span class="hb-ic">XO</span><b>Tic tac toe</b><span>Three in a row wins. Easy, hard, or two players on one device.</span><em>1-2 players</em></a>
-<a class="hb-card hb-more" href="account.html"><span class="hb-ic">&#9733;</span><b>Save your progress</b><span>Sign in free to keep your games and scores on every device.</span><em>Free account</em></a>
+<a class="hb-card hb-more" data-pop="FREE!" href="account.html"><span class="hb-ic">&#9733;</span><b>Save your progress</b><span>Sign in free to keep your games and scores on every device.</span><em>Free account</em></a>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-tools"><div class="hb-head"><h2 id="hb-tools">Free word tools</h2><a href="tools.html">All tools &rsaquo;</a></div>
 <div class="hb-grid">

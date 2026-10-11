@@ -102,7 +102,11 @@
     mark: function () { if (markToday()) { write(); queue(); listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } }); } },
     days: function (ym) { return ((data.ad || {})[ym] || []).slice(); },
     get: function (g) { return data[g]; },
-    set: function (g, v) { v.t = Date.now(); data[g] = v; markToday(); write(); queue(); },
+    set: function (g, v) {
+      // A game that has just ended counts as one game played.
+      if (/^(sl|c4|tt|mm|hm)$/.test(g) && v.over && !(data[g] && data[g].over)) { var o = data.gs || (data.gs = {}); o.gp = (o.gp || 0) + 1; o.t = Date.now(); }
+      v.t = Date.now(); data[g] = v; markToday(); write(); queue();
+    },
     all: function () { return data; },
     onChange: function (fn) { listeners.push(fn); },
     // Pull the account copy and merge it in. Resolves to true when something changed.
