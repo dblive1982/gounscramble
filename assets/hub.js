@@ -97,7 +97,7 @@
         });
       }).then(function (d) {
         var t = f ? d.c * 9 / 5 + 32 : d.c, i = wxInfo(d.code);
-        wx.setAttribute("data-t", "Weather"); put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city);
+        wx.setAttribute("data-t", "Today's weather"); put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city);
         wx.classList.add("live");
       }).catch(function () { /* keep the built-in tile */ });
     }
