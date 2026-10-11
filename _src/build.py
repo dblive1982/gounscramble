@@ -195,7 +195,7 @@ HUB = """<div class="hub">
 <div data-t="Fun facts"><b>300</b><span>word searches</span></div>
 <button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
 </section>
-<section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><span class="dh-t">Daily Journal</span><svg class="dh-arrow" viewBox="0 0 64 54" width="56" height="47" aria-hidden="true" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M54 6C54 30 36 46 12 42"/><path d="M12 42l11-11M12 42l13 9"/></svg></button><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
+<section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><span class="dh-t">Daily Journal</span><svg class="dh-arrow" viewBox="0 0 64 54" width="64" height="54" aria-hidden="true" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6C10 30 28 46 52 42"/><path d="M52 42l-11-11M52 42l-13 9"/></svg></button><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
 <div class="hb-me">
 <div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
 <ul class="hb-nums" id="hb-nums"></ul>
