@@ -34,12 +34,8 @@ if ($u) {
         ->execute([$email, $name, $sub]);
     $id = (int)$pdo->lastInsertId();
     $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
-    gu_email($email, 'Welcome to GoUnscramble',
-        'Welcome, ' . $name . '!',
-        '<p style="margin:0 0 12px">Your free GoUnscramble account is ready. Type any jumbled letters to find every word they can make, or take a break with Sudoku, word search and more.</p>'
-        . '<p style="margin:0">You signed up with Google using this email address (' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '). If that was not you, you can ignore this message.</p>',
-        "Your free GoUnscramble account is ready. Type any jumbled letters to find every word they can make, or take a break with Sudoku, word search and more.\n\nYou signed up with Google using this email address ($email). If that was not you, you can ignore this message.",
-        'Start unscrambling', $site . '/');
+    [$wHtml, $wText] = gu_welcome_parts($email, ' with Google');
+    gu_email($email, 'Welcome to GoUnscramble', 'Welcome, ' . $name . '!', $wHtml, $wText, 'Start unscrambling', $site . '/');
 }
 start_session();
 session_regenerate_id(true);
