@@ -47,3 +47,4 @@
 .ac textarea{resize:vertical}
 .ac form.card{display:flex;flex-direction:column;gap:10px}
 .ac .gbtn{display:flex;justify-content:center;min-height:44px}
+.ac .who span.mut{display:block;margin-top:2px}

@@ -69,6 +69,7 @@ HEADER = """<!--header-->
 <a href="about.html"@@CUR_about@@>About</a>
 <hr>
 <a href="account.html"@@CUR_account@@>Sign in</a>
+<a href="account.html" class="menu-out" id="menu-out" hidden>Sign out</a>
 <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Dark mode" hidden></button>
 </div>
 </details>
@@ -113,7 +114,7 @@ FOOTER = """<!--footer-->
 <!--/footer-->
 <script src="assets/engine.js"></script>
 <script src="assets/app.js"></script>
-<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var u=document.querySelector(".user-btn");if(u){u.setAttribute("aria-label","Your account");var v=localStorage.getItem("gu-av");if(v){u.classList.add("pic");u.style.backgroundImage="url("+v+")"}}}}catch(e){}})();</script>
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var o=document.getElementById("menu-out");if(o){o.hidden=false;o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)})}var u=document.querySelector(".user-btn");if(u){u.setAttribute("aria-label","Your account");var v=localStorage.getItem("gu-av");if(v){u.classList.add("pic");u.style.backgroundImage="url("+v+")"}}}}catch(e){}})();</script>
 </body>
 </html>
 """

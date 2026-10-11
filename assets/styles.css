@@ -532,3 +532,5 @@ body[data-page="tools"] .block > .cards { max-width: none; }
 
 .user-btn.pic{background-size:cover;background-position:center}
 .user-btn.pic svg{display:none}
+
+.menu-out[hidden]{display:none!important}
