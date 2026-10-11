@@ -226,3 +226,4 @@
 .gm .ar-pad4{display:grid;grid-template-columns:repeat(4,1fr)}
 .gm .ar-help{margin:0;font-weight:600;font-size:15px;color:#333}
 @media (hover:hover) and (pointer:fine){.gm .ar-pad{display:none}}
+.gm .agh0{margin-top:0}
