@@ -21,6 +21,13 @@ $("back").addEventListener("click",()=>show("games"));
 document.addEventListener("click",e=>{const a=e.target.closest("[data-v]");if(a){show(a.dataset.v);return}const g=e.target.closest("[data-go]");if(g)show(g.dataset.go)});
 function pills(host,opts,cur,fn){host.innerHTML="";opts.forEach(([v,l])=>{const b=document.createElement("button");b.type="button";b.className="pill"+(v===cur?" on":"");b.textContent=l;b.addEventListener("click",()=>{host.querySelectorAll(".pill").forEach(x=>x.classList.remove("on"));b.classList.add("on");fn(v)});host.appendChild(b)})}
 
+/* ---------- saved progress for the simple games ---------- */
+const gsGet=()=>Object.assign({},GUP.get("gs")||{});
+function gsAdd(k){const o=gsGet();o[k]=(o[k]||0)+1;GUP.set("gs",o)}
+function gsBest(m){const o=gsGet();if(!o.mmb||m<o.mmb){o.mmb=m;GUP.set("gs",o)}}
+const gSave=(k,v)=>GUP.set(k,v);
+function gLoad(k){const v=GUP.get(k);return v&&!v.over?v:null}
+
 /* ---------- Sudoku ---------- */
 const SD={lv:"easy",sol:[],giv:[],cur:[],sel:-1,done:false};
 function sdCands(g,i){const r=Math.floor(i/9),c=i%9,u=new Set();for(let k=0;k<9;k++){u.add(g[r*9+k]);u.add(g[k*9+c])}const br=r-r%3,bc=c-c%3;for(let a=0;a<3;a++)for(let b=0;b<3;b++)u.add(g[(br+a)*9+bc+b]);const o=[];for(let v=1;v<=9;v++)if(!u.has(v))o.push(v);return o}
@@ -73,10 +80,13 @@ async function slTurn(p){slVs(p);SL.busy=true;$("sl-roll").disabled=true;const r
   if(SL.pos[p]+r>100){slMsg(p,who+" rolled "+r+". Need an exact roll to land on 100.");await sleep(900)}
   else{slMsg(p,who+" rolled "+r+".");for(let i=0;i<r;i++){SL.pos[p]++;slPlace();await sleep(200)}
     const to=LAD[SL.pos[p]]||SNK[SL.pos[p]];if(to){await sleep(250);slMsg(p,(LAD[SL.pos[p]]?who+" climbed a ladder to ":who+" slid down a snake to ")+to+".");SL.pos[p]=to;slPlace();await sleep(900)}
-    if(SL.pos[p]===100){SL.over=true;slVs(-1);slMsg(p,p?"The computer wins. Try again!":"You win! Well done.");SL.busy=false;return}}
+    if(SL.pos[p]===100){SL.over=true;slVs(-1);slMsg(p,p?"The computer wins. Try again!":"You win! Well done.");SL.busy=false;gSave("sl",{pos:SL.pos.slice(),over:true});gsAdd(p?"slL":"slW");return}}
+  gSave("sl",{pos:SL.pos.slice(),over:false});
   if(p===0){SL.busy=false;await slTurn(1)}else{SL.busy=false;$("sl-roll").disabled=false;slVs(0);slMsg(0,"Your turn. Roll!")}}
-function slNew(){SL.pos=[0,0];SL.over=false;SL.busy=false;$("dice").textContent="-";$("sl-roll").disabled=false;slPlace();slVs(0);slMsg(0,"You are red, the computer is blue. Roll to start.")}
-INIT.snakes=()=>{slBuild();$("sl-roll").addEventListener("click",()=>{if(!SL.busy&&!SL.over)slTurn(0)});$("sl-new").addEventListener("click",slNew);slNew()};
+function slNew(resume){SL.pos=[0,0];SL.over=false;SL.busy=false;$("dice").textContent="-";$("sl-roll").disabled=false;
+  const sv=resume&&gLoad("sl");if(sv&&(sv.pos[0]||sv.pos[1])){SL.pos=sv.pos.slice();slPlace();slVs(0);slMsg(0,"Welcome back. Your game is just as you left it. Roll!");return}
+  gSave("sl",{pos:[0,0],over:false});slPlace();slVs(0);slMsg(0,"You are red, the computer is blue. Roll to start.")}
+INIT.snakes=()=>{slBuild();$("sl-roll").addEventListener("click",()=>{if(!SL.busy&&!SL.over)slTurn(0)});$("sl-new").addEventListener("click",()=>slNew());slNew(true)};
 
 /* ---------- Connect 4 ---------- */
 const C4={b:[],turn:1,mode:"easy",over:false,busy:false};
@@ -94,11 +104,13 @@ function c4Ai(){const cols=[...Array(7).keys()].filter(c=>c4Drop(C4.b,c)>=0);if(
 function c4Draw(w){const h=[];for(let c=0;c<C7;c++){let s='<button type="button" data-c="'+c+'" aria-label="Drop in column '+(c+1)+'">';for(let r=0;r<R6;r++){const v=C4.b[r][c],isw=w&&w.some(x=>x[0]===r&&x[1]===c);s+='<i class="'+(v?"p"+v:"")+(isw?" win":"")+'"></i>'}h.push(s+"</button>")}$("c4").innerHTML=h.join("")}
 function c4Msg(){c4Vs();const two=C4.mode==="two";$("c4-msg").textContent=C4.over?$("c4-msg").textContent:two?(C4.turn===1?"Player 1's turn (red).":"Player 2's turn (yellow)."):"Your turn. You are red."}
 async function c4Play(c){if(C4.over||C4.busy)return;const r=c4Drop(C4.b,c);if(r<0)return;const p=C4.turn;C4.b[r][c]=p;const w=c4Win(C4.b,p);c4Draw(w);
-  if(w){C4.over=true;c4Vs();$("c4-msg").textContent=C4.mode==="two"?(p===1?"Player 1 wins!":"Player 2 wins!"):(p===1?"You win! Well done.":"The computer wins. Try again!");return}
-  if(C4.b[0].every(x=>x)){C4.over=true;c4Vs();$("c4-msg").textContent="It's a draw.";return}
-  C4.turn=3-p;c4Msg();if(C4.mode!=="two"&&C4.turn===2){C4.busy=true;$("c4-msg").textContent="Computer is thinking...";await sleep(450);const cc=c4Ai();C4.busy=false;await c4Play(cc)}}
-function c4New(){C4.b=Array.from({length:R6},()=>new Array(C7).fill(0));C4.turn=1;C4.over=false;C4.busy=false;c4Draw(null);c4Msg()}
-INIT.connect4=()=>{pills($("c4-lv"),[["easy","Easy"],["hard","Hard"],["two","2 players"]],"easy",v=>{C4.mode=v;c4New()});$("c4").addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)c4Play(+b.dataset.c)});$("c4-new").addEventListener("click",c4New);c4New()};
+  if(w){C4.over=true;c4Vs();$("c4-msg").textContent=C4.mode==="two"?(p===1?"Player 1 wins!":"Player 2 wins!"):(p===1?"You win! Well done.":"The computer wins. Try again!");gSave("c4",{b:C4.b,turn:C4.turn,mode:C4.mode,over:true});if(C4.mode!=="two")gsAdd(p===1?"c4W":"c4L");return}
+  if(C4.b[0].every(x=>x)){C4.over=true;c4Vs();$("c4-msg").textContent="It's a draw.";gSave("c4",{b:C4.b,turn:C4.turn,mode:C4.mode,over:true});gsAdd("c4D");return}
+  C4.turn=3-p;gSave("c4",{b:C4.b,turn:C4.turn,mode:C4.mode,over:false});c4Msg();if(C4.mode!=="two"&&C4.turn===2){C4.busy=true;$("c4-msg").textContent="Computer is thinking...";await sleep(450);const cc=c4Ai();C4.busy=false;await c4Play(cc)}}
+function c4New(resume){C4.b=Array.from({length:R6},()=>new Array(C7).fill(0));C4.turn=1;C4.over=false;C4.busy=false;
+  const sv=resume&&gLoad("c4");if(sv&&sv.b&&sv.b.length===R6&&sv.b.some(r=>r.some(x=>x))){C4.b=sv.b;C4.turn=sv.turn;C4.mode=sv.mode;c4Draw(null);c4Msg();if(C4.mode!=="two"&&C4.turn===2)setTimeout(async()=>{C4.busy=true;await sleep(450);const cc=c4Ai();C4.busy=false;await c4Play(cc)},300);return}
+  c4Draw(null);c4Msg();gSave("c4",{b:C4.b,turn:1,mode:C4.mode,over:false})}
+INIT.connect4=()=>{const sv0=gLoad("c4");if(sv0&&sv0.mode)C4.mode=sv0.mode;pills($("c4-lv"),[["easy","Easy"],["hard","Hard"],["two","2 players"]],C4.mode,v=>{C4.mode=v;c4New()});$("c4").addEventListener("click",e=>{const b=e.target.closest("button[data-c]");if(b)c4Play(+b.dataset.c)});$("c4-new").addEventListener("click",()=>c4New());c4New(true)};
 
 /* ---------- Tic tac toe ---------- */
 const TT3={b:[],turn:"X",mode:"easy",over:false,sc:{x:0,o:0,d:0}};
@@ -109,34 +121,44 @@ function ttAi(){const e=[];TT3.b.forEach((v,i)=>{if(!v)e.push(i)});if(TT3.mode==
 function ttDraw(w){$("ttt").innerHTML="";TT3.b.forEach((v,i)=>{const b=document.createElement("button");b.type="button";b.textContent=v;b.className=(v||"")+(w&&w.includes(i)?" win":"");b.setAttribute("aria-label","Square "+(i+1)+(v?", "+v:""));b.addEventListener("click",()=>ttPlay(i));$("ttt").appendChild(b)})}
 function ttSc(){ttVs();$("tt-score").textContent="X "+TT3.sc.x+" · O "+TT3.sc.o+" · Draws "+TT3.sc.d}
 async function ttPlay(i){if(TT3.over||TT3.b[i]||TT3.busy)return;TT3.b[i]=TT3.turn;let w=ttW(TT3.b);ttDraw(w);
-  const two=TT3.mode==="two";if(w){TT3.over=true;const x=TT3.turn==="X";TT3.sc[x?"x":"o"]++;$("tt-msg").textContent=two?(TT3.turn==="X"?"Player 1":"Player 2")+" wins!":(x?"You win! Well done.":"The computer wins.");ttSc();return}
-  if(TT3.b.every(x=>x)){TT3.over=true;TT3.sc.d++;$("tt-msg").textContent="It's a draw.";ttSc();return}
-  TT3.turn=TT3.turn==="X"?"O":"X";if(two){$("tt-msg").textContent=(TT3.turn==="X"?"Player 1's turn (X).":"Player 2's turn (O).")}else if(TT3.turn==="O"){TT3.busy=true;$("tt-msg").textContent="Computer is thinking...";await sleep(400);TT3.busy=false;await ttPlay(ttAi());if(!TT3.over)$("tt-msg").textContent="Your turn. You are X."}}
-function ttNew(){TT3.b=new Array(9).fill("");TT3.turn="X";TT3.over=false;TT3.busy=false;ttDraw(null);$("tt-msg").textContent=TT3.mode==="two"?"Player 1's turn (X).":"Your turn. You are X.";ttSc()}
-INIT.ttt=()=>{pills($("tt-lv"),[["easy","Easy"],["hard","Hard"],["two","2 players"]],"easy",v=>{TT3.mode=v;TT3.sc={x:0,o:0,d:0};ttNew()});$("tt-new").addEventListener("click",ttNew);ttNew()};
+  const two=TT3.mode==="two";if(w){TT3.over=true;const x=TT3.turn==="X";TT3.sc[x?"x":"o"]++;ttSave();$("tt-msg").textContent=two?(TT3.turn==="X"?"Player 1":"Player 2")+" wins!":(x?"You win! Well done.":"The computer wins.");ttSc();return}
+  if(TT3.b.every(x=>x)){TT3.over=true;TT3.sc.d++;ttSave();$("tt-msg").textContent="It's a draw.";ttSc();return}
+  TT3.turn=TT3.turn==="X"?"O":"X";ttSave();if(two){$("tt-msg").textContent=(TT3.turn==="X"?"Player 1's turn (X).":"Player 2's turn (O).")}else if(TT3.turn==="O"){TT3.busy=true;$("tt-msg").textContent="Computer is thinking...";await sleep(400);TT3.busy=false;await ttPlay(ttAi());if(!TT3.over)$("tt-msg").textContent="Your turn. You are X."}}
+function ttSave(){gSave("tt",{b:TT3.b,turn:TT3.turn,mode:TT3.mode,over:TT3.over,sc:TT3.sc})}
+function ttNew(resume){TT3.b=new Array(9).fill("");TT3.turn="X";TT3.over=false;TT3.busy=false;
+  const sv=resume&&gLoad("tt");if(sv&&sv.b&&sv.b.length===9&&sv.b.some(x=>x)){TT3.b=sv.b;TT3.turn=sv.turn;TT3.mode=sv.mode;ttDraw(null);ttSc();$("tt-msg").textContent="Welcome back. Your game is just as you left it.";
+    if(TT3.mode!=="two"&&TT3.turn==="O")setTimeout(async()=>{TT3.busy=true;await sleep(400);TT3.busy=false;await ttPlay(ttAi());if(!TT3.over)$("tt-msg").textContent="Your turn. You are X."},300);return}
+  ttDraw(null);ttSave();$("tt-msg").textContent=TT3.mode==="two"?"Player 1's turn (X).":"Your turn. You are X.";ttSc()}
+INIT.ttt=()=>{const any=GUP.get("tt");if(any){if(any.mode)TT3.mode=any.mode;if(any.sc)TT3.sc=any.sc}pills($("tt-lv"),[["easy","Easy"],["hard","Hard"],["two","2 players"]],TT3.mode,v=>{TT3.mode=v;TT3.sc={x:0,o:0,d:0};ttNew()});$("tt-new").addEventListener("click",()=>ttNew());ttNew(true)};
 
 /* ---------- Memory match ---------- */
 const MM={cards:[],open:[],moves:0,found:0,lock:false};
 const FACES=["🍎","🍌","🍇","🍒","🍋","🍉","🥝","🍓"];
-function mmNew(){MM.cards=shuffle([...FACES,...FACES]);MM.open=[];MM.moves=0;MM.found=0;MM.lock=false;$("mem").innerHTML="";
-  MM.cards.forEach((f,i)=>{const b=document.createElement("button");b.type="button";b.className="mc";b.textContent=f;b.setAttribute("aria-label","Card "+(i+1));b.addEventListener("click",()=>mmFlip(i,b));$("mem").appendChild(b)});mmMsg()}
+function mmSave(){const m=[];$("mem").querySelectorAll(".mc").forEach((b,i)=>{if(b.classList.contains("done"))m.push(i)});gSave("mm",{cards:MM.cards,m,moves:MM.moves,over:MM.found===8})}
+function mmNew(resume){const sv=resume&&gLoad("mm"),ok=sv&&sv.cards&&sv.cards.length===16;MM.cards=ok?sv.cards:shuffle([...FACES,...FACES]);MM.open=[];MM.moves=ok?(sv.moves||0):0;MM.found=0;MM.lock=false;$("mem").innerHTML="";
+  MM.cards.forEach((f,i)=>{const b=document.createElement("button");b.type="button";b.className="mc";b.textContent=f;b.setAttribute("aria-label","Card "+(i+1));b.addEventListener("click",()=>mmFlip(i,b));$("mem").appendChild(b)});
+  if(ok){const bs=$("mem").querySelectorAll(".mc");(sv.m||[]).forEach(i=>{bs[i].className="mc done"});MM.found=(sv.m||[]).length/2}
+  mmMsg(ok&&MM.moves?"Welcome back. Moves so far: "+MM.moves:"");if(!ok)mmSave()}
 function mmMsg(t){let best="";try{const v=localStorage.getItem("gu-mm");if(v)best=" · Best: "+v}catch(e){}$("mm-msg").textContent=t||"Moves: "+MM.moves+best}
 async function mmFlip(i,b){if(MM.lock||b.classList.contains("up")||b.classList.contains("done"))return;b.classList.add("up");MM.open.push([i,b]);if(MM.open.length<2)return;MM.moves++;mmMsg();const [[i1,b1],[i2,b2]]=MM.open;MM.open=[];
-  if(MM.cards[i1]===MM.cards[i2]){b1.className="mc done";b2.className="mc done";MM.found++;if(MM.found===8){let t="You found them all in "+MM.moves+" moves!";try{const v=+localStorage.getItem("gu-mm")||999;if(MM.moves<v){localStorage.setItem("gu-mm",String(MM.moves));t+=" New best!"}}catch(e){}mmMsg(t)}}
-  else{MM.lock=true;await sleep(800);b1.classList.remove("up");b2.classList.remove("up");MM.lock=false}}
-INIT.memory=()=>{$("mm-new").addEventListener("click",mmNew);mmNew()};
+  if(MM.cards[i1]===MM.cards[i2]){b1.className="mc done";b2.className="mc done";MM.found++;mmSave();if(MM.found===8){gsAdd("mmP");gsBest(MM.moves);let t="You found them all in "+MM.moves+" moves!";try{const v=+localStorage.getItem("gu-mm")||999;if(MM.moves<v){localStorage.setItem("gu-mm",String(MM.moves));t+=" New best!"}}catch(e){}mmMsg(t)}}
+  else{mmSave();MM.lock=true;await sleep(800);b1.classList.remove("up");b2.classList.remove("up");MM.lock=false}}
+INIT.memory=()=>{$("mm-new").addEventListener("click",()=>mmNew());mmNew(true)};
 
 /* ---------- Hangman ---------- */
 const HM={w:"",g:new Set(),miss:0,over:false};
 function hmDraw(){const w=HM.w;$("hm-word").innerHTML=[...w].map(c=>'<span class="'+(HM.g.has(c)?"":(HM.over?"miss":"e"))+'">'+(HM.g.has(c)||HM.over?c:"")+"</span>").join("");
   document.querySelectorAll("#hm-fig [data-p]").forEach(p=>p.style.display=+p.dataset.p<=HM.miss?"":"none");
   [...$("hm-keys").children].forEach(b=>{const l=b.textContent.toLowerCase(),u=HM.g.has(l);b.disabled=u||HM.over;b.className=u&&w.includes(l)?"ok":""})}
+function hmSave(){gSave("hm",{w:HM.w,g:[...HM.g],miss:HM.miss,over:HM.over})}
 function hmGuess(l){if(HM.over||HM.g.has(l))return;HM.g.add(l);if(!HM.w.includes(l))HM.miss++;
-  if([...HM.w].every(c=>HM.g.has(c))){HM.over=true;$("hm-msg").textContent="You got it!";hmLook()}else if(HM.miss>=6){HM.over=true;$("hm-msg").textContent="Out of guesses. The word was "+HM.w.toUpperCase()+".";hmLook()}else $("hm-msg").textContent=(6-HM.miss)+" wrong guess"+(6-HM.miss===1?"":"es")+" left.";hmDraw()}
+  if([...HM.w].every(c=>HM.g.has(c))){HM.over=true;gsAdd("hmW");$("hm-msg").textContent="You got it!";hmLook()}else if(HM.miss>=6){HM.over=true;gsAdd("hmL");$("hm-msg").textContent="Out of guesses. The word was "+HM.w.toUpperCase()+".";hmLook()}else $("hm-msg").textContent=(6-HM.miss)+" wrong guess"+(6-HM.miss===1?"":"es")+" left.";hmSave();hmDraw()}
 function hmLook(){const q=encodeURIComponent(HM.w);$("hm-msg").insertAdjacentHTML("beforeend",' <span class="look"><a href="https://www.merriam-webster.com/dictionary/'+q+'" target="_blank" rel="noopener noreferrer">Meaning</a></span>')}
-function hmNew(){HM.w=HANG[rnd(HANG.length)];HM.g=new Set();HM.miss=0;HM.over=false;$("hm-msg").textContent="Guess a letter. 6 wrong guesses and it's over.";hmDraw()}
+function hmNew(resume){const sv=resume&&gLoad("hm");
+  if(sv&&sv.w&&HANG.includes(sv.w)&&(sv.g.length||sv.miss)){HM.w=sv.w;HM.g=new Set(sv.g);HM.miss=sv.miss;HM.over=false;$("hm-msg").textContent="Welcome back. "+(6-HM.miss)+" wrong guess"+(6-HM.miss===1?"":"es")+" left.";hmDraw();return}
+  HM.w=HANG[rnd(HANG.length)];HM.g=new Set();HM.miss=0;HM.over=false;$("hm-msg").textContent="Guess a letter. 6 wrong guesses and it's over.";hmSave();hmDraw()}
 INIT.hangman=()=>{"abcdefghijklmnopqrstuvwxyz".split("").forEach(l=>{const b=document.createElement("button");b.type="button";b.textContent=l;b.addEventListener("click",()=>hmGuess(l));$("hm-keys").appendChild(b)});
-  document.addEventListener("keydown",e=>{if($("v-hangman").hidden||e.ctrlKey||e.metaKey||e.altKey)return;if(/^[a-z]$/i.test(e.key))hmGuess(e.key.toLowerCase())});$("hm-new").addEventListener("click",hmNew);hmNew()};
+  document.addEventListener("keydown",e=>{if($("v-hangman").hidden||e.ctrlKey||e.metaKey||e.altKey)return;if(/^[a-z]$/i.test(e.key))hmGuess(e.key.toLowerCase())});$("hm-new").addEventListener("click",()=>hmNew());hmNew(true)};
 
 /* ---------- Word search (ported) ---------- */
 (function(){

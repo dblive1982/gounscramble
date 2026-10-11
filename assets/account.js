@@ -55,7 +55,17 @@
       var st = sd.stats || {}, solved = (st.easy || 0) + (st.medium || 0) + (st.hard || 0);
       L.innerHTML = "";
       [["Word searches finished", done], ["Word searches in progress", started], ["Sudokus solved", solved],
-       ["Sudoku in progress", sd.sol && !sd.done ? "Yes" : "No"]].forEach(function (r) {
+       ["Sudoku in progress", sd.sol && !sd.done ? "Yes" : "No"]].concat((function () {
+        var gs = g.get("gs") || {}, rows = [];
+        function run(k) { var v = g.get(k); return v && !v.over; }
+        var live = [["sl", "Snakes and ladders"], ["c4", "Connect 4"], ["tt", "Tic tac toe"], ["mm", "Memory match"], ["hm", "Hangman"]]
+          .filter(function (x) { return run(x[0]); }).map(function (x) { return x[1]; });
+        rows.push(["Games in progress", live.length ? live.join(", ") : "None"]);
+        var won = (gs.slW || 0) + (gs.c4W || 0) + (gs.hmW || 0);
+        rows.push(["Games won (snakes, Connect 4, Hangman)", won]);
+        if (gs.mmb) rows.push(["Memory match best", gs.mmb + " moves"]);
+        return rows;
+      })()).forEach(function (r) {
         var li = document.createElement("li"); li.textContent = r[0] + ": " + r[1]; L.appendChild(li);
       });
     }

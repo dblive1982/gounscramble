@@ -22,6 +22,24 @@
   function merge(local, remote) {
     local = local || {}; remote = remote || {};
     var out = {};
+    ["sl", "c4", "tt", "mm", "hm"].forEach(function (g) {
+      var a = local[g], b = remote[g];
+      if (!a) { if (b) out[g] = b; } else if (!b) out[g] = a; else out[g] = ((a.t || 0) >= (b.t || 0)) ? a : b;
+    });
+    (function () {
+      var a = local.gs, b = remote.gs;
+      if (!a && !b) return;
+      var r = {}, k;
+      a = a || {}; b = b || {};
+      for (k in a) r[k] = a[k];
+      for (k in b) {
+        if (k === "t") continue;
+        if (k === "mmb") r[k] = (r[k] && b[k]) ? Math.min(r[k], b[k]) : (r[k] || b[k]);
+        else r[k] = Math.max(r[k] || 0, b[k] || 0);
+      }
+      r.t = Math.max(a.t || 0, b.t || 0);
+      out.gs = r;
+    })();
     ["ws", "sd"].forEach(function (g) {
       var a = local[g], b = remote[g];
       if (!a) { if (b) out[g] = b; return; }
