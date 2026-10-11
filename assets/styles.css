@@ -546,3 +546,4 @@ body[data-page="tools"] .block > .cards { max-width: none; }
 
 .foot-secure { display: flex; align-items: flex-start; gap: 8px; margin: 0; font-size: 13px; line-height: 1.4; flex: 1 1 100%; order: 9; opacity: .85; }
 .foot-secure svg { flex: none; margin-top: 1px; }
+.foot-legal { margin: 0; flex: 1 1 100%; order: 10; font-size: 13px; line-height: 1.4; opacity: .85; }
