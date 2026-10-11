@@ -370,9 +370,6 @@ a.card:hover { border-color: var(--primary); }
 a.social:hover { background: var(--primary); }
 .chip.sel { box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--primary); }
 :focus-visible { outline-color: var(--primary); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .results .chip, :root:not([data-theme="light"]) .pill { color: #EBD9FB; border-color: #4B3277; } :root:not([data-theme="light"]) .chip .pts { color: #C9A3EE; } }
-:root[data-theme="dark"] .results .chip, :root[data-theme="dark"] .pill { color: #EBD9FB; border-color: #4B3277; }
-:root[data-theme="dark"] .chip .pts { color: #C9A3EE; }
 
 /* Teal restyle: comic logo, teal starburst header, coral buttons, black outlines. */
 :root, :root[data-theme="dark"], :root[data-theme="light"] {
@@ -470,3 +467,32 @@ button.chip:hover { background: #FFE27A; }
 .go-tag { display: inline-block; background: #FF6B6B; border: 3px solid #000; border-radius: 8px; padding: 0 8px; font-family: var(--display); font-weight: 700; font-size: 18px; line-height: 1.3; color: #000; }
 .social, a.social:hover { background: #000; color: #fff; border: 0; }
 .dict-row .field, select.field { font-family: var(--display); font-weight: 600; }
+
+/* Round 2: header as in the mock-up (centred logo, menu top-right), white menu, GO button. */
+.site-header .wrap { display: block; position: relative; text-align: center; padding: 14px 16px 20px; max-width: none; }
+.brand { display: flex; justify-content: center; margin: 0; }
+.logo-img { height: 168px; max-width: 88vw; }
+@media (max-width: 480px) { .logo-img { height: 150px; } }
+.main-nav { position: absolute; top: 14px; right: 16px; z-index: 5; }
+.main-nav summary { background: #fff; }
+.main-nav summary:hover, .main-nav .menu[open] summary { background: #fff; }
+.main-nav .menu[open] .menu-list { background: #fff; }
+.menu-list a:hover { background: var(--soft); }
+.results .chip, .pill { color: #000; border: 3px solid #000; }
+.chip .pts { color: #000; }
+
+/* Spacing, all pages: one content column, one gutter, left-aligned, as in the mock-up (28px top, 44px between sections). */
+main > .wrap, .site-footer .wrap { max-width: 720px; padding-left: 16px; padding-right: 16px; }
+.hero { align-items: flex-start; text-align: left; gap: 18px; padding-top: 28px; }
+.hero h1 { max-width: none; font-size: clamp(30px, 8vw, 40px); line-height: 1.1; margin: 0; }
+.lede { font-size: 18px; max-width: none; margin: 0; }
+.block { margin-top: 44px; gap: 14px; }
+.block.narrow { max-width: none; }
+.block h2 { font-size: 26px; line-height: 1.1; margin: 0; }
+.block.narrow p, .block.narrow ul.plain, .block.narrow ol { font-size: 17px; line-height: 1.55; }
+.panel { padding: 20px; width: 100%; }
+main { padding-bottom: 56px; }
+.home-extra { max-width: 640px; margin: 0 auto; padding: 0 16px 56px; }
+
+.hm { padding-bottom: 0; }
+body[data-page="tools"] .block > .cards { max-width: none; }

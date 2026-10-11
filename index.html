@@ -29,7 +29,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=33918b24">
+<link rel="stylesheet" href="assets/styles.css?v=ce66f30c">
+<link rel="stylesheet" href="assets/home.css?v=95621a9f">
 </head>
 <body data-page="home">
 <!--header-->
@@ -50,62 +51,35 @@
 </nav>
 </div></header>
 <!--/header-->
-<main><div class="wrap">
-<section class="hero">
-<h1>Unscramble any word <span class="accent">in seconds</span></h1>
-<p class="lede">Type your jumbled letters and see every word they can make.</p>
-<form id="tool-form" class="panel" novalidate>
-<label for="letters">Your letters</label>
-<div class="row">
-<input id="letters" class="field big" type="text" maxlength="15" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. aertp" aria-describedby="letters-hint">
-<button class="btn" type="submit">Unscramble</button>
-</div>
-<p id="letters-hint" class="hint">Up to 15 letters. Use ? or * for a blank tile.</p>
-<div class="more-row">
-<details class="more">
-<summary>More options<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></summary>
-<div class="opts">
-<div class="dict-row">
-<label for="dictionary">Dictionary</label>
-<select id="dictionary" class="field">
-<option value="enable" selected>ENABLE (general English)</option>
-<option value="nwl" disabled>US and Canada (NWL), coming soon</option>
-<option value="csw" disabled>UK (CSW), coming soon</option>
-</select>
-<label class="check"><input type="checkbox" id="hide-rude"> Hide offensive words</label>
-</div>
-<div class="filters">
-<div class="fgroup"><label for="starts">Starts with</label><input id="starts" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. t"></div>
-<div class="fgroup"><label for="ends">Ends with</label><input id="ends" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. ar"></div>
-<div class="fgroup"><label for="contains">Contains</label><input id="contains" class="field" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. ea"></div>
-<div class="fgroup"><label for="length">Word length</label><input id="length" class="field" type="number" inputmode="numeric" min="2" max="15" placeholder="Any"></div>
-</div>
-</div>
-</details>
-<button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button>
-</div>
+<main class="board hm">
+<form id="f" class="box" autocomplete="off">
+<svg class="mag" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+<input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
+<button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+<button class="go" type="submit">GO</button>
 </form>
-<button type="button" id="example" class="example" aria-label="Try the example: letters T E A R">
-<span class="letters" id="ex-letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
-<span class="arrow" aria-hidden="true">&rarr;</span>
-<span class="pills" id="ex-pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
-</button>
-<section id="results" class="results" aria-live="polite"></section>
-</section>
-<section class="block">
-<h2>More free tools</h2>
-<div class="cards">
-<a class="card" href="index.html"><div class="tile">Wu</div><h3>Word unscrambler</h3><p>Turn jumbled letters into every word they can make.</p></a>
-<a class="card" href="anagram-solver.html"><div class="tile">As</div><h3>Anagram solver</h3><p>Find words that use every one of your letters.</p></a>
-<a class="card" href="word-counter.html"><div class="tile">123</div><h3>Word counter</h3><p>Count words, characters, sentences and reading time.</p></a>
-<a class="card" href="case-converter.html"><div class="tile">Cc</div><h3>Case converter</h3><p>Switch text between upper, lower, title and sentence case.</p></a>
-<a class="card" href="random-word-picker.html"><div class="tile">Rnd</div><h3>Random word picker</h3><p>Pull random words, with an optional length.</p></a>
+<p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
+<div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button></div>
+<div class="opts" id="opts" hidden>
+<label class="opt chk"><input class="chk-box" id="o-safe" type="checkbox" checked><span>Hide offensive words</span></label>
+<label class="opt" style="grid-column:1/-1">Scoring<select id="o-dict" aria-label="Scoring"><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></label>
+<label class="opt">Length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
+<label class="opt">Starts with<input id="o-starts" type="text" maxlength="8" placeholder="sc" autocapitalize="off"></label>
+<label class="opt">Ends with<input id="o-ends" type="text" maxlength="8" placeholder="le" autocapitalize="off"></label>
+<label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
+<button class="reset" id="clrf" type="button">Clear</button>
 </div>
-</section>
-<section class="block narrow">
-<h2>About GoUnscramble</h2>
-<p>GoUnscramble turns jumbled letters into real words, and adds a few handy text tools alongside. Use ? or * for a blank tile, then narrow the list by the letters a word starts with, ends with or contains, or by its length. It works well for word games, crosswords and anagram puzzles. <a href="about.html">Read more</a>.</p>
-</section>
+<div id="out" aria-live="polite"></div>
+<section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is GoUnscramble?</h2>
+<p>GoUnscramble turns a jumble of letters into every word they can make. It is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games.</p>
+<h3>How to use it</h3>
+<p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
+<h3>Scores and word list</h3>
+<p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
+<p>Looking for more? Open the menu for the anagram solver and other free word tools. <a href="about.html">Read more about GoUnscramble</a>.</p></section>
+<p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
+</main>
+<div class="home-extra">
 <section class="block narrow">
 <h2>How to use the word unscrambler</h2>
 <ol>
@@ -135,7 +109,7 @@
 <p><a href="faq.html">See all questions</a></p>
 </section>
 
-</div></main>
+</div>
 <!--footer-->
 <footer class="site-footer"><div class="wrap">
 <div class="foot-brand"><span class="go-tag" aria-hidden="true">GO</span><span>&copy; 2026 GoUnscramble</span></div>
@@ -149,7 +123,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/app.js?v=ca36d5c8"></script>
+<script src="assets/home.js?v=1c1635be"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();</script>
 </body>
 </html>

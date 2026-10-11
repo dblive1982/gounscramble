@@ -42,6 +42,7 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
+@@HOMECSS@@
 </head>
 <body data-page="@@PAGE@@">
 """
@@ -153,40 +154,37 @@ def letters_input(button_text):
 <p id="letters-hint" class="hint">Up to 15 letters. Use ? or * for a blank tile.</p>""" % button_text
 
 
-HOME = """<main><div class="wrap">
-<section class="hero">
-<h1>Unscramble any word <span class="accent">in seconds</span></h1>
-<p class="lede">Type your jumbled letters and see every word they can make.</p>
-<form id="tool-form" class="panel" novalidate>
-@@LETTERS@@
-<div class="more-row">
-<details class="more">
-<summary>More options@@CHEVRON@@</summary>
-<div class="opts">
-@@DICT@@
-@@FILTERS@@
-</div>
-</details>
-<button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button>
-</div>
+HOME = """<main class="board hm">
+<form id="f" class="box" autocomplete="off">
+<svg class="mag" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+<input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
+<button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+<button class="go" type="submit">GO</button>
 </form>
-<button type="button" id="example" class="example" aria-label="Try the example: letters T E A R">
-<span class="letters" id="ex-letters" aria-hidden="true"><span class="ltile">T</span><span class="ltile">E</span><span class="ltile">A</span><span class="ltile">R</span></span>
-<span class="arrow" aria-hidden="true">&rarr;</span>
-<span class="pills" id="ex-pills" aria-hidden="true"><span class="pill">rate</span><span class="pill">tear</span><span class="pill">tare</span></span>
-</button>
-<section id="results" class="results" aria-live="polite"></section>
-</section>
-<section class="block">
-<h2>More free tools</h2>
-@@CARDS@@
-</section>
-<section class="block narrow">
-<h2>About GoUnscramble</h2>
-<p>GoUnscramble turns jumbled letters into real words, and adds a few handy text tools alongside. Use ? or * for a blank tile, then narrow the list by the letters a word starts with, ends with or contains, or by its length. It works well for word games, crosswords and anagram puzzles. <a href="about.html">Read more</a>.</p>
-</section>
+<p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
+<div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button></div>
+<div class="opts" id="opts" hidden>
+<label class="opt chk"><input class="chk-box" id="o-safe" type="checkbox" checked><span>Hide offensive words</span></label>
+<label class="opt" style="grid-column:1/-1">Scoring<select id="o-dict" aria-label="Scoring"><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></label>
+<label class="opt">Length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
+<label class="opt">Starts with<input id="o-starts" type="text" maxlength="8" placeholder="sc" autocapitalize="off"></label>
+<label class="opt">Ends with<input id="o-ends" type="text" maxlength="8" placeholder="le" autocapitalize="off"></label>
+<label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
+<button class="reset" id="clrf" type="button">Clear</button>
+</div>
+<div id="out" aria-live="polite"></div>
+<section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is GoUnscramble?</h2>
+<p>GoUnscramble turns a jumble of letters into every word they can make. It is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games.</p>
+<h3>How to use it</h3>
+<p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
+<h3>Scores and word list</h3>
+<p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
+<p>Looking for more? Open the menu for the anagram solver and other free word tools. <a href="about.html">Read more about GoUnscramble</a>.</p></section>
+<p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
+</main>
+<div class="home-extra">
 @@HOME_EXTRA@@
-</div></main>
+</div>
 """
 
 ANAGRAM = """<main><div class="wrap">
@@ -467,7 +465,7 @@ def seo_tags(p, url):
 
 def build_page(p):
     body = (fill_extras(p["body"])
-            .replace("@@LETTERS@@", letters_input("Find anagrams" if p["page"] == "anagram" else "Unscramble"))
+            .replace("@@LETTERS@@", letters_input("GO!"))
             .replace("@@DICT@@", DICT_ROW)
             .replace("@@FILTERS@@", FILTERS)
             .replace("@@CHEVRON@@", CHEVRON)
@@ -480,8 +478,12 @@ def build_page(p):
     head = (HEAD.replace("@@TITLE@@", p["title"]).replace("@@DESC@@", p["desc"])
             .replace("@@CANON@@", SITE + "/" + path).replace("@@PAGE@@", p["page"]))
     head = head.replace("@@SEO@@", seo_tags(p, SITE + "/" + path))
+    home = p["file"] == "index.html"
+    head = head.replace("@@HOMECSS@@", '<link rel="stylesheet" href="assets/home.css">' if home else "")
     page = head + header + body + footer
-    for name in ("styles.css", "engine.js", "app.js"):
+    if home:
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/home.js"></script>')
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     return page
 
