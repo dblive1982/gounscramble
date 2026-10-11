@@ -227,3 +227,6 @@
 .gm .ar-help{margin:0;font-weight:600;font-size:15px;color:#333}
 @media (hover:hover) and (pointer:fine){.gm .ar-pad{display:none}}
 .gm .agh0{margin-top:0}
+
+/* longer starburst labels (e.g. "2 PLAYERS") */
+.gm .tool[data-pop*=" "]::after{width:78px;height:78px;top:-24px;right:-18px;font-size:11px;line-height:1.05;letter-spacing:0;text-align:center;padding:0 16px;box-sizing:border-box}
