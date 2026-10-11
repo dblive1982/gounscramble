@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/_boot.php';
+require __DIR__ . '/_mail.php';
 $in = read_post();
 $name = trim((string)($in['name'] ?? ''));
 $email = clean_email((string)($in['email'] ?? ''));
@@ -19,4 +20,12 @@ $id = (int)$pdo->lastInsertId();
 start_session();
 session_regenerate_id(true);
 $_SESSION['uid'] = $id;
+$site = rtrim((config()['site'] ?? 'https://gounscramble.com'), '/');
+$safe = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+gu_email($email, 'Welcome to GoUnscramble',
+    'Welcome, ' . $name . '!',
+    '<p style="margin:0 0 12px">Your free GoUnscramble account is ready. Type any jumbled letters to find every word they can make, or take a break with Sudoku, word search and more.</p>'
+    . '<p style="margin:0">You signed up with this email address (' . htmlspecialchars($email, ENT_QUOTES, 'UTF-8') . '). If that was not you, you can ignore this message.</p>',
+    "Your free GoUnscramble account is ready. Type any jumbled letters to find every word they can make, or take a break with Sudoku, word search and more.\n\nYou signed up with this email address ($email). If that was not you, you can ignore this message.",
+    'Start unscrambling', $site . '/');
 out(200, ['user' => ['name' => $name, 'email' => $email]]);

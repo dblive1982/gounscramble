@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/_boot.php';
+require __DIR__ . '/_mail.php';
 $in = read_post();
 $email = clean_email((string)($in['email'] ?? ''));
 if (!valid_email($email)) out(422, ['error' => 'Please enter a valid email address.']);
@@ -15,10 +16,13 @@ if ($u) {
         ->execute([$u['id'], hash('sha256', $token)]);
     $c = config();
     $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
-    $from = $c['mail_from'] ?? 'noreply@gounscramble.com';
     $link = $site . '/account.html?reset=' . $token;
-    $body = "Hi " . $u['name'] . ",\n\nUse this link to choose a new GoUnscramble password. It works for one hour:\n\n" . $link . "\n\nIf you did not ask for this, you can ignore this email.\n";
-    @mail($email, 'Reset your GoUnscramble password', $body, "From: GoUnscramble <$from>\r\nContent-Type: text/plain; charset=utf-8");
+    gu_email($email, 'Reset your GoUnscramble password',
+        'Choose a new password',
+        '<p style="margin:0 0 12px">Hi ' . htmlspecialchars($u['name'], ENT_QUOTES, 'UTF-8') . ', tap the button to choose a new GoUnscramble password. The link works for one hour.</p>'
+        . '<p style="margin:0">If you did not ask for this, you can ignore this email and your password will stay the same.</p>',
+        'Hi ' . $u['name'] . ", use this link to choose a new GoUnscramble password. It works for one hour.\n\nIf you did not ask for this, you can ignore this email.",
+        'Choose a new password', $link);
 }
 // Same answer whether or not the email has an account.
 out(200, ['ok' => true]);
