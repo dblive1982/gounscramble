@@ -189,6 +189,8 @@
   if (f) f.addEventListener("submit", function () { if (r && r.value.replace(/\s/g, "")) { var o = G.get("gs") || {}; o.srch = (o.srch || 0) + 1; G.set("gs", o); } });
 
   var view = new Date(); view.setDate(1);
+  function key(y, m, d) { return y + "-" + pad(m + 1) + "-" + pad(d); }
+  var sel = key(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
   function streak() {
     var n = 0, d = new Date();
@@ -214,15 +216,61 @@
     "MTWTFSS".split("").forEach(function (c) { var e = document.createElement("span"); e.className = "dow"; e.textContent = c; grid.appendChild(e); });
     for (var i = 0; i < first; i++) grid.appendChild(document.createElement("span"));
     for (var d = 1; d <= len; d++) {
-      var e = document.createElement("span"); e.textContent = d;
-      if (played.indexOf(d) >= 0) { e.className = "on"; e.setAttribute("aria-label", d + " " + MONTHS[m] + ": played"); }
+      var e = document.createElement("button"), dk = key(y, m, d), fut = new Date(y, m, d) > now;
+      e.type = "button"; e.textContent = d; e.setAttribute("data-d", dk); e.disabled = fut;
+      var lab = d + " " + MONTHS[m] + (played.indexOf(d) >= 0 ? ", played" : "") + (G.note(dk) ? ", has a diary note" : "");
+      e.setAttribute("aria-label", lab);
+      if (played.indexOf(d) >= 0) e.classList.add("on");
+      if (G.note(dk)) e.classList.add("note");
       if (isNow && d === now.getDate()) e.classList.add("today");
+      if (dk === sel) e.classList.add("sel");
+      e.onclick = function () { sel = this.getAttribute("data-d"); calendar(); diary(true); };
       grid.appendChild(e);
     }
     host.appendChild(grid);
     var s = streak(), foot = document.createElement("p"); foot.className = "cal-foot";
     foot.textContent = played.length + (played.length === 1 ? " day" : " days") + " played this month" + (s ? " · " + s + (s === 1 ? " day" : " days") + " in a row" : "");
     host.appendChild(foot);
+  }
+
+  // Diary: a short note for any day up to today.
+  var dTimer = null, dBuilt = false;
+  var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  function niceDate(k) { var p = k.split("-"), dt = new Date(+p[0], +p[1] - 1, +p[2]); return DAYS[dt.getDay()] + " " + dt.getDate() + " " + MONTHS[dt.getMonth()] + " " + dt.getFullYear(); }
+  function diary(force) {
+    var host = $("hb-diary"); if (!host) return;
+    if (!dBuilt) {
+      host.innerHTML = '<p class="dy-t"><b id="dy-h"></b></p><textarea id="dy-x" rows="4" maxlength="500" placeholder="How was your day? Add a note or a thought..." aria-label="Diary note"></textarea>' +
+        '<div class="dy-f"><span id="dy-s" aria-live="polite"></span><span id="dy-c">0/500</span><button type="button" id="dy-clear" class="dy-clear">Clear note</button></div><div id="dy-r" class="dy-r"></div>';
+      var x = $("dy-x");
+      x.addEventListener("input", function () {
+        $("dy-c").textContent = x.value.length + "/500"; $("dy-s").textContent = "Saving...";
+        clearTimeout(dTimer); var k = sel, v = x.value;
+        dTimer = setTimeout(function () { G.setNote(k, v); $("dy-s").textContent = "Saved \u2713"; recent(); }, 600);
+      });
+      x.addEventListener("blur", function () { clearTimeout(dTimer); if (G.note(sel) !== x.value) { G.setNote(sel, x.value); $("dy-s").textContent = x.value.trim() ? "Saved \u2713" : ""; recent(); } });
+      $("dy-clear").addEventListener("click", function () { clearTimeout(dTimer); x.value = ""; G.setNote(sel, ""); $("dy-c").textContent = "0/500"; $("dy-s").textContent = "Note cleared"; recent(); });
+      host.addEventListener("click", function (e) { var b = e.target.closest("[data-pick]"); if (!b) return; sel = b.getAttribute("data-pick"); var p = sel.split("-"); view = new Date(+p[0], +p[1] - 1, 1); calendar(); diary(true); });
+      dBuilt = true; force = true;
+    }
+    var xa = $("dy-x");
+    if (force || document.activeElement !== xa) { xa.value = G.note(sel); $("dy-c").textContent = xa.value.length + "/500"; if (force) $("dy-s").textContent = ""; }
+    $("dy-h").textContent = "Diary \u00B7 " + niceDate(sel);
+    $("dy-clear").hidden = !xa.value;
+    recent();
+  }
+  function recent() {
+    var r = $("dy-r"); if (!r) return; var n = G.notes(), ks = Object.keys(n).sort().reverse().slice(0, 3);
+    $("dy-clear").hidden = !G.note(sel);
+    r.innerHTML = "";
+    if (!ks.length) return;
+    var h = document.createElement("p"); h.className = "dy-rt"; h.textContent = "Recent notes"; r.appendChild(h);
+    ks.forEach(function (k) {
+      var b = document.createElement("button"), p = k.split("-"); b.type = "button"; b.setAttribute("data-pick", k);
+      var d = document.createElement("b"); d.textContent = +p[2] + " " + MONTHS[+p[1] - 1].slice(0, 3);
+      var t = document.createElement("span"); t.textContent = n[k].length > 70 ? n[k].slice(0, 70) + "..." : n[k];
+      b.appendChild(d); b.appendChild(t); r.appendChild(b);
+    });
   }
 
   function stats() {
@@ -266,7 +314,7 @@
     var si = signedIn(), me = document.querySelector(".hb-me");
     me.classList.toggle("out", !si);
     document.querySelector(".hb-mine").hidden = !si; $("hb-cal").hidden = !si; $("hb-lock").hidden = si;
-    if (si) { stats(); calendar(); }
+    if (si) { stats(); calendar(); diary(false); }
   }
   hello(""); draw();
   G.onChange(draw);

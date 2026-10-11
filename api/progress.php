@@ -12,9 +12,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     if (!is_array($data)) out(422, ['error' => 'Bad data.']);
     // Keep only the games we know about, and keep the size sensible.
     $keep = [];
-    foreach (['ws', 'sd', 'sl', 'c4', 'tt', 'mm', 'hm', 'gs', 'ad', 'rs'] as $g) if (isset($data[$g]) && is_array($data[$g])) $keep[$g] = $data[$g];
+    foreach (['ws', 'sd', 'sl', 'c4', 'tt', 'mm', 'hm', 'gs', 'ad', 'rs', 'dy'] as $g) if (isset($data[$g]) && is_array($data[$g])) $keep[$g] = $data[$g];
     $json = json_encode($keep, JSON_UNESCAPED_SLASHES);
-    if ($json === false || strlen($json) > 200000) out(413, ['error' => 'Too much data.']);
+    if ($json === false || strlen($json) > 400000) out(413, ['error' => 'Too much data.']);
     $pdo->prepare('INSERT INTO progress (user_id, data, updated_at) VALUES (?,?,NOW()) ON DUPLICATE KEY UPDATE data=VALUES(data), updated_at=NOW()')
         ->execute([$uid, $json]);
     out(200, ['ok' => true]);

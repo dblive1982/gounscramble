@@ -185,8 +185,9 @@ HUB = """<div class="hub">
 <div class="hb-me">
 <div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
 <ul class="hb-nums" id="hb-nums"></ul>
-<div id="hb-go" class="hb-go"></div></div>
-<div class="hb-cal" id="hb-cal" aria-label="Days you played"></div>
+<div id="hb-go" class="hb-go"></div>
+<div class="hb-diary" id="hb-diary" aria-label="Diary"></div></div>
+<div class="hb-cal" id="hb-cal" aria-label="Days you played and diary"></div>
 <div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
@@ -423,7 +424,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Your profile</h2>
 <p>On your account page you can add a profile picture, a short bio, a location and a favourite game. All of these are optional, are only visible to you, and are stored with your account. You can change or remove them at any time. The picture is resized in your browser before it is saved.</p>
 <h2>Saved progress</h2>
-<p>Your game progress and activity, such as word search puzzles you have started or finished, your Sudoku game, your scores and your play calendar, is saved to your account while you are signed in, so it follows you between devices. When you sign out, it is removed from your device, and signed-out play is not saved. You can reset it, or delete your account, from the account page at any time.</p>
+<p>Your game progress and activity, plus any short diary notes you write on the calendar, such as word search puzzles you have started or finished, your Sudoku game, your scores and your play calendar, is saved to your account while you are signed in, so it follows you between devices. When you sign out, it is removed from your device, and signed-out play is not saved. You can reset it, or delete your account, from the account page at any time.</p>
 <h2>Cookies and browser storage</h2>
 <p>When you sign in we set one session cookie to keep you signed in. While you are signed in we also use your browser's local storage to keep your game progress and remember that you are signed in. Signing out clears it. These are needed for the features you ask for. Advertising cookies are covered below.</p>
 <h2>Deleting your account</h2>

@@ -23,7 +23,7 @@
 
   // Combine what this device has with what the account has, never losing a finished puzzle.
   // Anything saved before the latest "reset" (on any device) is dropped.
-  function strip(d, rs) { var r = {}, k; for (k in d) if (k !== "rs" && (!d[k] || (d[k].t || 0) >= rs)) r[k] = d[k]; return r; }
+  function strip(d, rs) { var r = {}, k; for (k in d) if (k !== "rs" && (k === "dy" || !d[k] || (d[k].t || 0) >= rs)) r[k] = d[k]; return r; }
   function merge(local, remote) {
     local = local || {}; remote = remote || {};
     var rst = Math.max((local.rs || {}).t || 0, (remote.rs || {}).t || 0);
@@ -56,6 +56,14 @@
       for (k in a) if (k !== "t") r[k] = a[k];
       for (k in b) if (k !== "t") r[k] = r[k] ? union(r[k], b[k]) : b[k];
       out.ad = r;
+    })();
+    (function () {                       // diary: newest edit of each day wins
+      var a = local.dy, b = remote.dy;
+      if (!a && !b) return;
+      var an = (a || {}).n || {}, bn = (b || {}).n || {}, r = {}, k;
+      for (k in an) r[k] = an[k];
+      for (k in bn) if (!r[k] || (bn[k].t || 0) > (r[k].t || 0)) r[k] = bn[k];
+      out.dy = { n: r, t: Math.max((a || {}).t || 0, (b || {}).t || 0) };
     })();
     ["ws", "sd"].forEach(function (g) {
       var a = local[g], b = remote[g];
@@ -112,11 +120,24 @@
     signedIn: signedIn,
     // Wipe saved games, scores and the calendar here and on the account (other devices follow on their next sync).
     reset: function () {
-      clearTimeout(timer); data = { rs: { t: Date.now() } }; write();
+      var keepDiary = data.dy;
+      clearTimeout(timer); data = { rs: { t: Date.now() } }; if (keepDiary) data.dy = keepDiary; write();
       listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } });
       push();
     },
     mark: function () { if (markToday()) { write(); queue(); listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } }); } },
+    // Diary: one short note per date ("YYYY-MM-DD"). Reset keeps the diary.
+    note: function (d) { var e = ((data.dy || {}).n || {})[d]; return (e && e.x) || ""; },
+    notes: function () { var o = {}, n = (data.dy || {}).n || {}, k; for (k in n) if (n[k] && n[k].x) o[k] = n[k].x; return o; },
+    setNote: function (d, x) {
+      if (!signedIn() || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+      x = String(x == null ? "" : x).slice(0, 500);
+      var dy = data.dy || (data.dy = { n: {} }), n = dy.n || (dy.n = {}), now = Date.now(), k;
+      if (!x.trim()) { if (!n[d] || !n[d].x) return; n[d] = { x: "", t: now }; } else n[d] = { x: x, t: now };
+      for (k in n) if (!n[k].x && now - (n[k].t || 0) > 60 * 864e5) delete n[k];
+      dy.t = now; write(); queue();
+      listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } });
+    },
     days: function (ym) { return ((data.ad || {})[ym] || []).slice(); },
     get: function (g) { return data[g]; },
     set: function (g, v) {

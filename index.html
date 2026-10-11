@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=2e657e9e">
-<link rel="stylesheet" href="assets/home.css?v=646dbc24">
+<link rel="stylesheet" href="assets/home.css?v=dd4f87b1">
 </head>
 <body data-page="home">
 <!--header-->
@@ -96,8 +96,9 @@
 <div class="hb-me">
 <div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
 <ul class="hb-nums" id="hb-nums"></ul>
-<div id="hb-go" class="hb-go"></div></div>
-<div class="hb-cal" id="hb-cal" aria-label="Days you played"></div>
+<div id="hb-go" class="hb-go"></div>
+<div class="hb-diary" id="hb-diary" aria-label="Diary"></div></div>
+<div class="hb-cal" id="hb-cal" aria-label="Days you played and diary"></div>
 <div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
@@ -203,7 +204,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=33df3c6c"></script>
+<script src="assets/progress.js?v=8d10021c"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=4ee77cf4"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}
