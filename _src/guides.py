@@ -270,7 +270,7 @@ FAQ_ITEMS = [
     ("Does it work on a phone?",
      "Yes. The pages adapt to small screens."),
     ("Is the site free?",
-     "Yes. All the tools are free and need no sign-up."),
+     "Yes. All the tools and games are free. An account is optional and only needed to save your progress and profile across devices."),
     ("How does the word counter count words?",
      "It counts runs of characters separated by spaces or line breaks. Other programs may treat hyphens, numbers or symbols differently."),
     ("What does the random word picker do?",
@@ -486,7 +486,7 @@ CASE_EXTRA = """<section class="block narrow">
 
 TOOLS_EXTRA = """<section class="block narrow">
 <h2>About these tools</h2>
-<p>Everything here runs in your browser, so the letters and text you type stay on your device. There is nothing to install and no account to create.</p>
+<p>Everything here runs in your browser, so the letters and text you type stay on your device. There is nothing to install, and an account is optional.</p>
 <p>The <strong>word unscrambler</strong> and <strong>anagram solver</strong> share a dictionary of about 173,000 words and support blank tiles. The <strong>random word picker</strong> draws from the same list. The <strong>word counter</strong> and <strong>case converter</strong> work on any text you paste in.</p>
 <p>Want to learn more? Read our <a href="guides.html">guides</a>, or look up a term in the <a href="glossary.html">glossary</a>.</p>
 </section>

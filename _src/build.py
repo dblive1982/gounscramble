@@ -101,7 +101,7 @@ def social_html():
 
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
-<div class="foot-brand">@@LOGO32@@<span>&copy; 2026 GoUnscramble</span></div>
+<div class="foot-brand"><span>&copy; 2026 GoUnscramble</span></div>
 <nav class="nav" aria-label="Footer">
 <a href="credits.html">Credits</a>
 <a href="faq.html">FAQ</a>
@@ -298,7 +298,7 @@ CASE = """<main><div class="wrap">
 TOOLS_PAGE = """<main><div class="wrap">
 <section class="prose">
 <h1>Free tools</h1>
-<p>Everything here runs in your browser, with no sign-up.</p>
+<p>Everything here runs in your browser. You do not need an account.</p>
 </section>
 <section class="block" style="margin-top:32px">
 @@CARDS@@
@@ -337,9 +337,19 @@ def cardify(body):
 
 PRIVACY = """<main><div class="wrap"><article class="prose">
 <h1>Privacy</h1>
-<p>Last updated 9 October 2026.</p>
+<p>Last updated 11 October 2026.</p>
 <h2>What you type</h2>
 <p>The unscrambler and the other tools run in your browser. The letters and text you type are not sent to our server.</p>
+<h2>Accounts</h2>
+<p>An account is optional. If you create one, we store your email address, your display name and a hashed version of your password (we never keep the password itself). If you sign in with Google, we receive your name and email address from Google instead. We use your email to sign you in, to send you a welcome message and to send password reset links. We do not send marketing email.</p>
+<h2>Your profile</h2>
+<p>On your account page you can add a profile picture, a short bio, a location and a favourite game. All of these are optional, are only visible to you, and are stored with your account. You can change or remove them at any time. The picture is resized in your browser before it is saved.</p>
+<h2>Saved progress</h2>
+<p>Your game progress, such as word search puzzles you have started or finished and your Sudoku game, is saved in your browser. If you are signed in, a copy is also saved to your account so it follows you between devices. Signed-out progress stays only on your device.</p>
+<h2>Cookies and browser storage</h2>
+<p>When you sign in we set one session cookie to keep you signed in. We also use your browser's local storage to remember game progress and whether you are signed in. These are needed for the features you ask for. Advertising cookies are covered below.</p>
+<h2>Deleting your account</h2>
+<p>To delete your account and everything stored with it, email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a> from the address you signed up with.</p>
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard server logs, such as your IP address and the pages requested, to keep the site running and secure.</p>
 <h2>Fonts</h2>
