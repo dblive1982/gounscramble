@@ -159,7 +159,7 @@ HOME = """<main class="board hm">
 <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
 <button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
-<button class="go" type="submit">GO</button>
+<button class="go" type="submit">GO!</button>
 </form>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
 <div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button></div>
