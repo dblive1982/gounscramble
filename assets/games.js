@@ -184,6 +184,8 @@ const app=$("ws-app"),titleEl=$("ws-title"),backBtn=$("ws-back"),bsp=$("ws-bsp")
 // ---------- storage (per-viewer convenience, safe if blocked) ----------
 function wsd(){const w=GUP.get("ws")||{};if(!w.done)w.done={};if(!w.cur)w.cur={};return w}
 function doneSet(cat){return new Set(wsd().done[cat]||[])}
+function roundOf(cat){const d=doneSet(cat);let R=0;for(;;){let all=true;for(let n=1;n<=PER;n++)if(!d.has(R*100+n)){all=false;break}if(!all)return R;R++}}
+function roundDone(cat){const R=roundOf(cat),d=doneSet(cat),o=new Set();for(let n=1;n<=PER;n++)if(d.has(R*100+n))o.add(n);return o}
 function markDone(cat,n){const w=wsd(),s=doneSet(cat);s.add(n);w.done[cat]=[...s].sort((a,b)=>a-b);delete w.cur[cat+"|"+n];GUP.set("ws",w)}
 function curGet(cat,n){return wsd().cur[cat+"|"+n]}
 function curSave(cat,n,o){const w=wsd();o.t=Date.now();w.cur[cat+"|"+n]=o;GUP.set("ws",w)}
@@ -199,11 +201,11 @@ function dirsFor(n){
   if(n<=14)return[R,D,DR,DL];
   return[R,D,DR,DL,L,U,UL,UR];
 }
-function build(cat,n){
+function build(cat,n,id){
   const pool=[...new Set(cat.words.filter(w=>w.length>=3&&w.length<=N))];
   const count=Math.min(10,8+Math.floor((n-1)/10));
   for(let attempt=0;attempt<30;attempt++){
-    const r=rng(hash(cat.name+"#"+n+"#"+attempt));
+    const r=rng(hash(cat.name+"#"+id+"#"+attempt));
     const sh=pool.slice();for(let i=sh.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]]}
     const pick=[];
     for(const w of sh){if(pick.length>=count)break;if(pick.every(p=>!p.includes(w)&&!w.includes(p)))pick.push(w)}
@@ -256,9 +258,9 @@ function renderCats(){
   app.appendChild(el("p","lead","Pick a category. Drag your finger across the letters to find each word."));
   const g=el("div","cats");
   CATS.forEach((c,i)=>{
-    const d=doneSet(c.name).size;
+    const d=roundDone(c.name).size,R=roundOf(c.name);
     const b=el("button","cat");b.type="button";b.style.setProperty("--c",c.color);
-    b.innerHTML='<span class="ico">'+c.name[0]+'</span><span class="nm">'+c.name+'</span><span class="pg">'+d+' of '+PER+' puzzles'+(inProg(c.name)?' · '+inProg(c.name)+' started':'')+'</span><span class="pbar"><i style="width:'+Math.round(d/PER*100)+'%"></i></span>';
+    b.innerHTML='<span class="ico">'+c.name[0]+'</span><span class="nm">'+c.name+(R?' <small>Set '+(R+1)+'</small>':'')+'</span><span class="pg">'+d+' of '+PER+' puzzles'+(inProg(c.name)?' · '+inProg(c.name)+' started':'')+'</span><span class="pbar"><i style="width:'+Math.round(d/PER*100)+'%"></i></span>';
     b.addEventListener("click",()=>show({name:"nums",cat:i}));
     g.appendChild(b);
   });
@@ -266,13 +268,13 @@ function renderCats(){
 }
 
 function renderNums(){
-  const c=CATS[view.cat],d=doneSet(c.name);
+  const c=CATS[view.cat],d=roundDone(c.name),R=roundOf(c.name);
   titleEl.textContent=c.name;
   app.appendChild(el("p","lead",d.size+" of "+PER+" puzzles finished"));
   const g=el("div","nums");g.style.setProperty("--c",c.color);
   let next=0;for(let n=1;n<=PER;n++)if(!d.has(n)){next=n;break}
   for(let n=1;n<=PER;n++){
-    const started=!d.has(n)&&!!curGet(c.name,n);
+    const started=!d.has(n)&&!!curGet(c.name,R*100+n);
     const b=el("button","num"+(d.has(n)?" done":(started?" prog":(n===next?" next":""))),String(n));b.type="button";
     b.setAttribute("aria-label","Puzzle "+n+(d.has(n)?", finished":(started?", started":"")));
     b.addEventListener("click",()=>show({name:"puzzle",cat:view.cat,n}));
@@ -282,7 +284,7 @@ function renderNums(){
 }
 
 function renderPuzzle(){
-  const c=CATS[view.cat],n=view.n,P=build(c,n);
+  const c=CATS[view.cat],n=view.n,R=roundOf(c.name),id=R*100+n,P=build(c,n,id);
   titleEl.textContent=c.name+" "+n;
   if(!P){app.appendChild(el("p","lead","Could not build this puzzle. Go back and try another."));return}
   const found=new Map(),hinted=new Set();let hints=3,colorIdx=0;
@@ -322,12 +324,12 @@ function renderPuzzle(){
     hinted.add(i);cells[i].classList.add("hint");
     hints--;hintBtn.textContent="Hint ("+hints+")";hintBtn.disabled=hints<=0;saveCur();
   });
-  resetBtn.addEventListener("click",()=>{curClear(c.name,n);show({name:"puzzle",cat:view.cat,n})});
+  resetBtn.addEventListener("click",()=>{curClear(c.name,id);show({name:"puzzle",cat:view.cat,n})});
 
   // ---- progress: restore what was found before, and save after every find or hint ----
   const foundList=[];
-  function saveCur(){if(found.size===P.words.length)return;curSave(c.name,n,{f:foundList,h:3-hints,hc:[...hinted]})}
-  const saved=curGet(c.name,n);
+  function saveCur(){if(found.size===P.words.length)return;curSave(c.name,id,{f:foundList,h:3-hints,hc:[...hinted]})}
+  const saved=curGet(c.name,id);
   if(saved){
     (saved.f||[]).forEach(([w,ci])=>{const p=P.pos[w];if(!p||found.has(w))return;const color=PAL[ci%PAL.length];line(p[0],p[p.length-1],color,".85");found.set(w,color);wEls[w].classList.add("f");foundList.push([w,ci])});
     colorIdx=foundList.length?Math.max(...foundList.map(x=>x[1]))+1:0;
@@ -393,11 +395,13 @@ function renderPuzzle(){
   gw.addEventListener("contextmenu",e=>e.preventDefault());
 
   function complete(){
-    markDone(c.name,n);
-    const d=el("div","card done-card");d.appendChild(el("h2","","Puzzle complete"));
+    markDone(c.name,id);
+    const full=roundOf(c.name)>R;
+    const d=el("div","card done-card");d.appendChild(el("h2","",full?"All "+PER+" finished!":"Puzzle complete"));
+    if(full)d.appendChild(el("p","",c.name+" set "+(R+1)+" is complete. A fresh set of "+PER+" puzzles with new word mixes is ready."));
     const row=el("div","acts");
-    if(n<PER){const nb=el("button","pill go","Next puzzle");nb.type="button";nb.addEventListener("click",()=>show({name:"puzzle",cat:view.cat,n:n+1}));row.appendChild(nb)}
-    const lb=el("button","pill","All puzzles");lb.type="button";lb.addEventListener("click",()=>show({name:"nums",cat:view.cat}));row.appendChild(lb);
+    if(full){const nb=el("button","pill go","Start new set");nb.type="button";nb.addEventListener("click",()=>show({name:"nums",cat:view.cat}));row.appendChild(nb)}else if(n<PER){const nb=el("button","pill go","Next puzzle");nb.type="button";nb.addEventListener("click",()=>show({name:"puzzle",cat:view.cat,n:n+1}));row.appendChild(nb)}
+    if(!full){const lb=el("button","pill","All puzzles");lb.type="button";lb.addEventListener("click",()=>show({name:"nums",cat:view.cat}));row.appendChild(lb)}
     d.appendChild(row);doneHost.appendChild(d);hintBtn.disabled=true;
   }
 }

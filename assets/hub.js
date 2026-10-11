@@ -7,6 +7,22 @@
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function signedIn() { try { return localStorage.getItem("gu-in") === "1"; } catch (e) { return false; } }
 
+  function playedSet() {
+    var G = window.GUP, o = {}; if (!G || !G.get) return o;
+    function has(k) { var v = G.get(k); return !!v && (typeof v !== "object" || Object.keys(v).length > 0); }
+    var ws = G.get("ws") || {}, any = function (x) { return x && Object.keys(x).some(function (c) { var v = x[c]; return Array.isArray(v) ? v.length : !!v; }); };
+    o.wordsearch = any(ws.done) || any(ws.cur); o.sudoku = has("sd"); o.connect4 = has("c4"); o.ttt = has("tt"); o.memory = has("mm"); o.hangman = has("hm"); o.snakes = has("sl");
+    return o;
+  }
+  function markPlayed() {
+    var p = playedSet();
+    document.querySelectorAll("[data-go], a.hb-card[href^='games.html#']").forEach(function (a) {
+      var k = a.getAttribute("data-go") || (a.getAttribute("href") || "").split("#")[1], on = !!p[k];
+      a.classList.toggle("played", on);
+    });
+  }
+  markPlayed(); if (window.GUP && GUP.onChange) GUP.onChange(markPlayed);
+
   // Try a scramble: a fresh set of jumbled real words on every visit, and a button for more.
   var POOL = "airport anchor balloon basket bedroom blanket blossom brave breeze bridge candle captain castle chapter cherry chicken cloud cottage cricket curtain dance diamond dinner dolphin dragon eagle elephant eleven engine fabric famous father flame flower forest friend garden gentle ghost ginger giraffe guitar hammer harbor heart holiday insect invent island ivory jacket jewel joker journey jungle karma kitchen kitten knight ladder lemon light magnet mango market mirror monkey music nature night noble ocean office olive orange parent peace penguin pepper piano picture pillow planet pocket pumpkin purple queen quest quiet rabbit radio rhythm river rocket sandwich school shine silver simple stone summer sunset teacher thunder ticket tiger tomato trail ultra umbrella unity velvet village vivid water whale window winter wizard yellow yogurt youth zebra zipper".split(" ");
   var chips = $("hb-chips"), roll = $("hb-roll");
@@ -81,7 +97,7 @@
         });
       }).then(function (d) {
         var t = f ? d.c * 9 / 5 + 32 : d.c, i = wxInfo(d.code);
-        put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city, "Today's weather");
+        wx.setAttribute("data-t", "Weather"); put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city);
         wx.classList.add("live");
       }).catch(function () { /* keep the built-in tile */ });
     }
@@ -132,7 +148,7 @@
         function show(n) { cur = (n + items.length) % items.length; shown = false; otd.classList.add("fade"); setTimeout(function () { render(items[cur], false); otd.classList.remove("fade"); }, 180); }
         function tick() { if (!shown && !document.hidden && items.length > 1) show(cur + 1); }
         otd.setAttribute("aria-label", "News puzzle: tap to unscramble the jumbled words");
-        otd.disabled = false; otd.classList.add("live");
+        otd.disabled = false; otd.classList.add("live"); otd.setAttribute("data-t", "News");
         render(items[0], false);
         otd.addEventListener("click", function () { if (!shown) { shown = true; render(items[cur], true); } else show(cur + 1); });
         timer = setInterval(tick, 8000);

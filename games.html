@@ -30,12 +30,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=2e657e9e">
-<link rel="stylesheet" href="assets/games.css?v=4d3eb525">
+<link rel="stylesheet" href="assets/games.css?v=a6110d71">
 </head>
 <body data-page="games">
 <!--header-->
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="352" height="300" alt="GO! Unscramble!"></a>
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="700" height="595" alt="GO! Unscramble!"></a>
 <a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
@@ -63,7 +63,7 @@
 </div></header>
 <!--/header-->
 <main class="gm">
-<div class="gtop"><button class="back" id="back" type="button" aria-label="All games" hidden>&lsaquo; All games</button><h1 id="ttl">Puzzles &amp; games</h1></div>
+<div class="gtop"><button class="back" id="back" type="button" aria-label="All games" hidden>&lsaquo; All games</button><h1 id="ttl">Puzzles &amp; games</h1><button class="pill" id="print" type="button" hidden aria-label="Print a black and white copy">&#128424; Print</button><button class="pill" id="share" type="button" hidden>&#8599; Share</button></div>
 
 <section id="v-games">
   <p class="sub">Free games you can play right here. Sign in to save your progress.</p>
@@ -159,7 +159,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/games.js?v=8cae13fa"></script>
+<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/games.js?v=637aea9d"></script><script src="assets/print.js?v=0ca9e4de"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}

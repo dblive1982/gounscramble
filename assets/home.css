@@ -242,3 +242,13 @@ body[data-page="home"]{--hh:264px}
 .hub .hb-otd.fade{opacity:0}
 .hub button.hb-otd:disabled{opacity:1}
 @media (prefers-reduced-motion:reduce){.hub .hb-otd{transition:none}}
+
+/* Tile titles */
+.hub .hb-stats [data-t]{position:relative;padding-top:30px}
+.hub .hb-stats [data-t]::before{content:attr(data-t);position:absolute;top:8px;left:0;right:0;font-weight:700;font-size:11px;letter-spacing:.09em;text-transform:uppercase;opacity:.7}
+.hub button.hb-otd[data-t]{min-height:150px;padding-top:30px}
+
+/* Played games */
+.played{position:relative}
+.played::after{content:"\2713  Played";position:absolute;top:-10px;right:-6px;background:#2bbf6a;color:#000;border:3px solid #000;border-radius:999px;padding:1px 10px;font-weight:700;font-size:12px;letter-spacing:.03em;transform:rotate(4deg);box-shadow:0 2px 0 #000;z-index:2}
+.gm .tool.played,.hub .hb-card.played{outline:4px solid #2bbf6a;outline-offset:2px}

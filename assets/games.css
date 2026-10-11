@@ -162,3 +162,50 @@
 @keyframes gm-wig{0%,100%{rotate:0deg}25%{rotate:-10deg}75%{rotate:10deg}}
 @keyframes gm-wob{0%,100%{rotate:0deg;scale:1}50%{rotate:6deg;scale:1.08}}
 @media (prefers-reduced-motion:reduce){.gm .tool,.gm .tool::after,.gm .tool:hover .tb{animation:none!important;transition:none!important}}
+
+/* Print button and printer-friendly sheet */
+.gm .gtop #print{margin-left:auto}
+#print-sheet{display:none}
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff!important}
+  body>*:not(#print-sheet){display:none!important}
+  #print-sheet{display:block;color:#000;font-family:Arial,Helvetica,sans-serif}
+  #print-sheet h1{font-size:26pt;margin:0 0 4pt;text-align:center;color:#000}
+  #print-sheet .pn{text-align:center;font-size:12pt;margin:0 0 14pt}
+  #print-sheet .pf{text-align:center;font-size:9pt;margin-top:14pt;color:#444}
+  #print-sheet .pl{font-weight:700;font-size:13pt;margin:14pt 0 6pt}
+  #print-sheet table{border-collapse:collapse;margin:0 auto}
+  #print-sheet .ps td{width:20mm;height:20mm;border:.6pt solid #000;text-align:center;font-size:22pt;font-weight:700;padding:0}
+  #print-sheet .ps tr:nth-child(3n) td{border-bottom:2.2pt solid #000}
+  #print-sheet .ps tr:first-child td{border-top:2.2pt solid #000}
+  #print-sheet .ps td:nth-child(3n){border-right:2.2pt solid #000}
+  #print-sheet .ps td:first-child{border-left:2.2pt solid #000}
+  #print-sheet .pw td{width:9mm;height:9mm;text-align:center;font-size:15pt;font-weight:700;padding:0}
+  #print-sheet .pwl{columns:3;list-style:none;margin:0;padding:0;font-size:12pt;font-weight:700;letter-spacing:.04em}
+  #print-sheet .pwl li{margin:0 0 5pt;break-inside:avoid}
+  #print-sheet .pwl li::before{content:"";display:inline-block;width:9pt;height:9pt;border:1pt solid #000;margin-right:7pt}
+  #print-sheet .pb3{display:grid;grid-template-columns:1fr 1fr;gap:16mm 10mm;justify-items:center}
+  #print-sheet .pt td{width:30mm;height:30mm;border:2pt solid #000}
+  #print-sheet .pt tr:first-child td{border-top:0}#print-sheet .pt tr:last-child td{border-bottom:0}
+  #print-sheet .pt td:first-child{border-left:0}#print-sheet .pt td:last-child{border-right:0}
+  #print-sheet .pc{margin-bottom:10mm;border:2pt solid #000}
+  #print-sheet .pc td{padding:2mm}
+  #print-sheet .pc i{display:block;width:17mm;height:17mm;border:1.5pt solid #000;border-radius:50%}
+  #print-sheet .ph{text-align:center}
+  #print-sheet .phw{display:flex;justify-content:center;gap:5mm;margin:10mm 0}
+  #print-sheet .phw span{width:14mm;border-bottom:2.5pt solid #000;height:16mm}
+  #print-sheet .pal{display:flex;flex-wrap:wrap;gap:4mm;justify-content:center}
+  #print-sheet .pal b{width:12mm;height:12mm;border:1.2pt solid #000;border-radius:50%;display:grid;place-items:center;font-size:13pt}
+  #print-sheet .psl{width:170mm;margin:0 auto}
+  #print-sheet .psl .sl{filter:grayscale(1) contrast(1.35);border-width:2pt;box-shadow:none}
+  #print-sheet .psl .cells i,#print-sheet .psl .cells i.d{background:#fff!important;color:#000}
+  #print-sheet .psl .cells i.d{background:#e6e6e6!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.gm .gtop #share{margin-left:0}.gm .gtop #print+#share{margin-left:0}.gm .gtop #print[hidden]+#share{margin-left:auto}
+
+/* Played games */
+.played{position:relative}
+.played::after{content:"\2713  Played";position:absolute;top:-10px;right:-6px;background:#2bbf6a;color:#000;border:3px solid #000;border-radius:999px;padding:1px 10px;font-weight:700;font-size:12px;letter-spacing:.03em;transform:rotate(4deg);box-shadow:0 2px 0 #000;z-index:2}
+.gm .tool.played,.hub .hb-card.played{outline:4px solid #2bbf6a;outline-offset:2px}

@@ -30,12 +30,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=2e657e9e">
-<link rel="stylesheet" href="assets/home.css?v=c51552f4">
+<link rel="stylesheet" href="assets/home.css?v=7186ea88">
 </head>
 <body data-page="home">
 <!--header-->
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="352" height="300" alt="GO! Unscramble!"></a>
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="700" height="595" alt="GO! Unscramble!"></a>
 <a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
@@ -87,10 +87,10 @@
 <div class="home-extra">
 <div class="hub">
 <section class="hb-stats" aria-label="Today at a glance">
-<div><b>172,823</b><span>words in the list</span></div>
-<div class="hb-wx" id="hb-wx" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
-<div><b>300</b><span>word searches</span></div>
-<button type="button" class="hb-otd" id="hb-otd" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
+<div data-t="Word list"><b>172,823</b><span>words in the list</span></div>
+<div class="hb-wx" id="hb-wx" data-t="Fun fact" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
+<div data-t="Fun facts"><b>300</b><span>word searches</span></div>
+<button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
 </section>
 <section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
 <div class="hb-me">
@@ -203,7 +203,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=76178af3"></script>
+<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=9385217f"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}

@@ -49,7 +49,7 @@ HEAD = """<!doctype html>
 
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="352" height="300" alt="GO! Unscramble!"></a>
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="700" height="595" alt="GO! Unscramble!"></a>
 <a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
@@ -176,10 +176,10 @@ def letters_input(button_text):
 
 HUB = """<div class="hub">
 <section class="hb-stats" aria-label="Today at a glance">
-<div><b>172,823</b><span>words in the list</span></div>
-<div class="hb-wx" id="hb-wx" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
-<div><b>300</b><span>word searches</span></div>
-<button type="button" class="hb-otd" id="hb-otd" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
+<div data-t="Word list"><b>172,823</b><span>words in the list</span></div>
+<div class="hb-wx" id="hb-wx" data-t="Fun fact" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
+<div data-t="Fun facts"><b>300</b><span>word searches</span></div>
+<button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
 </section>
 <section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
 <div class="hb-me">
@@ -632,10 +632,10 @@ def build_page(p):
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/home.js"></script><script src="assets/hub.js"></script>')
     if games:
-        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script>')
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "progress.js", "hub.js", "account.css", "account.js"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "print.js", "progress.js", "hub.js", "account.css", "account.js"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     return page
 
