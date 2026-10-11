@@ -10,4 +10,4 @@ if (!empty($_SESSION['uid'])) {
     $r = $s->fetch();
     if ($r) $user = public_user($r); else unset($_SESSION['uid']);
 }
-out(200, ['user' => $user, 'enabled' => true, 'google' => !empty($c['google_client_id'])]);
+out(200, ['user' => $user, 'enabled' => true, 'google' => !empty($c['google_client_id']), 'google_id' => $c['google_client_id'] ?? '']);

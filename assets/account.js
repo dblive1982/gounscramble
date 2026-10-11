@@ -82,6 +82,21 @@
         .then(function (d) { d._ok = r.ok; return d; });
     }).catch(function () { return { error: "Could not reach the server. Check your connection and try again." }; });
   }
+  function startGoogle(cid) {
+    var sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.async = true;
+    sc.onload = function () {
+      if (!window.google || !google.accounts) return;
+      google.accounts.id.initialize({ client_id: cid, callback: function (r) {
+        api("google", { credential: r.credential }).then(function (d) {
+          if (d.user) setUser(d.user); else { var e = $("in-err"); e.textContent = d.error || "Google sign-in failed."; show("signin"); }
+        });
+      } });
+      var w = Math.min(320, Math.max(220, ($("v-signin").clientWidth || 300)));
+      google.accounts.id.renderButton($("g-in"), { theme: "outline", size: "large", text: "continue_with", shape: "pill", width: w });
+      google.accounts.id.renderButton($("g-up"), { theme: "outline", size: "large", text: "signup_with", shape: "pill", width: w });
+    };
+    document.head.appendChild(sc);
+  }
   function busy(form, on) { var b = form.querySelector(".go"); if (b) b.disabled = on; }
 
   document.querySelectorAll("[data-v]").forEach(function (a) {
@@ -182,6 +197,7 @@
       if (!enabled) $("ac-off").hidden = false;
       var g = !!d.google;
       ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = !g; });
+      if (g && d.google_id) startGoogle(d.google_id);
       if (d.user) setUser(d.user);
       else { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
     })

@@ -9,5 +9,5 @@ return [
     'db_pass' => 'PUT-THE-DATABASE-PASSWORD-HERE',
     'site' => 'https://gounscramble.com',
     'mail_from' => 'noreply@gounscramble.com',
-    // 'google_client_id' => '', 'google_client_secret' => '',  // add later for Google sign-in
+    'google_client_id' => '',  // optional: Google sign-in (Client ID only, no secret needed)
 ];
