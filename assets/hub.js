@@ -127,7 +127,7 @@
           idx.sort(function (x, y2) { return words[y2].length - words[x].length; });
           var pick = idx.slice(0, 2);
           otd.innerHTML = "";
-          var k = document.createElement("em"); k.textContent = it.k; otd.appendChild(k);
+          if (it.k !== "In the news") { var k = document.createElement("em"); k.textContent = it.k; otd.appendChild(k); }
           var p = document.createElement("span"); p.className = "nt";
           words.forEach(function (w, i) {
             if (i) p.appendChild(document.createTextNode(" "));
@@ -159,7 +159,7 @@
   (function () {
     var el = document.querySelector(".hb-stats > div:nth-child(3)");
     if (!el) return;
-    var F = [["8,636", "five-letter words"], ["96", "valid two-letter words"], ["28", "letters in the longest word"], ["10", "words typed on one keyboard row"], ["5", "anagrams of LISTEN"], ["12", "words from A, E, P, R, S"]];
+    var F = [["8,636", "five-letter words"], ["96", "valid two-letter words"], ["28", "letters in the longest word"], ["10", "words typed on one keyboard row"], ["5", "anagrams of LISTEN"]];
     var f = F[Math.floor(Math.random() * F.length)];
     el.innerHTML = "<b>" + f[0] + "</b><span>" + f[1] + "</span>";
   })();

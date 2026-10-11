@@ -252,3 +252,9 @@ body[data-page="home"]{--hh:264px}
 .played{position:relative}
 .played::after{content:"\2713  Played";position:absolute;top:-10px;right:-6px;background:#2bbf6a;color:#000;border:3px solid #000;border-radius:999px;padding:1px 10px;font-weight:700;font-size:12px;letter-spacing:.03em;transform:rotate(4deg);box-shadow:0 2px 0 #000;z-index:2}
 .gm .tool.played,.hub .hb-card.played{outline:4px solid #2bbf6a;outline-offset:2px}
+
+/* Tile headings sit outside the card, as comic tabs on top */
+.hub .hb-stats{row-gap:40px;margin-top:34px}
+.hub .hb-stats [data-t],.hub button.hb-otd[data-t]{padding-top:14px}
+.hub .hb-stats [data-t]::before{top:auto;bottom:calc(100% - 2px);left:50%;right:auto;transform:translateX(-50%);white-space:nowrap;opacity:1;background:#ffd23f;color:#000;border:3px solid #000;border-bottom:0;border-radius:10px 10px 0 0;padding:3px 14px 2px;font-size:12px;line-height:1.2}
+.hub .hb-stats [data-t]{overflow:visible}
