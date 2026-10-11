@@ -167,6 +167,7 @@ def letters_input(button_text):
 
 
 HOME = """<main class="board hm">
+<h1 class="vh">Word unscrambler: unscramble letters into words</h1>
 <form id="f" class="box" autocomplete="off">
 <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
