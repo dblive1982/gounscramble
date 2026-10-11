@@ -9,5 +9,7 @@ return [
     'db_pass' => 'PUT-THE-DATABASE-PASSWORD-HERE',
     'site' => 'https://gounscramble.com',
     'mail_from' => 'noreply@gounscramble.com',
+    // Optional but recommended: send email through a real mailbox for better delivery
+    // 'smtp_user' => 'hello@gounscramble.com', 'smtp_pass' => 'THE-MAILBOX-PASSWORD',
     'google_client_id' => '',  // optional: Google sign-in (Client ID only, no secret needed)
 ];

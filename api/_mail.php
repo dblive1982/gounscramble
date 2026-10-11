@@ -34,5 +34,50 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
     $body = "--$b\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n$text\r\n"
         . "--$b\r\nContent-Type: text/html; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n$html\r\n"
         . "--$b--";
-    @mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $headers);
+    $subj = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+    // Prefer authenticated SMTP through a real mailbox (much better delivery); fall back to PHP mail().
+    if (!empty($c['smtp_user']) && !empty($c['smtp_pass'])) {
+        $sfrom = $c['smtp_user'];
+        $hdr = "From: GoUnscramble <$sfrom>\r\nTo: <$to>\r\nSubject: $subj\r\nDate: " . date('r')
+            . "\r\nMessage-ID: <" . bin2hex(random_bytes(12)) . "@gounscramble.com>\r\nMIME-Version: 1.0\r\n"
+            . "Content-Type: multipart/alternative; boundary=\"$b\"\r\n";
+        if (gu_smtp($c, $sfrom, $to, $hdr . "\r\n" . $body)) return;
+    }
+    @mail($to, $subj, $body, $headers);
+}
+
+function gu_smtp(array $c, string $from, string $to, string $data): bool {
+    $host = $c['smtp_host'] ?? 'smtp.hostinger.com';
+    $port = (int)($c['smtp_port'] ?? 465);
+    $fp = @stream_socket_client(($port === 465 ? 'ssl://' : 'tcp://') . $host . ':' . $port, $en, $es, 10);
+    if (!$fp) { error_log("gu_smtp connect failed: $es"); return false; }
+    stream_set_timeout($fp, 10);
+    $read = function () use ($fp): string {
+        $out = '';
+        while (($l = fgets($fp, 515)) !== false) { $out .= $l; if (strlen($l) < 4 || $l[3] === ' ') break; }
+        return $out;
+    };
+    $cmd = function (string $x, string $ok) use ($fp, $read): bool {
+        fwrite($fp, $x . "\r\n");
+        $r = $read();
+        return strpos($r, $ok) === 0;
+    };
+    $good = false;
+    if (strpos($read(), '220') === 0 && $cmd('EHLO gounscramble.com', '250')) {
+        if ($port !== 465) {
+            if ($cmd('STARTTLS', '220') && @stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) $cmd('EHLO gounscramble.com', '250');
+            else { fclose($fp); return false; }
+        }
+        if ($cmd('AUTH LOGIN', '334') && $cmd(base64_encode($c['smtp_user']), '334') && $cmd(base64_encode($c['smtp_pass']), '235')
+            && $cmd("MAIL FROM:<$from>", '250') && $cmd("RCPT TO:<$to>", '250') && $cmd('DATA', '354')) {
+            $data = preg_replace('/(?<!\r)\n/', "\r\n", $data);
+            $data = preg_replace('/^\./m', '..', $data);
+            fwrite($fp, $data . "\r\n.\r\n");
+            $good = strpos($read(), '250') === 0;
+        }
+    }
+    if (!$good) error_log('gu_smtp failed');
+    @fwrite($fp, "QUIT\r\n");
+    fclose($fp);
+    return $good;
 }
