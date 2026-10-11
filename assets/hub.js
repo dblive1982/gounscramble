@@ -142,7 +142,7 @@
             p.appendChild(document.createTextNode(w));
           });
           otd.appendChild(p);
-          var h2 = document.createElement("small"); h2.textContent = reveal ? "Tap for the next one" : "Tap to unscramble"; otd.appendChild(h2);
+          var h2 = document.createElement("small"); h2.textContent = reveal ? "Tap for another story" : "Tap to unscramble"; otd.appendChild(h2);
         }
         var cur = 0, shown = false, timer = null;
         function show(n) { cur = (n + items.length) % items.length; shown = false; otd.classList.add("fade"); setTimeout(function () { render(items[cur], false); otd.classList.remove("fade"); }, 180); }
@@ -151,7 +151,6 @@
         otd.disabled = false; otd.classList.add("live"); otd.setAttribute("data-t", "News");
         render(items[0], false);
         otd.addEventListener("click", function () { if (!shown) { shown = true; render(items[cur], true); } else show(cur + 1); });
-        timer = setInterval(tick, 8000);
       }).catch(function () { /* keep the built-in tile */ });
     }
   })();
@@ -160,8 +159,14 @@
     var el = document.querySelector(".hb-stats > div:nth-child(3)");
     if (!el) return;
     var F = [["8,636", "five-letter words"], ["96", "valid two-letter words"], ["28", "letters in the longest word"], ["10", "words typed on one keyboard row"], ["5", "anagrams of LISTEN"]];
-    var f = F[Math.floor(Math.random() * F.length)];
-    el.innerHTML = "<b>" + f[0] + "</b><span>" + f[1] + "</span>";
+    var order = F.slice().sort(function () { return Math.random() - .5; }), at = 0;
+    function show(i, fade) {
+      var f = order[i % order.length];
+      function set() { el.innerHTML = "<b>" + f[0] + "</b><span>" + f[1] + "</span>"; el.classList.remove("fade"); }
+      if (fade) { el.classList.add("fade"); setTimeout(set, 220); } else set();
+    }
+    show(0, false);
+    setInterval(function () { if (!document.hidden) show(++at, true); }, 10000);
   })();
   // Numbers count up when the page loads.
   (function () {
