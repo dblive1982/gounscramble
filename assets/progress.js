@@ -40,6 +40,15 @@
       r.t = Math.max(a.t || 0, b.t || 0);
       out.gs = r;
     })();
+    (function () {                       // days played: keep every day seen on either side
+      var a = local.ad, b = remote.ad;
+      if (!a && !b) return;
+      a = a || {}; b = b || {};
+      var r = { t: Math.max(a.t || 0, b.t || 0) }, k;
+      for (k in a) if (k !== "t") r[k] = a[k];
+      for (k in b) if (k !== "t") r[k] = r[k] ? union(r[k], b[k]) : b[k];
+      out.ad = r;
+    })();
     ["ws", "sd"].forEach(function (g) {
       var a = local[g], b = remote[g];
       if (!a) { if (b) out[g] = b; return; }
@@ -76,9 +85,24 @@
   }
   function queue() { if (!signedIn()) return; clearTimeout(timer); timer = setTimeout(push, 1500); }
 
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+  // Remember that today was a day you played (no scores, just the date).
+  function markToday() {
+    var d = new Date(), ym = d.getFullYear() + "-" + pad(d.getMonth() + 1), ad = data.ad || (data.ad = {});
+    var arr = ad[ym] || (ad[ym] = []);
+    if (arr.indexOf(d.getDate()) >= 0) return false;
+    arr.push(d.getDate()); arr.sort(function (x, y) { return x - y; });
+    var ks = Object.keys(ad).filter(function (k) { return k !== "t"; }).sort();
+    while (ks.length > 14) delete ad[ks.shift()];
+    ad.t = Date.now();
+    return true;
+  }
+
   var api = {
+    mark: function () { if (markToday()) { write(); queue(); listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } }); } },
+    days: function (ym) { return ((data.ad || {})[ym] || []).slice(); },
     get: function (g) { return data[g]; },
-    set: function (g, v) { v.t = Date.now(); data[g] = v; write(); queue(); },
+    set: function (g, v) { v.t = Date.now(); data[g] = v; markToday(); write(); queue(); },
     all: function () { return data; },
     onChange: function (fn) { listeners.push(fn); },
     // Pull the account copy and merge it in. Resolves to true when something changed.

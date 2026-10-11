@@ -543,3 +543,6 @@ body[data-page="tools"] .block > .cards { max-width: none; }
 .show-rude .prose .rude{display:inline-flex!important}
 .show-rude .prose li.rude{display:list-item!important}
 .rude-toggle{display:flex;align-items:center;gap:8px;margin:6px 0 14px;font-weight:700}
+
+.foot-secure { display: flex; align-items: flex-start; gap: 8px; margin: 0; font-size: 13px; line-height: 1.4; flex: 1 1 100%; order: 9; opacity: .85; }
+.foot-secure svg { flex: none; margin-top: 1px; }
