@@ -183,7 +183,7 @@
 /* Hero band: the teal header carries on behind the search box */
 body[data-page="home"] .site-header{--hh:264px;border-bottom:0;background-image:repeating-conic-gradient(from 0deg at 50% calc(var(--hh)*1.5),#1E9FB8 0 7deg,#0099B5 7deg 14deg)}
 @media (max-width:480px){body[data-page="home"] .site-header{--hh:210px}}
-.hero-band{position:relative;border-bottom:6px solid #000;background-color:#0099B5;background-image:repeating-conic-gradient(from 0deg at 50% calc(var(--hh,264px)*.5),#1E9FB8 0 7deg,#0099B5 7deg 14deg)}
+.hero-band{position:relative;border-bottom:10px solid #000;background-color:#0099B5;background-image:repeating-conic-gradient(from 0deg at 50% calc(var(--hh,264px)*.5),#1E9FB8 0 7deg,#0099B5 7deg 14deg)}
 body[data-page="home"]{--hh:264px}
 @media (max-width:480px){body[data-page="home"]{--hh:210px}}
 .hero-band::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,rgba(0,0,0,.28) 28%,transparent 31%) 0 0/12px 12px;-webkit-mask-image:radial-gradient(ellipse 60% 140% at 50% 50%,transparent 40%,#000 90%);mask-image:radial-gradient(ellipse 60% 140% at 50% 50%,transparent 40%,#000 90%)}
