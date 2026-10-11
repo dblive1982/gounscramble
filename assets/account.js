@@ -17,8 +17,7 @@
   function setUser(u) {
     user = u;
     try { if (u) localStorage.setItem("gu-in", "1"); else localStorage.removeItem("gu-in"); } catch (e) { /* storage unavailable */ }
-    var ml = document.querySelector('.menu-list a[href="account.html"]');
-    if (ml) ml.textContent = u ? "Your account" : "Sign in";
+    if (window.guMenu) window.guMenu();
     if (u) {
       paint(u); loadProfile(); progressSummary();
     }
@@ -36,6 +35,7 @@
     face($("av"), u.name, img); face($("av2"), u.name, img);
     $("av-rm").hidden = !img;
     try { if (img) localStorage.setItem("gu-av", img); else localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ }
+    if (window.guMenu) window.guMenu();
   }
   function loadProfile() {
     fetch("api/profile.php", { credentials: "same-origin" }).then(function (r) { return r.json(); }).then(function (d) {
