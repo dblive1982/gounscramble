@@ -31,8 +31,8 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
     $headers = "From: GoUnscramble <$from>\r\n"
         . "MIME-Version: 1.0\r\n"
         . "Content-Type: multipart/alternative; boundary=\"$b\"";
-    $body = "--$b\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n$text\r\n"
-        . "--$b\r\nContent-Type: text/html; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n$html\r\n"
+    $body = "--$b\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($text), 76, "\r\n")
+        . "--$b\r\nContent-Type: text/html; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($html), 76, "\r\n")
         . "--$b--";
     $subj = '=?UTF-8?B?' . base64_encode($subject) . '?=';
     // Prefer authenticated SMTP through a real mailbox (much better delivery); fall back to PHP mail().
