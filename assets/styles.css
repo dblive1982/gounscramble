@@ -499,3 +499,28 @@ body[data-page="tools"] .block > .cards { max-width: none; }
 .menu-list hr { border: 0; border-top: 3px solid #000; margin: 8px 6px; opacity: .25; width: auto; }
 .main-nav .menu[open] .menu-list { gap: 2px; }
 .menu-list a { padding-top: 10px; padding-bottom: 10px; }
+
+/* Spacing and colour pass 2: guides, glossary and info pages match the tool pages. */
+:root, :root[data-theme="dark"] { --muted: #1F1F26; }
+.prose { padding-top: 28px; gap: 12px; max-width: none; }
+.prose h1 { font-size: clamp(30px, 8vw, 40px); line-height: 1.1; margin: 0 0 4px; }
+.prose h2 { margin-top: 32px; margin-bottom: 0; font-size: 26px; line-height: 1.1; }
+.prose h3 { margin-top: 20px; margin-bottom: 0; font-size: 20px; }
+.prose p, .prose li, .gloss dd, .block.narrow p, .card p { color: #000; font-size: 17px; line-height: 1.55; }
+.prose p { margin: 0; }
+.gloss { gap: 18px; }
+.gloss dt { color: #000; font-size: 19px; }
+.gloss dd { margin: 3px 0 0; }
+.block.narrow h3 { margin-top: 22px; margin-bottom: 0; }
+.block.narrow h2 + p, .block.narrow h2 + ul, .block.narrow h2 + ol { margin-top: 0; }
+.prose .card p, .prose .card li { font-size: 16px; }
+.prose .guide-cards { margin-top: 8px; }
+.hint, .note, .count, .status, .scorelabel, .stat dt, .lookup-note, .arrow { color: #000; }
+.site-footer .wrap { color: #000; }
+.gloss { display: block; }
+.gloss dt { margin-top: 20px; }
+.gloss dt:first-child { margin-top: 0; }
+.gloss dd { margin: 4px 0 0; }
+.block.narrow > h2:not(:first-child), .prose > h2 { margin-top: 32px; }
+.block.narrow > ul, .block.narrow > ol, .block.narrow > p { margin-top: 0; margin-bottom: 0; }
+.block.narrow li, .block.narrow ul.plain, .block.narrow ol { color: #000; }

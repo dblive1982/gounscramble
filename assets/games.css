@@ -137,3 +137,6 @@
 .gm a.tool{text-decoration:none;color:#000}
 .gm{width:100%;min-width:0;padding-bottom:56px}
 .gm *{text-transform:none}
+.gm section{display:flex;flex-direction:column;gap:14px}
+.gm section[hidden]{display:none}
+.gm .gtop{margin-bottom:2px}
