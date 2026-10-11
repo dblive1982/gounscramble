@@ -315,7 +315,7 @@
     var si = signedIn(), me = document.querySelector(".hb-me");
     me.classList.toggle("out", !si);
     document.querySelector(".hb-mine").hidden = !si; $("hb-cal").hidden = !si; $("hb-lock").hidden = si;
-    $("hb-dyhint").hidden = !si;
+    $("hb-dyhint").hidden = !si; if ($("hb-doodle")) $("hb-doodle").hidden = si;
     if (si) { stats(); calendar(); diary(false); }
   }
   (function () {
