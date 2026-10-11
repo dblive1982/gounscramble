@@ -75,3 +75,7 @@
 .hm .chip{align-self:flex-start;margin-top:4px}
 .hm .optrow .chip{margin-top:0}
 .hm [hidden]{display:none!important}
+/* Tan board on the home page only (trial). Remove this block to go back to grey. */
+html,body[data-page="home"]{background:#E2CF9F}
+body[data-page="home"]{--bg:#E2CF9F}
+.hm{--tan:#E2CF9F}
