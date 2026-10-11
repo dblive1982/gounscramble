@@ -113,7 +113,7 @@ FOOTER = """<!--footer-->
 <!--/footer-->
 <script src="assets/engine.js"></script>
 <script src="assets/app.js"></script>
-<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();</script>
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var u=document.querySelector(".user-btn");if(u)u.setAttribute("aria-label","Your account")}}catch(e){}})();</script>
 </body>
 </html>
 """

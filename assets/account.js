@@ -16,6 +16,9 @@
   }
   function setUser(u) {
     user = u;
+    try { if (u) localStorage.setItem("gu-in", "1"); else localStorage.removeItem("gu-in"); } catch (e) { /* storage unavailable */ }
+    var ml = document.querySelector('.menu-list a[href="account.html"]');
+    if (ml) ml.textContent = u ? "Your account" : "Sign in";
     if (u) {
       $("nm").textContent = u.name; $("em").textContent = u.email;
       $("av").textContent = (u.name || "?").charAt(0).toUpperCase();
@@ -109,7 +112,7 @@
       var g = !!d.google;
       ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = !g; });
       if (d.user) setUser(d.user);
-      else show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin"));
+      else { try { localStorage.removeItem("gu-in"); } catch (e) { /* ignore */ } show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
     })
     .catch(function () { $("ac-off").hidden = false; show(token ? "reset" : "signin"); });
 })();
