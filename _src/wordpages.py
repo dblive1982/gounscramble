@@ -12,20 +12,20 @@ MIN_WORDS = 15                      # skip combinations with fewer words than th
 
 def score(w): return sum(TILE[c] for c in w)
 def esc(s): return html.escape(s)
-def chips(ws): return '<div class="chips">' + "".join('<span class="chip">%s</span>' % esc(w) for w in ws) + "</div>"
+BAD = set()
+def chips(ws): return '<div class="chips">' + "".join('<span class="chip%s">%s</span>' % (" rude" if w in BAD else "", esc(w)) for w in ws) + "</div>"
 def fmt(n): return "{:,}".format(n)
 def L(w): return w[0].upper()
 
 def load(root):
-    bad = set()
     try:
-        bad = {l.strip().lower() for l in open(os.path.join(root, "words", "offensive.txt"), encoding="utf-8")}
+        BAD.update(l.strip().lower() for l in open(os.path.join(root, "words", "offensive.txt"), encoding="utf-8"))
     except OSError:
         pass
     ws = []
     for l in open(os.path.join(root, "words", "enable.txt"), encoding="utf-8"):
         w = l.strip().lower()
-        if w.isalpha() and w not in bad:
+        if w.isalpha():
             ws.append(w)
     return sorted(set(ws))
 
@@ -37,7 +37,7 @@ def top(ws, k=24):
     return sorted(ws, key=lambda w: (-score(w), w))[:k]
 
 def top_list(ws, k=24):
-    return '<ul class="scorelist">' + "".join("<li><strong>%s</strong> <span>%d points</span></li>" % (esc(w), score(w)) for w in top(ws, k)) + "</ul>"
+    return '<ul class="scorelist">' + "".join('<li%s><strong>%s</strong> <span>%d points</span></li>' % (' class="rude"' if w in BAD else "", esc(w), score(w)) for w in top(ws, k)) + "</ul>"
 
 def alpha_strip(cur, fn, avail):
     return '<p class="jump">' + " ".join(('<strong>%s</strong>' % l.upper()) if l == cur else ('<a href="%s">%s</a>' % (fn(l), l.upper())) for l in avail) + "</p>"
@@ -153,4 +153,21 @@ def build(words):
     sec.append('<p>Learn how the lists work on the <a href="word-lists-explained.html">word lists explained</a> page, or <a href="index.html">unscramble your own letters</a>.</p>')
     pages["word-lists.html"] = ("Word Lists by Length and First Letter",
         "Browse word lists by length and first letter: two to eight letter words and words starting with every letter, from the ENABLE list.", "\n".join(sec))
-    return pages
+    return with_toggle(pages)
+
+
+TOGGLE = ('<label class="check rude-toggle"><input type="checkbox" id="hide-rude" checked> Hide offensive words</label>'
+          '<script>(function(){var c=document.getElementById("hide-rude"),d=document.documentElement,k="gu-hide-rude";'
+          'function ap(){d.classList.toggle("show-rude",!c.checked)}'
+          'try{if(localStorage.getItem(k)==="0")c.checked=false}catch(e){}ap();'
+          'c.addEventListener("change",function(){try{localStorage.setItem(k,c.checked?"1":"0")}catch(e){}ap()})})();</script>')
+
+def with_toggle(pages):
+    """Add the hide-offensive-words switch to every page that lists at least one such word."""
+    out = {}
+    for f, (t, d, body) in pages.items():
+        if 'class="chip rude"' in body or '<li class="rude">' in body:
+            i = body.find("</h1>") + 5
+            body = body[:i] + "\n" + TOGGLE + body[i:]
+        out[f] = (t, d, body)
+    return out
