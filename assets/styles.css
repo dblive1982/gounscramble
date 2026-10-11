@@ -471,8 +471,8 @@ button.chip:hover { background: #FFE27A; }
 /* Round 2: header as in the mock-up (centred logo, menu top-right), white menu, GO button. */
 .site-header .wrap { display: block; position: relative; text-align: center; padding: 14px 16px 20px; max-width: none; }
 .brand { display: flex; justify-content: center; margin: 0; }
-.logo-img { height: 168px; max-width: 88vw; }
-@media (max-width: 480px) { .logo-img { height: 150px; } }
+.logo-img { height: 230px; max-width: 88vw; }
+@media (max-width: 480px) { .logo-img { height: 176px; } }
 .main-nav { position: absolute; top: 14px; right: 16px; z-index: 5; }
 .main-nav summary { background: #fff; }
 .main-nav summary:hover, .main-nav .menu[open] summary { background: #fff; }
