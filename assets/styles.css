@@ -607,3 +607,5 @@ body[data-page="tools"] .block > .cards:not(.guide-cards) .card { flex: none; }
   .main-nav .menu[open] .menu-list{position:absolute;top:calc(100% + 6px);right:0;bottom:auto;left:auto;width:290px;max-height:calc(100vh - 130px);border:4px solid #000;border-radius:16px;box-shadow:0 5px 0 #000;padding:10px}
   .menu[open] .menu-x{display:none}
 }
+/* Menu button and profile button share the same hover colour */
+.site-header .user-btn:hover,.site-header .user-wrap:hover .user-btn,.site-header .main-nav summary:hover,.site-header .main-nav .menu[open] summary{background:var(--soft);color:#000}
