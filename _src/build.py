@@ -635,8 +635,14 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "print.js", "progress.js", "hub.js", "account.css", "account.js"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "logo.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
+    for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
+        try:
+            v = hashlib.md5(open(os.path.join(OUT, fav), "rb").read()).hexdigest()[:8]
+        except OSError:
+            v = "0"
+        page = page.replace('href="%s"' % fav, 'href="%s?v=%s"' % (fav, v))
     return page
 
 
