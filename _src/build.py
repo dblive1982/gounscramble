@@ -217,6 +217,13 @@ HUB = """<div class="hub">
 <a class="hb-card c-green" href="games.html#memory"><span class="hb-ic">??</span><b>Memory match</b><span>Flip the cards and find every pair in as few moves as you can.</span><em>1-2 players</em></a>
 <a class="hb-card c-orange" href="games.html#snakes"><span class="hb-ic">1-100</span><b>Snakes and ladders</b><span>Climb the ladders, dodge the snakes and race to 100.</span><em>1-2 players</em></a>
 <a class="hb-card c-teal" href="games.html#ttt"><span class="hb-ic">XO</span><b>Tic tac toe</b><span>Three in a row wins. Easy, hard, or two players on one device.</span><em>1-2 players</em></a>
+<a class="hb-card c-green" data-pop="NEW!" href="games.html#retrosnake"><span class="hb-ic">Sn</span><b>Retro Snake</b><span>Eat, grow and don't hit the walls or yourself. Gets faster as you go.</span><em>Arcade</em></a>
+<a class="hb-card c-teal" href="games.html#rally"><span class="hb-ic">Pg</span><b>Paddle Rally</b><span>The classic bat and ball duel. Beat the computer to 7 points.</span><em>Arcade</em></a>
+<a class="hb-card c-orange" href="games.html#bricks"><span class="hb-ic">Br</span><b>Brick Smash</b><span>Bounce the ball, smash every brick and don't let it drop.</span><em>Arcade</em></a>
+<a class="hb-card c-pink" href="games.html#blaster"><span class="hb-ic">Sb</span><b>Star Blaster</b><span>Blast the invading aliens before they reach you. Hide behind the shields.</span><em>Arcade</em></a>
+<a class="hb-card c-yellow" href="games.html#muncher"><span class="hb-ic">Mm</span><b>Maze Muncher</b><span>Eat every dot, dodge the ghosts and grab a pellet to turn the tables.</span><em>Arcade</em></a>
+<a class="hb-card c-lilac" href="games.html#blocks"><span class="hb-ic">Fb</span><b>Falling Blocks</b><span>Turn and drop the shapes to fill complete lines.</span><em>Arcade</em></a>
+<a class="hb-card c-green" href="games.html#hopper"><span class="hb-ic">Rh</span><b>Road Hopper</b><span>Dodge the traffic, ride the logs and hop home safely.</span><em>Arcade</em></a>
 <a class="hb-card hb-more" data-pop="FREE!" href="account.html"><span class="hb-ic">&#9733;</span><b>Save your progress</b><span>Sign in free to keep your games and scores on every device.</span><em>Free account</em></a>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-tools"><div class="hb-head"><h2 id="hb-tools">Free word tools</h2><a href="tools.html">All tools &rsaquo;</a></div>
@@ -535,7 +542,7 @@ PAGES = [
          desc="Sign in or create a free GoUnscramble account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
          title="Free Puzzles & Games | GoUnscramble",
-         desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Memory match and Hangman."),
+         desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | GoUnscramble",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
@@ -643,14 +650,16 @@ def build_page(p):
                  '<link rel="stylesheet" href="assets/games.css">' if games else
                  '<link rel="stylesheet" href="assets/account.css">\n<meta name="robots" content="noindex">' if acct else "")
     head = head.replace("@@HOMECSS@@", extra_css)
+    if games:
+        head = head.replace("family=Fredoka:", "family=Press+Start+2P&amp;family=Fredoka:")
     page = head + header + body + footer
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/home.js"></script><script src="assets/hub.js"></script>')
     if games:
-        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/print.js"></script>')
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "logo.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "logo.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:

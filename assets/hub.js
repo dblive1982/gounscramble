@@ -12,6 +12,7 @@
     function has(k) { var v = G.get(k); return !!v && (typeof v !== "object" || Object.keys(v).length > 0); }
     var ws = G.get("ws") || {}, any = function (x) { return x && Object.keys(x).some(function (c) { var v = x[c]; return Array.isArray(v) ? v.length : !!v; }); };
     o.wordsearch = any(ws.done) || any(ws.cur); o.sudoku = has("sd"); o.connect4 = has("c4"); o.ttt = has("tt"); o.memory = has("mm"); o.hangman = has("hm"); o.snakes = has("sl");
+    var gs = G.get("gs") || {}; ["retrosnake","rally","bricks","blaster","muncher","blocks","hopper"].forEach(function (k) { o[k] = (gs["a_" + k] || 0) > 0; });
     return o;
   }
   function markPlayed() {

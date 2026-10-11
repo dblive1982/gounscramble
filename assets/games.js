@@ -11,8 +11,9 @@ const slVs=a=>{const two=SL.mode==="two";vsDraw("sl-vs",[{c:"var(--wild)",n:two?
 const c4Vs=()=>{const two=C4.mode==="two";vsDraw("c4-vs",[{c:"var(--wild)",n:two?"Player 1":"You"},{c:"#ffd23f",n:two?"Player 2":"Computer ("+(C4.mode==="easy"?"Easy":"Hard")+")"}],C4.over?-1:C4.turn-1)};
 const ttVs=()=>{const two=TT3.mode==="two";vsDraw("tt-vs",[{m:"X",n:two?"Player 1":"You"},{m:"O",n:two?"Player 2":"Computer ("+(TT3.mode==="easy"?"Easy":"Hard")+")"}],TT3.over?-1:(TT3.turn==="X"?0:1))};
 /* ---------- menu + routing ---------- */
-const TT={games:"Puzzles & games",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman"};
+const TT={games:"Puzzles & games",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",retrosnake:"Retro Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Star Blaster",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper"};
 const INIT={};
+["retrosnake","rally","bricks","blaster","muncher","blocks","hopper"].forEach(id=>{INIT[id]=()=>{if(window.ARC)ARC.init(id)}});
 function menu(o){var m=document.querySelector(".site-header .menu");if(m&&!o)m.removeAttribute("open")}
 function show(v){if(!TT[v])v="games";for(const k in TT)$("v-"+k).hidden=k!==v;$("ttl").textContent=TT[v];$("back").hidden=v==="games";
   
