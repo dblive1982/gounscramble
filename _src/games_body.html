@@ -30,6 +30,7 @@
 </section>
 
 <section id="v-snakes" hidden>
+  <div class="row" id="sl-lv"></div>
   <div class="vs" id="sl-vs"></div>
   <div class="sl" id="sl"></div>
   <div class="row"><div class="dice" id="dice">-</div><button class="go" id="sl-roll" type="button">Roll</button><button class="pill" id="sl-new" type="button">New game</button></div>
@@ -53,14 +54,16 @@
 </section>
 
 <section id="v-memory" hidden>
-  <div class="vs"><span class="pl">1 player</span></div>
+  <div class="row" id="mm-lv"></div>
+  <div class="vs" id="mm-vs"></div>
   <div class="mem" id="mem"></div>
   <p class="msg" id="mm-msg" aria-live="polite">Moves: 0</p>
   <div class="row"><button class="pill" id="mm-new" type="button">New game</button></div>
 </section>
 
 <section id="v-hangman" hidden>
-  <div class="vs"><span class="pl">1 player</span></div>
+  <div class="row" id="hm-lv"></div>
+  <div class="vs" id="hm-vs"></div>
   <div class="hm">
     <svg viewBox="0 0 120 130" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" aria-hidden="true" id="hm-fig">
       <path d="M12 122h70M30 122V10h56v18"/>
@@ -68,6 +71,7 @@
     </svg>
     <div class="word" id="hm-word" aria-live="polite"></div>
     <p class="msg" id="hm-msg" style="text-align:center"></p>
+    <div class="row" id="hm-set" hidden><input type="password" id="hm-in" maxlength="15" autocomplete="off" placeholder="Secret word" aria-label="Secret word"><button class="go" id="hm-go" type="button">Set word</button></div>
     <div class="keys" id="hm-keys"></div>
     <div class="row"><button class="pill" id="hm-new" type="button">New word</button></div>
   </div>

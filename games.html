@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=ee491b89">
-<link rel="stylesheet" href="assets/games.css?v=ca9469fb">
+<link rel="stylesheet" href="assets/games.css?v=0eb9152a">
 </head>
 <body data-page="games">
 <!--header-->
@@ -94,6 +94,7 @@
 </section>
 
 <section id="v-snakes" hidden>
+  <div class="row" id="sl-lv"></div>
   <div class="vs" id="sl-vs"></div>
   <div class="sl" id="sl"></div>
   <div class="row"><div class="dice" id="dice">-</div><button class="go" id="sl-roll" type="button">Roll</button><button class="pill" id="sl-new" type="button">New game</button></div>
@@ -117,14 +118,16 @@
 </section>
 
 <section id="v-memory" hidden>
-  <div class="vs"><span class="pl">1 player</span></div>
+  <div class="row" id="mm-lv"></div>
+  <div class="vs" id="mm-vs"></div>
   <div class="mem" id="mem"></div>
   <p class="msg" id="mm-msg" aria-live="polite">Moves: 0</p>
   <div class="row"><button class="pill" id="mm-new" type="button">New game</button></div>
 </section>
 
 <section id="v-hangman" hidden>
-  <div class="vs"><span class="pl">1 player</span></div>
+  <div class="row" id="hm-lv"></div>
+  <div class="vs" id="hm-vs"></div>
   <div class="hm">
     <svg viewBox="0 0 120 130" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" aria-hidden="true" id="hm-fig">
       <path d="M12 122h70M30 122V10h56v18"/>
@@ -132,6 +135,7 @@
     </svg>
     <div class="word" id="hm-word" aria-live="polite"></div>
     <p class="msg" id="hm-msg" style="text-align:center"></p>
+    <div class="row" id="hm-set" hidden><input type="password" id="hm-in" maxlength="15" autocomplete="off" placeholder="Secret word" aria-label="Secret word"><button class="go" id="hm-go" type="button">Set word</button></div>
     <div class="keys" id="hm-keys"></div>
     <div class="row"><button class="pill" id="hm-new" type="button">New word</button></div>
   </div>
@@ -152,7 +156,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=fe199458"></script><script src="assets/games.js?v=bd9c81ab"></script>
+<script src="assets/progress.js?v=fe199458"></script><script src="assets/games.js?v=8cae13fa"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var o=document.getElementById("menu-out");if(o){o.hidden=false;o.addEventListener("click",function(e){e.preventDefault();var d=function(){try{localStorage.removeItem("gu-in");localStorage.removeItem("gu-av")}catch(x){}location.href="account.html"};fetch("api/logout.php",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json","X-GU":"1"},body:"{}"}).then(d,d)})}var u=document.querySelector(".user-btn");if(u){u.setAttribute("aria-label","Your account");var v=localStorage.getItem("gu-av");if(v){u.classList.add("pic");u.style.backgroundImage="url("+v+")"}}}}catch(e){}})();</script>
 </body>
 </html>
