@@ -50,6 +50,7 @@ HEAD = """<!doctype html>
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
 <a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="352" height="300" alt="GO! Unscramble!"></a>
+<a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
@@ -66,6 +67,8 @@ HEADER = """<!--header-->
 <a href="guides.html"@@CUR_guides@@>Guides</a>
 <a href="tools.html"@@CUR_tools@@>All tools</a>
 <a href="about.html"@@CUR_about@@>About</a>
+<hr>
+<a href="account.html"@@CUR_account@@>Sign in</a>
 <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Dark mode" hidden></button>
 </div>
 </details>
@@ -372,6 +375,7 @@ CREDITS = """<main><div class="wrap"><article class="prose">
 </article></div></main>
 """
 
+ACCOUNT = open(os.path.join(ROOT, "account_body.html"), encoding="utf-8").read()
 GAMES = open(os.path.join(ROOT, "games_body.html"), encoding="utf-8").read()
 
 PAGES = [
@@ -390,6 +394,9 @@ PAGES = [
     dict(file="case-converter.html", page="case", nav="case", body=CASE, skip="case",
          title="Case Converter | GoUnscramble",
          desc="Switch text between upper case, lower case, title case and sentence case."),
+    dict(file="account.html", page="account", nav="account", body=ACCOUNT, noindex=True,
+         title="Sign in | GoUnscramble",
+         desc="Sign in or create a free GoUnscramble account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
          title="Free Puzzles & Games | GoUnscramble",
          desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Memory match and Hangman."),
@@ -483,7 +490,7 @@ def build_page(p):
             .replace("@@CHEVRON@@", CHEVRON)
             .replace("@@CARDS@@", cards(p.get("skip"))))
     header = HEADER.replace("@@LOGO52@@", logo(52))
-    for key in ("home", "anagram", "games", "counter", "case", "random", "tools", "guides", "about"):
+    for key in ("home", "anagram", "games", "counter", "case", "random", "tools", "guides", "about", "account"):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
     footer = FOOTER.replace("@@LOGO32@@", logo(32)).replace("@@SOCIAL@@", social_html())
     path = "" if p["file"] == "index.html" else p["file"]
@@ -492,14 +499,19 @@ def build_page(p):
     head = head.replace("@@SEO@@", seo_tags(p, SITE + "/" + path))
     home = p["file"] == "index.html"
     games = p["file"] == "games.html"
-    extra_css = '<link rel="stylesheet" href="assets/home.css">' if home else ('<link rel="stylesheet" href="assets/games.css">' if games else "")
+    acct = p["file"] == "account.html"
+    extra_css = ('<link rel="stylesheet" href="assets/home.css">' if home else
+                 '<link rel="stylesheet" href="assets/games.css">' if games else
+                 '<link rel="stylesheet" href="assets/account.css">\n<meta name="robots" content="noindex">' if acct else "")
     head = head.replace("@@HOMECSS@@", extra_css)
     page = head + header + body + footer
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/home.js"></script>')
     if games:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/games.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js"):
+    if acct:
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/account.js"></script>')
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "account.css", "account.js"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     return page
 
@@ -516,7 +528,7 @@ def guide_pages():
 
 
 def sitemap(pages):
-    urls = [SITE + "/" if p["file"] == "index.html" else SITE + "/" + p["file"] for p in pages]
+    urls = [SITE + "/" if p["file"] == "index.html" else SITE + "/" + p["file"] for p in pages if not p.get("noindex")]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "".join("  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n" % (u, datetime.date.today().isoformat()) for u in urls) + "</urlset>\n")
 

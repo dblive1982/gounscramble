@@ -1,2 +1,6 @@
 # Keep source and git folders out of public view.
 RedirectMatch 404 ^/(_src|\.git)(/|$)
+
+# Account API: only the public endpoints are reachable; helper files are not.
+RedirectMatch 404 ^/api/_
+RedirectMatch 404 ^/gu-config

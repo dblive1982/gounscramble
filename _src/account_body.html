@@ -1,0 +1,63 @@
+<main class="ac" id="ac">
+<h1 id="ac-ttl" class="ac-ttl">Sign in</h1>
+<p class="ac-note" id="ac-off" hidden>Accounts are not switched on yet. Everything else on the site works without one.</p>
+
+<section id="v-signin" class="form">
+<p class="sub">Sign in to keep your puzzle progress.</p>
+<button class="alt" type="button" id="g-in" hidden><i>G</i>Continue with Google</button>
+<div class="or" id="or-in" hidden>or use your email</div>
+<form class="form" id="f-in" novalidate>
+<label class="fld">Email<input type="email" id="in-e" autocomplete="email" placeholder="you@example.com"></label>
+<label class="fld">Password<span class="pw"><input type="password" id="in-p" autocomplete="current-password" placeholder="Your password"><button type="button" class="showpw">Show</button></span></label>
+<div class="err" id="in-err" aria-live="polite"></div>
+<button class="go full" type="submit">Sign in</button>
+</form>
+<div class="cen"><button class="lnk" data-v="forgot" type="button">Forgot your password?</button>
+<span class="sub">New here? <button class="lnk" data-v="signup" type="button">Create an account</button></span></div>
+</section>
+
+<section id="v-signup" class="form" hidden>
+<p class="sub">Free, and it takes under a minute.</p>
+<button class="alt" type="button" id="g-up" hidden><i>G</i>Sign up with Google</button>
+<div class="or" id="or-up" hidden>or use your email</div>
+<form class="form" id="f-up" novalidate>
+<label class="fld">Display name<input type="text" id="up-n" autocomplete="nickname" maxlength="60" placeholder="What should we call you?"></label>
+<label class="fld">Email<input type="email" id="up-e" autocomplete="email" placeholder="you@example.com"></label>
+<label class="fld">Password<span class="pw"><input type="password" id="up-p" autocomplete="new-password" placeholder="At least 8 characters"><button type="button" class="showpw">Show</button></span></label>
+<label class="chk"><input type="checkbox" id="up-c"><span>I agree to the <a href="privacy.html">Privacy Policy</a>.</span></label>
+<div class="err" id="up-err" aria-live="polite"></div>
+<button class="go full" type="submit">Create account</button>
+</form>
+<div class="cen"><span class="sub">Already have an account? <button class="lnk" data-v="signin" type="button">Sign in</button></span></div>
+</section>
+
+<section id="v-forgot" class="form" hidden>
+<p class="sub">Enter your email and we will send you a reset link.</p>
+<form class="form" id="f-fg" novalidate>
+<label class="fld">Email<input type="email" id="fg-e" autocomplete="email" placeholder="you@example.com"></label>
+<div class="err" id="fg-err" aria-live="polite"></div>
+<button class="go full" type="submit">Send reset link</button>
+</form>
+<div class="cen"><button class="lnk" data-v="signin" type="button">Back to sign in</button></div>
+</section>
+
+<section id="v-sent" class="form" hidden>
+<div class="card"><p class="sub" id="sent-t">If an account exists for that email, a reset link is on its way.</p></div>
+<div class="cen"><button class="lnk" data-v="signin" type="button">Back to sign in</button></div>
+</section>
+
+<section id="v-reset" class="form" hidden>
+<p class="sub">Choose a new password.</p>
+<form class="form" id="f-rs" novalidate>
+<label class="fld">New password<span class="pw"><input type="password" id="rs-p" autocomplete="new-password" placeholder="At least 8 characters"><button type="button" class="showpw">Show</button></span></label>
+<div class="err" id="rs-err" aria-live="polite"></div>
+<button class="go full" type="submit">Save new password</button>
+</form>
+</section>
+
+<section id="v-account" class="form" hidden>
+<div class="card who"><div class="av" id="av">D</div><div><b id="nm">Name</b><span id="em">email</span></div></div>
+<div class="card"><p class="sub">You are signed in. Saving your puzzle progress and favourite words to your account is coming next.</p></div>
+<button class="pill" type="button" id="out" style="align-self:flex-start">Sign out</button>
+</section>
+</main>

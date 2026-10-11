@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in | GoUnscramble</title>
+<meta name="description" content="Sign in or create a free GoUnscramble account.">
+<link rel="canonical" href="https://gounscramble.com/account.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GoUnscramble">
+<meta property="og:title" content="Sign in | GoUnscramble">
+<meta property="og:description" content="Sign in or create a free GoUnscramble account.">
+<meta property="og:url" content="https://gounscramble.com/account.html">
+<meta property="og:image" content="https://gounscramble.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GoUnscramble: free word unscrambler">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sign in | GoUnscramble">
+<meta name="twitter:description" content="Sign in or create a free GoUnscramble account.">
+<meta name="twitter:image" content="https://gounscramble.com/assets/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gounscramble.com/"},{"@type":"ListItem","position":2,"name":"Sign in","item":"https://gounscramble.com/account.html"}]}]}</script>
+<meta name="theme-color" content="#0099b5">
+<meta name="google-adsense-account" content="ca-pub-6517978259411056">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6517978259411056" crossorigin="anonymous"></script>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=e8aff4b3">
+<link rel="stylesheet" href="assets/account.css?v=313a8cd8">
+<meta name="robots" content="noindex">
+</head>
+<body data-page="account">
+<!--header-->
+<header class="site-header"><div class="wrap">
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="352" height="300" alt="GO! Unscramble!"></a>
+<a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a>
+<nav class="nav main-nav" aria-label="Main">
+<details class="menu">
+<summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
+<div class="menu-list">
+<button type="button" class="menu-x" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></button>
+<a href="index.html">Word unscrambler</a>
+<a href="anagram-solver.html">Anagram solver</a>
+<a href="games.html">Puzzles &amp; games</a>
+<hr>
+<a href="word-counter.html">Word counter</a>
+<a href="case-converter.html">Case converter</a>
+<a href="random-word-picker.html">Random word picker</a>
+<hr>
+<a href="guides.html">Guides</a>
+<a href="tools.html">All tools</a>
+<a href="about.html">About</a>
+<hr>
+<a href="account.html" aria-current="page">Sign in</a>
+<button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Dark mode" hidden></button>
+</div>
+</details>
+</nav>
+</div></header>
+<!--/header-->
+<main class="ac" id="ac">
+<h1 id="ac-ttl" class="ac-ttl">Sign in</h1>
+<p class="ac-note" id="ac-off" hidden>Accounts are not switched on yet. Everything else on the site works without one.</p>
+
+<section id="v-signin" class="form">
+<p class="sub">Sign in to keep your puzzle progress.</p>
+<button class="alt" type="button" id="g-in" hidden><i>G</i>Continue with Google</button>
+<div class="or" id="or-in" hidden>or use your email</div>
+<form class="form" id="f-in" novalidate>
+<label class="fld">Email<input type="email" id="in-e" autocomplete="email" placeholder="you@example.com"></label>
+<label class="fld">Password<span class="pw"><input type="password" id="in-p" autocomplete="current-password" placeholder="Your password"><button type="button" class="showpw">Show</button></span></label>
+<div class="err" id="in-err" aria-live="polite"></div>
+<button class="go full" type="submit">Sign in</button>
+</form>
+<div class="cen"><button class="lnk" data-v="forgot" type="button">Forgot your password?</button>
+<span class="sub">New here? <button class="lnk" data-v="signup" type="button">Create an account</button></span></div>
+</section>
+
+<section id="v-signup" class="form" hidden>
+<p class="sub">Free, and it takes under a minute.</p>
+<button class="alt" type="button" id="g-up" hidden><i>G</i>Sign up with Google</button>
+<div class="or" id="or-up" hidden>or use your email</div>
+<form class="form" id="f-up" novalidate>
+<label class="fld">Display name<input type="text" id="up-n" autocomplete="nickname" maxlength="60" placeholder="What should we call you?"></label>
+<label class="fld">Email<input type="email" id="up-e" autocomplete="email" placeholder="you@example.com"></label>
+<label class="fld">Password<span class="pw"><input type="password" id="up-p" autocomplete="new-password" placeholder="At least 8 characters"><button type="button" class="showpw">Show</button></span></label>
+<label class="chk"><input type="checkbox" id="up-c"><span>I agree to the <a href="privacy.html">Privacy Policy</a>.</span></label>
+<div class="err" id="up-err" aria-live="polite"></div>
+<button class="go full" type="submit">Create account</button>
+</form>
+<div class="cen"><span class="sub">Already have an account? <button class="lnk" data-v="signin" type="button">Sign in</button></span></div>
+</section>
+
+<section id="v-forgot" class="form" hidden>
+<p class="sub">Enter your email and we will send you a reset link.</p>
+<form class="form" id="f-fg" novalidate>
+<label class="fld">Email<input type="email" id="fg-e" autocomplete="email" placeholder="you@example.com"></label>
+<div class="err" id="fg-err" aria-live="polite"></div>
+<button class="go full" type="submit">Send reset link</button>
+</form>
+<div class="cen"><button class="lnk" data-v="signin" type="button">Back to sign in</button></div>
+</section>
+
+<section id="v-sent" class="form" hidden>
+<div class="card"><p class="sub" id="sent-t">If an account exists for that email, a reset link is on its way.</p></div>
+<div class="cen"><button class="lnk" data-v="signin" type="button">Back to sign in</button></div>
+</section>
+
+<section id="v-reset" class="form" hidden>
+<p class="sub">Choose a new password.</p>
+<form class="form" id="f-rs" novalidate>
+<label class="fld">New password<span class="pw"><input type="password" id="rs-p" autocomplete="new-password" placeholder="At least 8 characters"><button type="button" class="showpw">Show</button></span></label>
+<div class="err" id="rs-err" aria-live="polite"></div>
+<button class="go full" type="submit">Save new password</button>
+</form>
+</section>
+
+<section id="v-account" class="form" hidden>
+<div class="card who"><div class="av" id="av">D</div><div><b id="nm">Name</b><span id="em">email</span></div></div>
+<div class="card"><p class="sub">You are signed in. Saving your puzzle progress and favourite words to your account is coming next.</p></div>
+<button class="pill" type="button" id="out" style="align-self:flex-start">Sign out</button>
+</section>
+</main>
+<!--footer-->
+<footer class="site-footer"><div class="wrap">
+<div class="foot-brand"><span class="go-tag" aria-hidden="true">GO</span><span>&copy; 2026 GoUnscramble</span></div>
+<nav class="nav" aria-label="Footer">
+<a href="credits.html">Credits</a>
+<a href="faq.html">FAQ</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</nav>
+<div class="socials"><span class="social" title="Facebook, coming soon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.7c0-.9.3-1.5 1.6-1.5h1.5V4.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.2H7.9v3h2.6V21z" fill="currentColor"/></svg></span><span class="social" title="Instagram, coming soon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="16.6" cy="7.4" r="1.1" fill="currentColor"/></svg></span><span class="social" title="X, coming soon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="social" title="TikTok, coming soon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M14 4v10.2a3.2 3.2 0 1 1-3.2-3.2M14 4c.3 2.3 1.8 3.7 4 3.9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="social" title="YouTube, coming soon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><rect x="3.5" y="6.5" width="17" height="11" rx="3.2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M10.4 9.6v4.8l4.2-2.4z" fill="currentColor"/></svg></span></div>
+</div></footer>
+<!--/footer-->
+<script src="assets/engine.js?v=61b07276"></script>
+<script src="assets/account.js?v=2992bd17"></script>
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();</script>
+</body>
+</html>
