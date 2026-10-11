@@ -337,3 +337,6 @@ body[data-page="home"]{--hh:264px}
 @keyframes hb-twinkle{0%,100%{scale:1;rotate:0deg}50%{scale:1.25;rotate:15deg}}
 @media (prefers-reduced-motion:reduce){.hub .hb-doodle .dd-s{animation:none}}
 @media (max-width:560px){.hub .hb-doodle{display:none}}
+.hub .hb-doodle .dd-a{animation:hb-nudge-x 1.4s ease-in-out infinite}
+@keyframes hb-nudge-x{0%,100%{translate:0 0}50%{translate:8px 0}}
+@media (prefers-reduced-motion:reduce){.hub .hb-doodle .dd-a{animation:none}}
