@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=f1de6a1c">
-<link rel="stylesheet" href="assets/home.css?v=dd4f87b1">
+<link rel="stylesheet" href="assets/home.css?v=0763729a">
 </head>
 <body data-page="home">
 <!--header-->
@@ -92,7 +92,7 @@
 <div data-t="Fun facts"><b>300</b><span>word searches</span></div>
 <button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
 </section>
-<section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
+<section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden>&#9998; Write in your journal / diary here</button><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
 <div class="hb-me">
 <div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
 <ul class="hb-nums" id="hb-nums"></ul>
@@ -204,7 +204,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=8d10021c"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=368d1e77"></script>
+<script src="assets/progress.js?v=8d10021c"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=dcd086d3"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});if(window.matchMedia&&matchMedia("(hover:hover) and (pointer:fine)").matches){var t=null,sm=m.querySelector("summary");m.addEventListener("mouseenter",function(){clearTimeout(t);m.setAttribute("open","")});m.addEventListener("mouseleave",function(){t=setTimeout(c,250)});if(sm)sm.addEventListener("click",function(e){e.preventDefault();m.setAttribute("open","")})}})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}

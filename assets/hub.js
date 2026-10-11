@@ -314,8 +314,13 @@
     var si = signedIn(), me = document.querySelector(".hb-me");
     me.classList.toggle("out", !si);
     document.querySelector(".hb-mine").hidden = !si; $("hb-cal").hidden = !si; $("hb-lock").hidden = si;
+    $("hb-dyhint").hidden = !si;
     if (si) { stats(); calendar(); diary(false); }
   }
+  (function () {
+    var h = $("hb-dyhint"); if (!h) return;
+    h.addEventListener("click", function () { var x = $("dy-x"); if (!x) return; x.scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(function () { x.focus({ preventScroll: true }); }, 350); });
+  })();
   hello(""); draw();
   G.onChange(draw);
   if (signedIn()) {
