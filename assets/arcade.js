@@ -90,7 +90,7 @@ function mount(id, host, cfg) {
     if (!visible() || e.ctrlKey || e.metaKey || e.altKey) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
     var k = KEYMAP[e.code] || e.code;
-    if (!/^(Arrow|Space|KeyP|Escape)/.test(k)) return;
+    if (!/^(Arrow|Space|KeyP|KeyF|Escape)/.test(k)) return;
     if (e.target.tagName === "BUTTON" && k === "Space") return;
     e.preventDefault(); if (e.repeat && !cfg.repeat) return; press(k, true);
   });
@@ -106,7 +106,7 @@ function mount(id, host, cfg) {
   });
   cv.addEventListener("pointermove", function (e) { if (G.st === "play" && game.ptr && (e.buttons || e.pointerType === "touch")) { var p = lpt(e); game.ptr(p[0], p[1], "move"); } });
   cv.addEventListener("pointerup", function (e) { if (G.st === "play" && game.ptr) { var p = lpt(e); game.ptr(p[0], p[1], "up"); } });
-  cv.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  cv.addEventListener("contextmenu", function (e) { e.preventDefault(); if (G.st === "play" && game.ptr) { var p = lpt(e); game.ptr(p[0], p[1], "flag"); } });
   pz.addEventListener("click", function () { if (G.st === "play") pause(true); else if (G.st === "pause") pause(false); });
   function snd() { sn.textContent = "Sound: " + (mute ? "off" : "on"); }
   snd(); sn.addEventListener("click", function () { mute = !mute; try { localStorage.setItem("gu-mute", mute ? "1" : "0"); } catch (e) { /* ignore */ } snd(); if (!mute) beep(660, 0.08); });
@@ -622,6 +622,235 @@ function hopper(G) {
   };
 }
 
+/* ============ 8. Rock Blaster ============ */
+function rocks(G) {
+  var W = 320, H = 320, sh, rk, bu, sc, lives, wave, inv, cd, ex, thr;
+  function mk(x, y, s) {
+    var pts = []; for (var i = 0; i < 10; i++) pts.push(0.78 + Math.random() * 0.4);
+    var a = Math.random() * 6.28, sp = (22 + Math.random() * 28) * (1 + wave * 0.08) * (s === 1 ? 1.8 : s === 2 ? 1.3 : 1);
+    return { x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, s: s, r: [0, 9, 17, 29][s], pts: pts, rot: Math.random() * 6, vr: (Math.random() - 0.5) * 1.5 };
+  }
+  function mkWave() { rk = []; for (var i = 0; i < 2 + wave; i++) { var x, y; do { x = Math.random() * W; y = Math.random() * H; } while (Math.hypot(x - sh.x, y - sh.y) < 100); rk.push(mk(x, y, 3)); } }
+  function wr(o) { if (o.x < 0) o.x += W; if (o.x > W) o.x -= W; if (o.y < 0) o.y += H; if (o.y > H) o.y -= H; }
+  function home() { sh = { x: W / 2, y: H / 2, a: -Math.PI / 2, vx: 0, vy: 0 }; inv = 2.5; }
+  return {
+    reset: function () { lives = 3; wave = 1; sc = 0; bu = []; ex = []; cd = 0; thr = 0; home(); mkWave(); G.score(0); },
+    key: function () { },
+    update: function (dt) {
+      var k = G.keys; if (k.ArrowLeft) sh.a -= 4.2 * dt; if (k.ArrowRight) sh.a += 4.2 * dt;
+      thr = k.ArrowUp ? 1 : 0; if (thr) { sh.vx += Math.cos(sh.a) * 190 * dt; sh.vy += Math.sin(sh.a) * 190 * dt; }
+      var sp = Math.hypot(sh.vx, sh.vy); if (sp > 210) { sh.vx *= 210 / sp; sh.vy *= 210 / sp; }
+      var f = Math.pow(0.5, dt); sh.vx *= f; sh.vy *= f; sh.x += sh.vx * dt; sh.y += sh.vy * dt; wr(sh);
+      cd -= dt; inv -= dt;
+      if (k.Space && cd <= 0 && bu.length < 4) { bu.push({ x: sh.x + Math.cos(sh.a) * 10, y: sh.y + Math.sin(sh.a) * 10, vx: Math.cos(sh.a) * 280 + sh.vx, vy: Math.sin(sh.a) * 280 + sh.vy, l: 1 }); cd = 0.22; G.beep(760, 0.07, "square", 0.03, 380); }
+      bu.forEach(function (b) { b.x += b.vx * dt; b.y += b.vy * dt; b.l -= dt; wr(b); }); bu = bu.filter(function (b) { return b.l > 0; });
+      rk.forEach(function (r) { r.x += r.vx * dt; r.y += r.vy * dt; r.rot += r.vr * dt; wr(r); });
+      var add = [];
+      bu.forEach(function (b) { rk.forEach(function (r) { if (!b.dead && !r.dead && Math.hypot(b.x - r.x, b.y - r.y) < r.r) { b.dead = r.dead = true; sc += [0, 100, 50, 20][r.s]; G.score(sc); G.beep(150, 0.18, "sawtooth", 0.05, 50); ex.push({ x: r.x, y: r.y, t: 0.3 }); if (r.s > 1) { add.push(mk(r.x, r.y, r.s - 1), mk(r.x, r.y, r.s - 1)); } } }); });
+      bu = bu.filter(function (b) { return !b.dead; }); rk = rk.filter(function (r) { return !r.dead; }).concat(add);
+      if (inv <= 0) rk.forEach(function (r) { if (!sh.dead && Math.hypot(sh.x - r.x, sh.y - r.y) < r.r + 5) { sh.dead = true; } });
+      if (sh.dead) { lives--; G.beep(100, 0.6, "sawtooth", 0.06, 30); ex.push({ x: sh.x, y: sh.y, t: 0.5 }); if (lives <= 0) { G.save(sc); G.end("GAME OVER", "SCORE " + sc); return; } home(); }
+      if (!rk.length) { wave++; mkWave(); inv = 2; G.beep(880, 0.3, "square", 0.05, 1320); }
+      ex.forEach(function (e) { e.t -= dt; }); ex = ex.filter(function (e) { return e.t > 0; });
+    },
+    draw: function (c) {
+      c.lineWidth = 2; c.lineJoin = "round";
+      rk.forEach(function (r) { c.strokeStyle = C.wht; c.beginPath(); r.pts.forEach(function (m, i) { var a = r.rot + i / r.pts.length * 6.283, x = r.x + Math.cos(a) * r.r * m, y = r.y + Math.sin(a) * r.r * m; if (i) c.lineTo(x, y); else c.moveTo(x, y); }); c.closePath(); c.stroke(); });
+      if (inv <= 0 || Math.floor(G.t * 10) % 2) {
+        c.strokeStyle = C.teal; c.beginPath(); c.moveTo(sh.x + Math.cos(sh.a) * 11, sh.y + Math.sin(sh.a) * 11); c.lineTo(sh.x + Math.cos(sh.a + 2.5) * 9, sh.y + Math.sin(sh.a + 2.5) * 9); c.lineTo(sh.x + Math.cos(sh.a + Math.PI) * 4, sh.y + Math.sin(sh.a + Math.PI) * 4); c.lineTo(sh.x + Math.cos(sh.a - 2.5) * 9, sh.y + Math.sin(sh.a - 2.5) * 9); c.closePath(); c.stroke();
+        if (thr && Math.floor(G.t * 20) % 2) { c.strokeStyle = C.org; c.beginPath(); c.moveTo(sh.x + Math.cos(sh.a + 2.9) * 6, sh.y + Math.sin(sh.a + 2.9) * 6); c.lineTo(sh.x + Math.cos(sh.a + Math.PI) * 13, sh.y + Math.sin(sh.a + Math.PI) * 13); c.lineTo(sh.x + Math.cos(sh.a - 2.9) * 6, sh.y + Math.sin(sh.a - 2.9) * 6); c.stroke(); }
+      }
+      bu.forEach(function (b) { G.rect(b.x - 1, b.y - 1, 3, 3, C.yel); });
+      ex.forEach(function (e) { c.strokeStyle = C.org; c.beginPath(); c.arc(e.x, e.y, (0.5 - e.t) * 40 + 4, 0, 7); c.stroke(); });
+      G.txt("WAVE " + wave, 8, 12, 8, C.teal, "left"); for (var i = 0; i < lives; i++) G.rect(W - 14 - i * 12, 7, 8, 8, C.teal);
+    }
+  };
+}
+
+/* ============ 9. Sky Flap ============ */
+function flap(G) {
+  var W = 300, H = 360, y, vy, pipes, sc, GAP = 108;
+  function add(x) { pipes.push({ x: x, g: 40 + rnd(H - 60 - GAP - 40), p: false }); }
+  function jump() { vy = -285; G.beep(520, 0.07, "square", 0.03, 760); }
+  function die() { G.beep(120, 0.5, "sawtooth", 0.06, 40); G.save(sc); G.end("GAME OVER", "SCORE " + sc); }
+  return {
+    reset: function () { y = 160; vy = 0; pipes = []; sc = 0; add(W + 40); G.score(0); },
+    key: function (k, d) { if (d && (k === "Space" || k === "ArrowUp")) jump(); },
+    ptr: function (x, yy, ph) { if (ph === "down") jump(); },
+    update: function (dt) {
+      vy += 900 * dt; y += vy * dt;
+      pipes.forEach(function (p) { p.x -= 95 * dt; });
+      if (pipes[pipes.length - 1].x < W - 170) add(W + 20);
+      pipes = pipes.filter(function (p) { return p.x > -50; });
+      if (y < 8) { y = 8; vy = 0; }
+      if (y > H - 48) return die();
+      for (var i = 0; i < pipes.length; i++) {
+        var p = pipes[i];
+        if (!p.p && p.x + 36 < 70) { p.p = true; sc++; G.score(sc); G.beep(880, 0.08, "square", 0.03); }
+        if (79 > p.x && 61 < p.x + 36 && (y - 8 < p.g || y + 8 > p.g + GAP)) return die();
+      }
+    },
+    draw: function (c) {
+      G.rect(0, 0, W, H - 40, "#2d7fc9"); G.rect(0, H - 120, W, 80, "#5fb0e6");
+      c.fillStyle = "rgba(255,255,255,.7)"; for (var i = 0; i < 4; i++) { var cx = ((i * 97 - G.t * 12) % (W + 80) + W + 80) % (W + 80) - 40; c.fillRect(cx, 60 + i * 38, 44, 10); c.fillRect(cx + 8, 52 + i * 38, 26, 10); }
+      pipes.forEach(function (p) { G.rect(p.x, 0, 36, p.g, C.grn); G.rect(p.x - 3, p.g - 14, 42, 14, "#4cc23c"); G.rect(p.x + 4, 0, 5, p.g, "#b6ffa8"); G.rect(p.x, p.g + GAP, 36, H, C.grn); G.rect(p.x - 3, p.g + GAP, 42, 14, "#4cc23c"); G.rect(p.x + 4, p.g + GAP + 14, 5, H, "#b6ffa8"); });
+      G.rect(0, H - 40, W, 40, "#d9b96a"); G.rect(0, H - 40, W, 6, "#7cc43c");
+      var wy = Math.floor(G.t * 10) % 2 ? 2 : -2;
+      G.rect(62, y - 8, 18, 16, C.yel); G.rect(62, y + 2, 10, 6, "#ffb800"); G.rect(72, y - 6, 6, 6, "#fff"); G.rect(75, y - 4, 3, 3, "#000"); G.rect(80, y - 1, 8, 5, C.org); G.rect(58, y + wy, 10, 6, "#ffe48a");
+      G.txt(String(sc), W / 2, 30, 24, C.wht);
+    }
+  };
+}
+
+/* ============ 10. Mole Pop ============ */
+function moles(G) {
+  var W = 300, H = 300, m, sc, tl, sp, hit;
+  function pos(i) { return [50 + (i % 3) * 100, 80 + Math.floor(i / 3) * 78]; }
+  return {
+    reset: function () { m = []; for (var i = 0; i < 9; i++) m.push({ up: 0, hit: 0 }); sc = 0; tl = 30; sp = 0.4; hit = null; G.score(0); },
+    key: function () { },
+    ptr: function (x, y, ph) {
+      if (ph !== "down") return; var got = false;
+      for (var i = 0; i < 9; i++) { var p = pos(i); if (Math.hypot(x - p[0], y - (p[1] - 8)) < 34 && m[i].up > 0 && !m[i].hit) { m[i].hit = 0.3; m[i].up = 0.3; sc += 10; G.score(sc); G.beep(520, 0.1, "square", 0.05, 160); got = true; } }
+      if (!got) G.beep(110, 0.06, "square", 0.03);
+    },
+    update: function (dt) {
+      tl -= dt; if (tl <= 0) { G.save(sc); G.end("TIME UP!", "SCORE " + sc); return; }
+      sp -= dt; if (sp <= 0) { var idle = []; m.forEach(function (o, i) { if (o.up <= 0) idle.push(i); }); if (idle.length) { m[idle[rnd(idle.length)]].up = Math.max(0.55, 1.2 - sc / 500); G.beep(300, 0.05, "triangle", 0.03, 400); } sp = Math.max(0.28, 0.75 - sc / 700) + Math.random() * 0.2; }
+      m.forEach(function (o) { if (o.up > 0) { o.up -= dt; if (o.up <= 0) o.hit = 0; } });
+    },
+    draw: function (c) {
+      G.rect(0, 0, W, H, "#3a8f2a"); c.fillStyle = "#43a331"; for (var i = 0; i < 40; i++) c.fillRect((i * 53) % W, 40 + (i * 37) % 250, 6, 3);
+      for (var i2 = 0; i2 < 9; i2++) {
+        var p = pos(i2), o = m[i2];
+        c.fillStyle = "#3b2410"; c.beginPath(); c.ellipse(p[0], p[1] + 14, 36, 12, 0, 0, 7); c.fill();
+        if (o.up > 0) {
+          var rise = Math.min(1, (o.up > 0.3 || o.hit ? 1 : o.up / 0.3)), by = p[1] + 12 - rise * 30;
+          c.save(); c.beginPath(); c.rect(p[0] - 40, p[1] - 40, 80, 62); c.clip();
+          c.fillStyle = "#8b5a2b"; c.beginPath(); c.ellipse(p[0], by + 14, 24, 28, 0, 0, 7); c.fill();
+          c.fillStyle = "#a9733c"; c.beginPath(); c.ellipse(p[0], by + 6, 18, 14, 0, 0, 7); c.fill();
+          if (o.hit) { c.strokeStyle = "#000"; c.lineWidth = 2; [-8, 8].forEach(function (dx) { c.beginPath(); c.moveTo(p[0] + dx - 3, by); c.lineTo(p[0] + dx + 3, by + 6); c.moveTo(p[0] + dx + 3, by); c.lineTo(p[0] + dx - 3, by + 6); c.stroke(); }); }
+          else { G.rect(p[0] - 10, by, 5, 6, "#000"); G.rect(p[0] + 5, by, 5, 6, "#000"); }
+          c.fillStyle = C.pink; c.beginPath(); c.ellipse(p[0], by + 12, 6, 4, 0, 0, 7); c.fill(); c.restore();
+        }
+        c.fillStyle = "#5a3a1a"; c.beginPath(); c.ellipse(p[0], p[1] + 20, 38, 10, 0, 0, Math.PI); c.fill();
+      }
+      G.rect(0, 0, W, 28, "#0b0b22"); G.rect(80, 9, Math.max(0, tl / 30) * 140, 10, tl < 6 ? C.red : C.yel); G.txt("TIME", 8, 14, 8, C.teal, "left");
+    }
+  };
+}
+
+/* ============ 11. Colour Echo ============ */
+function echo(G) {
+  var W = 300, H = 300, seq, phase, i, timer, lit, litT, idx, sc;
+  var COL = ["#2fd36b", "#ff4d5e", "#ffd23f", "#3b8bff"], TONE = [392, 330, 262, 196], KEYQ = { ArrowUp: 0, ArrowRight: 1, ArrowDown: 2, ArrowLeft: 3 };
+  function light(q, d) { lit = q; litT = d; G.beep(TONE[q], d, "sine", 0.08); }
+  function fail() { G.beep(110, 0.7, "sawtooth", 0.06, 40); G.save(sc); G.end("WRONG!", "ROUNDS " + sc); }
+  function press(q) {
+    if (phase !== "in") return; light(q, 0.25);
+    if (q !== seq[idx]) { fail(); return; }
+    idx++; if (idx === seq.length) { sc = seq.length; G.score(sc); seq.push(rnd(4)); phase = "show"; i = 0; timer = 0.9; }
+  }
+  return {
+    reset: function () { seq = [rnd(4)]; phase = "show"; i = 0; timer = 0.9; lit = -1; litT = 0; idx = 0; sc = 0; G.score(0); },
+    key: function (k, d) { if (d && KEYQ[k] != null) press(KEYQ[k]); },
+    ptr: function (x, y, ph) { if (ph !== "down") return; var dx = x - W / 2, dy = y - H / 2; press(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0)); },
+    update: function (dt) {
+      if (litT > 0) { litT -= dt; if (litT <= 0) lit = -1; }
+      if (phase === "show") { timer -= dt; if (timer <= 0) { if (i < seq.length) { var d = Math.max(0.22, 0.5 - seq.length * 0.015); light(seq[i], d); i++; timer = d + 0.18; } else { phase = "in"; idx = 0; } } }
+    },
+    draw: function (c) {
+      var cx = W / 2, cy = H / 2, R = 140, polys = [[[0, 0], [W, 0]], [[W, 0], [W, H]], [[W, H], [0, H]], [[0, H], [0, 0]]];
+      for (var q = 0; q < 4; q++) {
+        c.fillStyle = COL[q]; c.globalAlpha = lit === q ? 1 : 0.38; c.beginPath(); c.moveTo(cx, cy); c.lineTo(polys[q][0][0], polys[q][0][1]); c.lineTo(polys[q][1][0], polys[q][1][1]); c.closePath(); c.fill();
+        c.globalAlpha = 1; c.strokeStyle = C.bg; c.lineWidth = 6; c.stroke();
+      }
+      c.fillStyle = C.bg; c.beginPath(); c.arc(cx, cy, 46, 0, 7); c.fill();
+      G.txt(phase === "show" ? "WATCH" : "YOUR GO", cx, cy - 6, 8, phase === "show" ? C.yel : C.grn); G.txt(String(seq.length - (phase === "show" ? 0 : 0)), cx, cy + 14, 16, C.wht);
+    }
+  };
+}
+
+/* ============ 12. Number Merge ============ */
+function merge(G) {
+  var W = 300, H = 340, g, sc, sx, sy;
+  var BG = { 2: "#eee4da", 4: "#ede0c8", 8: "#f2b179", 16: "#f59563", 32: "#f67c5f", 64: "#f65e3b", 128: "#edcf72", 256: "#edcc61", 512: "#edc850", 1024: "#edc53f", 2048: "#edc22e" };
+  function spawn() { var e = []; for (var r = 0; r < 4; r++) for (var c = 0; c < 4; c++) if (!g[r][c]) e.push([r, c]); if (!e.length) return; var p = e[rnd(e.length)]; g[p[0]][p[1]] = Math.random() < 0.9 ? 2 : 4; }
+  function slide(line) { var a = line.filter(function (v) { return v; }), gain = 0; for (var i = 0; i < a.length - 1; i++) if (a[i] === a[i + 1]) { a[i] *= 2; gain += a[i]; a.splice(i + 1, 1); } while (a.length < 4) a.push(0); return [a, gain]; }
+  function can() { for (var r = 0; r < 4; r++) for (var c = 0; c < 4; c++) { if (!g[r][c]) return true; if (c < 3 && g[r][c] === g[r][c + 1]) return true; if (r < 3 && g[r][c] === g[r + 1][c]) return true; } return false; }
+  function mv(k) {
+    var before = JSON.stringify(g), gain = 0, r, c, res;
+    for (var n = 0; n < 4; n++) {
+      var line = []; for (var m = 0; m < 4; m++) line.push(k === "ArrowLeft" ? g[n][m] : k === "ArrowRight" ? g[n][3 - m] : k === "ArrowUp" ? g[m][n] : g[3 - m][n]);
+      res = slide(line); gain += res[1];
+      for (m = 0; m < 4; m++) { if (k === "ArrowLeft") g[n][m] = res[0][m]; else if (k === "ArrowRight") g[n][3 - m] = res[0][m]; else if (k === "ArrowUp") g[m][n] = res[0][m]; else g[3 - m][n] = res[0][m]; }
+    }
+    if (JSON.stringify(g) === before) return;
+    sc += gain; G.score(sc); G.beep(gain ? 520 : 300, 0.05, "square", 0.03); spawn();
+    if (!can()) { G.beep(110, 0.6, "sawtooth", 0.06, 40); G.save(sc); G.end("NO MOVES", "SCORE " + sc); }
+  }
+  return {
+    reset: function () { g = []; for (var r = 0; r < 4; r++) g.push([0, 0, 0, 0]); sc = 0; spawn(); spawn(); G.score(0); },
+    key: function (k, d) { if (d && /^Arrow/.test(k)) mv(k); },
+    ptr: function (x, y, ph) {
+      if (ph === "down") { sx = x; sy = y; return; } if (sx == null) return; var dx = x - sx, dy = y - sy;
+      if (Math.abs(dx) > 24 || Math.abs(dy) > 24) { mv(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "ArrowRight" : "ArrowLeft") : (dy > 0 ? "ArrowDown" : "ArrowUp")); sx = null; }
+      if (ph === "up") sx = null;
+    },
+    update: function () { },
+    draw: function (c) {
+      G.rect(12, 56, 276, 276, "#3a3a6a");
+      for (var r = 0; r < 4; r++) for (var cc = 0; cc < 4; cc++) {
+        var x = 16 + cc * 68, y = 60 + r * 68, v = g[r][cc]; G.rect(x, y, 64, 64, v ? (BG[v] || "#3c3a32") : "#4b4b80");
+        if (v) G.txt(String(v), x + 32, y + 33, v >= 1000 ? 14 : v >= 100 ? 16 : 24, v <= 4 ? "#6b5b4b" : "#fff");
+      }
+      G.txt("MERGE TO 2048", W / 2, 30, 12, C.yel);
+    }
+  };
+}
+
+/* ============ 13. Mine Finder ============ */
+function mines(G) {
+  var N = 9, MC = 10, S = 32, OX = 6, OY = 42, mn, rv, fl, nb, first, flagMode, ds, lastF, t0, left, done;
+  function cell(x, y) { var i = Math.floor((x - OX) / S), j = Math.floor((y - OY) / S); return (i >= 0 && j >= 0 && i < N && j < N) ? [i, j] : null; }
+  function each(i, j, f) { for (var a = -1; a <= 1; a++) for (var b = -1; b <= 1; b++) { if (!a && !b) continue; var x = i + a, y = j + b; if (x >= 0 && y >= 0 && x < N && y < N) f(x, y); } }
+  function plant(si, sj) {
+    var n = 0; while (n < MC) { var i = rnd(N), j = rnd(N); if (mn[j][i] || (Math.abs(i - si) <= 1 && Math.abs(j - sj) <= 1)) continue; mn[j][i] = 1; n++; }
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) { var k = 0; each(x, y, function (a, b) { if (mn[b][a]) k++; }); nb[y][x] = k; }
+  }
+  function flag(i, j) { if (rv[j][i]) return; fl[j][i] = !fl[j][i]; left += fl[j][i] ? -1 : 1; G.score(left); G.beep(fl[j][i] ? 440 : 330, 0.04); lastF = performance.now(); }
+  function reveal(i, j) {
+    if (fl[j][i] || rv[j][i]) return;
+    if (first) { plant(i, j); first = false; t0 = performance.now(); }
+    if (mn[j][i]) { for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) if (mn[y][x]) rv[y][x] = 2; G.beep(100, 0.7, "sawtooth", 0.06, 30); G.save(null); G.end("BOOM!", "TRY AGAIN"); done = 1; return; }
+    var st = [[i, j]]; while (st.length) { var p = st.pop(); if (rv[p[1]][p[0]] || fl[p[1]][p[0]]) continue; rv[p[1]][p[0]] = 1; if (!nb[p[1]][p[0]]) each(p[0], p[1], function (a, b) { if (!rv[b][a]) st.push([a, b]); }); }
+    G.beep(400, 0.03);
+    var left2 = 0; for (var y2 = 0; y2 < N; y2++) for (var x2 = 0; x2 < N; x2++) if (!mn[y2][x2] && rv[y2][x2] !== 1) left2++;
+    if (!left2) { var s = Math.round((performance.now() - t0) / 1000); G.beep(880, 0.4, "square", 0.05, 1320); G.save(G.bestNow() + 1); G.end("YOU WIN!", "TIME " + s + " SECONDS"); done = 1; }
+  }
+  return {
+    reset: function () { mn = []; rv = []; fl = []; nb = []; for (var y = 0; y < N; y++) { mn.push(new Array(N).fill(0)); rv.push(new Array(N).fill(0)); fl.push(new Array(N).fill(false)); nb.push(new Array(N).fill(0)); } first = true; flagMode = false; ds = null; lastF = 0; left = MC; done = 0; t0 = 0; G.score(MC); },
+    key: function (k, d) { if (d && k === "KeyF") { flagMode = !flagMode; G.beep(500, 0.04); } },
+    ptr: function (x, y, ph) {
+      if (ph === "down") { ds = { x: x, y: y, t: performance.now(), done: false }; return; }
+      if (ph === "flag") { if (performance.now() - lastF < 900) return; var q = cell(x, y); if (q) flag(q[0], q[1]); return; }
+      if (ph === "up" && ds && !ds.done) { var c = cell(ds.x, ds.y); ds = null; if (c) { if (flagMode) flag(c[0], c[1]); else reveal(c[0], c[1]); } } else if (ph === "up") ds = null;
+    },
+    update: function () { if (ds && !ds.done && performance.now() - ds.t > 420) { ds.done = true; var c = cell(ds.x, ds.y); if (c) flag(c[0], c[1]); } },
+    draw: function (c) {
+      var NC = [0, "#5aa9ff", "#7cff6b", "#ff6b6b", "#c79bff", "#ff9d3d", "#2de2e6", "#fff", "#aaa"];
+      for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+        var px = OX + x * S, py = OY + y * S, v = rv[y][x];
+        if (v === 1) { G.rect(px, py, S - 1, S - 1, "#24244f"); if (nb[y][x]) G.txt(String(nb[y][x]), px + S / 2, py + S / 2 + 1, 16, NC[nb[y][x]]); }
+        else if (v === 2) { G.rect(px, py, S - 1, S - 1, "#5a1a2a"); c.fillStyle = C.red; c.beginPath(); c.arc(px + 16, py + 16, 8, 0, 7); c.fill(); }
+        else { G.rect(px, py, S - 1, S - 1, "#6c6cc4"); G.rect(px, py, S - 1, 3, "#9a9af0"); G.rect(px, py + S - 4, S - 1, 3, "#43439a"); if (fl[y][x]) { G.rect(px + 15, py + 7, 2, 16, C.wht); G.rect(px + 9, py + 7, 8, 7, C.red); G.rect(px + 10, py + 22, 12, 3, C.wht); } }
+      }
+      G.txt(flagMode ? "FLAG MODE" : "DIG MODE", 8, 20, 8, flagMode ? C.yel : C.teal, "left");
+      G.txt(first ? "00" : ("" + Math.min(999, Math.floor(((done ? 0 : performance.now()) - t0) / 1000))).replace(/^-.*/, "0"), 292, 20, 8, C.wht, "right");
+    }
+  };
+}
+
 /* ---------- registry ---------- */
 var GAMES = {
   retrosnake: { name: "Retro Snake", tag: "EAT, GROW, DON'T CRASH", w: 320, h: 320, mw: 400, make: snake, arrowStart: 1, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Arrow keys or WASD to steer. On a phone, swipe on the screen or use the buttons. P to pause." },
@@ -630,7 +859,13 @@ var GAMES = {
   blaster: { name: "Star Blaster", tag: "STOP THE INVASION", w: 300, h: 360, mw: 400, make: blaster, repeat: 1, pad: [["◀", "ArrowLeft", "Left"], ["FIRE", "Space", "Fire"], ["▶", "ArrowRight", "Right"]], help: "Left and right arrows to move, hold Space to fire. On a phone use the buttons or drag the ship. Hide behind the green shields." },
   muncher: { name: "Maze Muncher", tag: "EAT ALL THE DOTS", w: 304, h: 352, mw: 400, make: muncher, arrowStart: 1, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Arrow keys or WASD to steer, or swipe on the screen. Grab a big pellet to turn the ghosts blue and chase them." },
   blocks: { name: "Falling Blocks", tag: "FILL THE LINES", w: 240, h: 320, mw: 340, make: blocks, repeat: 0, pad: [["◀", "ArrowLeft", "Left"], ["⟳", "ArrowUp", "Rotate"], ["▼", "ArrowDown", "Down"], ["DROP", "Space", "Hard drop"], ["▶", "ArrowRight", "Right"]], help: "Left and right to move, up to rotate, down to speed up, Space to drop. On a phone tap the screen to rotate, swipe sideways to move." },
-  hopper: { name: "Road Hopper", tag: "CROSS THE ROAD AND RIVER", w: 312, h: 336, mw: 400, make: hopper, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Hop with the arrow keys or swipe. Dodge the traffic, ride the logs and land in an empty green bay." }
+  hopper: { name: "Road Hopper", tag: "CROSS THE ROAD AND RIVER", w: 312, h: 336, mw: 400, make: hopper, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Hop with the arrow keys or swipe. Dodge the traffic, ride the logs and land in an empty green bay." },
+  rocks: { name: "Rock Blaster", tag: "BLAST THE ASTEROIDS", w: 320, h: 320, mw: 400, make: rocks, repeat: 1, pad: [["◀", "ArrowLeft", "Turn left"], ["▲", "ArrowUp", "Thrust"], ["FIRE", "Space", "Fire"], ["▶", "ArrowRight", "Turn right"]], help: "Left and right to turn, up to thrust, Space to fire. Rocks split into smaller ones. Clear them all to reach the next wave." },
+  flap: { name: "Sky Flap", tag: "FLY THROUGH THE GAPS", w: 300, h: 360, mw: 400, make: flap, pad: [["FLAP", "Space", "Flap"]], help: "Tap the screen, press Space or press the up arrow to flap. Fly through the gaps without touching a pipe." },
+  moles: { name: "Mole Pop", tag: "WHACK THEM ALL", w: 300, h: 300, mw: 400, make: moles, help: "Tap or click each mole as it pops up. You have 30 seconds, and they get quicker the more you score." },
+  echo: { name: "Colour Echo", tag: "WATCH, THEN REPEAT", w: 300, h: 300, mw: 400, make: echo, arrowStart: 1, help: "Watch the colours light up, then repeat them in order by tapping, or with the arrow keys. Each round adds one more." },
+  merge: { name: "Number Merge", tag: "JOIN THE NUMBERS", w: 300, h: 340, mw: 400, make: merge, arrowStart: 1, help: "Swipe or use the arrow keys to slide every tile. Matching numbers join together. Can you reach 2048?" },
+  mines: { name: "Mine Finder", tag: "CLEAR THE MINEFIELD", w: 300, h: 340, mw: 400, make: mines, bl: "Wins", sl: "Mines", pad: [["⚑ FLAG MODE", "KeyF", "Toggle flag mode"]], help: "Tap a square to dig. Numbers show how many mines touch it. Press and hold, right-click or use Flag mode to plant a flag." }
 };
 var NAMES = {}; for (var k in GAMES) NAMES[k] = GAMES[k].name;
 window.ARC = {
