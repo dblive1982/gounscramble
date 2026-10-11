@@ -595,3 +595,7 @@ body[data-page="tools"] .block > .cards:not(.guide-cards) .card { flex: none; }
 .site-header{overflow:visible;overflow-x:clip;z-index:20}
 .user-pop{z-index:30}
 .user-pop .up-n{text-align:left}
+
+.user-pop .up-n,.user-pop a,.user-pop button{font-family:var(--display,"Fredoka",system-ui,sans-serif);font-weight:600;letter-spacing:.01em}
+.user-pop .up-n{font-weight:700;font-size:18px}
+.user-pop a,.user-pop button{font-size:17px}
