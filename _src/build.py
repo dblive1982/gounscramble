@@ -187,7 +187,7 @@ HUB = """<div class="hub">
 <ul class="hb-nums" id="hb-nums"></ul>
 <div id="hb-go" class="hb-go"></div></div>
 <div class="hb-cal" id="hb-cal" aria-label="Days you played"></div>
-<div class="hb-lock" id="hb-lock" hidden><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
+<div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
 </div></section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
 <p class="hb-sub">Tap a jumble and watch GoUnscramble crack it, or roll a new set.</p>

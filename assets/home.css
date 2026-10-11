@@ -261,3 +261,8 @@ body[data-page="home"]{--hh:264px}
 /* Tab gets its full outline; news tile has room for its text */
 .hub .hb-stats [data-t]::before{border-bottom:3px solid #000;border-radius:10px;bottom:calc(100% - 4px);box-shadow:0 2px 0 #000}
 .hub button.hb-otd[data-t]{min-height:190px;padding:20px 12px 14px;justify-content:center}
+
+/* FREE badge in the sign-in card */
+.hub .hb-lock{position:relative}
+.hub .hb-lock .lock-free{position:absolute;right:9%;top:50%;width:132px;height:132px;margin:0;font-size:32px;translate:0 -50%}
+@media (max-width:640px){.hub .hb-lock .lock-free{width:84px;height:84px;font-size:20px;right:12px;top:14px;translate:none}.hub .hb-lock b{padding-right:84px}}
