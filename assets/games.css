@@ -1,5 +1,5 @@
 /* Games page, ported from the approved prototype and scoped under .gm. */
-.gm{--green:#00bf63;--board:#d9d9d9;--ink:#000;--paper:#fff;--tile:#fbfbfd;--tile-face:#fff0b3;--wild:#ff3131;--blue:#3b6cff;--soft:#efefef;--mine:#0a7f43;--display:"Fredoka",ui-rounded,system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif;--gutter:16px}
+.gm{--green:#00bf63;--board:#e2cf9f;--ink:#000;--paper:#fff;--tile:#fbfbfd;--tile-face:#fff0b3;--wild:#ff3131;--blue:#3b6cff;--soft:#efefef;--mine:#0a7f43;--display:"Fredoka",ui-rounded,system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif;--gutter:16px}
 .gm *{box-sizing:border-box}
 .gm [hidden]{display:none!important}
 .gm,.gm{background:var(--board);margin:0}

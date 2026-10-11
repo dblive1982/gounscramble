@@ -373,14 +373,14 @@ a.social:hover { background: var(--primary); }
 
 /* Teal restyle: comic logo, teal starburst header, coral buttons, black outlines. */
 :root, :root[data-theme="dark"], :root[data-theme="light"] {
-  --bg: #D9D9D9; --ink: #000000; --muted: #2E2E38; --line: #000000; --card: #FFFFFF; --yellow: #FFF0B3; --soft: #DFEAFC;
+  --bg: #E2CF9F; --ink: #000000; --muted: #2E2E38; --line: #000000; --card: #FFFFFF; --yellow: #FFF0B3; --soft: #DFEAFC;
   --green: #FF6B6B; --green-dark: #FF5252; --primary: #E8453C; --on-accent: #000000; --tile-bg: #FF6B6B; --band: #0099B5;
   --heading: #000000; --error: #B00020; color-scheme: light;
   --display: 'Fredoka', ui-rounded, system-ui, sans-serif; --body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #D9D9D9; --ink: #000000; --muted: #2E2E38; --line: #000000; --card: #FFFFFF; --yellow: #FFF0B3; --soft: #DFEAFC;
+    --bg: #E2CF9F; --ink: #000000; --muted: #2E2E38; --line: #000000; --card: #FFFFFF; --yellow: #FFF0B3; --soft: #DFEAFC;
     --tile-bg: #FF6B6B; --band: #0099B5; --heading: #000000; --error: #B00020; color-scheme: light;
   }
 }
@@ -414,7 +414,7 @@ h1 { letter-spacing: 0; }
 .main-nav .menu[open] summary { position: relative; z-index: 24; }
 .main-nav .menu[open] .menu-list {
   position: fixed; z-index: 30; top: 0; right: 0; bottom: 0; left: auto; width: min(300px, 82vw); min-width: 0;
-  background: #D9D9D9; border: 0; border-left: 6px solid #000; border-radius: 0; box-shadow: none; padding: 14px; gap: 4px; overflow-y: auto;
+  background: #E2CF9F; border: 0; border-left: 6px solid #000; border-radius: 0; box-shadow: none; padding: 14px; gap: 4px; overflow-y: auto;
 }
 .menu-x { display: none; }
 .menu[open] .menu-x {
