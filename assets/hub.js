@@ -49,6 +49,59 @@
     }, { rootMargin: "0px 0px -8% 0px" });
     items.forEach(function (el, i) { el.style.setProperty("--d", (i % 4) * 70 + "ms"); io.observe(el); });
   })();
+
+  // Live tiles: today's weather and an "on this day" fact. Both are optional extras; the page works without them.
+  (function () {
+    var wx = $("hb-wx"), otd = $("hb-otd");
+    function cache(k, ttl, fn) {
+      var now = Date.now(), v = null;
+      try { v = JSON.parse(sessionStorage.getItem(k) || "null"); } catch (e) { v = null; }
+      if (v && now - v.t < ttl) return Promise.resolve(v.d);
+      return fn().then(function (d) { try { sessionStorage.setItem(k, JSON.stringify({ t: now, d: d })); } catch (e) { /* ignore */ } return d; });
+    }
+    function getJSON(u) { return fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json(); }); }
+    function put(el, big, small, extra) {
+      el.innerHTML = ""; var b = document.createElement("b"), s = document.createElement("span");
+      b.textContent = big; s.textContent = small; el.appendChild(b); el.appendChild(s);
+      if (extra) { var e = document.createElement("em"); e.textContent = extra; el.appendChild(e); }
+    }
+    var WX = [[0, "\u2600\uFE0F", "Clear"], [1, "\uD83C\uDF24\uFE0F", "Mostly clear"], [2, "\u26C5", "Part cloudy"], [3, "\u2601\uFE0F", "Cloudy"], [45, "\uD83C\uDF2B\uFE0F", "Foggy"], [51, "\uD83C\uDF26\uFE0F", "Drizzle"], [56, "\uD83C\uDF27\uFE0F", "Freezing drizzle"], [61, "\uD83C\uDF27\uFE0F", "Rain"], [66, "\uD83C\uDF27\uFE0F", "Freezing rain"], [71, "\uD83C\uDF28\uFE0F", "Snow"], [80, "\uD83C\uDF26\uFE0F", "Showers"], [85, "\uD83C\uDF28\uFE0F", "Snow showers"], [95, "\u26C8\uFE0F", "Thunderstorm"]];
+    function wxInfo(c) { var r = WX[0]; for (var i = 0; i < WX.length; i++) if (c >= WX[i][0]) r = WX[i]; return r; }
+    if (wx) {
+      var tz = ""; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { /* ignore */ }
+      var city = (tz.split("/").pop() || "London").replace(/_/g, " ") || "London";
+      if (/^(UTC|GMT|Etc)/i.test(city)) city = "London";
+      var f = /^en-US|^en-LR|^en-MM/i.test(navigator.language || "");
+      cache("gu-wx", 30 * 60 * 1000, function () {
+        return getJSON("https://geocoding-api.open-meteo.com/v1/search?count=1&name=" + encodeURIComponent(city)).then(function (g) {
+          var p = g && g.results && g.results[0]; if (!p) throw 0;
+          return getJSON("https://api.open-meteo.com/v1/forecast?latitude=" + p.latitude + "&longitude=" + p.longitude + "&current=temperature_2m,weather_code&timezone=auto").then(function (w) {
+            if (!w || !w.current) throw 0; return { c: w.current.temperature_2m, code: w.current.weather_code, city: p.name };
+          });
+        });
+      }).then(function (d) {
+        var t = f ? d.c * 9 / 5 + 32 : d.c, i = wxInfo(d.code);
+        put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city, "Today's weather");
+        wx.classList.add("live");
+      }).catch(function () { /* keep the built-in tile */ });
+    }
+    if (otd) {
+      var d = new Date(), mm = ("0" + (d.getMonth() + 1)).slice(-2), dd = ("0" + d.getDate()).slice(-2);
+      cache("gu-otd-" + mm + dd, 12 * 3600 * 1000, function () {
+        return getJSON("https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/" + mm + "/" + dd).then(function (j) {
+          var ev = (j.events || []).filter(function (e) { return e.text && e.text.length <= 120 && e.year; });
+          if (!ev.length) throw 0;
+          var day = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5), e = ev[(day * 7) % ev.length];
+          var pg = e.pages && e.pages[0] && e.pages[0].content_urls && e.pages[0].content_urls.desktop && e.pages[0].content_urls.desktop.page;
+          return { y: e.year, t: e.text, u: pg || "" };
+        });
+      }).then(function (e) {
+        put(otd, e.y, e.t, "On this day");
+        if (e.u && /^https:\/\/en\.wikipedia\.org\//.test(e.u)) otd.href = e.u;
+        otd.classList.add("live");
+      }).catch(function () { /* keep the built-in tile */ });
+    }
+  })();
   if (!G || !$("hb-cal")) return;
   if (f) f.addEventListener("submit", function () { if (r && r.value.replace(/\s/g, "")) { var o = G.get("gs") || {}; o.srch = (o.srch || 0) + 1; G.set("gs", o); } });
 

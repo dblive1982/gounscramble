@@ -29,8 +29,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=77b67464">
-<link rel="stylesheet" href="assets/home.css?v=e53bcbb5">
+<link rel="stylesheet" href="assets/styles.css?v=2e657e9e">
+<link rel="stylesheet" href="assets/home.css?v=a9b3f2b0">
 </head>
 <body data-page="home">
 <!--header-->
@@ -72,7 +72,7 @@
 <button class="go" type="submit">GO!</button>
 </form>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
-<div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button></div>
+<div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span></div>
 <div class="opts" id="opts" hidden>
 <label class="opt chk"><input class="chk-box" id="o-safe" type="checkbox" checked><span>Hide offensive words</span></label>
 <label class="opt" style="grid-column:1/-1">Scoring<select id="o-dict" aria-label="Scoring"><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></label>
@@ -86,11 +86,11 @@
 </div></section>
 <div class="home-extra">
 <div class="hub">
-<section class="hb-stats" aria-label="GoUnscramble at a glance">
+<section class="hb-stats" aria-label="Today at a glance">
 <div><b>172,823</b><span>words in the list</span></div>
-<div><b>7</b><span>free games</span></div>
+<div class="hb-wx" id="hb-wx" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
 <div><b>300</b><span>word searches</span></div>
-<div><b>$0</b><span>always free</span></div>
+<a class="hb-otd" id="hb-otd" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noopener"><b>0</b><span>vowels in <i>rhythms</i></span></a>
 </section>
 <section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
 <div class="hb-me">
@@ -203,7 +203,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=2b6e91f7"></script>
+<script src="assets/progress.js?v=3dd814b2"></script><script src="assets/home.js?v=1c1635be"></script><script src="assets/hub.js?v=e99374da"></script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}

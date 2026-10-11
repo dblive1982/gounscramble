@@ -212,3 +212,20 @@ body[data-page="home"]{--hh:264px}
 .hub .hb-roll.spin svg{animation:hb-spin .6s cubic-bezier(.3,1.4,.5,1)}
 @keyframes hb-spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.hub .hb-roll.spin svg{animation:none}}
+
+/* Live tiles and the FREE badge */
+.hub .hb-stats{align-items:stretch}
+.hub .hb-stats>div,.hub .hb-stats>a{justify-content:center}
+.hub .hb-otd{background:#fff;border:4px solid #000;border-radius:20px;box-shadow:0 5px 0 #000;padding:14px 12px;text-align:center;display:flex;flex-direction:column;gap:2px;color:#000;text-decoration:none;transition:transform .1s,box-shadow .1s}
+.hub .hb-stats .hb-otd{transform:rotate(1.5deg)}
+.hub .hb-otd:hover{box-shadow:0 8px 0 #000}
+.hub .hb-otd:focus-visible{outline:3px solid #000;outline-offset:3px}
+.hub .hb-stats b{font-size:clamp(24px,5vw,38px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.hub .hb-stats span{font-weight:600;font-size:clamp(13px,2.6vw,16px)}
+.hub .hb-stats em{font-style:normal;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.65;margin-top:4px}
+.hub .hb-otd.live span{font-size:13px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hub .hb-wx.live{background:linear-gradient(135deg,#bfe6ee 45%,#fff 100%)}
+.hub .hb-wx.live b{font-size:clamp(26px,5vw,34px)}
+.hm .optrow{justify-content:space-between}
+.free-badge{display:inline-grid;place-items:center;width:66px;height:66px;margin:-14px 6px -14px 0;background:#ffd23f;color:#000;font-family:var(--display,"Fredoka",system-ui,sans-serif);font-weight:700;font-size:16px;letter-spacing:-.02em;transform:rotate(-10deg);clip-path:polygon(100% 50%,87.8% 57.5%,92.7% 70.7%,79% 74.1%,76.5% 88.3%,64.4% 83.6%,57.5% 96.1%,50% 87.2%,41.7% 96.1%,35.6% 83.6%,23.5% 88.3%,21% 74.1%,7.3% 70.7%,12.2% 57.5%,0% 50%,12.2% 42.5%,7.3% 29.3%,21% 25.9%,23.5% 11.7%,35.6% 16.4%,42.5% 3.9%,50% 12.8%,58.3% 3.9%,64.4% 16.4%,76.5% 11.7%,79% 25.9%,92.7% 29.3%,87.8% 42.5%);animation:hb-wob 2.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.free-badge{animation:none}}
