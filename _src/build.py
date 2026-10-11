@@ -235,7 +235,8 @@ HUB = """<div class="hub">
 </div>
 """
 
-HOME = """<main class="board hm">
+HOME = """<main>
+<section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
 <form id="f" class="box" autocomplete="off">
 <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
@@ -255,7 +256,7 @@ HOME = """<main class="board hm">
 <button class="reset" id="clrf" type="button">Clear</button>
 </div>
 <div id="out" aria-live="polite"></div>
-</main>
+</div></section>
 <div class="home-extra">
 @@HUB@@
 <div class="hm hm-after">
@@ -270,6 +271,7 @@ HOME = """<main class="board hm">
 </div>
 @@HOME_EXTRA@@
 </div>
+</main>
 """
 
 ANAGRAM = """<main><div class="wrap">
