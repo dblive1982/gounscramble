@@ -144,6 +144,12 @@
     }
   };
   document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden" && signedIn()) push(); });
+  // Phones can restore a cached page on Back: re-check the sign-in state so nothing from a signed-out account is shown.
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    if (!signedIn()) api.clear(); else api.sync();
+    if (window.guMenu) window.guMenu();
+  });
   read();
   window.GUP = api;
 })();
