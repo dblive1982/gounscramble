@@ -35,3 +35,14 @@
 .ac .err:empty{display:none}
 .ac .form > .go.full{margin-top:2px}
 .ac .pill,.ac .go,.ac .alt{text-transform:none}
+
+.ac .av{background-size:cover;background-position:center}
+.ac .av.big{width:84px;height:84px;font-size:38px}
+.ac .avrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:6px 0 10px}
+.ac .avbtns{display:flex;gap:8px;flex-wrap:wrap}
+.ac .avbtns .pill{cursor:pointer}
+.ac .mut{opacity:.7;font-size:14px}
+.ac .plist{margin:8px 0 0;padding-left:20px;display:grid;gap:4px}
+.ac textarea,.ac select{width:100%;font:inherit;border:4px solid #000;border-radius:14px;padding:10px 12px;background:#fff;color:#000;box-sizing:border-box}
+.ac textarea{resize:vertical}
+.ac form.card{display:flex;flex-direction:column;gap:10px}

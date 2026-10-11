@@ -140,3 +140,4 @@
 .gm section{display:flex;flex-direction:column;gap:14px}
 .gm section[hidden]{display:none}
 .gm .gtop{margin-bottom:2px}
+.gm #v-wordsearch .num.prog{background:#fff;outline:3px dashed var(--ink);outline-offset:-6px}

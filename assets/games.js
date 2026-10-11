@@ -30,7 +30,7 @@ function sdCount(g,lim){let n=0;(function rec(){let best=-1,bc=null,bl=10;for(le
   if(best<0){n++;return}for(const v of bc){g[best]=v;rec();if(n>=lim){g[best]=0;return}}g[best]=0})();return n}
 function sdNew(){const clues={easy:40,medium:32,hard:26}[SD.lv];let g=new Array(81).fill(0);sdFill(g);SD.sol=g.slice();
   const p=g.slice();let left=81;for(const i of shuffle([...Array(81).keys()])){if(left<=clues)break;const v=p[i];p[i]=0;if(sdCount(p.slice(),2)!==1)p[i]=v;else left--}
-  SD.giv=p.map(v=>v>0);SD.cur=p.slice();SD.sel=-1;SD.done=false;sdDraw();$("sd-msg").textContent="Tap a square, then a number."}
+  SD.giv=p.map(v=>v>0);SD.cur=p.slice();SD.sel=-1;SD.done=false;sdSave();sdDraw();$("sd-msg").textContent="Tap a square, then a number."}
 function sdConf(i){const v=SD.cur[i];if(!v)return false;const r=Math.floor(i/9),c=i%9;for(let k=0;k<9;k++){if(k!==c&&SD.cur[r*9+k]===v)return true;if(k!==r&&SD.cur[k*9+c]===v)return true}
   const br=r-r%3,bc=c-c%3;for(let a=0;a<3;a++)for(let b=0;b<3;b++){const j=(br+a)*9+bc+b;if(j!==i&&SD.cur[j]===v)return true}return false}
 function sdDraw(){const s=SD.sel,sv=s>=0?SD.cur[s]:0,sr=s>=0?Math.floor(s/9):-1,sc=s>=0?s%9:-1;
@@ -38,17 +38,21 @@ function sdDraw(){const s=SD.sel,sv=s>=0?SD.cur[s]:0,sr=s>=0?Math.floor(s/9):-1,
     if(s>=0){if(i===s)cl+=" sel";else if(sv&&v===sv)cl+=" same";else if(r===sr||c===sc||(Math.floor(r/3)===Math.floor(sr/3)&&Math.floor(c/3)===Math.floor(sc/3)))cl+=" peer"}
     if(v&&!SD.giv[i]&&sdConf(i))cl+=" bad";el.className=cl;el.textContent=v||""});
   const cnt=new Array(10).fill(0);SD.cur.forEach(v=>cnt[v]++);[...$("pad").children].forEach((b,k)=>b.disabled=cnt[k+1]>=9)}
+function sdSave(){const o=GUP.get("sd")||{};GUP.set("sd",{lv:SD.lv,sol:SD.sol,giv:SD.giv,cur:SD.cur,done:SD.done,stats:o.stats||{easy:0,medium:0,hard:0}})}
+function sdSolved(){const o=GUP.get("sd")||{},st=Object.assign({easy:0,medium:0,hard:0},o.stats||{});st[SD.lv]=(st[SD.lv]||0)+1;GUP.set("sd",{lv:SD.lv,sol:SD.sol,giv:SD.giv,cur:SD.cur,done:true,stats:st})}
 function sdSet(v){if(SD.done||SD.sel<0||SD.giv[SD.sel])return;SD.cur[SD.sel]=v;sdDraw();
-  if(SD.cur.every((x,i)=>x===SD.sol[i])){SD.done=true;$("sd-msg").textContent="Solved! Well done."}else if(v&&sdConf(SD.sel))$("sd-msg").textContent="That number clashes with another in its row, column or box.";else $("sd-msg").textContent=""}
+  if(SD.cur.every((x,i)=>x===SD.sol[i])){SD.done=true;sdSolved();$("sd-msg").textContent="Solved! Well done."}else{sdSave();if(v&&sdConf(SD.sel))$("sd-msg").textContent="That number clashes with another in its row, column or box.";else $("sd-msg").textContent=""}}
 INIT.sudoku=()=>{const g=$("sg");for(let i=0;i<81;i++){const b=document.createElement("button");b.type="button";b.setAttribute("role","gridcell");b.addEventListener("click",()=>{SD.sel=i;sdDraw()});g.appendChild(b)}
   for(let v=1;v<=9;v++){const b=document.createElement("button");b.type="button";b.textContent=v;b.addEventListener("click",()=>sdSet(v));$("pad").appendChild(b)}
-  pills($("sd-lv"),[["easy","Easy"],["medium","Medium"],["hard","Hard"]],"easy",v=>{SD.lv=v;setTimeout(sdNew,20)});
+  const sv=GUP.get("sd"),resume=sv&&sv.sol&&sv.sol.length===81&&!sv.done;
+  if(resume){SD.lv=sv.lv||"easy";SD.sol=sv.sol;SD.giv=sv.giv;SD.cur=sv.cur;SD.done=false}
+  pills($("sd-lv"),[["easy","Easy"],["medium","Medium"],["hard","Hard"]],SD.lv,v=>{SD.lv=v;setTimeout(sdNew,20)});
   $("sd-erase").addEventListener("click",()=>sdSet(0));$("sd-new").addEventListener("click",()=>{$("sd-msg").textContent="Making a new puzzle...";setTimeout(sdNew,20)});
   $("sd-hint").addEventListener("click",()=>{if(SD.done)return;let i=SD.sel;if(i<0||SD.giv[i]||SD.cur[i]===SD.sol[i]){const o=[];SD.cur.forEach((v,k)=>{if(v!==SD.sol[k])o.push(k)});if(!o.length)return;i=o[rnd(o.length)]}SD.sel=i;SD.cur[i]=SD.sol[i];SD.giv[i]=true;sdDraw();
-    if(SD.cur.every((x,k)=>x===SD.sol[k])){SD.done=true;$("sd-msg").textContent="Solved!"}else $("sd-msg").textContent="Hint added."});
+    if(SD.cur.every((x,k)=>x===SD.sol[k])){SD.done=true;sdSolved();$("sd-msg").textContent="Solved!"}else{sdSave();$("sd-msg").textContent="Hint added."}});
   document.addEventListener("keydown",e=>{if($("v-sudoku").hidden||SD.sel<0)return;if(/^[1-9]$/.test(e.key))sdSet(+e.key);else if(e.key==="Backspace"||e.key==="Delete"||e.key==="0")sdSet(0);
     else if(e.key.startsWith("Arrow")){e.preventDefault();let r=Math.floor(SD.sel/9),c=SD.sel%9;if(e.key==="ArrowUp")r=Math.max(0,r-1);if(e.key==="ArrowDown")r=Math.min(8,r+1);if(e.key==="ArrowLeft")c=Math.max(0,c-1);if(e.key==="ArrowRight")c=Math.min(8,c+1);SD.sel=r*9+c;sdDraw()}});
-  sdNew()};
+  if(resume){sdDraw();$("sd-msg").textContent="Welcome back. Your puzzle is just as you left it."}else sdNew()};
 
 /* ---------- Snakes and ladders ---------- */
 const LAD={4:14,9:31,20:38,28:84,40:59,51:67,63:81,71:91},SNK={17:7,54:34,62:19,64:60,87:24,93:73,95:75,99:78};
@@ -143,12 +147,13 @@ const PAL=["#ffb3b3","#ffd9a0","#fff08a","#b9f0a8","#9fe8de","#a8c8ff","#d3b8ff"
 const app=$("ws-app"),titleEl=$("ws-title"),backBtn=$("ws-back"),bsp=$("ws-bsp");
 
 // ---------- storage (per-viewer convenience, safe if blocked) ----------
-let mem={};
-function load(){try{const s=localStorage.getItem("gu-ws");if(s)mem=JSON.parse(s)||{}}catch(e){}}
-function save(){try{localStorage.setItem("gu-ws",JSON.stringify(mem))}catch(e){}}
-function doneSet(cat){return new Set(mem[cat]||[])}
-function markDone(cat,n){const s=doneSet(cat);s.add(n);mem[cat]=[...s];save()}
-load();
+function wsd(){const w=GUP.get("ws")||{};if(!w.done)w.done={};if(!w.cur)w.cur={};return w}
+function doneSet(cat){return new Set(wsd().done[cat]||[])}
+function markDone(cat,n){const w=wsd(),s=doneSet(cat);s.add(n);w.done[cat]=[...s].sort((a,b)=>a-b);delete w.cur[cat+"|"+n];GUP.set("ws",w)}
+function curGet(cat,n){return wsd().cur[cat+"|"+n]}
+function curSave(cat,n,o){const w=wsd();o.t=Date.now();w.cur[cat+"|"+n]=o;GUP.set("ws",w)}
+function curClear(cat,n){const w=wsd();if(w.cur[cat+"|"+n]){delete w.cur[cat+"|"+n];GUP.set("ws",w)}}
+function inProg(cat){const c=wsd().cur,d=doneSet(cat);return Object.keys(c).filter(k=>k.split("|")[0]===cat&&!d.has(+k.split("|")[1])).length}
 
 // ---------- seeded puzzle generation ----------
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
@@ -218,7 +223,7 @@ function renderCats(){
   CATS.forEach((c,i)=>{
     const d=doneSet(c.name).size;
     const b=el("button","cat");b.type="button";b.style.setProperty("--c",c.color);
-    b.innerHTML='<span class="ico">'+c.name[0]+'</span><span class="nm">'+c.name+'</span><span class="pg">'+d+' of '+PER+' puzzles</span><span class="pbar"><i style="width:'+Math.round(d/PER*100)+'%"></i></span>';
+    b.innerHTML='<span class="ico">'+c.name[0]+'</span><span class="nm">'+c.name+'</span><span class="pg">'+d+' of '+PER+' puzzles'+(inProg(c.name)?' · '+inProg(c.name)+' started':'')+'</span><span class="pbar"><i style="width:'+Math.round(d/PER*100)+'%"></i></span>';
     b.addEventListener("click",()=>show({name:"nums",cat:i}));
     g.appendChild(b);
   });
@@ -232,8 +237,9 @@ function renderNums(){
   const g=el("div","nums");g.style.setProperty("--c",c.color);
   let next=0;for(let n=1;n<=PER;n++)if(!d.has(n)){next=n;break}
   for(let n=1;n<=PER;n++){
-    const b=el("button","num"+(d.has(n)?" done":(n===next?" next":"")),String(n));b.type="button";
-    b.setAttribute("aria-label","Puzzle "+n+(d.has(n)?", finished":""));
+    const started=!d.has(n)&&!!curGet(c.name,n);
+    const b=el("button","num"+(d.has(n)?" done":(started?" prog":(n===next?" next":""))),String(n));b.type="button";
+    b.setAttribute("aria-label","Puzzle "+n+(d.has(n)?", finished":(started?", started":"")));
     b.addEventListener("click",()=>show({name:"puzzle",cat:view.cat,n}));
     g.appendChild(b);
   }
@@ -279,9 +285,20 @@ function renderPuzzle(){
     if(!options.length)return;
     const i=options[Math.floor(Math.random()*options.length)];
     hinted.add(i);cells[i].classList.add("hint");
-    hints--;hintBtn.textContent="Hint ("+hints+")";hintBtn.disabled=hints<=0;
+    hints--;hintBtn.textContent="Hint ("+hints+")";hintBtn.disabled=hints<=0;saveCur();
   });
-  resetBtn.addEventListener("click",()=>show({name:"puzzle",cat:view.cat,n}));
+  resetBtn.addEventListener("click",()=>{curClear(c.name,n);show({name:"puzzle",cat:view.cat,n})});
+
+  // ---- progress: restore what was found before, and save after every find or hint ----
+  const foundList=[];
+  function saveCur(){if(found.size===P.words.length)return;curSave(c.name,n,{f:foundList,h:3-hints,hc:[...hinted]})}
+  const saved=curGet(c.name,n);
+  if(saved){
+    (saved.f||[]).forEach(([w,ci])=>{const p=P.pos[w];if(!p||found.has(w))return;const color=PAL[ci%PAL.length];line(p[0],p[p.length-1],color,".85");found.set(w,color);wEls[w].classList.add("f");foundList.push([w,ci])});
+    colorIdx=foundList.length?Math.max(...foundList.map(x=>x[1]))+1:0;
+    hints=Math.max(0,3-(saved.h||0));(saved.hc||[]).forEach(i=>{if(cells[i]){hinted.add(i);cells[i].classList.add("hint")}});
+    hintBtn.textContent="Hint ("+hints+")";hintBtn.disabled=hints<=0;
+  }
 
   // ---- finger / mouse drag ----
   let start=-1,cur=-1,preview=null,ptr=null;
@@ -329,10 +346,10 @@ function renderPuzzle(){
     const hit=P.words.find(w=>!found.has(w)&&(w===s||w===rs));
     if(preview){preview.remove();preview=null}
     if(hit){
-      const color=PAL[colorIdx++%PAL.length];
+      const ci=colorIdx++%PAL.length,color=PAL[ci];
       line(p[0],p[p.length-1],color,".85");
-      found.set(hit,color);wEls[hit].classList.add("f");
-      if(found.size===P.words.length)complete();
+      found.set(hit,color);wEls[hit].classList.add("f");foundList.push([hit,ci]);
+      if(found.size===P.words.length)complete();else saveCur();
     }
     start=cur=-1;ptr=null;
   }
@@ -349,11 +366,12 @@ function renderPuzzle(){
     d.appendChild(row);doneHost.appendChild(d);hintBtn.disabled=true;
   }
 }
-window.__wsStart=render;
+window.__wsStart=render;GUP.onChange(()=>{if(view.name!=="puzzle")render()});
 })();
 INIT.wordsearch=()=>window.__wsStart();
 
 window.addEventListener("hashchange",()=>show((location.hash||"").slice(1)));
 show((location.hash||"").slice(1));
 
+GUP.sync();
 })();

@@ -20,10 +20,57 @@
     var ml = document.querySelector('.menu-list a[href="account.html"]');
     if (ml) ml.textContent = u ? "Your account" : "Sign in";
     if (u) {
-      $("nm").textContent = u.name; $("em").textContent = u.email;
-      $("av").textContent = (u.name || "?").charAt(0).toUpperCase();
+      paint(u); loadProfile(); progressSummary();
     }
     show(u ? "account" : "signin");
+  }
+  var prof = null;
+  function face(el, name, img) {
+    el.style.backgroundImage = img ? "url(" + img + ")" : "";
+    el.textContent = img ? "" : (name || "?").charAt(0).toUpperCase();
+    el.classList.toggle("has", !!img);
+  }
+  function paint(u) {
+    $("nm").textContent = u.name; $("em").textContent = u.email;
+    var img = prof && prof.avatar;
+    face($("av"), u.name, img); face($("av2"), u.name, img);
+    $("av-rm").hidden = !img;
+    try { if (img) localStorage.setItem("gu-av", img); else localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ }
+  }
+  function loadProfile() {
+    fetch("api/profile.php", { credentials: "same-origin" }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d.profile) return;
+      prof = d.profile; user.name = prof.name;
+      $("pr-n").value = prof.name; $("pr-b").value = prof.bio; $("pr-l").value = prof.location; $("pr-f").value = prof.fav;
+      $("since").textContent = prof.since ? "Member since " + prof.since : "";
+      paint(user);
+    }).catch(function () { /* ignore */ });
+  }
+  function progressSummary() {
+    var L = $("plist"), g = window.GUP; if (!g) return;
+    function draw() {
+      var ws = g.get("ws") || {}, sd = g.get("sd") || {}, done = 0, started = 0, k;
+      Object.keys(ws.done || {}).forEach(function (c) { done += ws.done[c].length; });
+      for (k in (ws.cur || {})) { var p = k.split("|"); if (!((ws.done || {})[p[0]] || []).includes(+p[1])) started++; }
+      var st = sd.stats || {}, solved = (st.easy || 0) + (st.medium || 0) + (st.hard || 0);
+      L.innerHTML = "";
+      [["Word searches finished", done], ["Word searches in progress", started], ["Sudokus solved", solved],
+       ["Sudoku in progress", sd.sol && !sd.done ? "Yes" : "No"]].forEach(function (r) {
+        var li = document.createElement("li"); li.textContent = r[0] + ": " + r[1]; L.appendChild(li);
+      });
+    }
+    draw(); g.onChange(draw); g.sync();
+  }
+  function shrink(file, cb) {
+    var img = new Image(), url = URL.createObjectURL(file);
+    img.onload = function () {
+      var S = 192, c = document.createElement("canvas"); c.width = c.height = S;
+      var m = Math.min(img.width, img.height), x = (img.width - m) / 2, y = (img.height - m) / 2;
+      c.getContext("2d").drawImage(img, x, y, m, m, 0, 0, S, S);
+      URL.revokeObjectURL(url); cb(c.toDataURL("image/jpeg", 0.82));
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); cb(null); };
+    img.src = url;
   }
   function api(name, body) {
     return fetch("api/" + name + ".php", {
@@ -97,8 +144,32 @@
       else er.textContent = d.error || "Could not change the password.";
     });
   });
+  $("f-pr").addEventListener("submit", function (e) {
+    e.preventDefault(); var er = $("pr-err"); er.textContent = "";
+    var n = $("pr-n").value.trim(); if (!n) { er.textContent = "Please enter a display name."; return; }
+    busy(this, true); var f = this;
+    api("profile", { name: n, bio: $("pr-b").value, location: $("pr-l").value, fav: $("pr-f").value }).then(function (d) {
+      busy(f, false);
+      if (d.profile) { prof = d.profile; user.name = prof.name; paint(user); er.textContent = "Saved."; } else er.textContent = d.error || "Could not save.";
+    });
+  });
+  $("av-file").addEventListener("change", function () {
+    var file = this.files && this.files[0]; this.value = ""; if (!file) return;
+    var er = $("pr-err"); er.textContent = "";
+    shrink(file, function (data) {
+      if (!data) { er.textContent = "That file isn't a picture we can use."; return; }
+      api("profile", { name: user.name, bio: $("pr-b").value, location: $("pr-l").value, fav: $("pr-f").value, avatar: data }).then(function (d) {
+        if (d.profile) { prof = d.profile; paint(user); } else er.textContent = d.error || "Could not save the picture.";
+      });
+    });
+  });
+  $("av-rm").addEventListener("click", function () {
+    api("profile", { name: user.name, bio: $("pr-b").value, location: $("pr-l").value, fav: $("pr-f").value, avatar: null }).then(function (d) {
+      if (d.profile) { prof = d.profile; paint(user); }
+    });
+  });
   $("out").addEventListener("click", function () {
-    api("logout", {}).then(function () { setUser(null); });
+    api("logout", {}).then(function () { prof = null; try { localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } setUser(null); });
   });
 
   var m = /[?&]reset=([a-f0-9]{64})/.exec(location.search);

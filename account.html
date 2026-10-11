@@ -29,8 +29,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=be28e9d5">
-<link rel="stylesheet" href="assets/account.css?v=313a8cd8">
+<link rel="stylesheet" href="assets/styles.css?v=6609978c">
+<link rel="stylesheet" href="assets/account.css?v=284daef9">
 <meta name="robots" content="noindex">
 </head>
 <body data-page="account">
@@ -120,8 +120,18 @@
 </section>
 
 <section id="v-account" class="form" hidden>
-<div class="card who"><div class="av" id="av">D</div><div><b id="nm">Name</b><span id="em">email</span></div></div>
-<div class="card"><p class="sub">You are signed in. Saving your puzzle progress and favourite words to your account is coming next.</p></div>
+<div class="card who"><div class="av" id="av">D</div><div><b id="nm">Name</b><span id="em">email</span><span id="since" class="mut"></span></div></div>
+<div class="card" id="prog"><p class="sub"><b>Your progress</b></p><ul class="plist" id="plist"><li>Loading…</li></ul></div>
+<form class="card form" id="f-pr" novalidate>
+<p class="sub"><b>Your profile</b></p>
+<div class="avrow"><div class="av big" id="av2">D</div><div class="avbtns"><label class="pill" for="av-file">Choose picture</label><input type="file" id="av-file" accept="image/*" hidden><button type="button" class="pill" id="av-rm" hidden>Remove</button></div></div>
+<label class="fld">Display name<input type="text" id="pr-n" maxlength="60" autocomplete="nickname"></label>
+<label class="fld">About you<textarea id="pr-b" maxlength="280" rows="3" placeholder="A line or two about you"></textarea></label>
+<label class="fld">Location<input type="text" id="pr-l" maxlength="80" placeholder="e.g. London, UK"></label>
+<label class="fld">Favourite game<select id="pr-f"><option value="">Not chosen</option><option>Word unscrambler</option><option>Word search</option><option>Sudoku</option><option>Snakes and ladders</option><option>Connect 4</option><option>Tic tac toe</option><option>Memory match</option><option>Hangman</option></select></label>
+<div class="err" id="pr-err" aria-live="polite"></div>
+<button class="go full" type="submit">Save profile</button>
+</form>
 <button class="pill" type="button" id="out" style="align-self:flex-start">Sign out</button>
 </section>
 </main>
@@ -138,7 +148,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/account.js?v=9ef1858f"></script>
-<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var u=document.querySelector(".user-btn");if(u)u.setAttribute("aria-label","Your account")}}catch(e){}})();</script>
+<script src="assets/progress.js?v=1b1103d4"></script><script src="assets/account.js?v=15b2b9a4"></script>
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var u=document.querySelector(".user-btn");if(u){u.setAttribute("aria-label","Your account");var v=localStorage.getItem("gu-av");if(v){u.classList.add("pic");u.style.backgroundImage="url("+v+")"}}}}catch(e){}})();</script>
 </body>
 </html>

@@ -113,7 +113,7 @@ FOOTER = """<!--footer-->
 <!--/footer-->
 <script src="assets/engine.js"></script>
 <script src="assets/app.js"></script>
-<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var u=document.querySelector(".user-btn");if(u)u.setAttribute("aria-label","Your account")}}catch(e){}})();</script>
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()})})();(function(){try{if(localStorage.getItem("gu-in")==="1"){var a=document.querySelector('.menu-list a[href="account.html"]');if(a)a.textContent="Your account";var u=document.querySelector(".user-btn");if(u){u.setAttribute("aria-label","Your account");var v=localStorage.getItem("gu-av");if(v){u.classList.add("pic");u.style.backgroundImage="url("+v+")"}}}}catch(e){}})();</script>
 </body>
 </html>
 """
@@ -508,10 +508,10 @@ def build_page(p):
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/home.js"></script>')
     if games:
-        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/games.js"></script>')
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script>')
     if acct:
-        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "account.css", "account.js"):
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "progress.js", "account.css", "account.js"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     return page
 

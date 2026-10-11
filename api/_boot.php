@@ -48,12 +48,25 @@ function ensure_schema(PDO $pdo): void {
         created_at DATETIME NOT NULL,
         last_login DATETIME NULL
     ) CHARACTER SET utf8mb4');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS profiles (
+        user_id INT UNSIGNED PRIMARY KEY,
+        bio VARCHAR(280) NOT NULL DEFAULT "",
+        location VARCHAR(80) NOT NULL DEFAULT "",
+        fav VARCHAR(40) NOT NULL DEFAULT "",
+        avatar MEDIUMTEXT NULL,
+        updated_at DATETIME NOT NULL
+    ) CHARACTER SET utf8mb4');
     $pdo->exec('CREATE TABLE IF NOT EXISTS resets (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         user_id INT UNSIGNED NOT NULL,
         token_hash CHAR(64) NOT NULL UNIQUE,
         expires_at DATETIME NOT NULL,
         used TINYINT NOT NULL DEFAULT 0
+    ) CHARACTER SET utf8mb4');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS progress (
+        user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+        data MEDIUMTEXT NOT NULL,
+        updated_at DATETIME NOT NULL
     ) CHARACTER SET utf8mb4');
     $pdo->exec('CREATE TABLE IF NOT EXISTS attempts (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
