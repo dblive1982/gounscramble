@@ -68,6 +68,25 @@
 <div class="err" id="pr-err" aria-live="polite"></div>
 <button class="go full" type="submit">Save profile</button>
 </form>
-<button class="pill" type="button" id="out" style="align-self:flex-start">Sign out</button>
+<div class="card form" id="c-data">
+<p class="sub"><b>Your data</b></p>
+<div class="dz">
+<p class="dz-t"><b>Reset game and activity data</b><span>Clears your saved games, scores, progress and play calendar on every device. Your account and profile stay.</span></p>
+<button class="pill" type="button" id="rs-open">Reset my data</button>
+<div class="dz-box" id="rs-box" hidden><p>Are you sure? This cannot be undone.</p><div class="row"><button class="pill warn" type="button" id="rs-yes">Yes, reset it</button><button class="pill" type="button" id="rs-no">Cancel</button></div></div>
+<div class="err" id="rs-done" aria-live="polite"></div>
+</div>
+<div class="dz">
+<p class="dz-t"><b>Delete my account</b><span>Permanently deletes your account, profile and everything saved with it. This cannot be undone.</span></p>
+<button class="pill warn" type="button" id="del-open">Delete my account</button>
+<form class="dz-box" id="f-del" hidden novalidate>
+<label class="fld" id="del-pw-w">Your password<span class="pw"><input type="password" id="del-pw" autocomplete="current-password"><button type="button" class="showpw">Show</button></span></label>
+<label class="fld">Type DELETE to confirm<input type="text" id="del-ok" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="DELETE"></label>
+<div class="err" id="del-err" aria-live="polite"></div>
+<div class="row"><button class="pill warn" type="submit">Delete forever</button><button class="pill" type="button" id="del-no">Cancel</button></div>
+</form>
+</div>
+</div>
+<div class="out-row"><button class="pill" type="button" id="out">Sign out</button></div>
 </section>
 </main>

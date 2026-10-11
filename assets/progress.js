@@ -19,9 +19,14 @@
   function union(a, b) { var s = {}; (a || []).concat(b || []).forEach(function (x) { s[x] = 1; }); return Object.keys(s).map(Number).sort(function (x, y) { return x - y; }); }
 
   // Combine what this device has with what the account has, never losing a finished puzzle.
+  // Anything saved before the latest "reset" (on any device) is dropped.
+  function strip(d, rs) { var r = {}, k; for (k in d) if (k !== "rs" && (!d[k] || (d[k].t || 0) >= rs)) r[k] = d[k]; return r; }
   function merge(local, remote) {
     local = local || {}; remote = remote || {};
+    var rst = Math.max((local.rs || {}).t || 0, (remote.rs || {}).t || 0);
+    if (rst) { local = strip(local, rst); remote = strip(remote, rst); }
     var out = {};
+    if (rst) out.rs = { t: rst };
     ["sl", "c4", "tt", "mm", "hm"].forEach(function (g) {
       var a = local[g], b = remote[g];
       if (!a) { if (b) out[g] = b; } else if (!b) out[g] = a; else out[g] = ((a.t || 0) >= (b.t || 0)) ? a : b;
@@ -99,6 +104,12 @@
   }
 
   var api = {
+    // Wipe saved games, scores and the calendar here and on the account (other devices follow on their next sync).
+    reset: function () {
+      clearTimeout(timer); data = { rs: { t: Date.now() } }; write();
+      listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } });
+      push();
+    },
     mark: function () { if (markToday()) { write(); queue(); listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } }); } },
     days: function (ym) { return ((data.ad || {})[ym] || []).slice(); },
     get: function (g) { return data[g]; },

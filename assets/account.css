@@ -48,3 +48,16 @@
 .ac form.card{display:flex;flex-direction:column;gap:10px}
 .ac .gbtn{display:flex;justify-content:center;min-height:44px}
 .ac .who span.mut{display:block;margin-top:2px}
+.ac .lnk{padding:10px 0;min-height:42px}
+.ac .showpw{min-height:42px;min-width:64px}
+
+.ac .out-row{display:flex;justify-content:center;padding:6px 0 2px}
+.ac #c-data{gap:18px}
+.ac .dz{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:14px;border-top:3px dashed #000}
+.ac .dz:first-of-type{border-top:0;padding-top:0}
+.ac .dz-t{margin:0;display:flex;flex-direction:column;gap:2px}
+.ac .dz-t span{font-weight:500;font-size:15px;line-height:1.4}
+.ac .dz-box{display:flex;flex-direction:column;gap:10px;width:100%;background:#fff0b3;border:3px solid #000;border-radius:18px;padding:12px 14px}
+.ac .dz-box p{margin:0;font-weight:600}
+.ac .pill.warn{background:#ff6b6b}
+.ac #rs-done{color:#0a7f43;font-weight:700}

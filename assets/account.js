@@ -193,6 +193,30 @@
       if (d.profile) { prof = d.profile; paint(user); }
     });
   });
+  function box(id, on) { $(id).hidden = !on; }
+  $("rs-open").addEventListener("click", function () { $("rs-done").textContent = ""; box("rs-box", true); this.hidden = true; });
+  $("rs-no").addEventListener("click", function () { box("rs-box", false); $("rs-open").hidden = false; });
+  $("rs-yes").addEventListener("click", function () {
+    if (window.GUP) GUP.reset();
+    box("rs-box", false); $("rs-open").hidden = false; $("rs-done").textContent = "Done. Your game and activity data has been reset.";
+  });
+  $("del-open").addEventListener("click", function () { $("del-pw-w").hidden = !user.pw; $("del-err").textContent = ""; box("f-del", true); this.hidden = true; });
+  $("del-no").addEventListener("click", function () { box("f-del", false); $("del-open").hidden = false; $("del-pw").value = ""; $("del-ok").value = ""; });
+  $("f-del").addEventListener("submit", function (e) {
+    e.preventDefault(); var er = $("del-err"), f = this; er.textContent = "";
+    if ($("del-ok").value.trim() !== "DELETE") { er.textContent = "Please type DELETE in capitals to confirm."; return; }
+    if (user.pw && !$("del-pw").value) { er.textContent = "Please enter your password."; return; }
+    busy(f, true);
+    api("delete", { confirm: "DELETE", password: $("del-pw").value }).then(function (d) {
+      busy(f, false);
+      if (!d.ok) { er.textContent = d.error || "Could not delete the account."; return; }
+      try { localStorage.removeItem("gu-in"); localStorage.removeItem("gu-av"); localStorage.removeItem("gu-progress"); } catch (x) { /* ignore */ }
+      prof = null; user = null;
+      var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; }
+      if (window.guMenu) window.guMenu();
+      $("sent-t").textContent = "Your account and everything saved with it has been deleted."; show("sent");
+    });
+  });
   $("out").addEventListener("click", function () {
     api("logout", {}).then(function () { prof = null; try { localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; setUser(null); });
   });

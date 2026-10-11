@@ -426,7 +426,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Cookies and browser storage</h2>
 <p>When you sign in we set one session cookie to keep you signed in. We also use your browser's local storage to remember game progress and whether you are signed in. These are needed for the features you ask for. Advertising cookies are covered below.</p>
 <h2>Deleting your account</h2>
-<p>To delete your account and everything stored with it, email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a> from the address you signed up with.</p>
+<p>You can delete your account yourself at any time from the account page. Deleting it permanently removes your account, profile and saved progress. You can also reset just your game and activity data there, and your account and profile stay. If you cannot sign in, email <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a> from the address you signed up with and we will delete it for you.</p>
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard server logs, such as your IP address and the pages requested, to keep the site running and secure.</p>
 <h2>Fonts</h2>
