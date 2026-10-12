@@ -33,15 +33,27 @@
   function makeChips() {
     if (!chips) return;
     var old = chips.querySelectorAll("[data-rack]"); old.forEach(function (b) { b.remove(); });
-    var ws = pick(10), list = ws.map(function (w, i) {
-      if (i === 4 || i === 9) { var a = w.split(""); a[Math.floor(Math.random() * a.length)] = "?"; return jumble(a.join("")).replace(/\?/g, "?"); }
+    var ws = pick(14), list = ws.map(function (w, i) {
+      if (i === 2 || i === 6) { var a = w.split(""); a[Math.floor(Math.random() * a.length)] = "?"; return jumble(a.join("")).replace(/\?/g, "?"); }
       return jumble(w);
     });
     list.forEach(function (t) {
       var b = document.createElement("button"); b.type = "button"; b.setAttribute("data-rack", t); b.textContent = t.toUpperCase();
       chips.appendChild(b);
     });
+    trimChips();
   }
+  function trimChips() {
+    if (!chips) return;
+    var bs = chips.querySelectorAll("[data-rack]"), tops = [];
+    [].forEach.call(bs, function (b) { b.hidden = false; });
+    [].forEach.call(bs, function (b) {
+      var t = b.offsetTop; if (tops.indexOf(t) < 0) tops.push(t);
+      b.hidden = tops.indexOf(t) > 1;
+    });
+  }
+  var rz; window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(trimChips, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(trimChips);
   if (chips) {
     makeChips();
     chips.addEventListener("click", function (e) {

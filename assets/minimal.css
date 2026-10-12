@@ -967,3 +967,9 @@ body .hm .optrow{margin-top:8px}
 /* Clear all in light blue */
 body .hm .opts .reset{background:#e3eaff;border:1px solid #c9d6ff;color:#2f49d6;font-weight:600}
 body .hm .opts .reset:hover{background:#d5e0ff}
+/* jumbles: natural pills, trimmed to two rows by hub.js */
+.hub .hb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hub .hb-chips button{padding:6px 12px;letter-spacing:.1em;text-align:left}
+.hub .hb-chips button:nth-child(n+10){display:inline-block}
+.hub .hb-chips button[hidden]{display:none!important}
+@media(min-width:720px){.hub .hb-chips{display:flex;gap:8px}}
