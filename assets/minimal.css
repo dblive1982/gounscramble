@@ -473,3 +473,11 @@ body .hm .gh span{background:#d9d9d9!important;color:#1c2230!important}
 
 /* all primary buttons use the brand blue */
 body .btn,body .btn-primary,body button.primary,body .ac .btn,body .ac button[type=submit],body .gm .btn.go,body .hm .go{background:linear-gradient(180deg,#6b86ff,#4059e8)!important;border-color:#4059e8!important;color:#fff!important}
+
+/* home: panels replaced by a simple text directory at the bottom */
+.hub .hb-jump,.hub #s-games,.hub #s-retro,.hub #s-lists,.hub #s-tools,.hub #s-guides{display:none!important}
+.hub .hb-dir{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:28px 20px;margin:56px 0 8px;padding-top:8px}
+.hub .hb-dir h3{font-size:16px;font-weight:700;margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--line);color:var(--ink)}
+.hub .hb-dir ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.hub .hb-dir a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:400}
+.hub .hb-dir a:hover{color:#5170ff;text-decoration:underline}

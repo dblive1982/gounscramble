@@ -260,6 +260,25 @@ HUB = """<div class="hub">
 </div>
 """
 
+def _hub_dir(hub):
+    cols=[]
+    for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-guides","Tips &amp; guides"),("s-lists","Word lists")):
+        m=re.search(r'<section class="hb-sec" id="%s".*?</section>'%sid,hub,re.S)
+        if not m: continue
+        seg=m.group(0); items=[]
+        for a in re.finditer(r'<a ([^>]*)>(.*?)</a>',seg,re.S):
+            attrs,inner=a.group(1),a.group(2)
+            if "hb-more" in attrs or "hb-all" in attrs or "hb-arrow" in attrs: continue
+            h=re.search(r'href="([^"]+)"',attrs)
+            b=re.search(r'<b>(.*?)</b>',inner)
+            label=b.group(1) if b else re.sub(r'<[^>]+>','',inner).strip()
+            if h and label: items.append('<li><a href="%s">%s</a></li>'%(h.group(1),label))
+        cols.append('<div class="hd-col"><h3>%s</h3><ul>%s</ul></div>'%(title,"".join(items)))
+    return '<nav class="hb-dir" aria-label="All games, tools and guides">'+"".join(cols)+'</nav>\n'
+HUB=HUB.rstrip()
+assert HUB.endswith("</div>")
+HUB=HUB[:-6]+_hub_dir(HUB)+"</div>\n"
+
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
