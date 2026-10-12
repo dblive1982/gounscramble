@@ -215,7 +215,7 @@
       prof = null; user = null;
       var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; }
       if (window.guMenu) window.guMenu();
-      $("sent-t").textContent = "Your account and everything saved with it has been deleted."; show("sent");
+      $("sent-t").textContent = "Your account and everything saved with it has been deleted."; show("sent"); $("ac-ttl").textContent = "Account deleted"; document.title = "Account deleted | GoUnscramble";
     });
   });
   $("out").addEventListener("click", function () {
