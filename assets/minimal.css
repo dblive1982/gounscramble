@@ -263,12 +263,12 @@ body .hm .box input::placeholder{letter-spacing:.01em}
 .hero-brand{text-decoration:none;color:inherit;cursor:pointer}.hero-brand:hover .wm{opacity:.8}
 
 /* tighter vertical rhythm: everything sits higher */
-body[data-page="home"] .site-header .wrap{padding-top:8px;padding-bottom:0}
+body[data-page="home"] .site-header{margin-bottom:-16px}
 body .hero-band .hm-top{padding-top:0;padding-bottom:4px;gap:10px}
 .hero-brand{gap:14px;margin:0 0 26px}
 .hero-brand .cube{width:60px;height:60px}
 @media (max-width:600px){
-  body[data-page="home"] .site-header .wrap{padding-top:6px}
+  body[data-page="home"] .site-header{margin-bottom:-14px}
   .hero-brand{gap:10px;margin:0 0 18px}
   .hero-brand .cube{width:46px;height:46px}
   body .hero-band .hero-brand .wm{font-size:28px}
