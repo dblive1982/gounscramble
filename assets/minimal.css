@@ -382,3 +382,13 @@ html{scroll-behavior:smooth}
 .wm,body .site-header .brand .wm,body .hero-brand .wm,body .hero-band .hero-brand .wm{font-family:'Figtree','Inter',system-ui,sans-serif;color:#1a1917!important;letter-spacing:-.02em}
 .wm b{font-weight:800}
 .cube{filter:drop-shadow(0 3px 6px rgba(30,40,70,.12))}
+
+/* real logo artwork (cube + wordmark cut from the approved mock-up) */
+.cube{filter:none}
+.brand{gap:8px;align-items:center}
+.brand .cube{width:auto;height:26px}
+.brand .wm-img{width:auto;height:17px;display:block}
+.hero-brand{gap:14px}
+.hero-brand .cube{width:auto;height:56px}
+.hero-brand .wm-img{width:auto;height:30px;display:block}
+@media (max-width:600px){.hero-brand .cube{height:46px}.hero-brand .wm-img{height:25px}.brand .cube{height:24px}.brand .wm-img{height:15px}}
