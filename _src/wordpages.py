@@ -43,7 +43,7 @@ def alpha_strip(cur, fn, avail):
     return '<p class="jump">' + " ".join(('<strong>%s</strong>' % l.upper()) if l == cur else ('<a href="%s">%s</a>' % (fn(l), l.upper())) for l in avail) + "</p>"
 
 def footer_links(extra=""):
-    return ('<h2>Keep going</h2><p>Have letters to unscramble? Use the <a href="index.html">word unscrambler</a> or the <a href="anagram-solver.html">anagram solver</a>. '
+    return ('<h2>Keep going</h2><p>Have letters to unscramble? Use the <a href="/">word unscrambler</a> or the <a href="anagram-solver.html">anagram solver</a>. '
             'Browse every list on the <a href="word-lists.html">word lists</a> page.%s</p>' % extra)
 
 def build(words):
@@ -150,7 +150,7 @@ def build(words):
     for n in SUB_LENGTHS:
         sec.append('<h2>%s-letter words by first letter</h2><div class="jump">%s</div>' % (NUM[n].capitalize(), " ".join('<a href="%s">%s</a>' % (f_ls(n, l), l.upper()) for l in letters if len(by_ls.get((n, l), [])) >= MIN_WORDS)))
     sec.append('<h2>Special letters</h2><div class="jump"><a href="words-with-q-without-u.html">Words with Q but no U</a> <a href="words-with-z.html">Words with Z</a> <a href="words-with-j-and-x.html">Words with J and X</a></div>')
-    sec.append('<p>Learn how the lists work on the <a href="word-lists-explained.html">word lists explained</a> page, or <a href="index.html">unscramble your own letters</a>.</p>')
+    sec.append('<p>Learn how the lists work on the <a href="word-lists-explained.html">word lists explained</a> page, or <a href="/">unscramble your own letters</a>.</p>')
     pages["word-lists.html"] = ("Word Lists by Length and First Letter",
         "Browse word lists by length and first letter: two to eight letter words and words starting with every letter, from the ENABLE list.", "\n".join(sec))
     return with_toggle(pages)

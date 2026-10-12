@@ -34,10 +34,10 @@ HOW_TO = """<h1>How to unscramble words</h1>
 <h2>6. Work from short to long, or long to short</h2>
 <p>Finding any word is a start. Once you have a short word, check whether you can extend it: add an <em>S</em>, an <em>-ED</em>, or a letter in the middle. If you are hunting for the longest word, start by trying to use every tile, and only then step down one letter at a time.</p>
 <h2>7. Use blanks and patterns when you have partial information</h2>
-<p>In many puzzles you know some of the letters but not all of them. The <a href="index.html">word unscrambler</a> accepts <strong>?</strong> or <strong>*</strong> for an unknown letter, and the filters under <em>More options</em> let you say what a word starts with, ends with or contains, and how long it is. That turns a huge list into a short one.</p>
+<p>In many puzzles you know some of the letters but not all of them. The <a href="/">word unscrambler</a> accepts <strong>?</strong> or <strong>*</strong> for an unknown letter, and the filters under <em>More options</em> let you say what a word starts with, ends with or contains, and how long it is. That turns a huge list into a short one.</p>
 <h2>Try it on a real jumble</h2>
 <p>Take the letters <strong>A E L P P</strong>. There is a double letter in <em>P</em>, so keep <em>PP</em> together. Common endings include <em>-LE</em>, which leaves <em>A</em>, <em>P</em>, <em>P</em>: that spells <em>apple</em>. The method turned five scattered tiles into a word in two steps.</p>
-<p>When you are stuck, type your letters into the <a href="index.html">unscrambler</a> and compare your own guesses with the full list. Over time you will start to notice which patterns you missed.</p>
+<p>When you are stuck, type your letters into the <a href="/">unscrambler</a> and compare your own guesses with the full list. Over time you will start to notice which patterns you missed.</p>
 """
 
 WHAT_IS_ANAGRAM = """<h1>What is an anagram?</h1>
@@ -53,7 +53,7 @@ WHAT_IS_ANAGRAM = """<h1>What is an anagram?</h1>
 <p>These words are close, but they are not the same.</p>
 <ul>
 <li>An <strong>anagram</strong> uses all of the letters, so the new word has the same length.</li>
-<li>To <strong>unscramble</strong> usually means finding any word hidden in a set of letters. Most word games let you use some of your tiles, not all of them, so unscrambling covers shorter words too. That is why the <a href="index.html">word unscrambler</a> lists words of every length, while the <a href="anagram-solver.html">anagram solver</a> lists only words that use every letter.</li>
+<li>To <strong>unscramble</strong> usually means finding any word hidden in a set of letters. Most word games let you use some of your tiles, not all of them, so unscrambling covers shorter words too. That is why the <a href="/">word unscrambler</a> lists words of every length, while the <a href="anagram-solver.html">anagram solver</a> lists only words that use every letter.</li>
 <li>A <strong>permutation</strong> is any ordering of the letters, whether or not it makes a word. Most permutations are nonsense.</li>
 </ul>
 <h2>How many arrangements are there?</h2>
@@ -81,7 +81,7 @@ SCRABBLE = """<h1>Scrabble tips: score more with the tiles you have</h1>
 <h2>Place high tiles on premium squares</h2>
 <p>A letter on a double or triple letter square is multiplied before the word score is added, and a word square then multiplies the whole word. A <em>J</em> or <em>X</em> on a triple letter square scores far more than the same tile placed plainly. Better still, place an <em>X</em> so that it forms two words at once, such as in a two-letter word that crosses a longer word, so the tile scores twice.</p>
 <h2>Aim for a bingo</h2>
-<p>Using all seven of your tiles in one turn earns a 50-point bonus. That is often worth more than several average turns together. To make bingos more likely, keep a balanced rack: a mix of vowels and consonants, and favour tiles such as <em>E</em>, <em>R</em>, <em>S</em>, <em>T</em>, <em>A</em> and <em>I</em>, which combine into many long words. Plan around common endings like <em>-ING</em>, <em>-ED</em> and <em>-ER</em>. Paste your rack into the <a href="index.html">unscrambler</a> after the game, with a <strong>?</strong> for any blank, to see which long words you missed.</p>
+<p>Using all seven of your tiles in one turn earns a 50-point bonus. That is often worth more than several average turns together. To make bingos more likely, keep a balanced rack: a mix of vowels and consonants, and favour tiles such as <em>E</em>, <em>R</em>, <em>S</em>, <em>T</em>, <em>A</em> and <em>I</em>, which combine into many long words. Plan around common endings like <em>-ING</em>, <em>-ED</em> and <em>-ER</em>. Paste your rack into the <a href="/">unscrambler</a> after the game, with a <strong>?</strong> for any blank, to see which long words you missed.</p>
 <h2>Learn the short words</h2>
 <p>Knowing the valid two- and three-letter words lets you play tiles in tight spots, make parallel plays, and score multiple words at once. See the <a href="two-letter-words.html">two-letter words</a> and <a href="three-letter-words.html">three-letter words</a> lists, and the lists of <a href="words-with-q-without-u.html">words with Q but no U</a>, <a href="words-with-z.html">words with Z</a>, and <a href="words-with-j-and-x.html">words with J and X</a> for your most awkward tiles.</p>
 <h2>Swap when your rack is poor</h2>
@@ -105,7 +105,7 @@ WORDLE = """<h1>Tips for five-letter word puzzles</h1>
 <h2>Beware of the near-miss trap</h2>
 <p>Sometimes your clues fit many words that differ in only one letter, such as <em>_IGHT</em>, which could be <em>light</em>, <em>might</em>, <em>night</em>, <em>right</em>, <em>sight</em> or <em>tight</em>. If you keep guessing one at a time, you can run out of tries. Instead, play a word that tests several of the candidate first letters at once, even if it is not itself a candidate.</p>
 <h2>Use a helper to review, not to cheat</h2>
-<p>After a puzzle, you can paste letters into the <a href="index.html">unscrambler</a>, set <em>Word length</em> to 5 under More options, and set <em>Contains</em> to a letter you know. It helps you learn which words you overlooked. Whether to use a helper during a puzzle is up to you and the rules of the game you play.</p>
+<p>After a puzzle, you can paste letters into the <a href="/">unscrambler</a>, set <em>Word length</em> to 5 under More options, and set <em>Contains</em> to a letter you know. It helps you learn which words you overlooked. Whether to use a helper during a puzzle is up to you and the rules of the game you play.</p>
 """
 
 CROSSWORD = """<h1>Crossword and word-search help</h1>
@@ -113,7 +113,7 @@ CROSSWORD = """<h1>Crossword and word-search help</h1>
 <h2>Start with the easy clues</h2>
 <p>Fill in the short answers and the clues you are sure of first. Each letter you add helps the clues that cross it. Work around the grid rather than finishing one corner.</p>
 <h2>Use the crossing letters</h2>
-<p>When you know some letters of an answer, you have a pattern, such as <strong>T _ A _ E</strong>. That is where a pattern search helps. In the <a href="index.html">word unscrambler</a>, use <em>Starts with</em>, <em>Ends with</em>, <em>Contains</em> and <em>Word length</em>. For pattern-based searching of this kind, set the length, then use the starts-with and ends-with boxes for the known end letters.</p>
+<p>When you know some letters of an answer, you have a pattern, such as <strong>T _ A _ E</strong>. That is where a pattern search helps. In the <a href="/">word unscrambler</a>, use <em>Starts with</em>, <em>Ends with</em>, <em>Contains</em> and <em>Word length</em>. For pattern-based searching of this kind, set the length, then use the starts-with and ends-with boxes for the known end letters.</p>
 <h2>Learn crossword conventions</h2>
 <ul>
 <li>A question mark at the end of a clue often means the answer involves wordplay or a pun.</li>
@@ -156,7 +156,7 @@ PREFIXES = """<h1>Common prefixes and suffixes</h1>
 <li><strong>-ment</strong> makes a noun: <em>movement</em>, <em>payment</em>.</li>
 </ul>
 <h2>Using this in word games</h2>
-<p>In Scrabble-style games, adding an <em>S</em>, <em>ED</em> or <em>ING</em> to a word already on the board is a classic way to score on both lines at once. When you have a long rack, try to spot a suffix first. Our <a href="index.html">unscrambler</a> has an <em>Ends with</em> filter: set it to <em>ing</em> to see only words that finish that way.</p>
+<p>In Scrabble-style games, adding an <em>S</em>, <em>ED</em> or <em>ING</em> to a word already on the board is a classic way to score on both lines at once. When you have a long rack, try to spot a suffix first. Our <a href="/">unscrambler</a> has an <em>Ends with</em> filter: set it to <em>ing</em> to see only words that finish that way.</p>
 <p>Not every word follows the rules, and spelling can change when a suffix is added (<em>happy</em> becomes <em>happiness</em>, <em>run</em> becomes <em>running</em>). Treat these patterns as clues, not guarantees.</p>
 """
 
@@ -320,7 +320,7 @@ def two_letter_page(words):
 </ul>
 <h2>Two-letter words without a vowel</h2>
 <p>A few valid words contain no vowel at all, such as %s. These are worth remembering when you hold only consonants.</p>
-<p>Continue with the <a href="three-letter-words.html">three-letter words</a>, or use the <a href="index.html">unscrambler</a> with <em>Word length</em> set to 2 to find which of these your own tiles can make.</p>
+<p>Continue with the <a href="three-letter-words.html">three-letter words</a>, or use the <a href="/">unscrambler</a> with <em>Word length</em> set to 2 to find which of these your own tiles can make.</p>
 """ % (len(w2), chips(w2), ", ".join("<em>%s</em>" % w for w in w2 if not any(c in "aeiouy" for c in w)))
 
 
@@ -361,7 +361,7 @@ def q_page(words):
 <li><strong>qwerty</strong>, the name of the standard keyboard layout, is on this list, and it needs no U.</li>
 </ul>
 <h2>Plan ahead</h2>
-<p>If you hold a Q early in a game, keep a U in your rack, or aim for a word with <em>QU</em> in it. The <a href="index.html">unscrambler</a> with a <em>Contains</em> filter set to <em>qu</em> shows words that use both. See <a href="scrabble-tips.html">Scrabble tips</a> for more on awkward tiles.</p>
+<p>If you hold a Q early in a game, keep a U in your rack, or aim for a word with <em>QU</em> in it. The <a href="/">unscrambler</a> with a <em>Contains</em> filter set to <em>qu</em> shows words that use both. See <a href="scrabble-tips.html">Scrabble tips</a> for more on awkward tiles.</p>
 """ % (len(q), chips(q))
 
 
@@ -379,7 +379,7 @@ def z_page(words):
 <ul>
 <li>A short Z word on a double or triple letter square usually scores more than a long plain word.</li>
 <li>Look for places where your Z can sit on a premium square and also form a second word.</li>
-<li>For longer options, try the <a href="index.html">unscrambler</a> with your tiles plus the Z, and set <em>Contains</em> to <em>z</em>.</li>
+<li>For longer options, try the <a href="/">unscrambler</a> with your tiles plus the Z, and set <em>Contains</em> to <em>z</em>.</li>
 </ul>
 <p>Related lists: <a href="words-with-q-without-u.html">words with Q but no U</a> and <a href="words-with-j-and-x.html">words with J and X</a>.</p>
 """ % secs
@@ -435,7 +435,7 @@ HOME_EXTRA = """<section class="block narrow">
 
 ANAGRAM_EXTRA = """<section class="block narrow">
 <h2>Anagram or unscramble?</h2>
-<p>An anagram uses every letter you have, exactly once. The unscrambler is wider: it also shows shorter words that use only some of your letters. If you are solving a cryptic crossword clue or a puzzle that says <em>rearrange all the letters</em>, you want an anagram. If you are playing a tile game, you probably want the <a href="index.html">unscrambler</a>.</p>
+<p>An anagram uses every letter you have, exactly once. The unscrambler is wider: it also shows shorter words that use only some of your letters. If you are solving a cryptic crossword clue or a puzzle that says <em>rearrange all the letters</em>, you want an anagram. If you are playing a tile game, you probably want the <a href="/">unscrambler</a>.</p>
 <h2>Examples</h2>
 <p>The letters <strong>LISTEN</strong> give <em>silent</em>, <em>enlist</em>, <em>tinsel</em> and <em>inlets</em>. The letters <strong>EVIL</strong> give <em>live</em>, <em>veil</em> and <em>vile</em>. A blank can fill a missing letter: <strong>LIS?EN</strong> tries every letter in the blank place.</p>
 <p>Read more in <a href="what-is-an-anagram.html">what is an anagram</a> and <a href="crossword-help.html">crossword help</a>.</p>

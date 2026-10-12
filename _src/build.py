@@ -59,7 +59,7 @@ HEADER = """<!--header-->
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
 <div class="menu-list">
 <button type="button" class="menu-x" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></button>
-<a href="index.html"@@CUR_home@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Word unscrambler</a>
+<a href="/"@@CUR_home@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Word unscrambler</a>
 <p class="menu-h">Word tools</p>
 <a href="anagram-solver.html"@@CUR_anagram@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M4 12h16M4 17h7M17 5l3 2-3 2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Anagram solver</a>
 <a href="word-counter.html"@@CUR_counter@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9M12 19V5M19 19v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Word counter</a>
@@ -85,7 +85,7 @@ HEADER = """<!--header-->
 </div>
 </details>
 </nav>
-<a class="brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="26" height="26" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
+<a class="brand" href="/" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="26" height="26" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="17" r="7" fill="currentColor"/><path d="M6 40c0-9 6-14.5 14-14.5S34 31 34 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 
 </div></header>
@@ -116,7 +116,7 @@ def social_html():
 
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
-<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="22" height="22" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a></div>
+<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="22" height="22" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a></div>
 <p class="foot-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg><span>Site secured using Encrypted HTTPS connection.</span></p>
 <p class="foot-legal"><b>Disclaimer:</b> everything on this site, including calculator results, word lists and tips, is for general information and entertainment only. It is not financial, tax, investment, legal, medical or other professional advice, and results may contain errors. We accept no responsibility for any loss or decision that comes from using it, so please check with a qualified professional before acting. See our <a href="terms.html">terms</a>.</p>
 <p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way.</p>
@@ -159,7 +159,7 @@ window.guMenu()})();</script>
 """
 
 TOOLS = [
-    ("unscrambler", "index.html", "Wu", "Word unscrambler", "Turn jumbled letters into every word they can make."),
+    ("unscrambler", "/", "Wu", "Word unscrambler", "Turn jumbled letters into every word they can make."),
     ("anagram", "anagram-solver.html", "As", "Anagram solver", "Find words that use every one of your letters."),
     ("counter", "word-counter.html", "123", "Word counter", "Count words, characters, sentences and reading time."),
     ("case", "case-converter.html", "Cc", "Case converter", "Switch text between upper, lower, title and sentence case."),
@@ -314,7 +314,7 @@ FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer 
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
-<a class="hero-brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
+<a class="hero-brand" href="/" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
 <form id="f" class="box" autocomplete="off">
 <svg class="sico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#9aa1ae" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
@@ -364,7 +364,7 @@ ANAGRAM = """<main><div class="wrap">
 </section>
 <section class="block narrow">
 <h2>How it works</h2>
-<p>An anagram uses all of the letters you give it, once each. Type your letters and the solver lists every word of exactly that length. Add a ? or * for a blank tile that can stand for any letter. To see shorter words too, use the <a href="index.html">word unscrambler</a>.</p>
+<p>An anagram uses all of the letters you give it, once each. Type your letters and the solver lists every word of exactly that length. Add a ? or * for a blank tile that can stand for any letter. To see shorter words too, use the <a href="/">word unscrambler</a>.</p>
 </section>
 @@ANAGRAM_EXTRA@@
 <section class="block">

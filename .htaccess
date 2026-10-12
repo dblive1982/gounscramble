@@ -4,3 +4,8 @@ RedirectMatch 404 ^/(_src|\.git)(/|$)
 # Account API: only the public endpoints are reachable; helper files are not.
 RedirectMatch 404 ^/api/_
 RedirectMatch 404 ^/gu-config
+
+# Send /index.html to the bare home page (only direct requests, not the internal DirectoryIndex lookup).
+RewriteEngine On
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?]
+RewriteRule ^index\.html$ / [R=301,L]
