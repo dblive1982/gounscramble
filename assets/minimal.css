@@ -260,3 +260,4 @@ body .hm .t{background:#fdf0c4!important;border:1px solid #e4cf93;box-shadow:0 2
 body .hm .t.blank{background:var(--primary)!important;border-color:var(--primary);box-shadow:0 2px 0 #d93a40;color:#fff!important}
 body .hm .box input{letter-spacing:.01em}
 body .hm .box input::placeholder{letter-spacing:.01em}
+.hero-brand{text-decoration:none;color:inherit;cursor:pointer}.hero-brand:hover .wm{opacity:.8}
