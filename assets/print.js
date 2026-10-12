@@ -57,6 +57,10 @@
       if (!window.__mzPrint) return null;
       return page("Maze", "Find the way from START to FINISH without crossing a wall.", "<div class='pmz'>" + window.__mzPrint() + "</div>");
     },
+    wordle: function () {
+      if (!window.__wgPrint) return null;
+      return page("Wordle Global", "Guess the five-letter word in six tries. Write each guess in a row, then mark letters in the right place, in the word, or not in it.", "<div class='pwgw'>" + window.__wgPrint() + "</div>");
+    },
     memory: function () {
       var f = ["A", "B", "C", "D", "E", "F", "G", "H"], c = "";
       for (var i = 0; i < 16; i++) c += "<div class='pm'>" + (i % 2 ? "" : "") + "</div>";

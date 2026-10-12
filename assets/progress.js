@@ -48,6 +48,35 @@
       r.t = Math.max(a.t || 0, b.t || 0);
       out.gs = r;
     })();
+    (function () {                       // Wordle Global: stats and streak never go backwards; the furthest board wins
+      var a = local.wg, b = remote.wg;
+      if (!a && !b) return;
+      if (!a) { out.wg = b; return; } if (!b) { out.wg = a; return; }
+      var newer = ((a.t || 0) >= (b.t || 0)) ? a : b, r = { t: Math.max(a.t || 0, b.t || 0), hc: newer.hc, m: newer.m };
+      var x = a.d, y = b.d;
+      if (x && y) r.d = (x.id !== y.id) ? (x.id > y.id ? x : y) : ((x.done && !y.done) ? x : (y.done && !x.done) ? y : ((y.g || []).length > (x.g || []).length ? y : x));
+      else if (x || y) r.d = x || y;
+      var u = newer.u || a.u || b.u; if (u) r.u = u;
+      var sa = a.st, sb = b.st;
+      if (sa || sb) {
+        sa = sa || {}; sb = sb || {};
+        var lead = ((sa.l || "") > (sb.l || "")) ? sa : ((sb.l || "") > (sa.l || "")) ? sb : null, st = {}, i;
+        st.p = Math.max(sa.p || 0, sb.p || 0); st.w = Math.max(sa.w || 0, sb.w || 0); st.b = Math.max(sa.b || 0, sb.b || 0);
+        st.l = lead ? lead.l : (sa.l || sb.l || ""); st.s = lead ? (lead.s || 0) : Math.max(sa.s || 0, sb.s || 0);
+        st.dist = []; for (i = 0; i < 6; i++) st.dist.push(Math.max((sa.dist || [])[i] || 0, (sb.dist || [])[i] || 0));
+        r.st = st;
+      }
+      if (a.su || b.su) r.su = { p: Math.max((a.su || {}).p || 0, (b.su || {}).p || 0), w: Math.max((a.su || {}).w || 0, (b.su || {}).w || 0) };
+      out.wg = r;
+    })();
+    (function () {                       // Maze best times: the fastest of each size
+      var a = local.mz, b = remote.mz;
+      if (!a && !b) return;
+      a = a || {}; b = b || {};
+      var r = { t: Math.max(a.t || 0, b.t || 0) };
+      ["easy", "medium", "hard"].forEach(function (k) { var x = a[k] || 0, y = b[k] || 0; r[k] = (x && y) ? Math.min(x, y) : (x || y); });
+      out.mz = r;
+    })();
     (function () {                       // days played: keep every day seen on either side
       var a = local.ad, b = remote.ad;
       if (!a && !b) return;

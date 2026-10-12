@@ -980,3 +980,13 @@ body .site-footer .wrap>.hb-dir{padding-top:30px}
 body .gm .pill.on{background:#e3eaff!important;border-color:#8ea4ff!important;color:#2f49d6!important;font-weight:600!important}
 /* search box and everything under it, slightly lower */
 body .hero-band .hero-brand{margin:0 0 22px}
+
+/* games header stays on one line; long titles wrap inside their own space */
+body .gm .gtop{flex-wrap:nowrap}
+body .gm .gtop h1{flex:1 1 0;min-width:0;font-size:clamp(20px,5.6vw,34px)}
+body .gm .gtop .ib,body .gm .gtop .back{flex:0 0 auto}
+/* Wordle Global: a little smaller so the keyboard fits on a phone screen */
+.gm .wgb{width:min(100%,300px);gap:5px}.gm .wgr{gap:5px}
+.gm .wgt{font-size:clamp(22px,7vw,28px);border-width:2px}
+.gm .wgkey{height:46px}
+.gm .wgkey.w{flex:1.9 1 0;font-size:11px;letter-spacing:-.02em}

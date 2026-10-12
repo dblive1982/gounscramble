@@ -251,3 +251,31 @@ html,body{overflow-x:clip;max-width:100%}
 .gm .mzpad button{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:20px;cursor:pointer;box-shadow:var(--sh-s);display:grid;place-items:center;padding:0}
 .gm .mzpad button:active{background:#e3eaff}
 .gm .mzpad button[data-d="1"]{grid-area:u}.gm .mzpad button[data-d="8"]{grid-area:l}.gm .mzpad button[data-d="4"]{grid-area:d}.gm .mzpad button[data-d="2"]{grid-area:r}
+
+/* Wordle Global */
+.gm .wgb{display:grid;gap:6px;width:min(100%,330px);margin:6px auto}
+.gm .wgr{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.gm .wgt{aspect-ratio:1;display:grid;place-items:center;border:3px solid #cfcfd6;border-radius:8px;background:var(--tile);font-family:var(--display);font-weight:700;font-size:clamp(24px,8vw,32px);text-transform:uppercase;color:var(--ink)}
+.gm .wgt.f{border-color:var(--ink)}
+.gm .wgt.s0,.gm .wgkey.s0{background:#c3c7d2;border-color:#c3c7d2;color:#000}
+.gm .wgt.s1,.gm .wgkey.s1{background:#ffd23f;border-color:#ffd23f;color:#000}
+.gm .wgt.s2,.gm .wgkey.s2{background:#00bf63;border-color:#00bf63;color:#000}
+.gm .hc .wgt.s1,.gm .hc~.wgk .wgkey.s1{background:#7fb8ff;border-color:#7fb8ff}
+.gm .hc .wgt.s2,.gm .hc~.wgk .wgkey.s2{background:#ff8a3d;border-color:#ff8a3d}
+.gm .wgt.rev{animation:wgflip .5s ease both}
+@keyframes wgflip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+.gm .wgr.bad{animation:wgshake .35s}
+@keyframes wgshake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.gm .wgk{display:grid;gap:6px;width:min(100%,460px);margin:4px auto}
+.gm .wgkr{display:flex;gap:5px;justify-content:center}
+.gm .wgkey{flex:1 1 0;min-width:0;height:50px;border:2px solid var(--ink);border-radius:8px;background:var(--tile);color:var(--ink);font-family:var(--display);font-weight:700;font-size:16px;text-transform:uppercase;cursor:pointer;padding:0}
+.gm .wgkey.w{flex:1.6 1 0;font-size:13px}
+.gm .wgkey.s0,.gm .wgkey.s1,.gm .wgkey.s2{border-color:var(--ink)}
+.gm .wgkey:active{filter:brightness(.92)}
+@media (prefers-reduced-motion:reduce){.gm .wgt.rev,.gm .wgr.bad{animation:none}}
+@media print{
+  #print-sheet .pwgw{text-align:center}
+  #print-sheet .pwg{border-collapse:separate;border-spacing:6pt;margin:0 auto}
+  #print-sheet .pwg td{width:34mm;height:34mm;border:2pt solid #000}
+  #print-sheet .pwk{font-size:15pt;letter-spacing:.08em;margin:6pt 0}
+}

@@ -210,6 +210,7 @@ HUB = """<div class="hub">
 <section class="hb-sec" id="s-games" aria-labelledby="hb-games"><div class="hb-head"><div><h2 id="hb-games">Puzzles &amp; Games</h2><p class="hb-sub">Free puzzles you can play right here.</p></div><a class="hb-arrow" href="games.html" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-teal" data-pop="300!" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
+<a class="hb-card c-green" data-pop="DAILY" href="games.html#wordle"><span class="hb-ic">W5</span><b>Wordle Global</b><span>Guess the five-letter word in six tries. A new word every day, plus unlimited play.</span><em>1 player</em></a>
 <a class="hb-card c-yellow" href="games.html#sudoku"><span class="hb-ic">9&times;9</span><b>Sudoku</b><span>Three levels, from a gentle warm-up to a proper head-scratcher.</span><em>1 player</em></a>
 <a class="hb-card c-pink" href="games.html#connect4"><span class="hb-ic">4</span><b>Connect 4</b><span>Drop discs and line up four. Beat the computer or a friend.</span><em>1-2 players</em></a>
 <a class="hb-card c-lilac" data-pop="2 PLAYERS" href="games.html#hangman"><span class="hb-ic">A_</span><b>Hangman</b><span>Guess the word one letter at a time, or set a secret word for a friend.</span><em>1-2 players</em></a>
@@ -486,7 +487,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Your profile</h2>
 <p>On your account page you can add a profile picture, a short bio, a location and a favourite game. All of these are optional, are only visible to you, and are stored with your account. You can change or remove them at any time. The picture is resized in your browser before it is saved.</p>
 <h2>Saved progress</h2>
-<p>Your game progress and activity, plus any short diary notes you write on the calendar, such as word search puzzles you have started or finished, your Sudoku game, your scores and your play calendar, is saved to your account while you are signed in, so it follows you between devices. When you sign out, it is removed from your device, and signed-out play is not saved. You can reset it, or delete your account, from the account page at any time.</p>
+<p>Your game progress and activity, plus any short diary notes you write on the calendar, such as word search puzzles you have started or finished, your Sudoku game, your Wordle Global streak and stats, your best Maze times, your scores and your play calendar, is saved to your account while you are signed in, so it follows you between devices. When you sign out, it is removed from your device, and signed-out play is not saved. You can reset it, or delete your account, from the account page at any time.</p>
 <h2>Cookies and browser storage</h2>
 <p>When you sign in we set one session cookie to keep you signed in. While you are signed in we also use your browser's local storage to keep your game progress and remember that you are signed in. Signing out clears it. These are needed for the features you ask for. Advertising cookies are covered below.</p>
 <h2>Deleting your account</h2>
@@ -589,8 +590,8 @@ PAGES = [
          title="Sign in | GoUnscramble",
          desc="Sign in or create a free GoUnscramble account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
-         title="Free Puzzles & Games | GoUnscramble",
-         desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
+         title="Free Puzzles & Games, Wordle Global | GoUnscramble",
+         desc="Free puzzles and games you can play in your browser: Wordle Global (a daily five-letter word game), word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | GoUnscramble",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),

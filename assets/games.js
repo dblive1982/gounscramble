@@ -11,7 +11,7 @@ const slVs=a=>{const two=SL.mode==="two";vsDraw("sl-vs",[{c:"var(--wild)",n:two?
 const c4Vs=()=>{const two=C4.mode==="two";vsDraw("c4-vs",[{c:"var(--wild)",n:two?"Player 1":"You"},{c:"#ffd23f",n:two?"Player 2":"Computer ("+(C4.mode==="easy"?"Easy":"Hard")+")"}],C4.over?-1:C4.turn-1)};
 const ttVs=()=>{const two=TT3.mode==="two";vsDraw("tt-vs",[{m:"X",n:two?"Player 1":"You"},{m:"O",n:two?"Player 2":"Computer ("+(TT3.mode==="easy"?"Easy":"Hard")+")"}],TT3.over?-1:(TT3.turn==="X"?0:1))};
 /* ---------- menu + routing ---------- */
-const TT={games:"Puzzles & games",maze:"Maze",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",runner:"Offline Runner",retrosnake:"Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Space Invaders",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper",rocks:"Rock Blaster",flap:"Sky Flap",moles:"Mole Pop",echo:"Colour Echo",merge:"Number Merge",mines:"Mine Finder"};
+const TT={games:"Puzzles & games",wordle:"Wordle Global",maze:"Maze",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",runner:"Offline Runner",retrosnake:"Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Space Invaders",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper",rocks:"Rock Blaster",flap:"Sky Flap",moles:"Mole Pop",echo:"Colour Echo",merge:"Number Merge",mines:"Mine Finder"};
 const INIT={};
 ["runner","retrosnake","rally","bricks","blaster","muncher","blocks","hopper","rocks","flap","moles","echo","merge","mines"].forEach(id=>{INIT[id]=()=>{if(window.ARC)ARC.init(id)}});
 function menu(o){var m=document.querySelector(".site-header .menu");if(m&&!o)m.removeAttribute("open")}
@@ -166,7 +166,7 @@ function mzSvg(o,n,opt){opt=opt||{};const S=10,P=2,W=n*S+P*2;let w="";
 function mzDraw(){$("mz").innerHTML=mzSvg(MZ.w,MZ.n,{trail:MZ.trail,pos:MZ.pos,sol:MZ.sol})}
 function mzMsg(t){$("mz-msg").textContent=t}
 function mzTime(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
-function mzBest(){try{return JSON.parse(localStorage.getItem("gu-mz")||"{}")}catch(e){return {}}}
+function mzBest(){let o={};try{o=JSON.parse(localStorage.getItem("gu-mz")||"{}")}catch(e){}const a=GUP.get("mz")||{};["easy","medium","hard"].forEach(k=>{if(a[k]>0&&(!o[k]||a[k]<o[k]))o[k]=a[k]});return o}
 function mzStat(){const b=mzBest()[MZ.lv];$("mz-stat").textContent="Moves "+MZ.moves+(MZ.t0&&!MZ.done?" · "+mzTime(Date.now()-MZ.t0):"")+(b?" · Best "+mzTime(b):"")}
 function mzNew(){MZ.n=MZN[MZ.lv];MZ.w=mzGen(MZ.n);MZ.pos=0;MZ.trail=[0];MZ.moves=0;MZ.t0=0;MZ.done=false;MZ.sol=false;$("mz-sol").textContent="Show solution";mzDraw();mzMsg("Get from the dot to the flag. Use the arrows, swipe, or the buttons.");mzStat()}
 function mzGo(bit,once){if(MZ.done)return;const n=MZ.n;let moved=false;
@@ -175,7 +175,7 @@ function mzGo(bit,once){if(MZ.done)return;const n=MZ.n;let moved=false;
     if(!MZ.t0)MZ.t0=Date.now();if(d===n*n-1)break;
     const open=[1,2,4,8].filter(b=>MZ.w[d]&b&&b!==({1:4,2:8,4:1,8:2}[bit]));if(open.length!==1)break;bit=open[0]}
   if(!moved)return;mzDraw();
-  if(MZ.pos===n*n-1){MZ.done=true;const tm=Date.now()-MZ.t0,b=mzBest();let extra="";if(!b[MZ.lv]||tm<b[MZ.lv]){b[MZ.lv]=tm;extra=" New best!";try{localStorage.setItem("gu-mz",JSON.stringify(b))}catch(e){}}
+  if(MZ.pos===n*n-1){MZ.done=true;const tm=Date.now()-MZ.t0,b=mzBest();let extra="";if(!b[MZ.lv]||tm<b[MZ.lv]){b[MZ.lv]=tm;extra=" New best!";try{localStorage.setItem("gu-mz",JSON.stringify(b))}catch(e){}GUP.set("mz",{easy:b.easy||0,medium:b.medium||0,hard:b.hard||0})}
     mzMsg("You made it in "+mzTime(tm)+" with "+MZ.moves+" moves."+extra);mzStat();return}
   mzStat()}
 const MZK={ArrowUp:1,w:1,W:1,ArrowRight:2,d:2,D:2,ArrowDown:4,s:4,S:4,ArrowLeft:8,a:8,A:8};
@@ -191,6 +191,72 @@ INIT.maze=()=>{pills($("mz-lv"),[["easy","Easy"],["medium","Medium"],["hard","Ha
   clearInterval(tid);tid=setInterval(()=>{if(!$("v-maze").hidden&&MZ.t0&&!MZ.done)mzStat()},1000);
   mzNew()};
 window.__mzPrint=()=>mzSvg(MZ.w,MZ.n,{print:true});
+
+/* ---------- Wordle Global ---------- */
+const WG={mode:"daily",ans:"",id:"",rows:[],cur:"",done:false,win:false,hc:false,ready:false,busy:false};
+const WGM=["Genius","Magnificent","Impressive","Splendid","Great","Phew"];
+const WGKB=["qwertyuiop","asdfghjkl","+zxcvbnm-"];
+function wgDay(){const d=new Date(),p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
+function wgYest(){const d=new Date();d.setDate(d.getDate()-1);const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
+function wgWords(){const a=window.WGD.a,o=[];for(let i=0;i<a.length;i+=5)o.push(a.substr(i,5));return o}
+function wgDaily(){const l=wgWords(),d=new Date(),n=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(2026,0,1))/864e5);return l[((n%l.length)+l.length)%l.length]}
+function wgValid(w){if(!WG.set){WG.set=new Set();const g=window.WGD.g;for(let i=0;i<g.length;i+=5)WG.set.add(g.substr(i,5))}return WG.set.has(w)}
+function wgEval(g,a){const r=[0,0,0,0,0],left={};for(let i=0;i<5;i++){if(g[i]===a[i])r[i]=2;else left[a[i]]=(left[a[i]]||0)+1}for(let i=0;i<5;i++)if(r[i]!==2&&left[g[i]]>0){r[i]=1;left[g[i]]--}return r}
+const wgSv=()=>GUP.get("wg")||{};
+function wgPut(patch){const o=Object.assign({},wgSv(),patch);o.hc=WG.hc;o.m=WG.mode;GUP.set("wg",o)}
+function wgSaveBoard(){if(WG.mode==="daily")wgPut({d:{id:WG.id,g:WG.rows.slice(),done:WG.done,win:WG.win}});else wgPut({u:{a:WG.ans,g:WG.rows.slice(),done:WG.done,win:WG.win}})}
+function wgLoad(){const sv=wgSv();let b=null;
+  if(WG.mode==="daily"){WG.id=wgDay();WG.ans=wgDaily();if(sv.d&&sv.d.id===WG.id)b=sv.d}
+  else{if(sv.u&&sv.u.a&&wgValid(sv.u.a)&&!sv.u.done)b=sv.u;else{const l=wgWords();WG.ans=l[rnd(l.length)];b=null}if(b)WG.ans=b.a}
+  WG.rows=b&&Array.isArray(b.g)?b.g.filter(w=>typeof w==="string"&&w.length===5):[];WG.cur="";WG.done=!!(b&&b.done);WG.win=!!(b&&b.win)}
+function wgStats(){const o=wgSv(),s=o.st||{};return {p:s.p||0,w:s.w||0,s:s.s||0,b:s.b||0,l:s.l||"",dist:(s.dist||[0,0,0,0,0,0]).slice()}}
+function wgFinish(){
+  if(WG.mode==="daily"){const s=wgStats();s.p++;if(WG.win){s.w++;s.dist[WG.rows.length-1]=(s.dist[WG.rows.length-1]||0)+1;s.s=(s.l===wgYest()||s.l===WG.id)?s.s+1:1;if(s.s>s.b)s.b=s.s}else s.s=0;s.l=WG.id;
+    wgPut({d:{id:WG.id,g:WG.rows.slice(),done:true,win:WG.win},st:s})}
+  else{const o=wgSv().su||{p:0,w:0};wgPut({u:{a:WG.ans,g:WG.rows.slice(),done:true,win:WG.win},su:{p:(o.p||0)+1,w:(o.w||0)+(WG.win?1:0)}})}}
+function wgKeyState(){const m={};WG.rows.forEach(g=>{const r=wgEval(g,WG.ans);for(let i=0;i<5;i++){const c=g[i];m[c]=Math.max(m[c]===undefined?-1:m[c],r[i])}});return m}
+function wgDraw(rev){const host=$("wg-grid");host.className="wgb"+(WG.hc?" hc":"");let h="";
+  for(let r=0;r<6;r++){const g=WG.rows[r],typing=r===WG.rows.length&&!WG.done,res=g?wgEval(g,WG.ans):null;h+='<div class="wgr" role="row">';
+    for(let i=0;i<5;i++){const ch=g?g[i]:(typing?(WG.cur[i]||""):"");h+='<div class="wgt'+(res?" s"+res[i]+(rev&&r===WG.rows.length-1?" rev":""):(ch?" f":""))+'" role="gridcell"'+(rev&&res&&r===WG.rows.length-1?' style="animation-delay:'+i*110+'ms"':"")+">"+ch+"</div>"}
+    h+="</div>"}
+  host.innerHTML=h;
+  const ks=wgKeyState();document.querySelectorAll("#wg-kb [data-k]").forEach(b=>{const k=b.dataset.k,v=ks[k];b.className="wgkey"+(v===undefined?"":" s"+v)+(k==="+"||k==="-"?" w":"")})}
+function wgMsg(t){$("wg-msg").textContent=t}
+function wgStat(){const s=wgStats(),u=wgSv().su||{p:0,w:0};
+  $("wg-stat").textContent="Daily: played "+s.p+" · won "+(s.p?Math.round(100*s.w/s.p):0)+"% · streak "+s.s+" · best "+s.b+(u.p?" | Unlimited: won "+u.w+" of "+u.p:"");
+  $("wg-note").textContent=GUP.signedIn()?"":"Sign in to keep your streak and stats on every device.";
+  $("wg-new").hidden=WG.mode!=="unlimited";$("wg-share").hidden=!WG.done;$("wg-hc").setAttribute("aria-pressed",WG.hc?"true":"false");$("wg-hc").classList.toggle("on",WG.hc)}
+function wgEnd(){wgMsg(WG.win?WGM[WG.rows.length-1]+"! "+(WG.mode==="daily"?"Come back tomorrow for a new word.":""):"The word was "+WG.ans.toUpperCase()+"."+(WG.mode==="daily"?" Come back tomorrow for a new word.":""))}
+function wgNew(){WG.rows=[];WG.cur="";WG.done=false;WG.win=false;const l=wgWords();WG.ans=l[rnd(l.length)];wgSaveBoard();wgDraw();wgStat();wgMsg("Type a five-letter word and press Enter.")}
+function wgSubmit(){if(WG.done||WG.busy)return;if(WG.cur.length<5){wgMsg("Not enough letters");wgShake();return}
+  if(!wgValid(WG.cur)){wgMsg("Not in the word list");wgShake();return}
+  WG.rows.push(WG.cur);WG.cur="";const g=WG.rows[WG.rows.length-1];
+  if(g===WG.ans){WG.done=true;WG.win=true}else if(WG.rows.length>=6){WG.done=true}
+  if(WG.done)wgFinish();else wgSaveBoard();
+  WG.busy=true;wgDraw(true);setTimeout(()=>{WG.busy=false;wgDraw();wgStat();if(WG.done)wgEnd();else wgMsg("")},650)}
+function wgShake(){const rows=document.querySelectorAll("#wg-grid .wgr"),r=rows[WG.rows.length];if(r){r.classList.remove("bad");void r.offsetWidth;r.classList.add("bad")}}
+function wgKey(k){if(WG.done||WG.busy||!WG.ready)return;
+  if(k==="+"){wgSubmit();return}
+  if(k==="-"){WG.cur=WG.cur.slice(0,-1)}else if(/^[a-z]$/.test(k)&&WG.cur.length<5)WG.cur+=k;else return;
+  wgMsg("");wgDraw()}
+function wgShare(){const s=WG.rows.map(g=>wgEval(g,WG.ans).map(v=>v===2?(WG.hc?"\u{1F7E7}":"\u{1F7E9}"):v===1?(WG.hc?"\u{1F7E6}":"\u{1F7E8}"):"⬛").join("")).join("\n");
+  const t="Wordle Global "+(WG.mode==="daily"?WG.id+" ":"")+(WG.win?WG.rows.length:"X")+"/6\n"+s+"\n"+location.origin+location.pathname+"#wordle";
+  if(navigator.share){navigator.share({text:t}).catch(()=>{});return}
+  const done=()=>window.GUToast&&GUToast("Result copied");
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,()=>window.prompt("Copy your result",t));else window.prompt("Copy your result",t)}
+function wgStart(){if(!window.WGD)return;WG.ready=true;const sv=wgSv();WG.mode=sv.m==="unlimited"?"unlimited":"daily";WG.hc=!!sv.hc;
+  pills($("wg-lv"),[["daily","Daily word"],["unlimited","Unlimited"]],WG.mode,v=>{WG.mode=v;wgLoad();wgPut({});wgDraw();wgStat();if(WG.done)wgEnd();else wgMsg("Type a five-letter word and press Enter.")});
+  $("wg-kb").innerHTML=WGKB.map(r=>'<div class="wgkr">'+[...r].map(c=>'<button type="button" data-k="'+c+'" class="wgkey'+(c==="+"||c==="-"?" w":"")+'" aria-label="'+(c==="+"?"Enter":c==="-"?"Delete":c)+'">'+(c==="+"?"Enter":c==="-"?"⌫":c)+"</button>").join("")+"</div>").join("");
+  $("wg-kb").addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(b)wgKey(b.dataset.k)});
+  document.addEventListener("keydown",e=>{if($("v-wordle").hidden||e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target.tagName;if(t==="INPUT"||t==="SELECT"||t==="TEXTAREA"||t==="BUTTON"&&e.key==="Enter")return;
+    if(e.key==="Enter"){e.preventDefault();wgKey("+")}else if(e.key==="Backspace"){e.preventDefault();wgKey("-")}else if(/^[a-zA-Z]$/.test(e.key)){wgKey(e.key.toLowerCase())}});
+  $("wg-new").addEventListener("click",wgNew);$("wg-share").addEventListener("click",wgShare);
+  $("wg-hc").addEventListener("click",()=>{WG.hc=!WG.hc;wgPut({});wgDraw();wgStat()});
+  GUP.onChange(()=>{if(!WG.ready||WG.cur||WG.busy)return;const sv=wgSv();WG.mode=sv.m==="unlimited"?"unlimited":"daily";WG.hc=!!sv.hc;wgStart2()});
+  wgLoad();wgDraw();wgStat();if(WG.done)wgEnd();else wgMsg(WG.rows.length?"":"Type a five-letter word and press Enter.")}
+function wgStart2(){wgLoad();document.querySelectorAll("#wg-lv .pill").forEach((b,i)=>b.classList.toggle("on",(i===0)===(WG.mode==="daily")));wgDraw();wgStat();if(WG.done)wgEnd()}
+INIT.wordle=()=>{if(window.WGD){wgStart();return}const sc=document.createElement("script");sc.src="assets/wg-words.js?v=1";sc.onload=wgStart;sc.onerror=()=>{$("wg-msg").textContent="Could not load the word list. Check your connection and reload."};document.head.appendChild(sc)};
+window.__wgPrint=()=>{let g="";for(let r=0;r<6;r++){g+="<tr>";for(let i=0;i<5;i++)g+="<td></td>";g+="</tr>"}return "<table class='pwg'>"+g+"</table><p class='pn'>Cross off the letters you have used:</p><p class='pwk'>"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").join(" ")+"</p>"};
 
 /* ---------- Memory match ---------- */
 const MM={cards:[],open:[],moves:0,found:0,lock:false,mode:"one",turn:0,sc:[0,0]};
