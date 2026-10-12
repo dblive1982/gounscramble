@@ -736,3 +736,16 @@ body .sal-h2{margin-top:26px}
 body .gm .c4 i.p1{background:#e5484d!important;box-shadow:inset 0 -3px 5px rgba(0,0,0,.18)!important}
 body .gm .c4 i.p2{background:#ffd23f!important;box-shadow:inset 0 -3px 5px rgba(0,0,0,.14)!important}
 body .gm .c4 i.win{box-shadow:0 0 0 3px #fff,inset 0 -3px 5px rgba(0,0,0,.18)!important}
+/* calculators: renderer extras */
+body .cr-h{font-size:15px;font-weight:700;margin:20px 0 4px;color:var(--ink)}
+body .cr-warn{background:#fff4e5;color:#8a4b00;border-radius:12px;padding:10px 14px;margin:12px 0 0;font-size:14px;line-height:1.45}
+body .cr-tall{max-height:360px;overflow:auto}
+body .cf-check{flex-direction:row;align-items:center}
+body .cf-chk{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+body .cf-chk input{width:20px;height:20px;accent-color:#5170ff;flex:none}
+body .cf-hint{font-size:12px;color:var(--muted);margin-top:4px}
+body .acc summary em.on{background:#eaf0ff;color:#2f49d6}
+body .acc[hidden],body .cf[hidden]{display:none!important}
+body textarea.field{min-height:110px;resize:vertical;font-family:inherit;line-height:1.5}
+body .cr-hero .cr-v.mono,body .cr-hero.mono .cr-v{font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all;font-size:22px}
+body .cr-v,body .cr-row dd{overflow-wrap:anywhere}

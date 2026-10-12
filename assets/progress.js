@@ -23,7 +23,7 @@
 
   // Combine what this device has with what the account has, never losing a finished puzzle.
   // Anything saved before the latest "reset" (on any device) is dropped.
-  function strip(d, rs) { var r = {}, k; for (k in d) if (k !== "rs" && (k === "dy" || !d[k] || (d[k].t || 0) >= rs)) r[k] = d[k]; return r; }
+  function strip(d, rs) { var r = {}, k; for (k in d) if (k !== "rs" && (k === "dy" || k === "cc" || !d[k] || (d[k].t || 0) >= rs)) r[k] = d[k]; return r; }
   function merge(local, remote) {
     local = local || {}; remote = remote || {};
     var rst = Math.max((local.rs || {}).t || 0, (remote.rs || {}).t || 0);
@@ -64,6 +64,14 @@
       for (k in an) r[k] = an[k];
       for (k in bn) if (!r[k] || (bn[k].t || 0) > (r[k].t || 0)) r[k] = bn[k];
       out.dy = { n: r, t: Math.max((a || {}).t || 0, (b || {}).t || 0) };
+    })();
+    (function () {                       // saved calculators: newest save of each calculator wins
+      var a = local.cc, b = remote.cc;
+      if (!a && !b) return;
+      var r = {}, k; a = a || {}; b = b || {};
+      for (k in a) r[k] = a[k];
+      for (k in b) if (!r[k] || (b[k].t || 0) > (r[k].t || 0)) r[k] = b[k];
+      out.cc = r;
     })();
     ["ws", "sd"].forEach(function (g) {
       var a = local[g], b = remote[g];
@@ -120,8 +128,8 @@
     signedIn: signedIn,
     // Wipe saved games, scores and the calendar here and on the account (other devices follow on their next sync).
     reset: function () {
-      var keepDiary = data.dy;
-      clearTimeout(timer); data = { rs: { t: Date.now() } }; if (keepDiary) data.dy = keepDiary; write();
+      var keepDiary = data.dy, keepCalc = data.cc;
+      clearTimeout(timer); data = { rs: { t: Date.now() } }; if (keepDiary) data.dy = keepDiary; if (keepCalc) data.cc = keepCalc; write();
       listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } });
       push();
     },
@@ -138,6 +146,17 @@
       dy.t = now; write(); queue();
       listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } });
     },
+    // Calculators: the last inputs used in each one (signed in only).
+    getCalc: function (slug) { var c = (data.cc || {})[slug]; return c && c.v ? Object.assign({}, c.v) : null; },
+    setCalc: function (slug, vals) {
+      if (!signedIn() || !/^[a-z0-9-]{1,40}$/.test(slug)) return;
+      var cc = data.cc || (data.cc = {}), now = Date.now(), ks = Object.keys(cc);
+      cc[slug] = { v: vals, t: now };
+      if (ks.length > 60) { ks.sort(function (x, y) { return (cc[x].t || 0) - (cc[y].t || 0); }); delete cc[ks[0]]; }
+      write(); queue();
+    },
+    calcs: function () { var o = {}, c = data.cc || {}; Object.keys(c).forEach(function (k) { o[k] = c[k].t || 0; }); return o; },
+    clearCalcs: function () { data.cc = {}; write(); push(); listeners.forEach(function (f) { try { f(); } catch (e) { /* ignore */ } }); },
     days: function (ym) { return ((data.ad || {})[ym] || []).slice(); },
     get: function (g) { return data[g]; },
     set: function (g, v) {

@@ -328,12 +328,12 @@ HOME = """<main>
 @@HUB@@
 <div class="hm hm-after">
 <section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is <b>go</b>unscramble?</h2>
-<p><b>go</b>unscramble turns a jumble of letters into every word they can make. It is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games.</p>
+<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its word unscrambler turns a jumble of letters into every word they can make, which is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games. Alongside it you will find word games and puzzles to play, and 40+ easy calculators for money, maths, health and everyday sums.</p>
 <h3>How to use it</h3>
 <p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
 <p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
-<p>Looking for more? Open the menu for the anagram solver and other free word tools. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
+<p>Looking for more? Open the menu for the anagram solver, word games and puzzles, and the <a href="calculators.html">calculators</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
 <p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
 </div>
 @@HOME_EXTRA@@

@@ -96,6 +96,8 @@ html[data-theme="dark"] body .sc-k.fn{background:#35363a!important;box-shadow:no
 html[data-theme="dark"] body .sc-k.eq{background:#5170ff!important;color:#fff!important}
 html[data-theme="dark"] body .sc-k.eq:active{background:#4059e8!important}
 html[data-theme="dark"] body .sb-tax{background:#e8eaed!important}
+html[data-theme="dark"] body .cr-warn{background:#3a2a10!important;color:#f5c27a!important}
+html[data-theme="dark"] body .acc summary em.on{background:#26305c!important;color:#b9c6ff!important}
 html[data-theme="dark"] body .sal-chips button[aria-pressed="true"]{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important}
 '''
 open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n')

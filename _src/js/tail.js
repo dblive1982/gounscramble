@@ -404,7 +404,7 @@
   }
   /* when the account copy arrives (after sign-in sync), re-apply saved values if the visitor has not started typing */
   try {
-    if (store.on() && window.GUP) GUP.sync().then(function (changed) { if (changed && !store.touched) { store.load(); restorers.forEach(function (f) { f(); }); } });
+    if (store.on() && window.GUP) GUP.sync().then(function (changed) { if (changed && !store.touched) { store.load(); restorers.forEach(function (f) { f(); }); } }).catch(function () {});
   } catch (e) { /* ignore */ }
   window.GUCalc = { CALCS: CALCS, run: function (slg, v) { return CALCS[slg].run(v); } };
 })();

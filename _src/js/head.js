@@ -109,7 +109,7 @@
   /* body measurements shared by BMI, calorie and ideal weight calculators */
   function bodyFields(noWeight) {
     var f = [
-      { id: "u", label: "Units", t: "sel", opts: [["m", "Metric (cm, kg)"], ["i", "Imperial (ft/in, st/lb)"]], def: "m" },
+      { id: "u", label: "Units", t: "sel", opts: [["m", "Metric"], ["i", "Imperial"]], def: "m" },
       { id: "h1", label: function (v) { return v.u === "i" ? "Height (feet)" : "Height (cm)"; }, def: "170" },
       { id: "h2", label: "Height (inches)", def: "0", show: function (v) { return v.u === "i"; } }];
     if (!noWeight) f.push({ id: "w1", label: function (v) { return v.u === "i" ? "Weight (stone)" : "Weight (kg)"; }, def: "70" },

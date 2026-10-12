@@ -122,9 +122,26 @@
   /* chips */
   var chips = $("sal-chips");
   PERIODS.forEach(function (p) { var b = el("button", null, p[1]); b.type = "button"; b.setAttribute("data-p", p[0]); b.addEventListener("click", function () { sel = p[0]; render(); }); chips.appendChild(b); });
-  form.addEventListener("input", go); form.addEventListener("change", go);
+  /* saving to the account (only when signed in) */
+  var KEYS = ["amount", "per", "hours", "days", "region", "code", "loan", "pg", "pen", "penunit", "penm", "bonus", "ot", "ben", "ss", "oth", "off", "spa"], timer = null, touched = false;
+  function signedIn() { try { return !!(window.GUP && GUP.signedIn()); } catch (e) { return false; } }
+  function collect() { var v = { _sel: sel }; KEYS.forEach(function (k) { var c = $("sal-" + k); v[k] = c.type === "checkbox" ? (c.checked ? "1" : "") : c.value; }); return v; }
+  function restore() {
+    var v = null; try { v = signedIn() && GUP.getCalc("salary"); } catch (e) { v = null; }
+    if (!v || !Object.keys(v).length) return;
+    KEYS.forEach(function (k) { var c = $("sal-" + k); if (!c || v[k] == null) return; if (c.type === "checkbox") c.checked = v[k] === "1"; else c.value = v[k]; });
+    if (v._sel) sel = v._sel;
+    go();
+  }
+  function save() {
+    if (!signedIn()) return; touched = true; clearTimeout(timer);
+    timer = setTimeout(function () { try { GUP.setCalc("salary", collect()); } catch (e) { /* ignore */ } }, 700);
+  }
+  form.addEventListener("input", function () { go(); save(); }); form.addEventListener("change", function () { go(); save(); });
+  chips.addEventListener("click", save);
   $("sal-reset").addEventListener("click", function () {
-    form.reset(); document.querySelectorAll("#sal-form details").forEach(function (d) { d.open = false; }); sel = "month"; go();
+    form.reset(); document.querySelectorAll("#sal-form details").forEach(function (d) { d.open = false; }); sel = "month"; go(); save();
   });
-  go();
+  restore(); go();
+  try { if (signedIn()) GUP.sync().then(function (c) { if (c && !touched) restore(); }).catch(function () {}); } catch (e) { /* ignore */ }
 })();

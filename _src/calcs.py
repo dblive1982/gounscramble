@@ -423,7 +423,7 @@ def body(slug):
     return ('<main><div class="wrap">\n<section class="hero calc-hero">\n<h1>%s</h1>\n<p class="lede">%s</p>\n%s\n</section>\n'
             '<section class="block narrow calc-about">\n<h2>About this calculator</h2>\n%s\n<h2>Common questions</h2>\n%s\n</section>\n'
             '<section class="block">\n<h2>More free calculators</h2>\n%s\n<p class="calc-all"><a href="calculators.html">See all calculators</a></p>\n</section>\n</div></main>\n'
-            '<script src="assets/calc.js"></script>%s\n') % (
+            '<script src="assets/progress.js"></script>\n<script src="assets/calc.js"></script>%s\n') % (
         esc(c["name"]), esc(c["lede"]), form, about, faq, related(slug),
         '\n<script src="assets/salary.js"></script>' if slug == "salary" else "")
 
