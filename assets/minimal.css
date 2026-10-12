@@ -964,3 +964,6 @@ body .hm .optrow{margin-top:8px}
 .hub .hb-chips button:nth-child(n+10){display:none}
 @media(min-width:720px){.hub .hb-chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.hub .hb-chips button:nth-child(n+10){display:block}.hub .hb-chips button{letter-spacing:.1em}
 .hub .hb-sec[aria-labelledby="hb-try"]{margin-top:-18px}}
+/* Clear all in light blue */
+body .hm .opts .reset{background:#e3eaff;border:1px solid #c9d6ff;color:#2f49d6;font-weight:600}
+body .hm .opts .reset:hover{background:#d5e0ff}
