@@ -393,3 +393,11 @@ body .hm .words{gap:16px}
 body .hm .w{gap:10px 14px}
 body .hm .group{margin-top:30px;gap:18px}
 body .hm .gh{margin-bottom:2px}
+
+/* footer: logo instead of plain text */
+.foot-brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.foot-logo{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.foot-logo .cube{width:22px;height:22px}
+body .site-footer .foot-logo .wm{font-size:19px;color:#1a1917!important}
+.foot-c{color:var(--muted);font-size:14px}
+.foot-logo .cube{width:26px;height:26px;flex:none}
