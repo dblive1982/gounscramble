@@ -91,7 +91,7 @@ function render(){
   const groups=new Map();
   for(const r of results){const L=r.w.length;if(!groups.has(L))groups.set(L,[]);groups.get(L).push(r)}
   let h='<p class="summary"><strong>'+total.toLocaleString()+" word"+(total===1?"":"s")+"</strong><span>"+(parseRack(rackText).n<2?"matching your filters":"from "+shownRack.replace(/[^A-Z?*_]/g,"").replace(/[*_]/g,"?"))+"</span></p>";
-  h+='<p class="key"><span class="k-s">Black = Scrabble</span><span class="k-w">Blue = Words With Friends</span></p>';
+  h+='<p class="key"><span class="k-s">Scrabble</span><span class="k-w">Words With Friends</span></p>';
   for(const [L,list] of groups){
     const n=shown[L]||PAGE, part=list.slice(0,n);
     const best=list[0].s;
