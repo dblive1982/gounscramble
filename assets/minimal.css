@@ -973,3 +973,6 @@ body .hm .opts .reset:hover{background:#d5e0ff}
 .hub .hb-chips button:nth-child(n+10){display:inline-block}
 .hub .hb-chips button[hidden]{display:none!important}
 @media(min-width:720px){.hub .hb-chips{display:flex;gap:8px}}
+/* more room between the footer border and the directory headings */
+/* more room between the footer border and the directory headings */
+body .site-footer .wrap>.hb-dir{padding-top:30px}
