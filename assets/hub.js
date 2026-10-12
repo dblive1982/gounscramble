@@ -96,11 +96,29 @@
             if (!w || !w.current) throw 0; return { c: w.current.temperature_2m, code: w.current.weather_code, city: p.name };
           });
         });
-      }).then(function (d) {
+      }).then(function (d) { paint(d, false); }).catch(function () { /* keep the built-in tile */ });
+      function paint(d, precise) {
         var t = f ? d.c * 9 / 5 + 32 : d.c, i = wxInfo(d.code);
-        wx.setAttribute("data-t", "Today's weather"); put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city);
-        wx.classList.add("live");
-      }).catch(function () { /* keep the built-in tile */ });
+        wx.setAttribute("data-t", "Today's weather"); put(wx, i[1] + " " + Math.round(t) + (f ? "\u00B0F" : "\u00B0C"), i[2] + " in " + d.city, precise ? "" : "Tap to use your exact location");
+        wx.classList.add("live"); wx.classList.toggle("tap", !precise);
+        if (!precise) { wx.setAttribute("role", "button"); wx.tabIndex = 0; } else { wx.removeAttribute("role"); wx.removeAttribute("tabindex"); }
+      }
+      function useLoc() {
+        if (!navigator.geolocation) return;
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          var la = Math.round(pos.coords.latitude * 100) / 100, lo = Math.round(pos.coords.longitude * 100) / 100;
+          getJSON("https://api.open-meteo.com/v1/forecast?latitude=" + la + "&longitude=" + lo + "&current=temperature_2m,weather_code&timezone=auto").then(function (w) {
+            if (!w || !w.current) throw 0;
+            return getJSON("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + la + "&longitude=" + lo + "&localityLanguage=en").then(function (g) { return (g && (g.city || g.locality || g.principalSubdivision)) || "your area"; }, function () { return "your area"; }).then(function (city) {
+              paint({ c: w.current.temperature_2m, code: w.current.weather_code, city: city }, true);
+              try { localStorage.setItem("gu-wx-loc", "1"); } catch (e) { /* ignore */ }
+            });
+          }).catch(function () { /* keep what is shown */ });
+        }, function () { try { localStorage.removeItem("gu-wx-loc"); } catch (e) { /* ignore */ } }, { timeout: 8000, maximumAge: 3600000 });
+      }
+      wx.addEventListener("click", function () { if (wx.classList.contains("tap")) useLoc(); });
+      wx.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.key === " ") && wx.classList.contains("tap")) { e.preventDefault(); useLoc(); } });
+      try { if (localStorage.getItem("gu-wx-loc") === "1") useLoc(); } catch (e) { /* ignore */ }
     }
     if (otd) {
       var d = new Date(), y = d.getFullYear(), mm = ("0" + (d.getMonth() + 1)).slice(-2), dd = ("0" + d.getDate()).slice(-2);
