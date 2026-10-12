@@ -457,6 +457,19 @@ TOOLS_PAGE = """<main><div class="wrap">
 </div></main>
 """
 
+PLANNERS = """<main><div class="wrap">
+<section class="prose">
+<h1>Planners</h1>
+<p>Printable planners to help you organise your week, money, meals and habits. Free printables and premium planner packs are on the way.</p>
+</section>
+<section class="block" style="margin-top:32px">
+<div class="cards"><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M7.5 14h9"/></svg></div><h3>Weekly planner</h3><p>Plan the week ahead, day by day.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M7.5 13.5h.01M12 13.5h.01M16.5 13.5h.01M7.5 17h.01M12 17h.01"/></svg></div><h3>Monthly planner</h3><p>A month at a glance with space for goals.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg></div><h3>Budget planner</h3><p>Track income, bills and savings.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M17 21V3c-2.5 1.5-3 5-3 8h3"/></svg></div><h3>Meal planner</h3><p>Plan meals and a shopping list for the week.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></div><h3>Habit tracker</h3><p>Build streaks one day at a time.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5v4.5c3 2.5 9 2.5 12 0v-4.5"/></svg></div><h3>Study planner</h3><p>Organise revision, deadlines and goals.</p><p><em>Coming soon</em></p></div></div>
+</section>
+@@STAN@@
+</div></main>
+"""
+STAN_URL = ""  # set to the Stan Store link when the store is live
+
 ABOUT = """<main><div class="wrap"><article class="prose">
 <h1>About <b>go</b>unscramble</h1>
 <p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 70 simple calculators for money, maths, health and everyday sums.</p>
@@ -603,6 +616,10 @@ PAGES = [
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | GoUnscramble",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
+    dict(file="planners.html", page="planners", nav=None, noindex=True,
+         body=PLANNERS.replace("@@STAN@@", ('<p class="stan"><a class="hb-btn" href="%s" rel="noopener">Shop planner packs</a></p>' % STAN_URL) if STAN_URL else ""),
+         title="Printable Planners | GoUnscramble",
+         desc="Printable planners for the week, month, budget, meals, habits and study. Coming soon."),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | GoUnscramble",
          desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, and 70+ everyday calculators."),
