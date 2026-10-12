@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=a5182195">
-<link rel="stylesheet" href="assets/account.css?v=deb4383c">
+<link rel="stylesheet" href="assets/account.css?v=bb63e00e">
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/minimal.css?v=c79d821b">
 <link rel="stylesheet" href="assets/dark.css?v=6c02aa92">
@@ -81,8 +81,8 @@
 
 <section id="v-signin" class="form">
 <p class="sub">Sign in to save your progress and take it with you to any device. The site is free to use without an account.</p>
-<div class="gbtn" id="g-in" hidden></div>
-<div class="or" id="or-in" hidden>or use your email</div>
+<div class="gbtn ld" id="g-in"></div>
+<div class="or" id="or-in">or use your email</div>
 <form class="form" id="f-in" novalidate>
 <label class="fld">Email<input type="email" id="in-e" autocomplete="email" placeholder="you@example.com"></label>
 <label class="fld">Password<span class="pw"><input type="password" id="in-p" autocomplete="current-password" placeholder="Your password"><button type="button" class="showpw">Show</button></span></label>
@@ -95,8 +95,8 @@
 
 <section id="v-signup" class="form" hidden>
 <p class="sub">Free, and it takes under a minute.</p>
-<div class="gbtn" id="g-up" hidden></div>
-<div class="or" id="or-up" hidden>or use your email</div>
+<div class="gbtn ld" id="g-up"></div>
+<div class="or" id="or-up">or use your email</div>
 <form class="form" id="f-up" novalidate>
 <label class="fld">Display name<input type="text" id="up-n" autocomplete="nickname" maxlength="60" placeholder="What should we call you?"></label>
 <label class="fld">Email<input type="email" id="up-e" autocomplete="email" placeholder="you@example.com"></label>
@@ -185,7 +185,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=d91ea755"></script><script src="assets/account.js?v=abc9c23a"></script>
+<script src="assets/progress.js?v=d91ea755"></script><script src="assets/account.js?v=6608f5de"></script>
 <script>(function(){var g=document.getElementById("theme-opts");if(!g)return;var bs=g.querySelectorAll("button");function d(){return document.documentElement.getAttribute("data-theme")==="dark"}function p(){bs.forEach(function(x){x.setAttribute("aria-pressed",String((x.getAttribute("data-t")==="dark")===d()))})}bs.forEach(function(x){x.addEventListener("click",function(){var n=x.getAttribute("data-t");document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("gu-theme",n)}catch(e){}p()})});p()})();</script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){if(!m.hasAttribute("open")||m.classList.contains("closing"))return;m.classList.add("closing");setTimeout(function(){m.removeAttribute("open");m.classList.remove("closing")},230)}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});var sm=m.querySelector("summary");if(sm)sm.addEventListener("click",function(e){if(m.hasAttribute("open")){e.preventDefault();c()}});})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}

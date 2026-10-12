@@ -70,3 +70,5 @@
 .ac .dz-t b{font-size:17px}
 .ac .out-row{padding:18px 0 8px}
 .ac .card+.card,.ac .card+form.card{margin-top:0}
+.ac .gbtn{height:44px;overflow:hidden;transition:opacity .25s}
+.ac .gbtn.ld{opacity:0}

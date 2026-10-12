@@ -105,7 +105,9 @@
       var w = Math.min(320, Math.max(220, ($("v-signin").clientWidth || 300)));
       google.accounts.id.renderButton($("g-in"), { theme: "outline", size: "large", text: "continue_with", shape: "pill", width: w });
       google.accounts.id.renderButton($("g-up"), { theme: "outline", size: "large", text: "signup_with", shape: "pill", width: w });
+      ["g-in", "g-up"].forEach(function (id) { $(id).classList.remove("ld"); });
     };
+    sc.onerror = function () { ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = true; }); };
     document.head.appendChild(sc);
   }
   function busy(form, on) { var b = form.querySelector(".go"); if (b) b.disabled = on; }
@@ -231,7 +233,7 @@
       enabled = !!d.enabled;
       if (!enabled) $("ac-off").hidden = false;
       var g = !!d.google;
-      ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = !g; });
+      if (!g) ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = true; });
       if (g && d.google_id) startGoogle(d.google_id);
       if (d.user) setUser(d.user);
       else { try { localStorage.removeItem("gu-in"); localStorage.removeItem("gu-av"); localStorage.removeItem("gu-progress"); localStorage.removeItem("gu-ws"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
