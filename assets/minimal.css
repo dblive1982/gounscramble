@@ -787,3 +787,10 @@ body .site-footer{margin-top:28px}
 body .site-footer .wrap>.hb-dir{padding-top:24px;margin-bottom:28px}
 body main{padding-bottom:24px}
 body .site-footer .wrap>.hb-dir{padding-top:8px}
+/* footer: socials on their own row under the logo */
+body .site-footer .wrap{row-gap:14px}
+body .site-footer .wrap>.foot-brand{order:1;flex:1 1 100%;justify-content:flex-start}
+body .site-footer .wrap>.socials{order:2;flex:1 1 100%;justify-content:flex-start;gap:12px;margin:0 0 6px}
+body .site-footer .wrap>.foot-secure{order:3;margin:6px 0 0}
+body .site-footer .wrap>.foot-legal{order:4;margin:0}
+body .site-footer .wrap>.hb-dir{order:0}
