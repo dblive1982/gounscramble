@@ -237,8 +237,8 @@ function snake(G) {
     },
     draw: function (c) {
       var fx = food.x * S, fy = food.y * S;
-      G.rect(fx + 4, fy + 4, S - 8, S - 8, C.pur);
-      sn.forEach(function (p, k) { G.rect(p.x * S + 1, p.y * S + 1, S - 2, S - 2, k === 0 ? C.wht : "#6b6b6b"); });
+      G.rect(fx + 2, fy + 2, S - 4, S - 4, "#535353"); G.rect(fx + 5, fy + 5, S - 10, S - 10, "#fff");
+      sn.forEach(function (p, k) { G.rect(p.x * S + 1, p.y * S + 1, S - 2, S - 2, k === 0 ? "#535353" : "#a3a3a3"); });
       var h = sn[0], ex = dir.x ? (dir.x > 0 ? 9 : 3) : 0, ey = dir.y ? (dir.y > 0 ? 9 : 3) : 0;
       if (dir.x) { G.rect(h.x * S + ex, h.y * S + 3, 3, 3, "#fff"); G.rect(h.x * S + ex, h.y * S + 10, 3, 3, "#fff"); } else { G.rect(h.x * S + 3, h.y * S + ey, 3, 3, "#fff"); G.rect(h.x * S + 10, h.y * S + ey, 3, 3, "#fff"); }
       c.strokeStyle = C.lt; c.lineWidth = 1; c.strokeRect(0.5, 0.5, N * S - 1, N * S - 1);
