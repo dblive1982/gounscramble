@@ -11,7 +11,7 @@ const slVs=a=>{const two=SL.mode==="two";vsDraw("sl-vs",[{c:"var(--wild)",n:two?
 const c4Vs=()=>{const two=C4.mode==="two";vsDraw("c4-vs",[{c:"var(--wild)",n:two?"Player 1":"You"},{c:"#ffd23f",n:two?"Player 2":"Computer ("+(C4.mode==="easy"?"Easy":"Hard")+")"}],C4.over?-1:C4.turn-1)};
 const ttVs=()=>{const two=TT3.mode==="two";vsDraw("tt-vs",[{m:"X",n:two?"Player 1":"You"},{m:"O",n:two?"Player 2":"Computer ("+(TT3.mode==="easy"?"Easy":"Hard")+")"}],TT3.over?-1:(TT3.turn==="X"?0:1))};
 /* ---------- menu + routing ---------- */
-const TT={games:"Puzzles & games",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",runner:"Offline Runner",retrosnake:"Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Space Invaders",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper",rocks:"Rock Blaster",flap:"Sky Flap",moles:"Mole Pop",echo:"Colour Echo",merge:"Number Merge",mines:"Mine Finder"};
+const TT={games:"Puzzles & games",maze:"Maze",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",runner:"Offline Runner",retrosnake:"Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Space Invaders",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper",rocks:"Rock Blaster",flap:"Sky Flap",moles:"Mole Pop",echo:"Colour Echo",merge:"Number Merge",mines:"Mine Finder"};
 const INIT={};
 ["runner","retrosnake","rally","bricks","blaster","muncher","blocks","hopper","rocks","flap","moles","echo","merge","mines"].forEach(id=>{INIT[id]=()=>{if(window.ARC)ARC.init(id)}});
 function menu(o){var m=document.querySelector(".site-header .menu");if(m&&!o)m.removeAttribute("open")}
@@ -134,6 +134,63 @@ function ttNew(resume){TT3.b=new Array(9).fill("");TT3.turn="X";TT3.over=false;T
     if(TT3.mode!=="two"&&TT3.turn==="O")setTimeout(async()=>{TT3.busy=true;await sleep(400);TT3.busy=false;await ttPlay(ttAi());if(!TT3.over)$("tt-msg").textContent="Your turn. You are X."},300);return}
   ttDraw(null);ttSave();$("tt-msg").textContent=TT3.mode==="two"?"Player 1's turn (X).":"Your turn. You are X.";ttSc()}
 INIT.ttt=()=>{const any=GUP.get("tt");if(any){if(any.mode)TT3.mode=any.mode;if(any.sc)TT3.sc=any.sc}pills($("tt-lv"),[["easy","Easy"],["hard","Hard"],["two","2 players"]],TT3.mode,v=>{TT3.mode=v;TT3.sc={x:0,o:0,d:0};ttNew()});$("tt-new").addEventListener("click",()=>ttNew());ttNew(true)};
+
+
+/* ---------- Maze ---------- */
+const MZ={lv:"easy",n:9,w:[],pos:0,trail:[0],moves:0,t0:0,tm:0,done:false,sol:false,dist:null};
+const MZN={easy:9,medium:14,hard:20};
+/* each cell: bit 1=up wall open, 2=right open, 4=down open, 8=left open */
+function mzGen(n){const o=new Array(n*n).fill(0),seen=new Array(n*n).fill(false),st=[0];seen[0]=true;
+  while(st.length){const c=st[st.length-1],x=c%n,y=(c-x)/n,nb=[];
+    if(y>0&&!seen[c-n])nb.push([c-n,1,4]);if(x<n-1&&!seen[c+1])nb.push([c+1,2,8]);if(y<n-1&&!seen[c+n])nb.push([c+n,4,1]);if(x>0&&!seen[c-1])nb.push([c-1,8,2]);
+    if(!nb.length){st.pop();continue}const [d,a,b]=nb[rnd(nb.length)];o[c]|=a;o[d]|=b;seen[d]=true;st.push(d)}
+  return o}
+function mzSolve(o,n){const prev=new Array(n*n).fill(-1);prev[0]=0;const q=[0];
+  while(q.length){const c=q.shift();if(c===n*n-1)break;const x=c%n;
+    [[1,-n],[2,1],[4,n],[8,-1]].forEach(([bit,dd])=>{if(o[c]&bit){const d=c+dd;if(prev[d]<0){prev[d]=c;q.push(d)}}})}
+  const path=[];let c=n*n-1;while(c!==0){path.push(c);c=prev[c]}path.push(0);return path.reverse()}
+function mzSvg(o,n,opt){opt=opt||{};const S=10,P=2,W=n*S+P*2;let w="";
+  for(let i=0;i<n*n;i++){const x=i%n,y=(i-x)/n,X=P+x*S,Y=P+y*S;
+    if(!(o[i]&1))w+="M"+X+" "+Y+"h"+S;if(!(o[i]&8)&&!(i===0))w+="M"+X+" "+Y+"v"+S;
+    if(y===n-1&&!(o[i]&4)&&i!==n*n-1)w+="M"+X+" "+(Y+S)+"h"+S;if(x===n-1&&!(o[i]&2)&&i!==n*n-1)w+="M"+(X+S)+" "+Y+"v"+S}
+  const ctr=i=>[P+(i%n)*S+S/2,P+Math.floor(i/n)*S+S/2];
+  let h='<svg class="mzs" viewBox="0 0 '+W+" "+W+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Maze, '+n+" by "+n+'">';
+  h+='<path class="mz-w" d="'+w+'" fill="none" stroke="currentColor" stroke-width="'+(opt.print?1.1:1.3)+'" stroke-linecap="round"/>';
+  if(opt.print){h+='<text x="'+(P+S/2)+'" y="'+(P-.4)+'" font-size="2.4" text-anchor="middle" fill="currentColor">START</text><text x="'+(P+n*S-S/2)+'" y="'+(P+n*S+2.4)+'" font-size="2.4" text-anchor="middle" fill="currentColor">FINISH</text>';return h+"</svg>"}
+  if(opt.sol){h+='<polyline class="mz-sol" fill="none" points="'+mzSolve(o,n).map(i=>ctr(i).join(",")).join(" ")+'"/>'}
+  if(opt.trail&&opt.trail.length>1)h+='<polyline class="mz-tr" fill="none" points="'+opt.trail.map(i=>ctr(i).join(",")).join(" ")+'"/>';
+  const [fx,fy]=ctr(n*n-1);h+='<path class="mz-fin" d="M'+(fx-2.6)+" "+(fy+3)+"V"+(fy-3)+"l5.2 2.1-5.2 2.1z"+'"/>';
+  const [px,py]=ctr(opt.pos||0);h+='<circle class="mz-me" cx="'+px+'" cy="'+py+'" r="'+S*.3+'"/>';
+  const [sx,sy]=ctr(0);h+='<circle class="mz-st" cx="'+sx+'" cy="'+sy+'" r="1.2"/>';
+  return h+"</svg>"}
+function mzDraw(){$("mz").innerHTML=mzSvg(MZ.w,MZ.n,{trail:MZ.trail,pos:MZ.pos,sol:MZ.sol})}
+function mzMsg(t){$("mz-msg").textContent=t}
+function mzTime(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function mzBest(){try{return JSON.parse(localStorage.getItem("gu-mz")||"{}")}catch(e){return {}}}
+function mzStat(){const b=mzBest()[MZ.lv];$("mz-stat").textContent="Moves "+MZ.moves+(MZ.t0&&!MZ.done?" · "+mzTime(Date.now()-MZ.t0):"")+(b?" · Best "+mzTime(b):"")}
+function mzNew(){MZ.n=MZN[MZ.lv];MZ.w=mzGen(MZ.n);MZ.pos=0;MZ.trail=[0];MZ.moves=0;MZ.t0=0;MZ.done=false;MZ.sol=false;$("mz-sol").textContent="Show solution";mzDraw();mzMsg("Get from the dot to the flag. Use the arrows, swipe, or the buttons.");mzStat()}
+function mzGo(bit,once){if(MZ.done)return;const n=MZ.n;let moved=false;
+  for(let k=0;k<(once?1:99);k++){const c=MZ.pos,dd={1:-n,2:1,4:n,8:-1}[bit];if(!(MZ.w[c]&bit))break;const d=c+dd;
+    const back=MZ.trail.length>1&&MZ.trail[MZ.trail.length-2]===d;if(back)MZ.trail.pop();else MZ.trail.push(d);MZ.pos=d;MZ.moves++;moved=true;
+    if(!MZ.t0)MZ.t0=Date.now();if(d===n*n-1)break;
+    const open=[1,2,4,8].filter(b=>MZ.w[d]&b&&b!==({1:4,2:8,4:1,8:2}[bit]));if(open.length!==1)break;bit=open[0]}
+  if(!moved)return;mzDraw();
+  if(MZ.pos===n*n-1){MZ.done=true;const tm=Date.now()-MZ.t0,b=mzBest();let extra="";if(!b[MZ.lv]||tm<b[MZ.lv]){b[MZ.lv]=tm;extra=" New best!";try{localStorage.setItem("gu-mz",JSON.stringify(b))}catch(e){}}
+    mzMsg("You made it in "+mzTime(tm)+" with "+MZ.moves+" moves."+extra);mzStat();return}
+  mzStat()}
+const MZK={ArrowUp:1,w:1,W:1,ArrowRight:2,d:2,D:2,ArrowDown:4,s:4,S:4,ArrowLeft:8,a:8,A:8};
+INIT.maze=()=>{pills($("mz-lv"),[["easy","Easy"],["medium","Medium"],["hard","Hard"]],MZ.lv,v=>{MZ.lv=v;mzNew()});
+  $("mz-new").addEventListener("click",mzNew);
+  $("mz-sol").addEventListener("click",()=>{MZ.sol=!MZ.sol;$("mz-sol").textContent=MZ.sol?"Hide solution":"Show solution";mzDraw()});
+  document.querySelectorAll("#mz-pad [data-d]").forEach(b=>b.addEventListener("click",()=>mzGo(+b.dataset.d,true)));
+  document.addEventListener("keydown",e=>{if($("v-maze").hidden||e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target.tagName;if(t==="INPUT"||t==="SELECT"||t==="TEXTAREA")return;const b=MZK[e.key];if(b){e.preventDefault();mzGo(b,true)}});
+  let sx=0,sy=0,tid=0;const bd=$("mz");
+  bd.addEventListener("touchstart",e=>{const t=e.changedTouches[0];sx=t.clientX;sy=t.clientY},{passive:true});
+  bd.addEventListener("touchend",e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;mzGo(Math.abs(dx)>Math.abs(dy)?(dx>0?2:8):(dy>0?4:1),false)},{passive:true});
+  bd.addEventListener("touchmove",e=>{if(e.cancelable)e.preventDefault()},{passive:false});
+  clearInterval(tid);tid=setInterval(()=>{if(!$("v-maze").hidden&&MZ.t0&&!MZ.done)mzStat()},1000);
+  mzNew()};
+window.__mzPrint=()=>mzSvg(MZ.w,MZ.n,{print:true});
 
 /* ---------- Memory match ---------- */
 const MM={cards:[],open:[],moves:0,found:0,lock:false,mode:"one",turn:0,sc:[0,0]};

@@ -12,6 +12,7 @@
     <a class="tool c-green" data-go="memory" href="#memory"><span class="tb"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="9" height="13" rx="1.8"/><rect x="12" y="5" width="9" height="13" rx="1.8" transform="rotate(8 16.5 11.5)"/><path d="M7.5 11v3"/></svg></span><b>Memory match</b><span class="td">Flip the cards and find every pair in as few moves as you can.</span><span class="tag">1-2 players</span></a>
     <a class="tool c-orange" data-go="snakes" href="#snakes"><span class="tb"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v18M16 3v18M7 7.5h9M7 12h9M7 16.5h9"/></svg></span><b>Snakes and ladders</b><span class="td">Climb the ladders, dodge the snakes and race to 100.</span><span class="tag">1-2 players &middot; vs computer</span></a>
     <a class="tool c-teal" data-go="ttt" href="#ttt"><span class="tb"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v16M15 4v16M4 9h16M4 15h16"/><path d="M5.2 5.2l2.6 2.6M7.8 5.2L5.2 7.8"/><circle cx="18" cy="18" r="1.6"/></svg></span><b>Tic tac toe</b><span class="td">Three in a row wins. Easy, hard, or two players on one device.</span><span class="tag">1-2 players &middot; vs computer</span></a>
+    <a class="tool c-lilac" data-go="maze" href="#maze"><span class="tb"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 3.5h17v17h-17zM3.5 8.5h9M12.5 8.5v4M8 12.5h4.5M8 12.5v4M8 16.5h8.5M16.5 8.5v8M16.5 8.5h4"/></svg></span><b>Maze</b><span class="td">Find your way from the dot to the flag. Three sizes, with print.</span><span class="tag">1 player</span></a>
   </div>
   <h2 class="agh" id="arcade">Retro games</h2>
   <p class="sub">Quick, plain and easy to play. Keyboard or touch.</p>
@@ -61,6 +62,16 @@
   <div class="ttt" id="ttt"></div>
   <p class="msg" id="tt-msg" aria-live="polite" style="text-align:center"></p>
   <div class="row" style="justify-content:center"><button class="pill" id="tt-new" type="button">New game</button><span class="sub" id="tt-score"></span></div>
+</section>
+
+<section id="v-maze" hidden>
+  <div class="row" id="mz-lv"></div>
+  <div class="vs"><span class="pl">1 player</span></div>
+  <div class="mz" id="mz"></div>
+  <p class="msg" id="mz-msg" aria-live="polite" style="text-align:center"></p>
+  <p class="sub" id="mz-stat" style="text-align:center;margin:0"></p>
+  <div class="mzpad" id="mz-pad" aria-label="Move"><button type="button" data-d="1" aria-label="Up">&#9650;</button><button type="button" data-d="8" aria-label="Left">&#9664;</button><button type="button" data-d="4" aria-label="Down">&#9660;</button><button type="button" data-d="2" aria-label="Right">&#9654;</button></div>
+  <div class="row" style="justify-content:center"><button class="pill" id="mz-new" type="button">New maze</button><button class="pill" id="mz-sol" type="button">Show solution</button></div>
 </section>
 
 <section id="v-memory" hidden>

@@ -53,6 +53,10 @@
       [].forEach.call(c.querySelectorAll("[id]"), function (e) { e.removeAttribute("id"); });
       return page("Snakes and ladders", "You need a dice and a counter each. Climb ladders, slide down snakes, and land exactly on 100.", "<div class='psl'>" + c.outerHTML + "</div>");
     },
+    maze: function () {
+      if (!window.__mzPrint) return null;
+      return page("Maze", "Find the way from START to FINISH without crossing a wall.", "<div class='pmz'>" + window.__mzPrint() + "</div>");
+    },
     memory: function () {
       var f = ["A", "B", "C", "D", "E", "F", "G", "H"], c = "";
       for (var i = 0; i < 16; i++) c += "<div class='pm'>" + (i % 2 ? "" : "") + "</div>";

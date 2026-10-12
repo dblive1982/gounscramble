@@ -216,6 +216,7 @@ HUB = """<div class="hub">
 <a class="hb-card c-green" href="games.html#memory"><span class="hb-ic">??</span><b>Memory match</b><span>Flip the cards and find every pair in as few moves as you can.</span><em>1-2 players</em></a>
 <a class="hb-card c-orange" href="games.html#snakes"><span class="hb-ic">1-100</span><b>Snakes and ladders</b><span>Climb the ladders, dodge the snakes and race to 100.</span><em>1-2 players</em></a>
 <a class="hb-card c-teal" href="games.html#ttt"><span class="hb-ic">XO</span><b>Tic tac toe</b><span>Three in a row wins. Easy, hard, or two players on one device.</span><em>1-2 players</em></a>
+<a class="hb-card c-lilac" href="games.html#maze"><span class="hb-ic">&#9638;</span><b>Maze</b><span>Find your way from the dot to the flag. Three sizes, and you can print them.</span><em>1 player</em></a>
 <a class="hb-card hb-more" data-pop="FREE!" href="account.html"><span class="hb-ic">&#9733;</span><b>Save your progress</b><span>Sign in free to keep your games and scores on every device.</span><em>Free account</em></a>
 </div></section>
 <section class="hb-sec" id="s-retro" aria-labelledby="hb-retro"><div class="hb-head"><div><h2 id="hb-retro">Retro games</h2><p class="hb-sub">Simple games to play in your browser.</p></div><a class="hb-arrow" href="games.html#arcade" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
@@ -589,7 +590,7 @@ PAGES = [
          desc="Sign in or create a free GoUnscramble account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
          title="Free Puzzles & Games | GoUnscramble",
-         desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
+         desc="Free puzzles and games you can play in your browser: word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | GoUnscramble",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
