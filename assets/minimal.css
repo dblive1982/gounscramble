@@ -732,3 +732,7 @@ body .cr-total{border-top:2px solid var(--line);margin-top:2px}
 body .cr-total dt,body .cr-total dd{color:var(--ink);font-weight:700;font-size:16px}
 body .sal-h2{margin-top:26px}
 @media (max-width:480px){body .acc summary em{max-width:44%}}
+/* Connect 4 discs must stay coloured over the hole style */
+body .gm .c4 i.p1{background:#e5484d!important;box-shadow:inset 0 -3px 5px rgba(0,0,0,.18)!important}
+body .gm .c4 i.p2{background:#ffd23f!important;box-shadow:inset 0 -3px 5px rgba(0,0,0,.14)!important}
+body .gm .c4 i.win{box-shadow:0 0 0 3px #fff,inset 0 -3px 5px rgba(0,0,0,.18)!important}

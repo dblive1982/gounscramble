@@ -11,6 +11,8 @@ html[data-theme="dark"] .ar-cv{filter:invert(1)}
 html[data-theme="dark"] body .gm #hm-fig{stroke:#9aa0a6!important}
 html[data-theme="dark"] body .gm .c4,html[data-theme="dark"] body .gm .mc{background:#4a63e0!important}
 html[data-theme="dark"] body .gm .c4 i{background:#1f2023!important}
+html[data-theme="dark"] body .gm .c4 i.p1{background:#e5484d!important}
+html[data-theme="dark"] body .gm .c4 i.p2{background:#ffd23f!important}
 html[data-theme="dark"] body .gm .mc.up{background:#292a2d!important}
 html[data-theme="dark"] body .gm .mc.done{background:#2d3a66!important;border-color:#3a4a85!important}
 html[data-theme="dark"] body .gm .sl .cells i{background:#292a2d!important;color:#9aa0a6}
