@@ -423,3 +423,8 @@ body .hm .box input{background:transparent!important}
 /* darker grey border on the search bar */
 body .hm .box{border:1.5px solid #9aa1ae!important}
 body .hm .box:focus-within{border-color:#667085!important}
+
+/* logo: blue "go", cube hidden for now */
+.brand .cube,.hero-brand .cube,.foot-logo .cube{display:none!important}
+body .wm b,body .site-header .brand .wm b,body .hero-band .hero-brand .wm b,body .foot-logo .wm b{color:#5170ff!important}
+.hero-brand{gap:0}.brand,.foot-logo{gap:0}
