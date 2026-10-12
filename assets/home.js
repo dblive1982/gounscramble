@@ -74,7 +74,7 @@ function tileHTML(r,o){
   let h='<div class="tiles" style="--n:'+r.w.length+'" aria-hidden="true">';
   for(let i=0;i<r.w.length;i++){
     const ch=r.w[i],bl=r.t[i];
-    h+='<span class="t'+(bl||hl.has(i)?" blank":"")+'">'+ch+(bl?"":"<sub"+(V[ch]>9?' class="s2"':"")+">"+V[ch]+"</sub>")+"</span>";
+    h+='<span class="t'+(bl||hl.has(i)?" blank":"")+'">'+ch+(bl?"":"<sub"+(V[ch]>9?' class="s2"':"")+">"+V[ch]+"</sub>"+(WWF[ch]!==V[ch]?"<sup"+(WWF[ch]>9?' class="s2"':"")+">"+WWF[ch]+"</sup>":""))+"</span>";
   }
   return h+"</div>";
 }
@@ -96,7 +96,7 @@ function render(){
     const n=shown[L]||PAGE, part=list.slice(0,n);
     const best=list[0].s;
     h+='<section class="group"><div class="gh"><span>'+L+" letters</span><em>"+list.length.toLocaleString()+" word"+(list.length===1?"":"s")+" \u00b7 top score "+best+'</em></div><ul class="words">';
-    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+'<span class="pts wwf">'+r.f+"</span>"+"</li>";
+    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+(r.f!==r.s?'<span class="pts wwf">'+r.f+"</span>":"")+"</li>";
     h+="</ul>";
     if(list.length>n)h+='<button class="more" type="button" data-len="'+L+'">Show '+Math.min(PAGE,list.length-n)+" more</button>";
     h+="</section>";
