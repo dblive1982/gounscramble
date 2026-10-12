@@ -377,3 +377,8 @@ html{scroll-behavior:smooth}
   .hub .hb-card em{margin-top:6px}
   .hub .hb-card[data-pop]::after{top:10px!important;right:10px!important;font-size:10px!important;padding:2px 8px!important}
 }
+
+/* logo: cube + wordmark as in the approved mock-up */
+.wm,body .site-header .brand .wm,body .hero-brand .wm,body .hero-band .hero-brand .wm{font-family:'Figtree','Inter',system-ui,sans-serif;color:#1a1917!important;letter-spacing:-.02em}
+.wm b{font-weight:800}
+.cube{filter:drop-shadow(0 3px 6px rgba(30,40,70,.12))}
