@@ -943,3 +943,5 @@ body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:34px;padding
 .opts .og-foot{gap:12px}
 .opts .sw{font-size:13px}
 body .hm .opts .reset{padding:6px 12px;font-size:13px}
+body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:30px;padding:3px 8px;font-size:13px;border-radius:9px!important}
+.opts .og-grid .opt{font-size:10.5px;gap:2px}
