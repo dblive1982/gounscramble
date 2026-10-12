@@ -917,4 +917,6 @@ window.ARC = {
   ids: Object.keys(GAMES), names: NAMES,
   init: function (id) { var g = GAMES[id], h = $("a-" + id); if (g && h && !h.firstChild) mount(id, h, g); }
 };
+/* opened straight from a link such as games.html#retrosnake: games.js ran before this file, so start the game now */
+try { var hh = (location.hash || "").slice(1); if (hh && GAMES[hh]) window.ARC.init(hh); } catch (e) { /* ignore */ }
 })();
