@@ -821,3 +821,6 @@ body .hub .hb-ic{display:grid;place-items:center;width:44px;min-width:44px;paddi
 .pl-top{margin:18px 0 6px}.pl-top .pl-acts{margin-top:0}
 .pl-hero{display:block!important}
 .pl-btn{white-space:nowrap}
+/* game + category line icons */
+body .gm .tool .tb svg.ic,body .gm #v-wordsearch .cat .ico svg.ic{color:#5170ff;display:block}
+body .gm .tool .tb{display:grid;place-items:center;width:46px;min-width:46px;height:46px;padding:0}
