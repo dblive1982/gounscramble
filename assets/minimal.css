@@ -419,3 +419,7 @@ html,body,body[data-page]{background:#ffffff!important;background-image:none!imp
 body .hm .box{background:#fff!important;border:1px solid #e4e8f0!important;box-shadow:0 4px 18px rgba(28,34,48,.08)!important}
 body .hm .box:focus-within{border-color:#cfd6e4!important;box-shadow:0 6px 22px rgba(28,34,48,.12)!important}
 body .hm .box input{background:transparent!important}
+
+/* darker grey border on the search bar */
+body .hm .box{border:1.5px solid #9aa1ae!important}
+body .hm .box:focus-within{border-color:#667085!important}
