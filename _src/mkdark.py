@@ -93,6 +93,8 @@ html[data-theme="dark"] body .gm .ttt button.O{color:#8aa0ff}
 html[data-theme="dark"] body .sc-k.fn{background:#35363a!important;box-shadow:none!important;color:#c4c7cc!important}
 html[data-theme="dark"] body .sc-k.eq{background:#5170ff!important;color:#fff!important}
 html[data-theme="dark"] body .sc-k.eq:active{background:#4059e8!important}
+html[data-theme="dark"] body .sb-tax{background:#e8eaed!important}
+html[data-theme="dark"] body .sal-chips button[aria-pressed="true"]{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important}
 '''
 open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n')
 print(len(rules),'rules')

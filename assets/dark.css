@@ -27,6 +27,8 @@ html[data-theme="dark"] body .gm .ttt button.O{color:#8aa0ff}
 html[data-theme="dark"] body .sc-k.fn{background:#35363a!important;box-shadow:none!important;color:#c4c7cc!important}
 html[data-theme="dark"] body .sc-k.eq{background:#5170ff!important;color:#fff!important}
 html[data-theme="dark"] body .sc-k.eq:active{background:#4059e8!important}
+html[data-theme="dark"] body .sb-tax{background:#e8eaed!important}
+html[data-theme="dark"] body .sal-chips button[aria-pressed="true"]{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important}
 html[data-theme="dark"] .main-nav summary{color:#e8eaed!important}
 html[data-theme="dark"] .main-nav summary:hover,html[data-theme="dark"] .main-nav .menu[open] summary{color:#e8eaed!important}
 html[data-theme="dark"] .menu[open] .menu-x{color:#e8eaed!important}
@@ -197,3 +199,7 @@ html[data-theme="dark"] body .sc-k{background:#292a2d!important}
 html[data-theme="dark"] body .sc-k.fn{color:#e8eaed!important}
 html[data-theme="dark"] body .sc-k.op{background:#2d3a66!important;color:#9db0ff!important}
 html[data-theme="dark"] body .sc-k.clr{background:#4a2427!important;color:#ff8a80!important}
+html[data-theme="dark"] body .acc{background:#292a2d!important}
+html[data-theme="dark"] body .sal-chips button{background:#292a2d!important}
+html[data-theme="dark"] body .sb-sl{background:#3a4a85!important}
+html[data-theme="dark"] body .sb-pen{background:#5a4d25!important}

@@ -8,13 +8,15 @@ C = []
 def add(slug, file, cat, name, glyph, short, lede, about, faq):
     C.append(dict(slug=slug, file=file, cat=cat, name=name, glyph=glyph, short=short, lede=lede, about=about, faq=faq))
 
-add("salary", "salary-calculator.html", "Financial", "Salary calculator", "£",
-    "Hourly, weekly, monthly and yearly pay, plus UK take-home.",
-    "Turn your pay into hourly, daily, weekly, monthly and yearly figures, and see an estimate of your UK take-home pay.",
-    ["Enter what you earn and how often you are paid, then say how many hours and days you work in a week. The calculator turns your pay into a yearly figure using 52 weeks, then splits that figure into every other pay period. Hourly pay is yearly pay divided by 52 weeks of your weekly hours, weekly pay is a 52nd, and monthly pay is a 12th.",
-     "If some of your days off are unpaid, add them in the box. The adjusted column takes those days out of your yearly pay using your daily rate. For the 2026/27 tax year in England, Wales and Northern Ireland the first £12,570 of income is tax free, then 20% to £50,270, 40% to £125,140 and 45% above that. The tax-free amount shrinks by £1 for every £2 over £100,000. Employee National Insurance is 8% from £12,570 to £50,270 and 2% above. Pension, student loan, tax codes and Scottish rates are not included."],
-    [("How do I work out my hourly rate from a yearly salary?", "Divide the yearly salary by 52, then divide that by the hours you work each week. For £35,000 and a 40-hour week that is about £16.83 an hour."),
-     ("Why are there two columns?", "The unadjusted column assumes you are paid for every working day. The adjusted column removes the unpaid days off you entered.")])
+add("salary", "salary-calculator.html", "Financial", "Salary calculator", "\u00a3",
+    "UK take-home pay with tax code, student loan, pension and more.",
+    "Work out your UK take-home pay for 2026/27. Add your tax code, student loan, pension, bonus and benefits for a payslip-style result.",
+    ["Enter your pay and how often you are paid, then open any of the sections to add more detail: your tax code, student loan plan, pension contributions, bonus, overtime, taxable benefits and salary sacrifice. The calculator shows what you take home each year, month, four weeks, fortnight, week, day or hour, and where the rest goes.",
+     "It uses the 2026/27 tax year. In England, Wales and Northern Ireland the first \u00a312,570 is tax free, then income tax is 20% to \u00a350,270, 40% to \u00a3125,140 and 45% above, with the tax-free amount shrinking by \u00a31 for every \u00a32 over \u00a3100,000. Scotland has its own six bands from 19% to 48%. Employee National Insurance is 8% from \u00a312,570 to \u00a350,270 and 2% above, and is not charged over state pension age. Student loan repayments are 9% over the threshold for your plan (\u00a326,900 for Plan 1, \u00a329,385 for Plan 2, \u00a333,795 for Plan 4 and \u00a325,000 for Plan 5) and 6% over \u00a321,000 for a postgraduate loan.",
+     "Pension contributions can be taken three ways. Net pay arrangements come off before tax but National Insurance is still charged. Salary sacrifice comes off before both. Relief at source is taken after tax, and the provider adds basic rate relief. If your payslip differs, check your tax code and any other deductions."],
+    [("What tax code should I use?", "Leave it blank for the standard 1257L code, which gives the usual \u00a312,570 tax-free allowance. If your payslip shows a different code, such as 1100L, BR or K475, type it in."),
+     ("Is the result the same as my payslip?", "It should be close. Payslips can differ because of holiday pay, part-year earnings, other benefits, or your employer's pension rules."),
+     ("How is the hourly rate worked out?", "Yearly pay is divided by 52 weeks of your weekly hours. Add unpaid days off in More options and the table shows both figures.")])
 
 add("income-tax", "income-tax-calculator.html", "Financial", "Income tax calculator", "Tax",
     "UK income tax and National Insurance for 2026/27.",
@@ -365,19 +367,49 @@ def related(slug):
 
 SALARY_FORM = """<form class="panel calc sal" id="sal-form" autocomplete="off" onsubmit="return false">
 <div class="cf-grid">
-<div class="cf"><label for="sal-amount">Pay</label><input id="sal-amount" class="field" type="text" inputmode="decimal" value="35000"></div>
-<div class="cf"><label for="sal-per">Paid per</label><select id="sal-per" class="field"><option value="hour">Hour</option><option value="day">Day</option><option value="week">Week</option><option value="2week">2 weeks</option><option value="month">Month</option><option value="year" selected>Year</option></select></div>
-<div class="cf"><label for="sal-cur">Currency</label><select id="sal-cur" class="field"><option value="&pound;">&pound; Pound</option><option value="$">$ Dollar</option><option value="&euro;">&euro; Euro</option></select></div>
+<div class="cf"><label for="sal-amount">Pay (&pound;)</label><input id="sal-amount" class="field" type="text" inputmode="decimal" value="35000"></div>
+<div class="cf"><label for="sal-per">Paid per</label><select id="sal-per" class="field"><option value="hour">Hour</option><option value="day">Day</option><option value="week">Week</option><option value="2week">2 weeks</option><option value="4week">4 weeks</option><option value="month">Month</option><option value="year" selected>Year</option></select></div>
 <div class="cf"><label for="sal-hours">Hours per week</label><input id="sal-hours" class="field" type="text" inputmode="decimal" value="40"></div>
 <div class="cf"><label for="sal-days">Days per week</label><input id="sal-days" class="field" type="text" inputmode="decimal" value="5"></div>
-<div class="cf"><label for="sal-off">Unpaid days off a year</label><input id="sal-off" class="field" type="text" inputmode="decimal" value="0"></div>
 </div>
-<label class="cf-chk"><input type="checkbox" id="sal-uk" checked> Estimate UK take-home pay</label>
+<div class="acc-list">
+<details class="acc"><summary><span>Tax code &amp; region</span><em id="acc-tax-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf cf-wide"><label for="sal-region">Where you work</label><select id="sal-region" class="field"><option value="eng" selected>England, Wales or N. Ireland</option><option value="sco">Scotland</option></select></div>
+<div class="cf cf-wide"><label for="sal-code">Tax code (optional)</label><input id="sal-code" class="field" type="text" autocapitalize="characters" spellcheck="false" placeholder="Standard 1257L"></div>
+</div></details>
+<details class="acc"><summary><span>Student loan</span><em id="acc-loan-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-loan">Repayment plan</label><select id="sal-loan" class="field"><option value="0" selected>None</option><option value="1">Plan 1</option><option value="2">Plan 2</option><option value="4">Plan 4 (Scotland)</option><option value="5">Plan 5</option></select></div>
+<div class="cf"><label class="cf-chk" for="sal-pg"><input type="checkbox" id="sal-pg"> I also have a postgraduate loan</label></div>
+</div></details>
+<details class="acc"><summary><span>Pension</span><em id="acc-pen-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-pen">Your contribution</label><input id="sal-pen" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label for="sal-penunit">As</label><select id="sal-penunit" class="field"><option value="pct" selected>% of salary</option><option value="gbp">&pound; per month</option></select></div>
+<div class="cf cf-wide"><label for="sal-penm">How it is taken</label><select id="sal-penm" class="field"><option value="net" selected>Net pay (before tax)</option><option value="sac">Salary sacrifice (before tax and NI)</option><option value="ras">Relief at source (after tax)</option></select></div>
+</div></details>
+<details class="acc"><summary><span>Bonus and overtime</span><em id="acc-bo-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-bonus">Bonus per year (&pound;)</label><input id="sal-bonus" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label for="sal-ot">Overtime per year (&pound;)</label><input id="sal-ot" class="field" type="text" inputmode="decimal" value="0"></div>
+</div></details>
+<details class="acc"><summary><span>Benefits and deductions</span><em id="acc-be-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-ben">Taxable benefits per year (&pound;)</label><input id="sal-ben" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label for="sal-ss">Salary sacrifice per year (&pound;)</label><input id="sal-ss" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf cf-wide"><label for="sal-oth">Other deductions after tax per month (&pound;)</label><input id="sal-oth" class="field" type="text" inputmode="decimal" value="0"></div>
+</div></details>
+<details class="acc"><summary><span>More options</span><em id="acc-mo-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-off">Unpaid days off a year</label><input id="sal-off" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label class="cf-chk" for="sal-spa"><input type="checkbox" id="sal-spa"> Over state pension age (no National Insurance)</label></div>
+</div></details>
+</div>
 <p class="cr-err" id="sal-err" role="alert" hidden></p>
 <div class="cr" id="sal-out">
-<div class="cr-tw"><table class="cr-t sal-t" id="sal-tbl"><thead><tr><th scope="col">Pay period</th><th scope="col">Pay</th><th scope="col" class="sal-adj" hidden>Adjusted for days off</th></tr></thead><tbody></tbody></table></div>
-<div id="sal-uk-out"><h2 class="cm-h">Estimated UK take-home pay</h2><dl class="cr-rows" id="sal-uk-stats"></dl>
-<p class="hint">For 2026/27 in England, Wales and Northern Ireland. Pension, student loan, tax codes and Scottish rates are not included.</p></div>
+<div class="cr-hero"><span class="cr-k" id="sal-k"></span><b class="cr-v" id="sal-v"></b></div>
+<div class="sal-chips" id="sal-chips" role="group" aria-label="Pay period"></div>
+<div class="sal-bar" id="sal-bar" aria-hidden="true"></div>
+<ul class="sal-leg" id="sal-leg"></ul>
+<dl class="cr-rows" id="sal-rows"></dl>
+<p class="hint" id="sal-note"></p>
+<h2 class="cm-h sal-h2">Your pay in every period</h2>
+<div class="cr-tw"><table class="cr-t sal-t" id="sal-tbl"><thead><tr><th scope="col">Pay period</th><th scope="col">Pay before tax</th><th scope="col" class="sal-adj" hidden>After unpaid days</th></tr></thead><tbody></tbody></table></div>
 </div>
 <div class="btns"><button type="button" class="btn alt" id="sal-reset">Reset</button></div>
 </form>"""

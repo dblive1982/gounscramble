@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Salary calculator | GoUnscramble</title>
-<meta name="description" content="Turn your pay into hourly, daily, weekly, monthly and yearly figures, and see an estimate of your UK take-home pay.">
+<meta name="description" content="Work out your UK take-home pay for 2026/27. Add your tax code, student loan, pension, bonus and benefits for a payslip-style result.">
 <link rel="canonical" href="https://gounscramble.com/salary-calculator.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="GoUnscramble">
 <meta property="og:title" content="Salary calculator | GoUnscramble">
-<meta property="og:description" content="Turn your pay into hourly, daily, weekly, monthly and yearly figures, and see an estimate of your UK take-home pay.">
+<meta property="og:description" content="Work out your UK take-home pay for 2026/27. Add your tax code, student loan, pension, bonus and benefits for a payslip-style result.">
 <meta property="og:url" content="https://gounscramble.com/salary-calculator.html">
 <meta property="og:image" content="https://gounscramble.com/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -17,9 +17,9 @@
 <meta property="og:image:alt" content="GoUnscramble: free word unscrambler">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Salary calculator | GoUnscramble">
-<meta name="twitter:description" content="Turn your pay into hourly, daily, weekly, monthly and yearly figures, and see an estimate of your UK take-home pay.">
+<meta name="twitter:description" content="Work out your UK take-home pay for 2026/27. Add your tax code, student loan, pension, bonus and benefits for a payslip-style result.">
 <meta name="twitter:image" content="https://gounscramble.com/assets/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gounscramble.com/"},{"@type":"ListItem","position":2,"name":"Salary calculator","item":"https://gounscramble.com/salary-calculator.html"}]},{"@type":"WebApplication","name":"Salary calculator","url":"https://gounscramble.com/salary-calculator.html","description":"Turn your pay into hourly, daily, weekly, monthly and yearly figures, and see an estimate of your UK take-home pay.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gounscramble.com/"},{"@type":"ListItem","position":2,"name":"Salary calculator","item":"https://gounscramble.com/salary-calculator.html"}]},{"@type":"WebApplication","name":"Salary calculator","url":"https://gounscramble.com/salary-calculator.html","description":"Work out your UK take-home pay for 2026/27. Add your tax code, student loan, pension, bonus and benefits for a payslip-style result.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}</script>
 <meta name="theme-color" content="#0099b5">
 <meta name="google-adsense-account" content="ca-pub-6517978259411056">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6517978259411056" crossorigin="anonymous"></script>
@@ -31,8 +31,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=a5182195">
 
-<link rel="stylesheet" href="assets/minimal.css?v=b8f2aed1">
-<link rel="stylesheet" href="assets/dark.css?v=9869ac64">
+<link rel="stylesheet" href="assets/minimal.css?v=f1a19eea">
+<link rel="stylesheet" href="assets/dark.css?v=01595e34">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
 <body data-page="calc">
@@ -76,31 +76,61 @@
 <main><div class="wrap">
 <section class="hero calc-hero">
 <h1>Salary calculator</h1>
-<p class="lede">Turn your pay into hourly, daily, weekly, monthly and yearly figures, and see an estimate of your UK take-home pay.</p>
+<p class="lede">Work out your UK take-home pay for 2026/27. Add your tax code, student loan, pension, bonus and benefits for a payslip-style result.</p>
 <form class="panel calc sal" id="sal-form" autocomplete="off" onsubmit="return false">
 <div class="cf-grid">
-<div class="cf"><label for="sal-amount">Pay</label><input id="sal-amount" class="field" type="text" inputmode="decimal" value="35000"></div>
-<div class="cf"><label for="sal-per">Paid per</label><select id="sal-per" class="field"><option value="hour">Hour</option><option value="day">Day</option><option value="week">Week</option><option value="2week">2 weeks</option><option value="month">Month</option><option value="year" selected>Year</option></select></div>
-<div class="cf"><label for="sal-cur">Currency</label><select id="sal-cur" class="field"><option value="&pound;">&pound; Pound</option><option value="$">$ Dollar</option><option value="&euro;">&euro; Euro</option></select></div>
+<div class="cf"><label for="sal-amount">Pay (&pound;)</label><input id="sal-amount" class="field" type="text" inputmode="decimal" value="35000"></div>
+<div class="cf"><label for="sal-per">Paid per</label><select id="sal-per" class="field"><option value="hour">Hour</option><option value="day">Day</option><option value="week">Week</option><option value="2week">2 weeks</option><option value="4week">4 weeks</option><option value="month">Month</option><option value="year" selected>Year</option></select></div>
 <div class="cf"><label for="sal-hours">Hours per week</label><input id="sal-hours" class="field" type="text" inputmode="decimal" value="40"></div>
 <div class="cf"><label for="sal-days">Days per week</label><input id="sal-days" class="field" type="text" inputmode="decimal" value="5"></div>
-<div class="cf"><label for="sal-off">Unpaid days off a year</label><input id="sal-off" class="field" type="text" inputmode="decimal" value="0"></div>
 </div>
-<label class="cf-chk"><input type="checkbox" id="sal-uk" checked> Estimate UK take-home pay</label>
+<div class="acc-list">
+<details class="acc"><summary><span>Tax code &amp; region</span><em id="acc-tax-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf cf-wide"><label for="sal-region">Where you work</label><select id="sal-region" class="field"><option value="eng" selected>England, Wales or N. Ireland</option><option value="sco">Scotland</option></select></div>
+<div class="cf cf-wide"><label for="sal-code">Tax code (optional)</label><input id="sal-code" class="field" type="text" autocapitalize="characters" spellcheck="false" placeholder="Standard 1257L"></div>
+</div></details>
+<details class="acc"><summary><span>Student loan</span><em id="acc-loan-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-loan">Repayment plan</label><select id="sal-loan" class="field"><option value="0" selected>None</option><option value="1">Plan 1</option><option value="2">Plan 2</option><option value="4">Plan 4 (Scotland)</option><option value="5">Plan 5</option></select></div>
+<div class="cf"><label class="cf-chk" for="sal-pg"><input type="checkbox" id="sal-pg"> I also have a postgraduate loan</label></div>
+</div></details>
+<details class="acc"><summary><span>Pension</span><em id="acc-pen-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-pen">Your contribution</label><input id="sal-pen" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label for="sal-penunit">As</label><select id="sal-penunit" class="field"><option value="pct" selected>% of salary</option><option value="gbp">&pound; per month</option></select></div>
+<div class="cf cf-wide"><label for="sal-penm">How it is taken</label><select id="sal-penm" class="field"><option value="net" selected>Net pay (before tax)</option><option value="sac">Salary sacrifice (before tax and NI)</option><option value="ras">Relief at source (after tax)</option></select></div>
+</div></details>
+<details class="acc"><summary><span>Bonus and overtime</span><em id="acc-bo-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-bonus">Bonus per year (&pound;)</label><input id="sal-bonus" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label for="sal-ot">Overtime per year (&pound;)</label><input id="sal-ot" class="field" type="text" inputmode="decimal" value="0"></div>
+</div></details>
+<details class="acc"><summary><span>Benefits and deductions</span><em id="acc-be-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-ben">Taxable benefits per year (&pound;)</label><input id="sal-ben" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label for="sal-ss">Salary sacrifice per year (&pound;)</label><input id="sal-ss" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf cf-wide"><label for="sal-oth">Other deductions after tax per month (&pound;)</label><input id="sal-oth" class="field" type="text" inputmode="decimal" value="0"></div>
+</div></details>
+<details class="acc"><summary><span>More options</span><em id="acc-mo-m"></em></summary><div class="acc-body cf-grid">
+<div class="cf"><label for="sal-off">Unpaid days off a year</label><input id="sal-off" class="field" type="text" inputmode="decimal" value="0"></div>
+<div class="cf"><label class="cf-chk" for="sal-spa"><input type="checkbox" id="sal-spa"> Over state pension age (no National Insurance)</label></div>
+</div></details>
+</div>
 <p class="cr-err" id="sal-err" role="alert" hidden></p>
 <div class="cr" id="sal-out">
-<div class="cr-tw"><table class="cr-t sal-t" id="sal-tbl"><thead><tr><th scope="col">Pay period</th><th scope="col">Pay</th><th scope="col" class="sal-adj" hidden>Adjusted for days off</th></tr></thead><tbody></tbody></table></div>
-<div id="sal-uk-out"><h2 class="cm-h">Estimated UK take-home pay</h2><dl class="cr-rows" id="sal-uk-stats"></dl>
-<p class="hint">For 2026/27 in England, Wales and Northern Ireland. Pension, student loan, tax codes and Scottish rates are not included.</p></div>
+<div class="cr-hero"><span class="cr-k" id="sal-k"></span><b class="cr-v" id="sal-v"></b></div>
+<div class="sal-chips" id="sal-chips" role="group" aria-label="Pay period"></div>
+<div class="sal-bar" id="sal-bar" aria-hidden="true"></div>
+<ul class="sal-leg" id="sal-leg"></ul>
+<dl class="cr-rows" id="sal-rows"></dl>
+<p class="hint" id="sal-note"></p>
+<h2 class="cm-h sal-h2">Your pay in every period</h2>
+<div class="cr-tw"><table class="cr-t sal-t" id="sal-tbl"><thead><tr><th scope="col">Pay period</th><th scope="col">Pay before tax</th><th scope="col" class="sal-adj" hidden>After unpaid days</th></tr></thead><tbody></tbody></table></div>
 </div>
 <div class="btns"><button type="button" class="btn alt" id="sal-reset">Reset</button></div>
 </form>
 </section>
 <section class="block narrow calc-about">
 <h2>About this calculator</h2>
-<p>Enter what you earn and how often you are paid, then say how many hours and days you work in a week. The calculator turns your pay into a yearly figure using 52 weeks, then splits that figure into every other pay period. Hourly pay is yearly pay divided by 52 weeks of your weekly hours, weekly pay is a 52nd, and monthly pay is a 12th.</p><p>If some of your days off are unpaid, add them in the box. The adjusted column takes those days out of your yearly pay using your daily rate. For the 2026/27 tax year in England, Wales and Northern Ireland the first £12,570 of income is tax free, then 20% to £50,270, 40% to £125,140 and 45% above that. The tax-free amount shrinks by £1 for every £2 over £100,000. Employee National Insurance is 8% from £12,570 to £50,270 and 2% above. Pension, student loan, tax codes and Scottish rates are not included.</p>
+<p>Enter your pay and how often you are paid, then open any of the sections to add more detail: your tax code, student loan plan, pension contributions, bonus, overtime, taxable benefits and salary sacrifice. The calculator shows what you take home each year, month, four weeks, fortnight, week, day or hour, and where the rest goes.</p><p>It uses the 2026/27 tax year. In England, Wales and Northern Ireland the first £12,570 is tax free, then income tax is 20% to £50,270, 40% to £125,140 and 45% above, with the tax-free amount shrinking by £1 for every £2 over £100,000. Scotland has its own six bands from 19% to 48%. Employee National Insurance is 8% from £12,570 to £50,270 and 2% above, and is not charged over state pension age. Student loan repayments are 9% over the threshold for your plan (£26,900 for Plan 1, £29,385 for Plan 2, £33,795 for Plan 4 and £25,000 for Plan 5) and 6% over £21,000 for a postgraduate loan.</p><p>Pension contributions can be taken three ways. Net pay arrangements come off before tax but National Insurance is still charged. Salary sacrifice comes off before both. Relief at source is taken after tax, and the provider adds basic rate relief. If your payslip differs, check your tax code and any other deductions.</p>
 <h2>Common questions</h2>
-<h3>How do I work out my hourly rate from a yearly salary?</h3><p>Divide the yearly salary by 52, then divide that by the hours you work each week. For £35,000 and a 40-hour week that is about £16.83 an hour.</p><h3>Why are there two columns?</h3><p>The unadjusted column assumes you are paid for every working day. The adjusted column removes the unpaid days off you entered.</p>
+<h3>What tax code should I use?</h3><p>Leave it blank for the standard 1257L code, which gives the usual £12,570 tax-free allowance. If your payslip shows a different code, such as 1100L, BR or K475, type it in.</p><h3>Is the result the same as my payslip?</h3><p>It should be close. Payslips can differ because of holiday pay, part-year earnings, other benefits, or your employer's pension rules.</p><h3>How is the hourly rate worked out?</h3><p>Yearly pay is divided by 52 weeks of your weekly hours. Add unpaid days off in More options and the table shows both figures.</p>
 </section>
 <section class="block">
 <h2>More free calculators</h2>
@@ -109,7 +139,7 @@
 </section>
 </div></main>
 <script src="assets/calc.js?v=d4194044"></script>
-<script src="assets/salary.js?v=d4aa7d96"></script>
+<script src="assets/salary.js?v=5d984d97"></script>
 <!--footer-->
 <footer class="site-footer"><div class="wrap"><nav class="hb-dir" aria-label="Site directory"><div class="hd-col"><h3>About</h3><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="credits.html">Credits</a></li><li><a href="faq.html">FAQ</a></li></ul></div><div class="hd-col"><h3>Puzzles</h3><ul><li><a href="games.html#wordsearch">Word search</a></li><li><a href="games.html#sudoku">Sudoku</a></li><li><a href="games.html#connect4">Connect 4</a></li><li><a href="games.html#hangman">Hangman</a></li><li><a href="games.html#memory">Memory match</a></li><li><a href="games.html#snakes">Snakes and ladders</a></li><li><a href="games.html#ttt">Tic tac toe</a></li></ul></div><div class="hd-col"><h3>Retro games</h3><ul><li><a href="games.html#runner">Offline Runner</a></li><li><a href="games.html#retrosnake">Snake</a></li><li><a href="games.html#bricks">Brick Smash</a></li><li><a href="games.html#blaster">Space Invaders</a></li></ul></div><div class="hd-col"><h3>Word tools</h3><ul><li><a href="anagram-solver.html">Anagram solver</a></li><li><a href="word-counter.html">Word counter</a></li><li><a href="case-converter.html">Case converter</a></li><li><a href="random-word-picker.html">Random word picker</a></li></ul></div><div class="hd-col"><h3>Calculators</h3><ul><li><a href="salary-calculator.html">Salary calculator</a></li><li><a href="mortgage-calculator.html">Mortgage calculator</a></li><li><a href="scientific-calculator.html">Scientific calculator</a></li><li><a href="percentage-calculator.html">Percentage calculator</a></li><li><a href="bmi-calculator.html">BMI calculator</a></li><li><a href="calculators.html">All calculators</a></li></ul></div><div class="hd-col"><h3>Tips &amp; guides</h3><ul><li><a href="scrabble-tips.html">Scrabble tips</a></li><li><a href="wordle-tips.html">Five-letter puzzle tips</a></li><li><a href="crossword-help.html">Crossword help</a></li><li><a href="what-is-an-anagram.html">What is an anagram?</a></li></ul></div><div class="hd-col"><h3>Word lists</h3><ul><li><a href="two-letter-words.html">2-letter words</a></li><li><a href="three-letter-words.html">3-letter words</a></li><li><a href="four-letter-words.html">4-letter words</a></li><li><a href="five-letter-words.html">5-letter words</a></li><li><a href="six-letter-words.html">6-letter words</a></li><li><a href="seven-letter-words.html">7-letter words</a></li><li><a href="eight-letter-words.html">8-letter words</a></li><li><a href="words-with-z.html">Words with Z</a></li><li><a href="words-with-q-without-u.html">Q without U</a></li><li><a href="words-with-j-and-x.html">Words with J and X</a></li></ul></div></nav>
 
