@@ -414,3 +414,8 @@ body .site-footer .foot-logo .wm{font-size:19px;color:#1a1917!important}
 
 /* plain white page background */
 html,body,body[data-page]{background:#ffffff!important;background-image:none!important}
+
+/* clean look on white: flat pill, light border, soft shadow */
+body .hm .box{background:#fff!important;border:1px solid #e4e8f0!important;box-shadow:0 4px 18px rgba(28,34,48,.08)!important}
+body .hm .box:focus-within{border-color:#cfd6e4!important;box-shadow:0 6px 22px rgba(28,34,48,.12)!important}
+body .hm .box input{background:transparent!important}
