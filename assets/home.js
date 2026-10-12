@@ -84,7 +84,7 @@ function render(){
   const shownRack=rackText.trim().toUpperCase();
   if(!total){
     const nf=activeFilters();
-    out.innerHTML='<p class="empty">'+(parseRack(rackText).n<2&&!nf?"Type your letters in the box above, then press GO.":(nf?"No words match your "+nf+" active filter"+(nf>1?"s":"")+". Press Clear to remove them.":"No words found. Try a ? wildcard."))+"</p>";
+    out.innerHTML=(parseRack(rackText).n<2&&!nf)?"":'<p class="empty">'+((nf?"No words match your "+nf+" active filter"+(nf>1?"s":"")+". Press Clear to remove them.":"No words found. Try a ? wildcard."))+"</p>";
     return;
   }
   const fo=opts();

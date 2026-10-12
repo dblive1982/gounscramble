@@ -953,3 +953,8 @@ body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:30px;padding
 @media(min-width:720px){.opts .og-grid{grid-template-columns:repeat(4,minmax(0,108px))!important;gap:12px}}
 body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:33px;font-size:14px;padding:4px 8px}
 .opts .og-grid .opt{font-size:12px;gap:3px}
+/* tighter top of home so the search box sits higher */
+body .hero-band .hero-brand{margin:0 0 10px;gap:6px}
+body .hero-band .hm-top{gap:8px}
+body .hm.home-res{padding-top:6px}
+body .hm .optrow{margin-top:8px}
