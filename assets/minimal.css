@@ -575,3 +575,8 @@ body .menu-list a[aria-current="page"] .mi{color:#2f49d6}
 body .menu-list hr{margin:8px 0;border:0;border-top:1px solid #e3e5ea}
 body .menu-list .theme-toggle{margin:6px 0 0 20px}
 @media (max-width:600px){body .main-nav .menu[open] .menu-list{width:min(290px,80vw)!important}}
+/* Google-style default avatar */
+body .site-header .user-btn,body .site-header .user-btn.pic{width:40px;height:40px;overflow:hidden;background:#a8c7fa!important;color:#4a78e0!important}
+body .site-header .user-btn.pic{background-size:cover!important;background-position:center!important}
+body .site-header .user-btn svg{width:40px;height:40px}
+body .site-header .user-btn:hover,body .site-header .user-wrap:hover .user-btn{background:#9bbcf5!important;color:#3f6fe0!important}
