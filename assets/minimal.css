@@ -226,3 +226,25 @@ body .site-header .user-btn:hover,body .site-header .user-wrap:hover .user-btn{b
 body .hub #hb-acc{display:none!important}
 body .site-header .user-wrap{margin-right:6px}
 body .site-header .user-btn{white-space:nowrap}
+
+/* Options open inline (pushes content down, never covers anything) */
+body .hero-band .opts{position:static!important;flex:0 0 100%;width:100%;margin-top:10px;z-index:auto;box-shadow:var(--sh-s);padding:16px}
+body .hm .optrow{flex-wrap:wrap}
+body .hm .opt select,body .hm .opt input{font-size:15px;padding:8px 12px}
+body .hm .reset{align-self:end;justify-self:start}
+
+/* smaller panels */
+.hub{max-width:860px}
+.hub .hb-stats{gap:10px;row-gap:26px;margin-top:26px}
+.hub .hb-stats div,.hub .hb-otd,.hub button.hb-otd{padding:12px 8px!important;min-height:0!important;border-radius:16px;justify-content:center}
+.hub .hb-stats b{font-size:clamp(22px,3.4vw,28px)}
+.hub .hb-stats span{font-size:clamp(12px,2.2vw,14px)}
+.hub .hb-otd.live span,.hub button.hb-otd.live .nt{font-size:12px;-webkit-line-clamp:3}
+.hub .hb-wx.live b{font-size:clamp(22px,3.4vw,26px)}
+.hub .hb-grid,.hub .hb-facts{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.hub .hb-card{padding:14px 16px;gap:4px;border-radius:16px}
+.hub .hb-card b{font-size:16.5px}
+.hub .hb-card>span:not(.hb-ic){font-size:14px;line-height:1.35}
+.hub .hb-ic{min-width:42px;height:42px;border-radius:12px;font-size:14px}
+.hub .hb-mine,.hub .hb-cal,.hub .hb-fact{padding:14px;border-radius:16px}
+.hub{gap:38px}
