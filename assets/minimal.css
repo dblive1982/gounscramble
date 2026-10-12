@@ -428,3 +428,11 @@ body .hm .box:focus-within{border-color:#667085!important}
 .brand .cube,.hero-brand .cube,.foot-logo .cube{display:none!important}
 body .wm b,body .site-header .brand .wm b,body .hero-band .hero-brand .wm b,body .foot-logo .wm b{color:#5170ff!important}
 .hero-brand{gap:0}.brand,.foot-logo{gap:0}
+
+/* match the Canva mockup: soft grey backdrop, blue accent, floating pill */
+html,body,body[data-page]{background:linear-gradient(180deg,#f7f8fb 0,#eceef4 100%) fixed!important}
+.wm,body .site-header .brand .wm,body .hero-brand .wm,body .hero-band .hero-brand .wm,body .foot-logo .wm{font-family:'Albert Sans','Inter',system-ui,sans-serif!important;font-weight:400;letter-spacing:-.01em}
+body .wm b{font-weight:800}
+body .hm .box{background:linear-gradient(180deg,#fff,#f4f6fb)!important;border:0!important;box-shadow:0 22px 44px rgba(70,85,130,.18),0 4px 10px rgba(70,85,130,.08),inset 0 1px 0 #fff!important}
+body .hm .box:focus-within{border:0!important;box-shadow:0 26px 50px rgba(70,85,130,.22),0 4px 10px rgba(70,85,130,.08)!important}
+body .hm .go{background:linear-gradient(180deg,#6b86ff,#4059e8)!important;box-shadow:0 8px 18px rgba(81,112,255,.45),inset 0 1px 0 rgba(255,255,255,.4)!important}
