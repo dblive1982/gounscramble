@@ -165,7 +165,7 @@ body .hm .foot{border-top:1px solid var(--line);background:transparent;font-fami
 body .site-header .brand .wm,body .site-header .brand span.wm{color:var(--ink)!important;font-weight:400;font-size:22px;letter-spacing:-.02em;text-shadow:none}
 body .site-header .brand .wm b{font-weight:800}
 body .hero-brand .wm{font-size:clamp(30px,7vw,44px);color:var(--ink)}
-body .gm,body .hm,body .hub{--board:transparent;--display:'Inter',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--tile-face:#fff;--soft:#eef2f8;--tan:#eef2f8;--ink:#1c2230;--wild:#5170ff}
+body .gm,body .hm,body .hub{--board:transparent;--display:'Inter',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--tile-face:#fff;--soft:#eef2f8;--tan:#eef2f8;--ink:#1c2230;--wild:#ef4b53}
 body .gm{background:transparent;font-weight:500;color:var(--ink)}
 body .gm .gtop h1,body .gm:has(#v-games:not([hidden])) .gtop h1{display:block;background:none;border:0;box-shadow:none;transform:none;padding:0;font-size:clamp(26px,5vw,34px);font-weight:700;letter-spacing:-.02em;color:var(--ink)}
 .gm .sub{color:var(--muted);font-weight:400}
@@ -488,3 +488,27 @@ body .btn,body .btn-primary,body button.primary,body .ac .btn,body .ac button[ty
 body .site-footer .wrap{max-width:1040px}
 .hb-dir h3{border-bottom:0!important;padding-bottom:0!important;margin:0 0 16px!important}
 .hb-dir h3{border-bottom:1px solid #e3e5ea!important;padding-bottom:10px!important;margin:0 0 12px!important}
+
+/* word search categories: plain white cards like the guides page */
+body .gm #v-wordsearch .cat{background:#fff!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:var(--sh-s)!important;padding:16px 18px 18px;transition:box-shadow .15s}
+body .gm #v-wordsearch .cat:hover{box-shadow:var(--sh)!important}
+body .gm #v-wordsearch .cat .ico{background:var(--soft)!important;border:0!important;border-radius:12px;color:var(--ink)}
+body .gm #v-wordsearch .cat .nm{font-size:19px;font-weight:700}
+body .gm #v-wordsearch .cat .pg{font-size:13px;font-weight:500;color:var(--muted)}
+body .gm #v-wordsearch .pbar{height:8px;border:0!important;background:var(--soft)!important}
+body .gm #v-wordsearch .pbar i{background:#5170ff!important;border-radius:999px}
+
+/* games: softer, plain surfaces (word search numbers, boards, cards) */
+body .gm #v-wordsearch .num{background:#fff!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:var(--sh-s)!important;font-weight:600}
+body .gm #v-wordsearch .num.done{background:#eaf0ff!important;border-color:#c9d6ff!important}
+body .gm #v-wordsearch .num.done::after{background:#5170ff}
+body #v-wordsearch .card,body .gm .card{border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:var(--sh-s)!important;background:#fff!important}
+body .gm #v-wordsearch .pill,body .gm .pill,body .gm .pl{border:0!important;background:var(--soft)!important;font-weight:600}
+body .gm .pd{border:1px solid rgba(28,34,48,.25)!important}
+body .gm .c4{border:0!important;border-radius:22px;box-shadow:var(--sh)}
+body .gm .c4 i{border:1px solid rgba(28,34,48,.25)!important}
+body .gm .ttt button{border:1px solid var(--line)!important;border-radius:18px!important;box-shadow:var(--sh-s)}
+body .gm .mc{border:1px solid var(--line)!important;border-radius:14px!important;box-shadow:var(--sh-s)}
+body .gm .word span,body .gm .keys button,body .gm .pad button,body .gm .dice{border:1px solid var(--line)!important;box-shadow:0 2px 0 var(--line)!important}
+body .gm .sl{border:1px solid var(--line)!important;border-radius:18px}
+body .gm #v-wordsearch .pill,body .gm .pill{background:#fff!important;box-shadow:var(--sh-s)!important}
