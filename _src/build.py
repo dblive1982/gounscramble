@@ -653,7 +653,7 @@ def seo_tags(p, url):
 
 def build_page(p):
     body = (fill_extras(p["body"])
-            .replace("@@LETTERS@@", letters_input("GO!"))
+            .replace("@@LETTERS@@", letters_input("GO"))
             .replace("@@DICT@@", DICT_ROW)
             .replace("@@FILTERS@@", FILTERS)
             .replace("@@CHEVRON@@", CHEVRON)
