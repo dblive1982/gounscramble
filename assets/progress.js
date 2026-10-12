@@ -69,6 +69,28 @@
       if (a.su || b.su) r.su = { p: Math.max((a.su || {}).p || 0, (b.su || {}).p || 0), w: Math.max((a.su || {}).w || 0, (b.su || {}).w || 0) };
       out.wg = r;
     })();
+    (function () {                       // Mini Crossword: streak and best time never go backwards; the furthest board wins
+      var a = local.cw, b = remote.cw;
+      if (!a && !b) return;
+      if (!a) { out.cw = b; return; } if (!b) { out.cw = a; return; }
+      var newer = ((a.t || 0) >= (b.t || 0)) ? a : b, r = { t: Math.max(a.t || 0, b.t || 0), m: newer.m };
+      function filled(e) { return ((e && e.e) || "").replace(/[^A-Z]/g, "").length; }
+      var x = a.d, y = b.d;
+      if (x && y) r.d = (x.id !== y.id) ? (x.id > y.id ? x : y) : ((x.done && !y.done) ? x : (y.done && !x.done) ? y : (filled(y) > filled(x) ? y : x));
+      else if (x || y) r.d = x || y;
+      var u = newer.u || a.u || b.u; if (u) r.u = u;
+      var sa = a.st, sb = b.st;
+      if (sa || sb) {
+        sa = sa || {}; sb = sb || {};
+        var lead = ((sa.l || "") > (sb.l || "")) ? sa : ((sb.l || "") > (sa.l || "")) ? sb : null, st = {};
+        st.p = Math.max(sa.p || 0, sb.p || 0); st.l = lead ? lead.l : (sa.l || sb.l || "");
+        st.s = lead ? (lead.s || 0) : Math.max(sa.s || 0, sb.s || 0);
+        st.bt = (sa.bt && sb.bt) ? Math.min(sa.bt, sb.bt) : (sa.bt || sb.bt || 0);
+        r.st = st;
+      }
+      if (a.su || b.su) { var ba = (a.su || {}).bt || 0, bb = (b.su || {}).bt || 0; r.su = { p: Math.max((a.su || {}).p || 0, (b.su || {}).p || 0), bt: (ba && bb) ? Math.min(ba, bb) : (ba || bb) }; }
+      out.cw = r;
+    })();
     (function () {                       // Maze best times: the fastest of each size
       var a = local.mz, b = remote.mz;
       if (!a && !b) return;

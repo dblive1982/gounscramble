@@ -11,7 +11,7 @@ const slVs=a=>{const two=SL.mode==="two";vsDraw("sl-vs",[{c:"var(--wild)",n:two?
 const c4Vs=()=>{const two=C4.mode==="two";vsDraw("c4-vs",[{c:"var(--wild)",n:two?"Player 1":"You"},{c:"#ffd23f",n:two?"Player 2":"Computer ("+(C4.mode==="easy"?"Easy":"Hard")+")"}],C4.over?-1:C4.turn-1)};
 const ttVs=()=>{const two=TT3.mode==="two";vsDraw("tt-vs",[{m:"X",n:two?"Player 1":"You"},{m:"O",n:two?"Player 2":"Computer ("+(TT3.mode==="easy"?"Easy":"Hard")+")"}],TT3.over?-1:(TT3.turn==="X"?0:1))};
 /* ---------- menu + routing ---------- */
-const TT={games:"Puzzles & games",wordle:"Wordle Global",maze:"Maze",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",runner:"Offline Runner",retrosnake:"Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Space Invaders",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper",rocks:"Rock Blaster",flap:"Sky Flap",moles:"Mole Pop",echo:"Colour Echo",merge:"Number Merge",mines:"Mine Finder"};
+const TT={games:"Puzzles & games",wordle:"Wordle Global",crossword:"Mini Crossword",maze:"Maze",wordsearch:"Word search",sudoku:"Sudoku",snakes:"Snakes and ladders",connect4:"Connect 4",ttt:"Tic tac toe",memory:"Memory match",hangman:"Hangman",runner:"Offline Runner",retrosnake:"Snake",rally:"Paddle Rally",bricks:"Brick Smash",blaster:"Space Invaders",muncher:"Maze Muncher",blocks:"Falling Blocks",hopper:"Road Hopper",rocks:"Rock Blaster",flap:"Sky Flap",moles:"Mole Pop",echo:"Colour Echo",merge:"Number Merge",mines:"Mine Finder"};
 const INIT={};
 ["runner","retrosnake","rally","bricks","blaster","muncher","blocks","hopper","rocks","flap","moles","echo","merge","mines"].forEach(id=>{INIT[id]=()=>{if(window.ARC)ARC.init(id)}});
 function menu(o){var m=document.querySelector(".site-header .menu");if(m&&!o)m.removeAttribute("open")}
@@ -257,6 +257,85 @@ function wgStart(){if(!window.WGD)return;WG.ready=true;const sv=wgSv();WG.mode=s
 function wgStart2(){wgLoad();document.querySelectorAll("#wg-lv .pill").forEach((b,i)=>b.classList.toggle("on",(i===0)===(WG.mode==="daily")));wgDraw();wgStat();if(WG.done)wgEnd()}
 INIT.wordle=()=>{if(window.WGD){wgStart();return}const sc=document.createElement("script");sc.src="assets/wg-words.js?v=1";sc.onload=wgStart;sc.onerror=()=>{$("wg-msg").textContent="Could not load the word list. Check your connection and reload."};document.head.appendChild(sc)};
 window.__wgPrint=()=>{let g="";for(let r=0;r<6;r++){g+="<tr>";for(let i=0;i<5;i++)g+="<td></td>";g+="</tr>"}return "<table class='pwg'>"+g+"</table><p class='pn'>Cross off the letters you have used:</p><p class='pwk'>"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").join(" ")+"</p>"};
+
+/* ---------- Mini Crossword ---------- */
+const CW={mode:"daily",idx:0,sol:"",ent:[],sel:0,dir:"a",el:0,t0:0,done:false,help:false,bad:{},ready:false,id:"",words:null,num:[],cur:0};
+const CWK=["qwertyuiop","asdfghjkl","zxcvbnm-"];
+function cwDay(){return Math.floor((Date.UTC(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())-Date.UTC(2026,0,1))/864e5)}
+function cwTime(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function cwBuild(){const g=CW.sol,num=new Array(25).fill(0),A=[],D=[];let n=0;const w=i=>g[i]!=="#";
+  for(let i=0;i<25;i++){if(!w(i))continue;const r=Math.floor(i/5),c=i%5;const sa=(c===0||!w(i-1))&&c<4&&w(i+1),sd=(r===0||!w(i-5))&&r<4&&w(i+5);
+    if(sa||sd)num[i]=++n;
+    if(sa){const cells=[];for(let k=i;k%5>=c&&w(k)&&(k===i||k%5!==0);k++)cells.push(k);A.push({n,cells})}
+    if(sd){const cells=[];for(let k=i;k<25&&w(k);k+=5)cells.push(k);D.push({n,cells})}}
+  CW.num=num;CW.words={a:A,d:D}}
+function cwWord(i,dir){const L=CW.words[dir];for(let k=0;k<L.length;k++)if(L[k].cells.indexOf(i)>=0)return {k,w:L[k]};return null}
+function cwOrder(){const o=[];CW.words.a.forEach((w,k)=>o.push({d:"a",k,w}));CW.words.d.forEach((w,k)=>o.push({d:"d",k,w}));return o}
+function cwActive(){let a=cwWord(CW.sel,CW.dir);if(!a){CW.dir=CW.dir==="a"?"d":"a";a=cwWord(CW.sel,CW.dir)}return a}
+const cwSv=()=>GUP.get("cw")||{};
+function cwEnt(){return CW.ent.map((c,i)=>CW.sol[i]==="#"?"#":(c||".")).join("")}
+function cwPut(patch){const o=Object.assign({},cwSv(),patch);o.m=CW.mode;GUP.set("cw",o)}
+function cwSave(){const b={e:cwEnt(),t:CW.done?CW.el:(CW.t0?Date.now()-CW.t0:CW.el),done:CW.done,h:CW.help};
+  if(CW.mode==="daily")cwPut({d:Object.assign({id:CW.id},b)});else cwPut({u:Object.assign({i:CW.idx},b)})}
+function cwStats(){const s=cwSv().st||{};return {p:s.p||0,s:s.s||0,b:s.b||0,bt:s.bt||0,l:s.l||""}}
+function cwLoad(){const sv=cwSv(),N=window.CWD.length;let b=null;
+  if(CW.mode==="daily"){CW.id=wgDay();CW.idx=((cwDay()%N)+N)%N;if(sv.d&&sv.d.id===CW.id)b=sv.d}
+  else{if(sv.u&&typeof sv.u.i==="number"&&sv.u.i<N&&!sv.u.done){b=sv.u;CW.idx=b.i}else CW.idx=rnd(N)}
+  CW.sol=window.CWD[CW.idx][0];cwBuild();CW.ent=new Array(25).fill("");CW.bad={};CW.help=false;CW.done=false;CW.el=0;CW.t0=0;
+  if(b&&typeof b.e==="string"&&b.e.length===25){for(let i=0;i<25;i++)if(CW.sol[i]!=="#"&&/[A-Z]/.test(b.e[i]))CW.ent[i]=b.e[i];CW.done=!!b.done;CW.help=!!b.h;CW.el=b.t||0}
+  const f=CW.sol.split("").findIndex((c,i)=>c!=="#"&&!CW.ent[i]);CW.sel=f<0?CW.sol.split("").findIndex(c=>c!=="#"):f;CW.dir="a";cwActive()}
+function cwDraw(){const host=$("cw-grid"),act=cwActive(),inW=new Set(act?act.w.cells:[]);let h="";
+  for(let i=0;i<25;i++){if(CW.sol[i]==="#"){h+='<div class="cwc b" role="presentation"></div>';continue}
+    h+='<button type="button" class="cwc'+(i===CW.sel?" sel":inW.has(i)?" hl":"")+(CW.bad[i]?" bad":"")+'" data-i="'+i+'" aria-label="'+(CW.num[i]?CW.num[i]+", ":"")+(CW.ent[i]||"empty")+'">'+(CW.num[i]?'<i class="n">'+CW.num[i]+"</i>":"")+'<b>'+(CW.ent[i]||"")+"</b></button>"}
+  host.innerHTML=h;
+  if(act){const c=window.CWD[CW.idx][act.w?(CW.dir==="a"?1:2):1][act.k];$("cw-clue-t").innerHTML="<b>"+act.w.n+(CW.dir==="a"?" Across":" Down")+"</b> "+c.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  const ks={};document.querySelectorAll("#cw-kb [data-k]").forEach(b=>{b.className="wgkey"+(b.dataset.k==="-"?" w":"")})}
+function cwMsg(t){$("cw-msg").textContent=t}
+function cwStatLine(){const s=cwStats(),su=cwSv().su||{p:0,bt:0};
+  $("cw-stat").textContent=(CW.done?"Time "+cwTime(CW.el)+" · ":(CW.t0?"Time "+cwTime(Date.now()-CW.t0)+" · ":""))+"Daily: solved "+s.p+" · streak "+s.s+(s.bt?" · best "+cwTime(s.bt):"")+(su.p?" | Unlimited: solved "+su.p:"");
+  $("cw-note").textContent=GUP.signedIn()?"":"Sign in to keep your streak and times on every device.";
+  $("cw-new").hidden=CW.mode!=="unlimited";$("cw-share").hidden=!CW.done}
+function cwEnd(){cwMsg(CW.help?"Solved with a little help. Well done!":"Solved in "+cwTime(CW.el)+"!");if(CW.mode==="daily")$("cw-msg").textContent+=" Come back tomorrow for a new one."}
+function cwCheckDone(){for(let i=0;i<25;i++)if(CW.sol[i]!=="#"&&CW.ent[i]!==CW.sol[i])return false;return true}
+function cwFinish(){CW.done=true;CW.el=Date.now()-CW.t0;CW.bad={};
+  if(CW.mode==="daily"){const s=cwStats();s.p++;s.s=(s.l===wgYest()||s.l===CW.id)?s.s+1:1;s.l=CW.id;if(!CW.help&&(!s.bt||CW.el<s.bt))s.bt=CW.el;
+    cwPut({d:{id:CW.id,e:cwEnt(),t:CW.el,done:true,h:CW.help},st:s})}
+  else{const o=cwSv().su||{p:0,bt:0};cwPut({u:{i:CW.idx,e:cwEnt(),t:CW.el,done:true,h:CW.help},su:{p:(o.p||0)+1,bt:(!CW.help&&(!o.bt||CW.el<o.bt))?CW.el:o.bt||0}})}
+  cwEnd();cwDraw();cwStatLine()}
+function cwTouch(){if(!CW.t0&&!CW.done)CW.t0=Date.now()-CW.el}
+function cwAfter(){if(cwCheckDone()){cwFinish();return}cwSave();cwDraw();cwStatLine()}
+function cwNext(back){const a=cwActive();if(!a)return;const c=a.w.cells,k=c.indexOf(CW.sel),n=k+(back?-1:1);if(n>=0&&n<c.length)CW.sel=c[n]}
+function cwType(ch){if(CW.done||!CW.ready)return;cwTouch();CW.ent[CW.sel]=ch.toUpperCase();delete CW.bad[CW.sel];cwMsg("");const a=cwActive(),k=a.w.cells.indexOf(CW.sel);
+  let nx=-1;for(let j=k+1;j<a.w.cells.length;j++){if(!CW.ent[a.w.cells[j]]){nx=a.w.cells[j];break}}if(nx<0&&k+1<a.w.cells.length)nx=a.w.cells[k+1];if(nx>=0)CW.sel=nx;cwAfter()}
+function cwBack(){if(CW.done||!CW.ready)return;if(CW.ent[CW.sel]){CW.ent[CW.sel]="";delete CW.bad[CW.sel]}else{cwNext(true);CW.ent[CW.sel]="";delete CW.bad[CW.sel]}cwSave();cwDraw()}
+function cwMove(dr,dc){let r=Math.floor(CW.sel/5),c=CW.sel%5;for(let s=0;s<5;s++){r+=dr;c+=dc;if(r<0||r>4||c<0||c>4)return;if(CW.sol[r*5+c]!=="#"){CW.sel=r*5+c;cwDraw();return}}}
+function cwStep(d){const o=cwOrder(),a=cwActive(),k=o.findIndex(x=>x.d===CW.dir&&x.k===a.k),n=(k+d+o.length)%o.length;CW.dir=o[n].d;CW.sel=o[n].w.cells.find(i=>!CW.ent[i])||o[n].w.cells[0];cwDraw()}
+function cwTap(i){if(CW.done)return;if(i===CW.sel){CW.dir=CW.dir==="a"?"d":"a";cwActive()}else{CW.sel=i;if(!cwWord(i,CW.dir))CW.dir=CW.dir==="a"?"d":"a"}cwDraw()}
+function cwCheck(){if(CW.done)return;cwTouch();CW.bad={};let n=0;for(let i=0;i<25;i++)if(CW.sol[i]!=="#"&&CW.ent[i]&&CW.ent[i]!==CW.sol[i]){CW.bad[i]=1;n++}cwMsg(n?n+" letter"+(n>1?"s are":" is")+" wrong.":"Everything you have so far is right.");cwDraw()}
+function cwReveal(word){if(CW.done)return;cwTouch();CW.help=true;const a=cwActive(),cells=word?a.w.cells:[CW.sel];cells.forEach(i=>{CW.ent[i]=CW.sol[i];delete CW.bad[i]});cwAfter()}
+function cwNew(){CW.idx=rnd(window.CWD.length);CW.sol=window.CWD[CW.idx][0];cwBuild();CW.ent=new Array(25).fill("");CW.bad={};CW.help=false;CW.done=false;CW.el=0;CW.t0=0;CW.sel=CW.sol.split("").findIndex(c=>c!=="#");CW.dir="a";cwActive();cwSave();cwMsg("");cwDraw();cwStatLine()}
+function cwShare(){const t="Mini Crossword "+(CW.mode==="daily"?CW.id+" ":"")+"solved in "+cwTime(CW.el)+(CW.help?" (with help)":"")+"\n"+location.origin+location.pathname+"#crossword";
+  if(navigator.share){navigator.share({text:t}).catch(()=>{});return}const done=()=>window.GUToast&&GUToast("Result copied");
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,()=>window.prompt("Copy your result",t));else window.prompt("Copy your result",t)}
+function cwStart(){if(!window.CWD)return;CW.ready=true;const sv=cwSv();CW.mode=sv.m==="unlimited"?"unlimited":"daily";
+  pills($("cw-lv"),[["daily","Daily puzzle"],["unlimited","Unlimited"]],CW.mode,v=>{CW.mode=v;cwLoad();cwPut({});cwDraw();cwStatLine();if(CW.done)cwEnd();else cwMsg("")});
+  $("cw-kb").innerHTML=CWK.map(r=>'<div class="wgkr">'+[...r].map(c=>'<button type="button" data-k="'+c+'" class="wgkey'+(c==="-"?" w":"")+'" aria-label="'+(c==="-"?"Delete":c)+'">'+(c==="-"?"⌫":c)+"</button>").join("")+"</div>").join("");
+  $("cw-kb").addEventListener("click",e=>{const b=e.target.closest("[data-k]");if(!b)return;if(b.dataset.k==="-")cwBack();else cwType(b.dataset.k)});
+  $("cw-grid").addEventListener("click",e=>{const b=e.target.closest("[data-i]");if(b)cwTap(+b.dataset.i)});
+  $("cw-prev").addEventListener("click",()=>cwStep(-1));$("cw-next").addEventListener("click",()=>cwStep(1));$("cw-clue-t").addEventListener("click",()=>{if(!CW.done){CW.dir=CW.dir==="a"?"d":"a";cwActive();cwDraw()}});
+  $("cw-check").addEventListener("click",cwCheck);$("cw-rl").addEventListener("click",()=>cwReveal(false));$("cw-rw").addEventListener("click",()=>cwReveal(true));
+  $("cw-new").addEventListener("click",cwNew);$("cw-share").addEventListener("click",cwShare);
+  document.addEventListener("keydown",e=>{if($("v-crossword").hidden||e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target.tagName;if(t==="INPUT"||t==="SELECT"||t==="TEXTAREA")return;
+    const k=e.key;if(/^[a-zA-Z]$/.test(k)){e.preventDefault();cwType(k)}else if(k==="Backspace"){e.preventDefault();cwBack()}
+    else if(k==="ArrowLeft"){e.preventDefault();cwMove(0,-1)}else if(k==="ArrowRight"){e.preventDefault();cwMove(0,1)}else if(k==="ArrowUp"){e.preventDefault();cwMove(-1,0)}else if(k==="ArrowDown"){e.preventDefault();cwMove(1,0)}
+    else if(k==="Tab"){e.preventDefault();cwStep(e.shiftKey?-1:1)}else if(k===" "){e.preventDefault();cwTap(CW.sel)}});
+  GUP.onChange(()=>{if(!CW.ready)return;const sv=cwSv();CW.mode=sv.m==="unlimited"?"unlimited":"daily";document.querySelectorAll("#cw-lv .pill").forEach((b,i)=>b.classList.toggle("on",(i===0)===(CW.mode==="daily")));cwLoad();cwDraw();cwStatLine();if(CW.done)cwEnd()});
+  clearInterval(CW.tick);CW.tick=setInterval(()=>{if(!$("v-crossword").hidden&&CW.t0&&!CW.done)cwStatLine()},1000);
+  cwLoad();cwDraw();cwStatLine();if(CW.done)cwEnd()}
+INIT.crossword=()=>{if(window.CWD){cwStart();return}const sc=document.createElement("script");sc.src="assets/cw-data.js?v=1";sc.onload=cwStart;sc.onerror=()=>{$("cw-msg").textContent="Could not load the puzzles. Check your connection and reload."};document.head.appendChild(sc)};
+window.__cwPrint=()=>{if(!CW.words)return "";let g="<table class='pcw'>";for(let r=0;r<5;r++){g+="<tr>";for(let c=0;c<5;c++){const i=r*5+c;g+=CW.sol[i]==="#"?"<td class='k'></td>":"<td>"+(CW.num[i]?"<i>"+CW.num[i]+"</i>":"")+"</td>"}g+="</tr>"}g+="</table>";
+  const cl=window.CWD[CW.idx],li=(L,arr)=>"<ol class='pcl'>"+L.map((w,k)=>"<li value='"+w.n+"'>"+arr[k]+"</li>").join("")+"</ol>";
+  return g+"<div class='pcc'><div><h2>Across</h2>"+li(CW.words.a,cl[1])+"</div><div><h2>Down</h2>"+li(CW.words.d,cl[2])+"</div></div>"};
 
 /* ---------- Memory match ---------- */
 const MM={cards:[],open:[],moves:0,found:0,lock:false,mode:"one",turn:0,sc:[0,0]};

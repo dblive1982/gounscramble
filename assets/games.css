@@ -279,3 +279,28 @@ html,body{overflow-x:clip;max-width:100%}
   #print-sheet .pwg td{width:34mm;height:34mm;border:2pt solid #000}
   #print-sheet .pwk{font-size:15pt;letter-spacing:.08em;margin:6pt 0}
 }
+
+/* Mini Crossword */
+.gm .cwcl{display:flex;align-items:stretch;gap:8px;width:min(100%,460px);margin:6px auto}
+.gm .cwcl button{flex:0 0 44px;border:2px solid var(--ink);border-radius:10px;background:var(--tile);color:var(--ink);font-size:26px;line-height:1;cursor:pointer;padding:0}
+.gm .cwct{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;background:#e3eaff;border-radius:10px;padding:8px 10px;min-height:48px;font-size:16px;line-height:1.25;cursor:pointer;color:#10122b}
+.gm .cwct b{margin-right:6px;color:#2f49d6}
+.gm .cwg{display:grid;grid-template-columns:repeat(5,1fr);gap:0;width:min(100%,320px);margin:8px auto;border:2px solid var(--ink);background:var(--ink)}
+.gm .cwc{position:relative;aspect-ratio:1;display:grid;place-items:center;border:1px solid var(--ink);background:#fff;color:var(--ink);font-family:var(--display);font-weight:700;font-size:clamp(24px,8vw,32px);padding:0;border-radius:0;cursor:pointer}
+.gm .cwc.b{background:var(--ink);border-color:var(--ink);cursor:default}
+.gm .cwc.hl{background:#cfe0ff}
+.gm .cwc.sel{background:#ffd23f}
+.gm .cwc.bad{color:#d01c1c}
+.gm .cwc .n{position:absolute;top:2px;left:3px;font:600 10px/1 var(--body);font-style:normal}
+.gm .cwc b{font-weight:700}
+@media print{
+  #print-sheet .pcww{text-align:center}
+  #print-sheet .pcw{border-collapse:collapse;margin:0 auto 12pt}
+  #print-sheet .pcw td{width:24mm;height:24mm;border:1.5pt solid #000;position:relative;vertical-align:top;text-align:left}
+  #print-sheet .pcw td.k{background:#000}
+  #print-sheet .pcw td i{font:600 9pt Arial;font-style:normal;position:absolute;top:1.5mm;left:2mm}
+  #print-sheet .pcc{display:flex;gap:16mm;justify-content:center;text-align:left;font-size:12pt}
+  #print-sheet .pcc h2{font-size:13pt;margin:0 0 4pt}
+  #print-sheet .pcl{margin:0;padding-left:22pt}
+  #print-sheet .pcl li{margin:0 0 4pt}
+}
