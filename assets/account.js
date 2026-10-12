@@ -42,7 +42,7 @@
       if (!d.profile) return;
       prof = d.profile; user.name = prof.name;
       $("pr-n").value = prof.name; $("pr-b").value = prof.bio; $("pr-l").value = prof.location; $("pr-f").value = prof.fav;
-      $("since").textContent = prof.since ? "Member since " + prof.since : "";
+      $("since").textContent = prof.since ? "Member since " + String(prof.since).slice(0, 10).split("-").reverse().join("/") : "";
       paint(user);
     }).catch(function () { /* ignore */ });
   }
