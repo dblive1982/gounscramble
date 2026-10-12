@@ -64,7 +64,7 @@
         var won = (gs.slW || 0) + (gs.c4W || 0) + (gs.hmW || 0);
         rows.push(["Games won (snakes, Connect 4, Hangman)", won]);
         if (gs.mmb) rows.push(["Memory match best", gs.mmb + " moves"]);
-        [["retrosnake", "Retro Snake"], ["rally", "Paddle Rally (wins)"], ["bricks", "Brick Smash"], ["blaster", "Star Blaster"], ["muncher", "Maze Muncher"], ["blocks", "Falling Blocks"], ["hopper", "Road Hopper"], ["rocks", "Rock Blaster"], ["flap", "Sky Flap"], ["moles", "Mole Pop"], ["echo", "Colour Echo"], ["merge", "Number Merge"], ["mines", "Mine Finder (wins)"]].forEach(function (a) { if (gs["b_" + a[0]]) rows.push([a[1] + " best", gs["b_" + a[0]]]); });
+        [["runner", "Offline Runner"], ["retrosnake", "Snake"], ["rally", "Paddle Rally (wins)"], ["bricks", "Brick Smash"], ["blaster", "Space Invaders"], ["muncher", "Maze Muncher"], ["blocks", "Falling Blocks"], ["hopper", "Road Hopper"], ["rocks", "Rock Blaster"], ["flap", "Sky Flap"], ["moles", "Mole Pop"], ["echo", "Colour Echo"], ["merge", "Number Merge"], ["mines", "Mine Finder (wins)"]].forEach(function (a) { if (gs["b_" + a[0]]) rows.push([a[1] + " best", gs["b_" + a[0]]]); });
         return rows;
       })()).forEach(function (r) {
         var li = document.createElement("li"); li.textContent = r[0] + ": " + r[1]; L.appendChild(li);

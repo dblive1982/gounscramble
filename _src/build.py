@@ -191,7 +191,7 @@ def letters_input(button_text):
 
 
 HUB = """<div class="hub">
-<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
+<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Arcade games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
 <section class="hb-sec" id="s-games" aria-labelledby="hb-games"><div class="hb-head"><div><h2 id="hb-games">Puzzles &amp; Games</h2><p class="hb-sub">Free puzzles you can play right here.</p></div><a class="hb-arrow" href="games.html" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-teal" data-pop="300!" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
@@ -203,12 +203,12 @@ HUB = """<div class="hub">
 <a class="hb-card c-teal" href="games.html#ttt"><span class="hb-ic">XO</span><b>Tic tac toe</b><span>Three in a row wins. Easy, hard, or two players on one device.</span><em>1-2 players</em></a>
 <a class="hb-card hb-more" data-pop="FREE!" href="account.html"><span class="hb-ic">&#9733;</span><b>Save your progress</b><span>Sign in free to keep your games and scores on every device.</span><em>Free account</em></a>
 </div></section>
-<section class="hb-sec" id="s-retro" aria-labelledby="hb-retro"><div class="hb-head"><div><h2 id="hb-retro">Retro Games</h2><p class="hb-sub">Old-school arcade favourites with our own twist.</p></div><a class="hb-arrow" href="games.html#arcade" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+<section class="hb-sec" id="s-retro" aria-labelledby="hb-retro"><div class="hb-head"><div><h2 id="hb-retro">Arcade Games</h2><p class="hb-sub">Simple games to play in your browser.</p></div><a class="hb-arrow" href="games.html#arcade" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
-<a class="hb-card c-green" data-pop="NEW!" href="games.html#retrosnake"><span class="hb-ic">Sn</span><b>Retro Snake</b><span>Eat, grow and don't hit the walls or yourself. Gets faster as you go.</span><em>Arcade</em></a>
-<a class="hb-card c-orange" href="games.html#bricks"><span class="hb-ic">Br</span><b>Brick Smash</b><span>Bounce the ball, smash every brick and don't let it drop.</span><em>Arcade</em></a>
-<a class="hb-card c-pink" href="games.html#blaster"><span class="hb-ic">Sb</span><b>Star Blaster</b><span>Blast the invading aliens before they reach you. Hide behind the shields.</span><em>Arcade</em></a>
-<a class="hb-card c-yellow" href="games.html#muncher"><span class="hb-ic">Mm</span><b>Maze Muncher</b><span>Eat every dot, dodge the ghosts and grab a pellet to turn the tables.</span><em>Arcade</em></a>
+<a class="hb-card c-teal" href="games.html#runner"><span class="hb-ic">Rn</span><b>Offline Runner</b><span>Jump the cactuses and run as far as you can.</span><em>Arcade</em></a>
+<a class="hb-card c-teal" href="games.html#retrosnake"><span class="hb-ic">Sn</span><b>Snake</b><span>Eat, grow and don't hit the walls or yourself.</span><em>Arcade</em></a>
+<a class="hb-card c-teal" href="games.html#bricks"><span class="hb-ic">Br</span><b>Brick Smash</b><span>Bounce the ball and smash every brick.</span><em>Arcade</em></a>
+<a class="hb-card c-teal" href="games.html#blaster"><span class="hb-ic">Si</span><b>Space Invaders</b><span>Shoot the invaders before they reach you.</span><em>Arcade</em></a>
 </div></section>
 <section class="hb-sec" id="s-lists" aria-labelledby="hb-lists"><div class="hb-head"><div><h2 id="hb-lists">Word Lists</h2><p class="hb-sub">Browse words by length and first letter.</p></div><a class="hb-arrow" href="word-lists.html" aria-label="All word lists"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-links">
@@ -263,7 +263,7 @@ HUB = """<div class="hub">
 
 def _hub_dir(hub):
     cols=[]
-    for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-guides","Tips &amp; guides"),("s-lists","Word lists")):
+    for sid,title in (("s-games","Puzzles"),("s-retro","Arcade games"),("s-tools","Word tools"),("s-guides","Tips &amp; guides"),("s-lists","Word lists")):
         m=re.search(r'<section class="hb-sec" id="%s".*?</section>'%sid,hub,re.S)
         if not m: continue
         seg=m.group(0); items=[]

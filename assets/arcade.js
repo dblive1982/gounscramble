@@ -3,8 +3,8 @@
 "use strict";
 var $ = function (id) { return document.getElementById(id); };
 var rnd = function (n) { return Math.floor(Math.random() * n); };
-var FONT = '"Press Start 2P",ui-monospace,Menlo,Consolas,monospace';
-var C = { bg: "#0b0b22", teal: "#2de2e6", yel: "#ffd23f", pink: "#ff5c8a", grn: "#7cff6b", pur: "#a78bff", org: "#ff9d3d", red: "#ff4545", wht: "#f4f4ff", blu: "#3b6cff", dim: "#5a5a8a" };
+var FONT = 'Inter,system-ui,-apple-system,"Segoe UI",sans-serif';
+var C = { bg: "#ffffff", teal: "#535353", yel: "#535353", pink: "#535353", grn: "#535353", pur: "#8e8e8e", org: "#8e8e8e", red: "#535353", wht: "#535353", blu: "#8e8e8e", dim: "#bdbdbd", lt: "#d9d9d9" };
 
 /* ---------- sound ---------- */
 var mute = false; try { mute = localStorage.getItem("gu-mute") === "1"; } catch (e) { /* ignore */ }
@@ -58,8 +58,8 @@ function mount(id, host, cfg) {
   G.score = function (v) { scE.textContent = v; };
   G.refresh = function () { bsE.textContent = bestTxt(); };
   G.txt = function (s, x, y, size, col, al) {
-    c.font = size + "px " + FONT; var w = c.measureText(s).width, k = size;
-    if (w > W - 8) { k = Math.max(6, Math.floor(size * (W - 8) / w)); c.font = k + "px " + FONT; }
+    size = Math.round(size * 1.5); c.font = "700 " + size + "px " + FONT; var w = c.measureText(s).width, k = size;
+    if (w > W - 8) { k = Math.max(6, Math.floor(size * (W - 8) / w)); c.font = "700 " + k + "px " + FONT; }
     c.fillStyle = col || C.wht; c.textAlign = al || "center"; c.textBaseline = "middle"; c.fillText(s, x, y);
   };
   G.rect = function (x, y, w, h, col) { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); };
@@ -133,19 +133,19 @@ function mount(id, host, cfg) {
   var last = 0, acc = 0, STEP = 1000 / 60;
   function overlay() {
     if (G.st === "play") return;
-    c.fillStyle = "rgba(5,5,20,.72)"; c.fillRect(0, 0, W, H);
+    c.fillStyle = "rgba(255,255,255,.86)"; c.fillRect(0, 0, W, H);
     var mid = H / 2, blink = Math.floor(performance.now() / 450) % 2;
     if (G.st === "ready") {
-      G.txt(cfg.name.toUpperCase(), W / 2, mid - 34, 16, C.yel);
-      G.txt(cfg.tag || "", W / 2, mid - 8, 8, C.teal);
+      G.txt(cfg.name.toUpperCase(), W / 2, mid - 30, 12, C.wht);
+      G.txt(cfg.tag || "", W / 2, mid - 6, 8, C.pur);
       if (blink) G.txt("TAP OR PRESS SPACE", W / 2, mid + 28, 8, C.wht);
     } else if (G.st === "pause") {
-      G.txt("PAUSED", W / 2, mid - 10, 16, C.yel); if (blink) G.txt("TAP TO RESUME", W / 2, mid + 22, 8, C.wht);
+      G.txt("PAUSED", W / 2, mid - 10, 12, C.wht); if (blink) G.txt("TAP TO RESUME", W / 2, mid + 22, 8, C.wht);
     } else {
-      G.txt(G.title, W / 2, mid - 40, 16, C.pink);
+      G.txt(G.title, W / 2, mid - 40, 12, C.wht);
       if (G.sub) G.txt(G.sub, W / 2, mid - 12, 8, C.wht);
-      if (G.nb) G.txt("NEW BEST!", W / 2, mid + 12, 12, C.yel);
-      if (blink) G.txt("TAP TO PLAY AGAIN", W / 2, mid + 44, 8, C.teal);
+      if (G.nb) G.txt("NEW BEST!", W / 2, mid + 12, 8, C.wht);
+      if (blink) G.txt("TAP TO PLAY AGAIN", W / 2, mid + 44, 8, C.pur);
     }
   }
   function frame(t) {
@@ -159,6 +159,53 @@ function mount(id, host, cfg) {
   }
   requestAnimationFrame(frame);
   try { if (document.fonts && document.fonts.load) document.fonts.load('16px "Press Start 2P"'); } catch (e) { /* ignore */ }
+}
+
+/* ============ 0. Offline Runner ============ */
+var DINO = ["......11111111..", "......11.1111111", "......1111111111", "......1111111111", "......11111.....", "......11111111..", "1.....11111.....", "1....111111.....", "11..1111111..1..", "1111111111111...", ".11111111111....", "..1111111111....", "...11111111.....", "....1111111.....", "....11...11....."];
+function runner(G) {
+  var W = 600, H = 200, GY = 168, DX = 48, y, vy, ground, obs, dist, spd, nextGap, cl, bump, step;
+  function jump() { if (y >= GY - 0.5) { vy = -640; G.beep(520, 0.07, "square", 0.03, 760); } }
+  function spawn() {
+    var t = rnd(10), o;
+    if (t < 5) o = { w: 12, h: 30 + rnd(10), k: 1 }; else if (t < 8) o = { w: 28, h: 28, k: 2 }; else o = { w: 12, h: 46, k: 3 };
+    o.x = W + 20; obs.push(o); nextGap = spd * (0.75 + Math.random() * 0.9) + 130;
+  }
+  return {
+    reset: function () { y = GY; vy = 0; obs = []; dist = 0; spd = 230; nextGap = 260; cl = [{ x: 120, y: 40 }, { x: 330, y: 62 }, { x: 520, y: 32 }]; bump = []; for (var i = 0; i < 24; i++) bump.push({ x: rnd(W), w: 2 + rnd(5) }); step = 0; G.score(0); },
+    key: function (k, d) { if (d && (k === "Space" || k === "ArrowUp")) jump(); },
+    ptr: function (x, yy, ph) { if (ph === "down") jump(); },
+    update: function (dt) {
+      spd = Math.min(560, spd + 9 * dt); dist += spd * dt; step += spd * dt;
+      vy += 1950 * dt; y += vy * dt; if (y > GY) { y = GY; vy = 0; }
+      if (G.keys.ArrowDown && y < GY) vy += 2600 * dt;
+      nextGap -= spd * dt; if (nextGap <= 0) spawn();
+      obs.forEach(function (o) { o.x -= spd * dt; }); obs = obs.filter(function (o) { return o.x > -50; });
+      cl.forEach(function (c) { c.x -= 30 * dt; if (c.x < -50) { c.x = W + 20 + rnd(80); c.y = 26 + rnd(50); } });
+      var sc = Math.floor(dist / 10); G.score(sc);
+      for (var i = 0; i < obs.length; i++) {
+        var o = obs[i];
+        if (DX + 26 > o.x - 2 && DX + 8 < o.x + o.w + 4 && y > GY - o.h + 6) { G.beep(150, 0.4, "sawtooth", 0.05, 50); G.save(sc); G.end("GAME OVER", "SCORE " + sc); return; }
+      }
+    },
+    draw: function (c) {
+      c.fillStyle = C.lt; cl.forEach(function (k) { G.rect(k.x, k.y, 40, 8, C.lt); G.rect(k.x + 8, k.y - 6, 20, 6, C.lt); });
+      G.rect(0, GY, W, 2, C.wht);
+      bump.forEach(function (b) { var x = ((b.x - step) % W + W) % W; G.rect(x, GY + 8, b.w * 2, 2, C.lt); });
+      var legs = y < GY - 1 ? 0 : (Math.floor(step / 40) % 2);
+      var rows = DINO.slice(0, 14).concat([legs ? "....11...11...." : "....11...1....."]);
+      G.spr(rows, DX, y - 30, 2, C.wht);
+      obs.forEach(function (o) {
+        var x = o.x, h = o.h, t = GY;
+        if (o.k === 2) { cactus(x, 28); cactus(x + 14, 22); } else cactus(x, h);
+      });
+      function cactus(x, h) {
+        G.rect(x + 2, GY - h, 8, h, C.wht);
+        G.rect(x - 4, GY - h + 12, 6, 4, C.wht); G.rect(x - 4, GY - h + 8, 4, 8, C.wht);
+        G.rect(x + 10, GY - h + 16, 6, 4, C.wht); G.rect(x + 12, GY - h + 11, 4, 9, C.wht);
+      }
+    }
+  };
 }
 
 /* ============ 1. Retro Snake ============ */
@@ -189,15 +236,12 @@ function snake(G) {
       if (h.x === food.x && h.y === food.y) { sc += 10; G.score(sc); G.beep(660, 0.09, "square", 0.04, 990); iv = Math.max(0.06, 0.13 - Math.floor(sc / 40) * 0.008); put(); } else sn.pop();
     },
     draw: function (c) {
-      c.fillStyle = "#14143a"; for (var i = 0; i < N; i++) for (var j = 0; j < N; j++) if ((i + j) % 2 === 0) c.fillRect(i * S, j * S, S, S);
       var fx = food.x * S, fy = food.y * S;
-      G.rect(fx + 3, fy + 4, 10, 9, C.red); G.rect(fx + 2, fy + 6, 12, 5, C.red); G.rect(fx + 7, fy + 1, 2, 4, C.grn); G.rect(fx + 4, fy + 5, 2, 2, "#ff9b9b");
-      sn.forEach(function (p, k) {
-        G.rect(p.x * S + 1, p.y * S + 1, S - 2, S - 2, k === 0 ? C.grn : C.teal);
-        G.rect(p.x * S + 4, p.y * S + 4, S - 8, S - 8, k === 0 ? "#b6ffa8" : "#1aa9ad");
-      });
+      G.rect(fx + 4, fy + 4, S - 8, S - 8, C.pur);
+      sn.forEach(function (p, k) { G.rect(p.x * S + 1, p.y * S + 1, S - 2, S - 2, k === 0 ? C.wht : "#6b6b6b"); });
       var h = sn[0], ex = dir.x ? (dir.x > 0 ? 9 : 3) : 0, ey = dir.y ? (dir.y > 0 ? 9 : 3) : 0;
-      if (dir.x) { G.rect(h.x * S + ex, h.y * S + 3, 3, 3, "#000"); G.rect(h.x * S + ex, h.y * S + 10, 3, 3, "#000"); } else { G.rect(h.x * S + 3, h.y * S + ey, 3, 3, "#000"); G.rect(h.x * S + 10, h.y * S + ey, 3, 3, "#000"); }
+      if (dir.x) { G.rect(h.x * S + ex, h.y * S + 3, 3, 3, "#fff"); G.rect(h.x * S + ex, h.y * S + 10, 3, 3, "#fff"); } else { G.rect(h.x * S + 3, h.y * S + ey, 3, 3, "#fff"); G.rect(h.x * S + 10, h.y * S + ey, 3, 3, "#fff"); }
+      c.strokeStyle = C.lt; c.lineWidth = 1; c.strokeRect(0.5, 0.5, N * S - 1, N * S - 1);
     }
   };
 }
@@ -243,7 +287,7 @@ function rally(G) {
 
 /* ============ 3. Brick Smash ============ */
 function bricks(G) {
-  var W = 300, H = 360, PY = 336, PW = 52, px, bx, by, vx, vy, stuck, br, lives, lv, sc, spd, cols = [C.red, C.org, C.yel, C.grn, C.teal, C.pur, C.pink, C.blu];
+  var W = 300, H = 360, PY = 336, PW = 52, px, bx, by, vx, vy, stuck, br, lives, lv, sc, spd, cols = ["#535353", "#6b6b6b", "#808080", "#949494", "#a8a8a8", "#bcbcbc", "#cccccc", "#d9d9d9"];
   function layout() {
     br = []; var rows = Math.min(8, 4 + lv);
     for (var r = 0; r < rows; r++) for (var i = 0; i < 10; i++) br.push({ x: i * 30 + 1, y: 40 + r * 14, w: 28, h: 12, r: r, hp: (lv > 2 && r === 0) ? 2 : 1 });
@@ -281,10 +325,10 @@ function bricks(G) {
       }
     },
     draw: function (c) {
-      br.forEach(function (b) { G.rect(b.x, b.y, b.w, b.h, cols[b.r % cols.length]); G.rect(b.x, b.y, b.w, 2, "rgba(255,255,255,.45)"); G.rect(b.x, b.y + b.h - 2, b.w, 2, "rgba(0,0,0,.3)"); if (b.hp > 1) G.rect(b.x + 12, b.y + 5, 4, 2, "#fff"); });
-      G.rect(px - PW / 2, PY, PW, 8, C.wht); G.rect(px - PW / 2, PY, PW, 2, C.teal);
-      G.rect(bx - 4, by - 4, 8, 8, C.yel);
-      G.txt("LEVEL " + lv, 8, 14, 8, C.teal, "left"); for (var i = 0; i < lives; i++) G.rect(W - 18 - i * 14, 9, 10, 10, C.pink);
+      br.forEach(function (b) { G.rect(b.x, b.y, b.w, b.h, cols[b.r % cols.length]); if (b.hp > 1) G.rect(b.x + 12, b.y + 5, 4, 2, "#fff"); });
+      G.rect(px - PW / 2, PY, PW, 8, C.wht);
+      G.rect(bx - 4, by - 4, 8, 8, "#535353");
+      G.txt("LEVEL " + lv, 8, 14, 8, C.pur, "left"); for (var i = 0; i < lives; i++) G.rect(W - 18 - i * 14, 9, 10, 10, C.wht);
       if (stuck) G.txt("TAP OR SPACE TO LAUNCH", W / 2, 300, 8, C.wht);
     }
   };
@@ -350,15 +394,15 @@ function blaster(G) {
       if (lives <= 0) { G.save(sc); G.end("GAME OVER", "SCORE " + sc); }
     },
     draw: function (c) {
-      bunk.forEach(function (u) { if (u.a) G.rect(u.x, u.y, 4, 4, C.grn); });
-      en.forEach(function (e) { if (e.alive) G.spr(SPR[e.t][frame], e.x, e.y, 2, e.t === "c" ? C.pink : e.t === "b" ? C.grn : C.yel); });
-      if (ufo) G.spr(UFO, ufo.x - 13, 24, 2, C.red);
-      if (inv <= 0 || Math.floor(G.t * 12) % 2) G.spr(SHIP, px - 9, 314, 2, C.teal);
-      G.rect(0, 336, W, 2, C.grn);
+      bunk.forEach(function (u) { if (u.a) G.rect(u.x, u.y, 4, 4, "#bcbcbc"); });
+      en.forEach(function (e) { if (e.alive) G.spr(SPR[e.t][frame], e.x, e.y, 2, C.wht); });
+      if (ufo) G.spr(UFO, ufo.x - 13, 24, 2, C.pur);
+      if (inv <= 0 || Math.floor(G.t * 12) % 2) G.spr(SHIP, px - 9, 314, 2, C.wht);
+      G.rect(0, 336, W, 2, C.lt);
       bl.forEach(function (b) { G.rect(b.x - 1, b.y, 2, 6, C.wht); });
-      bombs.forEach(function (b) { G.rect(b.x - 1, b.y, 3, 6, C.org); });
-      ex.forEach(function (e) { if (e.p) G.txt(String(e.p), e.x, e.y, 8, C.yel); else { G.rect(e.x - 6, e.y - 1, 12, 2, C.wht); G.rect(e.x - 1, e.y - 6, 2, 12, C.wht); } });
-      G.txt("WAVE " + wave, 8, 12, 8, C.teal, "left"); for (var i = 0; i < Math.max(0, lives); i++) G.spr(SHIP, W - 24 - i * 22, 6, 1, C.teal);
+      bombs.forEach(function (b) { G.rect(b.x - 1, b.y, 3, 6, C.pur); });
+      ex.forEach(function (e) { if (e.p) G.txt(String(e.p), e.x, e.y, 8, C.wht); else { G.rect(e.x - 6, e.y - 1, 12, 2, C.pur); G.rect(e.x - 1, e.y - 6, 2, 12, C.pur); } });
+      G.txt("WAVE " + wave, 8, 12, 8, C.pur, "left"); for (var i = 0; i < Math.max(0, lives); i++) G.spr(SHIP, W - 24 - i * 22, 6, 1, C.wht);
     }
   };
   function stepIv_() { return iv(); }
@@ -853,10 +897,11 @@ function mines(G) {
 
 /* ---------- registry ---------- */
 var GAMES = {
-  retrosnake: { name: "Retro Snake", tag: "EAT, GROW, DON'T CRASH", w: 320, h: 320, mw: 400, make: snake, arrowStart: 1, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Arrow keys or WASD to steer. On a phone, swipe on the screen or use the buttons. P to pause." },
+  runner: { name: "Offline Runner", tag: "JUMP THE CACTUSES", w: 600, h: 200, mw: 640, make: runner, pad: [["JUMP", "Space", "Jump"]], help: "Press Space or the up arrow, or tap the screen, to jump. Hold down to drop faster. The longer you run, the quicker it gets." },
+  retrosnake: { name: "Snake", tag: "EAT, GROW, DON'T CRASH", w: 320, h: 320, mw: 400, make: snake, arrowStart: 1, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Arrow keys or WASD to steer. On a phone, swipe on the screen or use the buttons. P to pause." },
   rally: { name: "Paddle Rally", tag: "FIRST TO 7 WINS", w: 360, h: 240, mw: 520, make: rally, opts: [["easy", "Easy"], ["normal", "Normal"], ["hard", "Hard"]], bl: "Wins", pad: [["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"]], sl: "Score", help: "Up and down arrows (or W and S), or drag your finger up and down the screen. Beat the computer to 7 points." },
   bricks: { name: "Brick Smash", tag: "CLEAR EVERY BRICK", w: 300, h: 360, mw: 400, make: bricks, pad: [["◀", "ArrowLeft", "Left"], ["LAUNCH", "Space", "Launch ball"], ["▶", "ArrowRight", "Right"]], help: "Left and right arrows or drag to move the bat. Space or tap to launch the ball. You have 3 lives." },
-  blaster: { name: "Star Blaster", tag: "STOP THE INVASION", w: 300, h: 360, mw: 400, make: blaster, repeat: 1, pad: [["◀", "ArrowLeft", "Left"], ["FIRE", "Space", "Fire"], ["▶", "ArrowRight", "Right"]], help: "Left and right arrows to move, hold Space to fire. On a phone use the buttons or drag the ship. Hide behind the green shields." },
+  blaster: { name: "Space Invaders", tag: "STOP THE INVASION", w: 300, h: 360, mw: 400, make: blaster, repeat: 1, pad: [["◀", "ArrowLeft", "Left"], ["FIRE", "Space", "Fire"], ["▶", "ArrowRight", "Right"]], help: "Left and right arrows to move, hold Space to fire. On a phone use the buttons or drag the ship. Hide behind the grey shields." },
   muncher: { name: "Maze Muncher", tag: "EAT ALL THE DOTS", w: 304, h: 352, mw: 400, make: muncher, arrowStart: 1, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Arrow keys or WASD to steer, or swipe on the screen. Grab a big pellet to turn the ghosts blue and chase them." },
   blocks: { name: "Falling Blocks", tag: "FILL THE LINES", w: 240, h: 320, mw: 340, make: blocks, repeat: 0, pad: [["◀", "ArrowLeft", "Left"], ["⟳", "ArrowUp", "Rotate"], ["▼", "ArrowDown", "Down"], ["DROP", "Space", "Hard drop"], ["▶", "ArrowRight", "Right"]], help: "Left and right to move, up to rotate, down to speed up, Space to drop. On a phone tap the screen to rotate, swipe sideways to move." },
   hopper: { name: "Road Hopper", tag: "CROSS THE ROAD AND RIVER", w: 312, h: 336, mw: 400, make: hopper, pad: [["◀", "ArrowLeft", "Left"], ["▲", "ArrowUp", "Up"], ["▼", "ArrowDown", "Down"], ["▶", "ArrowRight", "Right"]], help: "Hop with the arrow keys or swipe. Dodge the traffic, ride the logs and land in an empty green bay." },

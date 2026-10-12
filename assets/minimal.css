@@ -580,3 +580,8 @@ body .site-header .user-btn,body .site-header .user-btn.pic{width:40px;height:40
 body .site-header .user-btn.pic{background-size:cover!important;background-position:center!important}
 body .site-header .user-btn svg{width:40px;height:40px}
 body .site-header .user-btn:hover,body .site-header .user-wrap:hover .user-btn{background:#9bbcf5!important;color:#3f6fe0!important}
+
+/* simple grey/white arcade screen */
+body .gm .ar-scr{background:#fff!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:var(--sh-s)!important;padding:8px!important}
+body .gm .ar-scr::after{display:none!important}
+body .gm .ar-cv{background:#fff!important;border-radius:10px!important}
