@@ -450,3 +450,7 @@ body .hm .go{width:68px;height:68px}
   body .hm .box{padding:10px 10px 10px 24px}
   body .hm .go{width:60px;height:60px}
 }
+
+/* back to Albert Sans wordmark */
+.wm,body .site-header .brand .wm,body .hero-brand .wm,body .hero-band .hero-brand .wm,body .foot-logo .wm{font-family:'Albert Sans','Inter',system-ui,sans-serif!important;letter-spacing:-.01em}
+body .wm b{font-weight:800}
