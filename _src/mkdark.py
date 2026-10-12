@@ -104,5 +104,6 @@ html[data-theme="dark"] body .acc summary em.on{background:#26305c!important;col
 html[data-theme="dark"] body .sal-chips button[aria-pressed="true"]{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important}
 '''
 PRINT='@media print{:root[data-theme="dark"]{color-scheme:light!important}html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] body[data-page]{background:#fff!important;background-image:none!important;color:#000!important}html[data-theme="dark"] #print-sheet,html[data-theme="dark"] #print-sheet *{color:#000!important}html[data-theme="dark"] #print-sheet .psl .cells i.d{background:#e6e6e6!important}html[data-theme="dark"] #print-sheet .psl .cells i{background:#fff!important}}\n'
-open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n'+PRINT)
+LATE='html[data-theme="dark"] body .hero-band .opts{background:transparent!important;border:0!important;box-shadow:none!important}\n'
+open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n'+LATE+PRINT)
 print(len(rules),'rules')
