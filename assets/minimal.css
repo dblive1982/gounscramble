@@ -1,5 +1,5 @@
 /* GoUnscramble minimal theme: loads last and replaces the comic look. Search first. */
-:root,:root[data-theme="dark"],:root[data-theme="light"]{
+:root:not([data-theme="dark"]),:root[data-theme="light"]{
   --bg:#ffffff;--ink:#1c2230;--muted:#667085;--line:#e4e8f0;--card:#fff;--yellow:#fff6d6;--soft:#eef2f8;
   --primary:#5170ff;--green:#5170ff;--green-dark:#4059e8;--tile-bg:#5170ff;--band:#fff;--heading:#1c2230;--on-accent:#fff;
   --display:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -585,3 +585,8 @@ body .site-header .user-btn:hover,body .site-header .user-wrap:hover .user-btn{b
 body .gm .ar-scr{background:#fff!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:var(--sh-s)!important;padding:8px!important}
 body .gm .ar-scr::after{display:none!important}
 body .gm .ar-cv{background:#fff!important;border-radius:10px!important}
+
+/* light / dark choice in the menu (dark mode is only ever chosen by the visitor) */
+body .menu-list .theme-opts{display:flex;gap:8px;margin:10px 12px 0 20px;padding-top:12px;border-top:1px solid var(--line)}
+body .menu-list .theme-opts button{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:500;cursor:pointer}
+body .menu-list .theme-opts button[aria-pressed="true"]{background:#e3eaff;border-color:#c9d6ff;color:#2f49d6;font-weight:600}

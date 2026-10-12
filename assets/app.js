@@ -349,6 +349,7 @@
   }
 
   function setupTheme() {
+    return; /* dark mode toggle is handled in the page footer script */
     var b = $('theme-toggle');
     if (!b) return;
     var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
