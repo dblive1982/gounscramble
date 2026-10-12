@@ -532,3 +532,6 @@ body .hm .go{color:#fff!important;font-family:var(--body);font-weight:800;font-s
 /* GO button: flat blue like the Sign in button, no shadow or glow */
 body .hm .go,body .hm .go:hover,body .hm .go:active,body .hm .go:focus{background:#5170ff!important;box-shadow:none!important;border:0!important;filter:none!important}
 body .hm .go:hover{background:#4059e8!important}
+
+/* GO button: identical in every state (no resize, no colour change) */
+body .hm .go,body .hm .go:hover,body .hm .go:active,body .hm .go:focus,body .hm .go:focus-visible{background:#5170ff!important;transform:none!important;box-shadow:none!important;outline:0!important;transition:none!important;-webkit-tap-highlight-color:transparent}
