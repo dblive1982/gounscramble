@@ -468,3 +468,4 @@ body .hm .summary{font-size:15px}
 
 /* letter-count pills: light grey */
 body .hm .gh span{background:#e9ecf2!important;color:var(--ink)!important}
+body .hm .gh span{background:#a6a6a6!important;color:#111!important}
