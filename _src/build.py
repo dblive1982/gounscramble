@@ -116,7 +116,8 @@ FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
 <div class="foot-brand"><a class="foot-logo" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="22" height="22" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a><span class="foot-c">&copy; 2026</span></div>
 <p class="foot-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg><span>Site secured using Encrypted HTTPS connection.</span></p>
-<p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way. This site is for entertainment purposes only.</p>
+<p class="foot-legal"><b>Disclaimer:</b> everything on this site, including calculator results, word lists and tips, is for general information and entertainment only. It is not financial, tax, investment, legal, medical or other professional advice, and results may contain errors. We accept no responsibility for any loss or decision that comes from using it, so please check with a qualified professional before acting. See our <a href="terms.html">terms</a>.</p>
+<p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way.</p>
 <nav class="nav" aria-label="Footer">
 <a href="credits.html">Credits</a>
 <a href="faq.html">FAQ</a>
@@ -453,7 +454,7 @@ TOOLS_PAGE = """<main><div class="wrap">
 
 ABOUT = """<main><div class="wrap"><article class="prose">
 <h1>About <b>go</b>unscramble</h1>
-<p><b>go</b>unscramble turns jumbled letters into real words. Type the letters you have, add a ? or * for any blank tile, and the unscrambler lists every word they can make, longest first.</p>
+<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 40 simple calculators for money, maths, health and everyday sums.</p>
 <div class="cards guide-cards">
 <div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
 <div class="card"><h3>Dictionaries</h3><p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p></div>
@@ -481,7 +482,7 @@ def cardify(body):
 
 PRIVACY = """<main><div class="wrap"><article class="prose">
 <h1>Privacy</h1>
-<p>Last updated 11 October 2026.</p>
+<p>Last updated 12 October 2026.</p>
 <h2>What you type</h2>
 <p>The unscrambler and the other tools run in your browser. The letters and text you type are not sent to our server.</p>
 <h2>Accounts</h2>
@@ -518,11 +519,15 @@ TERMS = """<main><div class="wrap"><article class="prose">
 <h2>Who we are</h2>
 <p><b>go</b>unscramble is an independent website. You can reach us through the <a href="contact.html">contact page</a> or at <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
 <h2>Using the site</h2>
-<p>The word tools and games are free to use for personal, non-commercial purposes. Please do not misuse the site, for example by trying to break or overload it, scraping it at scale, probing it for weaknesses or using it for anything unlawful.</p>
+<p>The word tools, games and calculators are free to use for personal, non-commercial purposes. Please do not misuse the site, for example by trying to break or overload it, scraping it at scale, probing it for weaknesses or using it for anything unlawful.</p>
 <h2>Your account</h2>
 <p>An account is optional. You must give accurate details, keep your password safe and tell us if you think someone else has used your account. You are responsible for what happens under your account. You can ask us to delete your account at any time by emailing us from the address you signed up with. We may suspend or remove accounts that break these terms.</p>
 <h2>Your profile and content</h2>
 <p>Your profile picture, bio and other details are yours. Only upload a picture you have the right to use, and do not add anything unlawful, offensive or misleading. We may remove content that breaks these rules.</p>
+<h2>For information only, not advice</h2>
+<p>Everything on the site, including calculator results, word lists, tips, guides and any other content, is provided for general information and entertainment only. It is <b>not</b> financial, tax, investment, mortgage, pension, legal, medical, health, nutrition, fitness, engineering or other professional advice, and it should not be relied on as such. We are not financial advisers, lawyers, doctors or other regulated professionals, and nothing here creates an adviser and client relationship. Before you make any decision that matters, such as taking out a loan or mortgage, changing your pension, filing a tax return, starting a diet or exercise plan, or buying materials for a build, speak to a suitably qualified professional.</p>
+<h2>Calculators and results</h2>
+<p>The calculators give estimates based on the numbers you enter and on rates, thresholds and formulas that we have built in, such as UK tax and National Insurance figures for the 2026/27 tax year. Rules and rates change, the real world is more complicated than any form, and we may make mistakes or leave out details that apply to you. Results can differ from what your employer, lender, tax authority, doctor or other provider works out, and theirs is the one that counts. Please check anything important against official sources before acting on it. You are responsible for the accuracy of what you type in and for how you use the results.</p>
 <h2>Word lists and accuracy</h2>
 <p>Our word lists and results are provided as a guide. They may not match the dictionary or rules of a particular game or competition, so please check important words against the official list. Word meanings and scores are shown for convenience and may contain mistakes.</p>
 <h2>Our content</h2>
@@ -532,7 +537,7 @@ TERMS = """<main><div class="wrap"><article class="prose">
 <h2>Availability and changes</h2>
 <p>We try to keep the site running but cannot promise it will always be available or error free. We may change, pause or remove features, including saved progress, at any time.</p>
 <h2>Our responsibility</h2>
-<p>The site is provided "as is". To the fullest extent the law allows, we are not liable for any loss arising from using the site. Nothing in these terms limits any right you have as a consumer or excludes liability that cannot lawfully be excluded, such as for death or personal injury caused by negligence or for fraud.</p>
+<p>The site is provided "as is" and "as available", without any promise that it is accurate, complete, up to date or suitable for your purpose. To the fullest extent the law allows, we accept no responsibility and are not liable for any loss, cost or damage, whether direct or indirect, arising from using the site or relying on its calculators, results or other content, including any financial, legal, tax, health or other decision you make. Nothing in these terms limits any right you have as a consumer or excludes liability that cannot lawfully be excluded, such as for death or personal injury caused by negligence or for fraud.</p>
 <h2>Privacy</h2>
 <p>How we handle your data is explained on the <a href="privacy.html">privacy page</a>.</p>
 <h2>Changes and governing law</h2>
@@ -570,8 +575,8 @@ PAGES = [
          title="Free Online Calculators | GoUnscramble",
          desc="Free online calculators: salary, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and more. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
-         title="GoUnscramble: Unscramble Letters Into Words",
-         desc="Free word unscrambler. Type your jumbled letters and see every word they can make, with filters for starts with, ends with, contains and length."),
+         title="GoUnscramble: Word Unscrambler, Puzzles & Calculators",
+         desc="Free word unscrambler and anagram solver, plus word games, puzzles and 40+ simple calculators for salary, mortgage, BMI, percentages and more. Fast, free and private."),
     dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
          title="Anagram Solver | GoUnscramble",
          desc="Find the words that use every one of your letters. A free anagram solver with blank tile support."),
@@ -595,13 +600,13 @@ PAGES = [
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | GoUnscramble",
-         desc="About GoUnscramble, a free word unscrambler with a few handy text tools."),
+         desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, and 40+ everyday calculators."),
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | GoUnscramble",
          desc="How GoUnscramble handles what you type and what your browser sends."),
     dict(file="terms.html", page="terms", nav=None, body=cardify(TERMS),
          title="Terms and Conditions | GoUnscramble",
-         desc="The terms for using GoUnscramble and its free word tools, games and optional accounts."),
+         desc="The terms for using GoUnscramble and its free word tools, games, calculators and optional accounts. Information only, not financial, legal or medical advice."),
     dict(file="contact.html", page="contact", nav=None, body=CONTACT,
          title="Contact | GoUnscramble",
          desc="Get in touch with GoUnscramble."),
@@ -655,7 +660,7 @@ def seo_tags(p, url):
     ]
     graph = []
     if p["file"] == "index.html":
-        graph.append({"@type": "WebSite", "name": "GoUnscramble", "url": SITE + "/", "inLanguage": "en"})
+        graph.append({"@type": "WebSite", "name": "GoUnscramble", "url": SITE + "/", "inLanguage": "en", "description": "Free word unscrambler, word tools, puzzles, games and calculators."})
     else:
         crumbs = [("Home", SITE + "/"), (p["title"].replace(" | GoUnscramble", ""), url)]
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
@@ -687,7 +692,7 @@ def build_page(p):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
     footer = FOOTER.replace("@@LOGO32@@", logo(32)).replace("@@SOCIAL@@", social_html())
     path = "" if p["file"] == "index.html" else p["file"]
-    head = (HEAD.replace("@@TITLE@@", p["title"]).replace("@@DESC@@", p["desc"])
+    head = (HEAD.replace("@@TITLE@@", p["title"].replace("&","&amp;")).replace("@@DESC@@", p["desc"].replace("&","&amp;").replace(chr(34),"&quot;"))
             .replace("@@CANON@@", SITE + "/" + path).replace("@@PAGE@@", p["page"]))
     head = head.replace("@@SEO@@", seo_tags(p, SITE + "/" + path))
     home = p["file"] == "index.html"
