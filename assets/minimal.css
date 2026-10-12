@@ -995,3 +995,9 @@ body .gm .gtop .ib,body .gm .gtop .back{flex:0 0 auto}
 body .site-footer .wrap>.hb-dir{display:block;column-count:3;column-gap:12px}
 body .site-footer .wrap>.hb-dir .hd-col{display:block;break-inside:avoid;page-break-inside:avoid;margin:0 0 34px}
 @media(min-width:700px){body .site-footer .wrap>.hb-dir{column-count:auto;column-width:170px}}
+
+/* footer directory: three even columns of lists */
+body .site-footer .wrap>.hb-dir{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-count:auto;column-gap:12px;align-items:start}
+body .site-footer .wrap>.hb-dir .hd-grp{min-width:0}
+body .site-footer .wrap>.hb-dir .hd-col{margin:0 0 30px}
+@media(min-width:700px){body .site-footer .wrap>.hb-dir{column-gap:48px;column-width:auto}}

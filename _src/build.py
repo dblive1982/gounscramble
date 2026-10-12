@@ -278,14 +278,17 @@ def _hub_dir(hub):
             label=b.group(1) if b else re.sub(r'<[^>]+>','',inner).strip()
             if h and label: items.append('<li><a href="%s">%s</a></li>'%(h.group(1),label))
         cols.append((sid,'<h3>%s</h3><ul>%s</ul>'%(title,"".join(items))))
-    d=dict(cols); order=[]
-    for sid,_h in cols:
-        if sid=="s-guides": continue
-        order.append('<div class="hd-col">%s%s</div>'%(d[sid], (d.get("s-guides","") if sid=="s-tools" else "")+(_PLCOL if sid=="s-calc" else "")))
-    cols=order
+    d=dict(cols)
+    blk=lambda sid: '<div class="hd-col">%s</div>'%d[sid] if sid in d else ""
+    pl='<div class="hd-col">%s</div>'%_PLCOL
+    # three even columns: puzzles / word lists + calculators / the rest
+    g1=["@@ABOUT@@",blk("s-games"),pl]
+    g2=[blk("s-lists"),blk("s-calc")]
+    g3=[blk("s-retro"),blk("s-tools"),blk("s-guides")]
+    cols=["<div class=\"hd-grp\">%s</div>"%"".join(g) for g in (g1,g2,g3)]
     return '<nav class="hb-dir" aria-label="All games, tools and guides">'+"".join(cols)+'</nav>\n'
 _ABOUT='<div class="hd-col"><h3>About</h3><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="credits.html">Credits</a></li><li><a href="faq.html">FAQ</a></li></ul></div>'
-FOOT_DIR=_hub_dir(HUB).replace('<nav class="hb-dir" aria-label="All games, tools and guides">','<nav class="hb-dir" aria-label="Site directory">'+_ABOUT,1)
+FOOT_DIR=_hub_dir(HUB).replace('<nav class="hb-dir" aria-label="All games, tools and guides">','<nav class="hb-dir" aria-label="Site directory">',1).replace("@@ABOUT@@",_ABOUT,1)
 FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer class="site-footer"><div class="wrap">'+FOOT_DIR,1)
 
 HOME = """<main>
