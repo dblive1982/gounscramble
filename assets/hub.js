@@ -33,8 +33,8 @@
   function makeChips() {
     if (!chips) return;
     var old = chips.querySelectorAll("[data-rack]"); old.forEach(function (b) { b.remove(); });
-    var ws = pick(6), list = ws.map(function (w, i) {
-      if (i === 5) { var a = w.split(""); a[Math.floor(Math.random() * a.length)] = "?"; return jumble(a.join("")).replace(/\?/g, "?"); }
+    var ws = pick(12), list = ws.map(function (w, i) {
+      if (i === 5 || i === 11) { var a = w.split(""); a[Math.floor(Math.random() * a.length)] = "?"; return jumble(a.join("")).replace(/\?/g, "?"); }
       return jumble(w);
     });
     list.forEach(function (t) {

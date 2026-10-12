@@ -903,3 +903,11 @@ body .hero-band .opts[hidden]{display:none!important}
 .opts .sw-in:focus-visible+.sw-tr{outline:2px solid #5170ff;outline-offset:2px}
 .opts .reset{margin:0}
 .hub-prog{margin-top:36px}
+/* try a scramble: smaller, more chips; calmer spacing into the About text */
+.hub .hb-chips{gap:8px}
+.hub .hb-chips button{font-size:14px;padding:6px 12px;letter-spacing:.1em;font-weight:600}
+.home-extra>.hm-after{padding-top:56px!important}
+body .hm .about{margin-top:0;gap:12px}
+body .hm .about h2{margin-bottom:2px}
+body .hm .about h3{margin:16px 0 0}
+body .hm .about p{line-height:1.65}
