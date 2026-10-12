@@ -535,3 +535,7 @@ body .hm .go:hover{background:#4059e8!important}
 
 /* GO button: identical in every state (no resize, no colour change) */
 body .hm .go,body .hm .go:hover,body .hm .go:active,body .hm .go:focus,body .hm .go:focus-visible{background:#5170ff!important;transform:none!important;box-shadow:none!important;outline:0!important;transition:none!important;-webkit-tap-highlight-color:transparent}
+
+/* all primary blue buttons: plain flat blue, same in every state */
+body .btn:not(.alt),body button.btn:not(.alt),body .btn-primary,body button.primary,body .ac .btn:not(.alt),body .ac button[type=submit],body .go,body .go.full,body .hub .hb-btn:not(.alt),body .hub #hb-acc,body .hub .hb-roll{background:#5170ff!important;background-image:none!important;border:0!important;box-shadow:none!important;filter:none!important;transform:none!important;color:#fff!important;transition:none!important}
+body .btn:not(.alt):hover,body .btn:not(.alt):active,body .btn:not(.alt):focus,body .ac button[type=submit]:hover,body .ac button[type=submit]:active,body .go:hover,body .go:active,body .go:focus,body .go.full:hover,body .go.full:active,body .hub .hb-btn:not(.alt):hover,body .hub .hb-btn:not(.alt):active{background:#5170ff!important;box-shadow:none!important;transform:none!important}
