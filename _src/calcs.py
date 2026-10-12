@@ -352,7 +352,7 @@ def esc(s):
 
 
 def card(c):
-    return '<a class="card" href="%s"><div class="tile">%s</div><h3>%s</h3><p>%s</p></a>' % (c["file"], c["glyph"], c["name"], c["short"])
+    return '<a class="card" href="%s"><div class="tile ct">%s</div><h3>%s</h3><p>%s</p></a>' % (c["file"], c["glyph"], c["name"], c["short"])
 
 
 def related(slug):

@@ -696,3 +696,9 @@ body .sc-hist li b{color:var(--ink);font-weight:600;overflow-wrap:anywhere;text-
  body .sc-k{height:50px;font-size:17px;border-radius:12px}
  body .sc-k.fn{font-size:14px}
 }
+body .cards .tile.ct{width:auto;min-width:48px;padding:0 12px;white-space:nowrap;font-size:15px;letter-spacing:0}
+body #sal-uk-out{margin-top:26px}
+body #sal-uk-out .cm-h{margin-bottom:4px}
+body .calc .cr:empty{margin:0}
+body .calc-about{margin-top:34px}
+body .calc-hero+.calc-about+.block{margin-top:34px}
