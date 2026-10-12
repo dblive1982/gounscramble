@@ -386,3 +386,10 @@ html{scroll-behavior:smooth}
 /* smaller helper line under Options */
 body .hm .empty,body .home-res #out .empty,body .hero-band .empty{font-size:14.5px!important;font-weight:400;margin-top:18px!important;color:var(--muted)}
 @media (max-width:600px){body .hm .empty,body .home-res #out .empty{font-size:14px!important;margin-top:14px!important}}
+
+/* roomier result tiles */
+body .hm .tiles{gap:6px;--tw:min(clamp(34px,9.4vw,44px),calc((100vw - 56px - (var(--n) - 1)*6px)/var(--n)))}
+body .hm .words{gap:16px}
+body .hm .w{gap:10px 14px}
+body .hm .group{margin-top:30px;gap:18px}
+body .hm .gh{margin-bottom:2px}
