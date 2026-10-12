@@ -916,3 +916,8 @@ body .hm .optrow{display:block;margin-top:14px}
 body .hm .optrow .free-badge{display:none}
 body .hero-band .opts{margin-top:0;padding:16px 16px 14px;gap:14px}
 @media(max-width:600px){body .hero-band .opts{padding:14px}.opts .og-grid{gap:10px}}
+/* Words With Friends values shown in blue beside Scrabble values */
+.hm .t sup{position:absolute;right:3px;top:1px;font-size:calc(var(--tw)*.3);font-weight:800;line-height:1;color:#2f6bff;vertical-align:baseline}
+.hm .t sup.s2{font-size:calc(var(--tw)*.25);letter-spacing:-.04em;right:2px}
+.hm .t.blank sup{color:#cfe0ff}
+.hm .pts.wwf{color:#2f6bff;border-color:#2f6bff}

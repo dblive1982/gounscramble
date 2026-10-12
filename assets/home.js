@@ -28,14 +28,13 @@ function make(word,rack){
   }
   return tiles;
 }
-function score(word,tiles){let s=0;for(let i=0;i<word.length;i++)if(!tiles[i])s+=V[word[i]];return s}
+function score(word,tiles,T){T=T||V;let s=0;for(let i=0;i<word.length;i++)if(!tiles[i])s+=T[word[i]];return s}
 function opts(){
   const clean=v=>v.toLowerCase().replace(/[^a-z]/g,"");
   return {len:parseInt($("o-len").value,10)||0,starts:clean($("o-starts").value),ends:clean($("o-ends").value),has:clean($("o-has").value)};
 }
 
 function solve(text){
-  V=$("o-dict").value==="wwf"?WWF:VAL;
   const WORDS=W_ENA;
   const rack=parseRack(text), o=opts(), res=[];
   const safe=$("o-safe").checked;
@@ -56,7 +55,7 @@ function solve(text){
     if(o.has&&!w.includes(o.has))continue;
     if(safe&&BAD.has(w))continue;
     const t=anyMode?new Array(L).fill(0):make(w,rack);
-    if(t)res.push({w,t,s:score(w,t)});
+    if(t)res.push({w,t,s:score(w,t),f:score(w,t,WWF)});
   }
   res.sort((a,b)=>b.w.length-a.w.length||b.s-a.s||(a.w<b.w?-1:1));
   return {rack,res};
@@ -75,7 +74,7 @@ function tileHTML(r,o){
   let h='<div class="tiles" style="--n:'+r.w.length+'" aria-hidden="true">';
   for(let i=0;i<r.w.length;i++){
     const ch=r.w[i],bl=r.t[i];
-    h+='<span class="t'+(bl||hl.has(i)?" blank":"")+'">'+ch+(bl?"":"<sub"+(V[ch]>9?' class="s2"':"")+">"+V[ch]+"</sub>")+"</span>";
+    h+='<span class="t'+(bl||hl.has(i)?" blank":"")+'">'+ch+(bl?"":"<sub"+(V[ch]>9?' class="s2"':"")+">"+V[ch]+"</sub>"+(WWF[ch]!==V[ch]?"<sup"+(WWF[ch]>9?' class="s2"':"")+">"+WWF[ch]+"</sup>":""))+"</span>";
   }
   return h+"</div>";
 }
@@ -96,7 +95,7 @@ function render(){
     const n=shown[L]||PAGE, part=list.slice(0,n);
     const best=list[0].s;
     h+='<section class="group"><div class="gh"><span>'+L+" letters</span><em>"+list.length.toLocaleString()+" word"+(list.length===1?"":"s")+" \u00b7 top score "+best+'</em></div><ul class="words">';
-    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span></li>";
+    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+(r.f!==r.s?'<span class="pts wwf">'+r.f+"</span>":"")+"</li>";
     h+="</ul>";
     if(list.length>n)h+='<button class="more" type="button" data-len="'+L+'">Show '+Math.min(PAGE,list.length-n)+" more</button>";
     h+="</section>";
@@ -141,12 +140,11 @@ document.addEventListener("click",e=>{
   const ob=e.target.closest("#optbtn");
   if(ob){const on=ob.getAttribute("aria-expanded")!=="true";ob.setAttribute("aria-expanded",on);$("opts").hidden=!on;return}
   if(e.target.closest("#clr")){$("rack").value="";syncClr();run();saveQ();$("rack").focus();return}
-  if(e.target.closest("#clrf")){["o-starts","o-ends","o-has"].forEach(i=>$(i).value="");$("o-len").value="";$("o-dict").value="ena";$("o-safe").checked=true;run()}
+  if(e.target.closest("#clrf")){["o-starts","o-ends","o-has"].forEach(i=>$(i).value="");$("o-len").value="";$("o-safe").checked=true;run()}
 });
 function syncClr(){$("clr").hidden=!$("rack").value}
 $("rack").addEventListener("input",syncClr);
 $("o-len").addEventListener("change",run);
-$("o-dict").addEventListener("change",run);
 $("o-safe").addEventListener("change",run);
 document.querySelectorAll(".opt input").forEach(i=>i.addEventListener("input",run));
 

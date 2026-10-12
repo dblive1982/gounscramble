@@ -298,9 +298,6 @@ HOME = """<main>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
 <div class="optrow"><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
 <div class="opts" id="opts">
-<div class="og"><span class="og-t">Scoring</span>
-<div class="seg" id="o-seg" role="group" aria-label="Scoring"><button type="button" data-v="ena" aria-pressed="true">Scrabble</button><button type="button" data-v="wwf" aria-pressed="false">Words With Friends</button></div>
-<select id="o-dict" aria-label="Scoring" hidden><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></div>
 <div class="og"><span class="og-t">Narrow your results</span>
 <div class="og-grid">
 <label class="opt">Starts with<input id="o-starts" type="text" maxlength="8" placeholder="sc" autocapitalize="off"></label>
@@ -309,7 +306,6 @@ HOME = """<main>
 <label class="opt">Word length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
 </div></div>
 <div class="og og-foot"><label class="sw"><input class="sw-in" id="o-safe" type="checkbox" checked><span class="sw-tr" aria-hidden="true"></span><span>Hide offensive words</span></label><button class="reset" id="clrf" type="button">Clear all</button></div>
-<script>(function(){var seg=document.getElementById("o-seg"),sel=document.getElementById("o-dict");function sync(){[].forEach.call(seg.children,function(b){b.setAttribute("aria-pressed",b.getAttribute("data-v")===sel.value?"true":"false")})}seg.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;sel.value=b.getAttribute("data-v");sync();sel.dispatchEvent(new Event("change",{bubbles:true}))});document.getElementById("clrf").addEventListener("click",function(){setTimeout(sync,0)})})();</script>
 </div></div>
 </div></section>
 <div class="hm home-res"><div id="out" aria-live="polite"></div></div>
@@ -319,9 +315,9 @@ HOME = """<main>
 <section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is <b>go</b>unscramble?</h2>
 <p><b>go</b>unscramble is a free home for word tools, puzzles, calculators and printable planners. Its word unscrambler turns a jumble of letters into every word they can make, which is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games. Alongside it you will find word games and puzzles to play, and 70+ easy calculators for money, maths, health and everyday sums.</p>
 <h3>How to use it</h3>
-<p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
+<p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Use the options to narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
-<p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
+<p>Each word shows its tile score, with the highest scoring words first. Every tile shows its Scrabble score, and a blue number appears above it when Words With Friends scores that letter differently. Words come from the ENABLE list, which is public domain.</p>
 <p>Looking for more? Open the menu for the anagram solver, word games and puzzles, the <a href="calculators.html">calculators</a> and the free <a href="planners.html">printable planners</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
 <p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
 </div>
