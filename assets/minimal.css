@@ -749,3 +749,8 @@ body .acc[hidden],body .cf[hidden]{display:none!important}
 body textarea.field{min-height:110px;resize:vertical;font-family:inherit;line-height:1.5}
 body .cr-hero .cr-v.mono,body .cr-hero.mono .cr-v{font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all;font-size:22px}
 body .cr-v,body .cr-row dd{overflow-wrap:anywhere}
+body .hd-col ul+h3{margin-top:30px}
+body .calc-about .terms{margin:6px 0 0;display:flex;flex-direction:column;gap:2px}
+body .calc-about .terms dt{font-weight:700;color:var(--ink);margin-top:12px}
+body .calc-about .terms dd{margin:2px 0 0;color:var(--muted);line-height:1.55}
+body textarea.cr-text{margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;width:100%}

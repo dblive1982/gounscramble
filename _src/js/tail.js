@@ -103,6 +103,12 @@
     hero.appendChild(el("b", "cr-v", r.hero[1]));
     if (r.hero[2]) hero.appendChild(el("span", "cr-s", r.hero[2]));
     out.appendChild(hero);
+    if (r.text != null) {
+      var ta = el("textarea", "field cr-text"); ta.readOnly = true; ta.rows = 5; ta.value = r.text; ta.setAttribute("aria-label", "Result");
+      var cp = el("button", "btn alt", "Copy"); cp.type = "button";
+      cp.addEventListener("click", function () { ta.select(); try { navigator.clipboard.writeText(ta.value).then(function () { cp.textContent = "Copied"; }, function () { document.execCommand("copy"); }); } catch (e) { try { document.execCommand("copy"); } catch (e2) { /* ignore */ } } });
+      out.appendChild(ta); var cb = el("div", "btns"); cb.appendChild(cp); out.appendChild(cb);
+    }
     if (r.bar) {
       var tot = r.bar.reduce(function (a, s) { return a + Math.max(0, s[1]); }, 0), bar = el("div", "sal-bar"), leg = el("ul", "sal-leg");
       r.bar.forEach(function (s) {

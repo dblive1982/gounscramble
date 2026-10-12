@@ -1,12 +1,12 @@
 """Calculator pages for GoUnscramble. The maths lives in assets/calc.js; this file holds names, copy and page markup."""
 import html
 
-CATS = ["Financial", "Math", "Fitness & Health", "Other"]
+CATS = ["Financial", "Math", "Fitness & Health", "Date & Time", "Home & Building", "Travel & Cars", "Science & Weather", "Electronics", "Web & Tech", "Other"]
 
 # slug, file, category, name, tile glyph, short card text, lede, about paragraphs, faqs
 C = []
-def add(slug, file, cat, name, glyph, short, lede, about, faq):
-    C.append(dict(slug=slug, file=file, cat=cat, name=name, glyph=glyph, short=short, lede=lede, about=about, faq=faq))
+def add(slug, file, cat, name, glyph, short, lede, about, faq, terms=None):
+    C.append(dict(slug=slug, file=file, cat=cat, name=name, glyph=glyph, short=short, lede=lede, about=about, faq=faq, terms=terms or []))
 
 add("salary", "salary-calculator.html", "Financial", "Salary calculator", "\u00a3",
     "UK take-home pay with tax code, student loan, pension and more.",
@@ -346,6 +346,12 @@ add("password", "password-generator.html", "Other", "Password generator", "Pwd",
     [("Is it safe to use a website for this?", "This one makes the password on your device and sends nothing. Even so, a password manager is the best place to keep them."),
      ("How long should a password be?", "At least 14 to 16 characters for important accounts.")])
 
+import calcs_more
+calcs_more.register(add)
+_REMAP = {"age": "Date & Time", "date-calculator": "Date & Time", "time": "Date & Time", "hours": "Date & Time", "fuel-cost": "Travel & Cars", "speed-distance-time": "Travel & Cars",
+          "concrete": "Home & Building", "unit-converter": "Science & Weather", "subnet": "Web & Tech", "password": "Web & Tech"}
+for _c in C:
+    if _c["slug"] in _REMAP: _c["cat"] = _REMAP[_c["slug"]]
 BY = {c["slug"]: c for c in C}
 
 
@@ -420,17 +426,18 @@ def body(slug):
     form = SALARY_FORM if slug == "salary" else '<div class="panel calc" data-calc="%s" id="calc"></div>' % slug
     about = "".join("<p>%s</p>" % p for p in c["about"])
     faq = "".join("<h3>%s</h3><p>%s</p>" % (q, a) for q, a in c["faq"])
+    terms = ('<h2>Measurements and terms explained</h2>\n<dl class="terms">%s</dl>\n' % "".join("<dt>%s</dt><dd>%s</dd>" % (t, d) for t, d in c["terms"])) if c.get("terms") else ""
     return ('<main><div class="wrap">\n<section class="hero calc-hero">\n<h1>%s</h1>\n<p class="lede">%s</p>\n%s\n</section>\n'
-            '<section class="block narrow calc-about">\n<h2>About this calculator</h2>\n%s\n<h2>Common questions</h2>\n%s\n</section>\n'
+            '<section class="block narrow calc-about">\n<h2>About this calculator</h2>\n%s\n%s<h2>Common questions</h2>\n%s\n</section>\n'
             '<section class="block">\n<h2>More free calculators</h2>\n%s\n<p class="calc-all"><a href="calculators.html">See all calculators</a></p>\n</section>\n</div></main>\n'
             '<script src="assets/progress.js"></script>\n<script src="assets/calc.js"></script>%s\n') % (
-        esc(c["name"]), esc(c["lede"]), form, about, faq, related(slug),
+        esc(c["name"]), esc(c["lede"]), form, about, terms, faq, related(slug),
         '\n<script src="assets/salary.js"></script>' if slug == "salary" else "")
 
 
 def hub():
     parts = ['<main><div class="wrap">\n<section class="hero calc-hero">\n<h1>Free online calculators</h1>\n'
-             '<p class="lede">Simple, fast calculators for money, maths, health and everyday life. Everything runs in your browser, with no sign-up.</p>\n</section>']
+             '<p class="lede">Simple, fast calculators for money, maths, health, building, travel, weather, electronics and everyday life. Everything runs in your browser, with no sign-up.</p>\n</section>']
     icons = {"Financial": "Money", "Math": "Maths", "Fitness & Health": "Fitness and health", "Other": "Everyday"}
     for cat in CATS:
         items = [c for c in C if c["cat"] == cat]

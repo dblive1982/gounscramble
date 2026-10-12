@@ -296,7 +296,12 @@ def _hub_dir(hub):
             b=re.search(r'<b>(.*?)</b>',inner)
             label=b.group(1) if b else re.sub(r'<[^>]+>','',inner).strip()
             if h and label: items.append('<li><a href="%s">%s</a></li>'%(h.group(1),label))
-        cols.append('<div class="hd-col"><h3>%s</h3><ul>%s</ul></div>'%(title,"".join(items)))
+        cols.append((sid,'<h3>%s</h3><ul>%s</ul>'%(title,"".join(items))))
+    d=dict(cols); order=[]
+    for sid,_h in cols:
+        if sid=="s-guides": continue
+        order.append('<div class="hd-col">%s%s</div>'%(d[sid], d.get("s-guides","") if sid=="s-tools" else ""))
+    cols=order
     return '<nav class="hb-dir" aria-label="All games, tools and guides">'+"".join(cols)+'</nav>\n'
 _ABOUT='<div class="hd-col"><h3>About</h3><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="credits.html">Credits</a></li><li><a href="faq.html">FAQ</a></li></ul></div>'
 FOOT_DIR=_hub_dir(HUB).replace('<nav class="hb-dir" aria-label="All games, tools and guides">','<nav class="hb-dir" aria-label="Site directory">'+_ABOUT,1)
@@ -329,7 +334,7 @@ HOME = """<main>
 @@HUB@@
 <div class="hm hm-after">
 <section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is <b>go</b>unscramble?</h2>
-<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its word unscrambler turns a jumble of letters into every word they can make, which is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games. Alongside it you will find word games and puzzles to play, and 40+ easy calculators for money, maths, health and everyday sums.</p>
+<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its word unscrambler turns a jumble of letters into every word they can make, which is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games. Alongside it you will find word games and puzzles to play, and 70+ easy calculators for money, maths, health and everyday sums.</p>
 <h3>How to use it</h3>
 <p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
@@ -454,7 +459,7 @@ TOOLS_PAGE = """<main><div class="wrap">
 
 ABOUT = """<main><div class="wrap"><article class="prose">
 <h1>About <b>go</b>unscramble</h1>
-<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 40 simple calculators for money, maths, health and everyday sums.</p>
+<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 70 simple calculators for money, maths, health and everyday sums.</p>
 <div class="cards guide-cards">
 <div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
 <div class="card"><h3>Dictionaries</h3><p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p></div>
@@ -576,7 +581,7 @@ PAGES = [
          desc="Free online calculators: salary, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and more. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
          title="GoUnscramble: Word Unscrambler, Puzzles & Calculators",
-         desc="Free word unscrambler and anagram solver, plus word games, puzzles and 40+ simple calculators for salary, mortgage, BMI, percentages and more. Fast, free and private."),
+         desc="Free word unscrambler and anagram solver, plus word games, puzzles and 70 simple calculators for salary, mortgage, BMI, percentages and more. Fast, free and private."),
     dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
          title="Anagram Solver | GoUnscramble",
          desc="Find the words that use every one of your letters. A free anagram solver with blank tile support."),
@@ -600,7 +605,7 @@ PAGES = [
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | GoUnscramble",
-         desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, and 40+ everyday calculators."),
+         desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, and 70+ everyday calculators."),
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | GoUnscramble",
          desc="How GoUnscramble handles what you type and what your browser sends."),
