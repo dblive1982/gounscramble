@@ -754,3 +754,36 @@ body .calc-about .terms{margin:6px 0 0;display:flex;flex-direction:column;gap:2p
 body .calc-about .terms dt{font-weight:700;color:var(--ink);margin-top:12px}
 body .calc-about .terms dd{margin:2px 0 0;color:var(--muted);line-height:1.55}
 body textarea.cr-text{margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;width:100%}
+/* home: calculator tiles sit straight, Daily journal is a simple pill */
+body .hub .hb-card .hb-ic,body .hub .hb-card:nth-child(even) .hb-ic{transform:none!important;rotate:none!important;animation:none!important}
+body .hub .hb-ic{min-width:44px;height:44px;padding:0 12px;border-radius:12px}
+body .hub .hb-dyhint{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto!important;margin:6px 0 0!important;padding:8px 16px!important;background:#eaf0ff!important;color:#2f49d6!important;border:0!important;border-radius:999px!important;box-shadow:none!important;font:600 15px/1 Inter,system-ui,sans-serif;cursor:pointer}
+body .hub .hb-dyhint:hover{background:#dbe5ff!important}
+body .hub .hb-dyhint .dh-t{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;transform:none!important;font:600 15px/1 Inter,system-ui,sans-serif!important;color:inherit}
+body .hub .hb-dyhint .dh-arrow{display:none!important}
+html[data-theme="dark"] body .hub .hb-dyhint{background:#26305c!important;color:#b9c6ff!important}
+html[data-theme="dark"] body .hub .hb-dyhint:hover{background:#2f3b72!important}
+body .hub .hb-nums{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+body .hub .hb-nums li{padding:12px 4px}
+body .hub .hb-nums span{font-size:12px}
+@media (max-width:330px){body .hub .hb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* home: calendar and diary in the site's softer style */
+body .hub .cal-head button{border:1px solid var(--line)!important;background:#fff!important;box-shadow:var(--sh-s);color:var(--ink)}
+body .hub .cal-grid button{border:0!important;border-radius:12px;background:transparent;color:var(--ink);font-weight:600}
+body .hub .cal-grid button.on{background:#eaf0ff!important;color:#2f49d6!important;font-weight:700}
+body .hub .cal-grid button.today,body .hub .cal-grid span.today{border:1.5px solid #5170ff!important;box-shadow:none!important;animation:none!important;background:transparent}
+body .hub .cal-grid button.on.today,body .hub .cal-grid span.on.today{background:#5170ff!important;color:#fff!important;border:0!important}
+body .hub .cal-grid button.sel{outline:2px solid #5170ff!important;outline-offset:1px;background:#eaf0ff!important;color:#2f49d6!important}
+body .hub .cal-grid button.note::after{border:0!important;background:#5170ff!important;width:6px;height:6px}
+body .hub .hb-diary{background:#fff!important;border:1px solid var(--line)!important;border-radius:16px;box-shadow:none}
+body .hub .hb-diary textarea{border:1px solid var(--line)!important;background:#fff!important;color:var(--ink)!important;font-weight:500;border-radius:12px}
+body .hub .hb-diary textarea:focus{outline:2px solid #5170ff;outline-offset:0;border-color:#5170ff!important}
+body .hub .dy-clear{border:1px solid var(--line)!important;background:#fff!important;color:var(--ink)!important;font-weight:600}
+body .hub .dy-r button{border:0!important;background:var(--soft)!important;color:var(--ink)!important;border-radius:12px}
+body .hub .hb-go a{background:#eaf0ff!important;color:#2f49d6!important;border:0!important;font-weight:600}
+/* footer spacing */
+body .hb-dir .hd-col ul+h3{margin-top:34px!important}
+body .site-footer{margin-top:28px}
+body .site-footer .wrap>.hb-dir{padding-top:24px;margin-bottom:28px}
+body main{padding-bottom:24px}
+body .site-footer .wrap>.hb-dir{padding-top:8px}
