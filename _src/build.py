@@ -275,9 +275,9 @@ def _hub_dir(hub):
             if h and label: items.append('<li><a href="%s">%s</a></li>'%(h.group(1),label))
         cols.append('<div class="hd-col"><h3>%s</h3><ul>%s</ul></div>'%(title,"".join(items)))
     return '<nav class="hb-dir" aria-label="All games, tools and guides">'+"".join(cols)+'</nav>\n'
-HUB=HUB.rstrip()
-assert HUB.endswith("</div>")
-HUB=HUB[:-6]+_hub_dir(HUB)+"</div>\n"
+_ABOUT='<div class="hd-col"><h3>About</h3><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="credits.html">Credits</a></li><li><a href="faq.html">FAQ</a></li></ul></div>'
+FOOT_DIR=_hub_dir(HUB).replace('<nav class="hb-dir" aria-label="All games, tools and guides">','<nav class="hb-dir" aria-label="Site directory">'+_ABOUT,1)
+FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer class="site-footer"><div class="wrap">'+FOOT_DIR,1)
 
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
