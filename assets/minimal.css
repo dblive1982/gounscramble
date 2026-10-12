@@ -401,3 +401,13 @@ body .hm .gh{margin-bottom:2px}
 body .site-footer .foot-logo .wm{font-size:19px;color:#1a1917!important}
 .foot-c{color:var(--muted);font-size:14px}
 .foot-logo .cube{width:26px;height:26px;flex:none}
+
+/* bigger logo on phones */
+@media (max-width:600px){
+  .hero-brand{gap:10px;margin:0 0 28px}
+  .hero-brand .cube{width:54px;height:54px}
+  body .hero-band .hero-brand .wm,.hero-brand .wm{font-size:32px}
+  body .site-header .brand .wm{font-size:20px}
+  .brand .cube{width:26px;height:26px}
+  body .site-footer .foot-logo .wm{font-size:21px}
+}
