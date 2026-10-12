@@ -261,3 +261,20 @@ body .hm .t.blank{background:var(--primary)!important;border-color:var(--primary
 body .hm .box input{letter-spacing:.01em}
 body .hm .box input::placeholder{letter-spacing:.01em}
 .hero-brand{text-decoration:none;color:inherit;cursor:pointer}.hero-brand:hover .wm{opacity:.8}
+
+/* tighter vertical rhythm: everything sits higher */
+body[data-page="home"] .site-header .wrap{padding-top:8px;padding-bottom:0}
+body .hero-band .hm-top{padding-top:0;padding-bottom:4px;gap:10px}
+.hero-brand{gap:14px;margin:0 0 26px}
+.hero-brand .cube{width:60px;height:60px}
+@media (max-width:600px){
+  body[data-page="home"] .site-header .wrap{padding-top:6px}
+  .hero-brand{gap:10px;margin:0 0 18px}
+  .hero-brand .cube{width:46px;height:46px}
+  body .hero-band .hero-brand .wm{font-size:28px}
+  body .hm .box{padding:8px 8px 8px 24px}
+  body .hm .go{width:56px;height:56px}
+  body .hm .hint{font-size:13px}
+  .hub{margin-top:22px;gap:30px}
+  body .hm .summary{margin-top:22px}
+}
