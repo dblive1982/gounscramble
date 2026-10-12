@@ -284,9 +284,10 @@ HOME = """<main>
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
 <a class="hero-brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
 <form id="f" class="box" autocomplete="off">
+<svg class="sico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#9aa1ae" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
 <button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
-<button class="go" type="submit" aria-label="Unscramble"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
+<button class="go" type="submit" aria-label="Unscramble">GO</button>
 </form>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
 <div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
