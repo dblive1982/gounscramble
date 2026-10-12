@@ -825,3 +825,59 @@ body .hub .hb-ic{display:grid;place-items:center;width:44px;min-width:44px;paddi
 body .gm .tool .tb svg.ic,body .gm #v-wordsearch .cat .ico svg.ic{color:#5170ff;display:block}
 body .gm .tool .tb{display:grid;place-items:center;width:46px;min-width:46px;height:46px;padding:0}
 @media print{html,body{background:#fff!important;background-image:none!important}}
+/* icon buttons (print, share) and toast */
+body .ib{display:inline-grid;place-items:center;width:42px;height:42px;padding:0;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);box-shadow:var(--sh-s);cursor:pointer;flex:none}
+body .ib:hover{color:#5170ff}
+body .ib[hidden]{display:none}
+body .gm .gtop .ib{margin:0}
+body .gm .gtop #print{margin-left:auto}
+body .gm .gtop #print[hidden]+#share{margin-left:auto}
+.calc-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.calc-top h1{margin:0;min-width:0}
+.calc-top .acts{display:flex;gap:8px;flex:none}
+#gu-toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#1c2230;color:#fff;border-radius:999px;padding:10px 18px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999}
+#gu-toast.on{opacity:1;transform:translate(-50%,0)}
+/* printing: only the printable sheet, on plain white, one page where possible */
+#print-sheet{display:none}
+@media print{
+  @page{margin:14mm}
+  html,body,body[data-page]{background:#fff!important;background-image:none!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important}
+  body>*:not(#print-sheet){display:none!important}
+  #print-sheet{display:block;color:#000;font-family:Arial,Helvetica,sans-serif}
+  #print-sheet h1{font-size:22pt;margin:0 0 3pt;text-align:center;color:#000}
+  #print-sheet .pn{text-align:center;font-size:10pt;margin:0 0 12pt;color:#444}
+  #print-sheet .pf{text-align:center;font-size:8.5pt;margin-top:14pt;color:#444}
+  #print-sheet .pcalc{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;max-width:none!important}
+  #print-sheet .pcalc *{box-shadow:none!important;background:none!important;color:#000!important;border-color:#888!important;animation:none!important}
+  #print-sheet .cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:7pt 16pt;margin:0 0 10pt}
+  #print-sheet .cf{break-inside:avoid;min-width:0}
+  #print-sheet .cf label{display:block;font-size:8.5pt;color:#444!important;margin:0 0 1pt}
+  #print-sheet .pv{display:block;font-weight:700;font-size:11pt;border-bottom:.6pt solid #888;padding:1pt 0 2pt;white-space:pre-wrap;word-break:break-word}
+  #print-sheet .pv-c{display:inline;border:0;font-weight:400}
+  #print-sheet .cf-chk{display:flex!important;gap:4pt;font-size:10pt!important}
+  #print-sheet .cf-wide{grid-column:1/-1}
+  #print-sheet details{border:.6pt solid #888;border-radius:4pt;margin:0 0 8pt;padding:5pt 8pt;break-inside:avoid}
+  #print-sheet summary{font-weight:700;font-size:10pt;list-style:none;margin:0 0 4pt}
+  #print-sheet summary::-webkit-details-marker{display:none}
+  #print-sheet .cr-hero{border:1.2pt solid #000!important;border-radius:6pt;padding:9pt;text-align:center;margin:8pt 0;break-inside:avoid}
+  #print-sheet .cr-k{display:block;font-size:10pt}
+  #print-sheet .cr-v{display:block;font-size:24pt}
+  #print-sheet .cr-s{display:block;font-size:9pt}
+  #print-sheet .cr-h{font-size:12pt;margin:12pt 0 4pt;break-after:avoid}
+  #print-sheet .cr-rows{margin:0 0 6pt}
+  #print-sheet .cr-row{display:flex;justify-content:space-between;gap:12pt;border-bottom:.5pt solid #bbb;padding:3pt 0;font-size:10.5pt;break-inside:avoid}
+  #print-sheet .cr-row dt,#print-sheet .cr-row dd{margin:0}
+  #print-sheet .cr-total{font-weight:700;border-bottom:1pt solid #000}
+  #print-sheet .cr-tw{overflow:visible!important;max-height:none!important}
+  #print-sheet table{border-collapse:collapse;width:100%;font-size:9.5pt}
+  #print-sheet th,#print-sheet td{border:.5pt solid #888;padding:2pt 4pt;text-align:right}
+  #print-sheet th:first-child,#print-sheet td:first-child{text-align:left}
+  #print-sheet .cr-warn,#print-sheet .cr-err,#print-sheet .hint{font-size:9.5pt;border:.6pt solid #888;padding:4pt 6pt;border-radius:4pt}
+  #print-sheet .sal-bar,#print-sheet .sal-leg{display:none}
+  #print-sheet .sc-screen{border:.8pt solid #000;padding:6pt;margin:0 0 8pt}
+  #print-sheet .sc-in,#print-sheet .sc-res{display:block;font-size:14pt}
+  #print-sheet .sc-hist{font-size:10.5pt;padding-left:16pt}
+  #print-sheet .cr-text,#print-sheet .pv{font-family:inherit}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.calc-top h1{flex:1}

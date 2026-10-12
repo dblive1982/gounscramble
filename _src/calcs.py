@@ -429,10 +429,10 @@ def body(slug):
     about = "".join("<p>%s</p>" % p for p in c["about"])
     faq = "".join("<h3>%s</h3><p>%s</p>" % (q, a) for q, a in c["faq"])
     terms = ('<h2>Measurements and terms explained</h2>\n<dl class="terms">%s</dl>\n' % "".join("<dt>%s</dt><dd>%s</dd>" % (t, d) for t, d in c["terms"])) if c.get("terms") else ""
-    return ('<main><div class="wrap">\n<section class="hero calc-hero">\n<h1>%s</h1>\n<p class="lede">%s</p>\n%s\n</section>\n'
+    return ('<main><div class="wrap">\n<section class="hero calc-hero">\n<div class="calc-top"><h1>%s</h1><div class="acts"><button class="ib" id="cp-print" type="button" aria-label="Print" title="Print"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5a2 2 0 01-2-2v-4a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2h-2M7 14h10v6H7z"/></svg></button><button class="ib" id="cp-share" type="button" aria-label="Share" title="Share"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 002 2h10a2 2 0 002-2v-5"/></svg></button></div></div>\n<p class="lede">%s</p>\n%s\n</section>\n'
             '<section class="block narrow calc-about">\n<h2>About this calculator</h2>\n%s\n%s<h2>Common questions</h2>\n%s\n</section>\n'
             '<section class="block">\n<h2>More free calculators</h2>\n%s\n<p class="calc-all"><a href="calculators.html">See all calculators</a></p>\n</section>\n</div></main>\n'
-            '<script src="assets/progress.js"></script>\n<script src="assets/calc.js"></script>%s\n') % (
+            '<script src="assets/progress.js"></script>\n<script src="assets/calc.js"></script><script src="assets/calcprint.js"></script>%s\n') % (
         esc(c["name"]), esc(c["lede"]), form, about, terms, faq, related(slug),
         '\n<script src="assets/salary.js"></script>' if slug == "salary" else "")
 

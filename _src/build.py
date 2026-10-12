@@ -726,7 +726,7 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "salary.js", "minimal.css", "dark.css", "logo.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "logo.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:

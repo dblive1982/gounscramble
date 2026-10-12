@@ -31,8 +31,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=a5182195">
 <link rel="stylesheet" href="assets/games.css?v=0578a1b8">
-<link rel="stylesheet" href="assets/minimal.css?v=124e4a84">
-<link rel="stylesheet" href="assets/dark.css?v=b5ca4902">
+<link rel="stylesheet" href="assets/minimal.css?v=c79d821b">
+<link rel="stylesheet" href="assets/dark.css?v=6c02aa92">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
 <body data-page="games">
@@ -75,7 +75,7 @@
 </div></header>
 <!--/header-->
 <main class="gm">
-<div class="gtop"><button class="back" id="back" type="button" aria-label="All games" hidden>&lsaquo; All games</button><h1 id="ttl">Puzzles &amp; games</h1><button class="pill" id="print" type="button" hidden aria-label="Print a black and white copy">&#128424; Print</button><button class="pill" id="share" type="button" hidden>&#8599; Share</button></div>
+<div class="gtop"><button class="back" id="back" type="button" aria-label="All games" hidden>&lsaquo; All games</button><h1 id="ttl">Puzzles &amp; games</h1><button class="ib" id="print" type="button" hidden aria-label="Print" title="Print"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5a2 2 0 01-2-2v-4a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2h-2M7 14h10v6H7z"/></svg></button><button class="ib" id="share" type="button" hidden aria-label="Share" title="Share"><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 002 2h10a2 2 0 002-2v-5"/></svg></button></div>
 
 <section id="v-games">
   <p class="sub">Free games you can play right here. Sign in to save your progress.</p>
@@ -209,7 +209,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=00ec7b10"></script><script src="assets/games.js?v=e442efce"></script><script src="assets/arcade.js?v=0c48979b"></script><script src="assets/print.js?v=0ca9e4de"></script>
+<script src="assets/progress.js?v=d91ea755"></script><script src="assets/games.js?v=e442efce"></script><script src="assets/arcade.js?v=0c48979b"></script><script src="assets/print.js?v=57bdf5e4"></script>
 <script>(function(){var g=document.getElementById("theme-opts");if(!g)return;var bs=g.querySelectorAll("button");function d(){return document.documentElement.getAttribute("data-theme")==="dark"}function p(){bs.forEach(function(x){x.setAttribute("aria-pressed",String((x.getAttribute("data-t")==="dark")===d()))})}bs.forEach(function(x){x.addEventListener("click",function(){var n=x.getAttribute("data-t");document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("gu-theme",n)}catch(e){}p()})});p()})();</script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){if(!m.hasAttribute("open")||m.classList.contains("closing"))return;m.classList.add("closing");setTimeout(function(){m.removeAttribute("open");m.classList.remove("closing")},230)}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});var sm=m.querySelector("summary");if(sm)sm.addEventListener("click",function(e){if(m.hasAttribute("open")){e.preventDefault();c()}});})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}

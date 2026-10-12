@@ -191,5 +191,10 @@
     if (window.guMenu) window.guMenu();
   });
   read();
+  window.GUToast = function (msg) {
+    var t = document.getElementById("gu-toast");
+    if (!t) { t = document.createElement("div"); t.id = "gu-toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.textContent = msg; t.className = "on"; clearTimeout(t._t); t._t = setTimeout(function () { t.className = ""; }, 1800);
+  };
   window.GUP = api;
 })();
