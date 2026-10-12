@@ -76,6 +76,11 @@ html[data-theme="dark"] .gm .sc.given{background:#3a3b3f!important}
 html[data-theme="dark"] #v-snakes .cells i{background:#34353a!important}
 html[data-theme="dark"] #v-snakes .cells i.d{background:#222326!important}
 html[data-theme="dark"] .ar-cv{filter:invert(1)}
+html[data-theme="dark"] body .gm .ttt button{border-right-color:#5f6368!important;border-bottom-color:#5f6368!important}
+html[data-theme="dark"] body .gm .ttt button:nth-child(3n){border-right:0!important}
+html[data-theme="dark"] body .gm .ttt button:nth-child(n+7){border-bottom:0!important}
+html[data-theme="dark"] body .gm .ttt button.win{background:#2d3a66!important}
+html[data-theme="dark"] body .gm .ttt button.O{color:#8aa0ff}
 '''
 open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n')
 print(len(rules),'rules')

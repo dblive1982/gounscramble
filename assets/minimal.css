@@ -594,3 +594,13 @@ body .menu-list .theme-opts button[aria-pressed="true"]{background:#e3eaff;borde
 /* weather tile: tap to use exact location */
 .hub .hb-wx.tap{cursor:pointer}
 .hub .hb-wx em{display:block;font-style:normal;font-size:11px;font-weight:500;color:var(--muted);margin-top:2px}
+
+/* tic tac toe: a clear # grid */
+body .gm .ttt{gap:0!important;max-width:330px}
+body .gm .ttt button{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;border-right:5px solid #b8bfce!important;border-bottom:5px solid #b8bfce!important}
+body .gm .ttt button:nth-child(3n){border-right:0!important}
+body .gm .ttt button:nth-child(n+7){border-bottom:0!important}
+body .gm .ttt button.X{color:var(--ink)}
+body .gm .ttt button.O{color:#5170ff}
+body .gm .ttt button.win{background:#e3eaff!important}
+@media (hover:hover){body .gm .ttt button:not(.X):not(.O):hover{background:#f1f3f8!important}}
