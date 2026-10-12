@@ -219,7 +219,7 @@ function snake(G) {
     if (q.length < 2) q.push({ x: m[0], y: m[1] });
   }
   return {
-    reset: function () { sn = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]; dir = { x: 1, y: 0 }; q = []; sc = 0; t = 0; iv = 0.13; put(); G.score(0); },
+    reset: function () { sn = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]; dir = { x: 1, y: 0 }; q = []; sc = 0; t = 0; iv = 0.24; put(); G.score(0); },
     key: function (k, d) { if (d) turn(k); },
     ptr: function (x, y, ph) {
       if (ph === "down") { sx = x; sy = y; return; }
@@ -233,7 +233,7 @@ function snake(G) {
       var h = { x: sn[0].x + dir.x, y: sn[0].y + dir.y };
       if (h.x < 0 || h.y < 0 || h.x >= N || h.y >= N || sn.slice(0, -1).some(function (p) { return p.x === h.x && p.y === h.y; })) { G.beep(150, 0.5, "sawtooth", 0.05, 40); G.save(sc); G.end("GAME OVER", "SCORE " + sc); return; }
       sn.unshift(h);
-      if (h.x === food.x && h.y === food.y) { sc += 10; G.score(sc); G.beep(660, 0.09, "square", 0.04, 990); iv = Math.max(0.06, 0.13 - Math.floor(sc / 40) * 0.008); put(); } else sn.pop();
+      if (h.x === food.x && h.y === food.y) { sc += 10; G.score(sc); G.beep(660, 0.09, "square", 0.04, 990); iv = Math.max(0.07, 0.24 - Math.floor(sc / 50) * 0.02); put(); } else sn.pop();
     },
     draw: function (c) {
       var fx = food.x * S, fy = food.y * S;
@@ -242,6 +242,7 @@ function snake(G) {
       var h = sn[0], ex = dir.x ? (dir.x > 0 ? 9 : 3) : 0, ey = dir.y ? (dir.y > 0 ? 9 : 3) : 0;
       if (dir.x) { G.rect(h.x * S + ex, h.y * S + 3, 3, 3, "#fff"); G.rect(h.x * S + ex, h.y * S + 10, 3, 3, "#fff"); } else { G.rect(h.x * S + 3, h.y * S + ey, 3, 3, "#fff"); G.rect(h.x * S + 10, h.y * S + ey, 3, 3, "#fff"); }
       c.strokeStyle = C.lt; c.lineWidth = 1; c.strokeRect(0.5, 0.5, N * S - 1, N * S - 1);
+      G.txt("LEVEL " + (Math.floor(sc / 50) + 1), 8, 12, 8, C.pur, "left");
     }
   };
 }
