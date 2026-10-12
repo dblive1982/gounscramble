@@ -287,7 +287,7 @@ def faq_html(items=None, heading=True):
 
 
 FAQ_PAGE = """<h1>Frequently asked questions</h1>
-<p>Quick answers about how GoUnscramble works. If yours is not here, use the <a href="contact.html">contact page</a>.</p>
+<p>Quick answers about how <b>go</b>unscramble works. If yours is not here, use the <a href="contact.html">contact page</a>.</p>
 @@FAQ@@
 """
 

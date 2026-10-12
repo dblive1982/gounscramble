@@ -243,7 +243,7 @@ HUB = """<div class="hub">
 <button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
 </section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
-<p class="hb-sub">Tap a jumble and watch GoUnscramble crack it, or roll a new set.</p>
+<p class="hb-sub">Tap a jumble and watch <b>go</b>unscramble crack it, or roll a new set.</p>
 <div class="hb-chips" id="hb-chips"><button type="button" data-rack="lesnit">LESNIT</button><button type="button" data-rack="rnaedg">RNAEDG</button><button type="button" data-rack="asrtem">ASRTEM</button><button type="button" data-rack="mektra">MEKTRA</button><button type="button" data-rack="oerangs">OERANGS</button><button type="button" data-rack="scrambl?">SCRAMBL?</button></div><div class="hb-rollrow"><button type="button" class="hb-roll" id="hb-roll" aria-label="Show new scrambles"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.4-5.7"/><path d="M20 4v5h-5"/></svg><span>New scrambles</span></button></div>
 </section>
 <section class="hb-sec" aria-labelledby="hb-facts"><h2 id="hb-facts">Did you know?</h2>
@@ -285,13 +285,13 @@ HOME = """<main>
 <div class="home-extra">
 @@HUB@@
 <div class="hm hm-after">
-<section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is GoUnscramble?</h2>
-<p>GoUnscramble turns a jumble of letters into every word they can make. It is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games.</p>
+<section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is <b>go</b>unscramble?</h2>
+<p><b>go</b>unscramble turns a jumble of letters into every word they can make. It is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games.</p>
 <h3>How to use it</h3>
 <p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
 <p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
-<p>Looking for more? Open the menu for the anagram solver and other free word tools. <a href="about.html">Read more about GoUnscramble</a>.</p></section>
+<p>Looking for more? Open the menu for the anagram solver and other free word tools. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
 <p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
 </div>
 @@HOME_EXTRA@@
@@ -410,8 +410,8 @@ TOOLS_PAGE = """<main><div class="wrap">
 """
 
 ABOUT = """<main><div class="wrap"><article class="prose">
-<h1>About GoUnscramble</h1>
-<p>GoUnscramble turns jumbled letters into real words. Type the letters you have, add a ? or * for any blank tile, and the unscrambler lists every word they can make, longest first.</p>
+<h1>About <b>go</b>unscramble</h1>
+<p><b>go</b>unscramble turns jumbled letters into real words. Type the letters you have, add a ? or * for any blank tile, and the unscrambler lists every word they can make, longest first.</p>
 <div class="cards guide-cards">
 <div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
 <div class="card"><h3>Dictionaries</h3><p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p></div>
@@ -474,7 +474,7 @@ TERMS = """<main><div class="wrap"><article class="prose">
 <p>Last updated 11 October 2026.</p>
 <p>These terms apply when you use gounscramble.com (the "site"). By using the site or creating an account you agree to them. If you do not agree, please do not use the site.</p>
 <h2>Who we are</h2>
-<p>GoUnscramble is an independent website. You can reach us through the <a href="contact.html">contact page</a> or at <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
+<p><b>go</b>unscramble is an independent website. You can reach us through the <a href="contact.html">contact page</a> or at <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p>
 <h2>Using the site</h2>
 <p>The word tools and games are free to use for personal, non-commercial purposes. Please do not misuse the site, for example by trying to break or overload it, scraping it at scale, probing it for weaknesses or using it for anything unlawful.</p>
 <h2>Your account</h2>
