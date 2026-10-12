@@ -190,26 +190,8 @@ def letters_input(button_text):
 
 
 HUB = """<div class="hub">
-<section class="hb-stats" aria-label="Today at a glance">
-<div data-t="Word list"><b>172,823</b><span>words in the list</span></div>
-<div class="hb-wx" id="hb-wx" data-t="Fun fact" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
-<div data-t="Fun facts"><b>300</b><span>word searches</span></div>
-<button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
-</section>
-<section class="hb-sec" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><span class="dh-t">Daily Journal</span><svg class="dh-arrow" viewBox="0 0 64 54" width="64" height="54" aria-hidden="true" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6C10 30 28 46 52 42"/><path d="M52 42l-11-11M52 42l-13 9"/></svg></button><span class="hb-doodle" id="hb-doodle" aria-hidden="true"><svg viewBox="0 0 450 78" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 24h86M34 38h76M20 52h82"/><g class="dd-a"><path d="M126 22H330V6L432 38 330 70V54H126Z" transform="translate(5 5)" fill="#000" stroke="#000"/><path d="M126 22H330V6L432 38 330 70V54H126Z" fill="#ffd23f"/><text x="226" y="47" text-anchor="middle" font-family="Fredoka,Nunito,system-ui,sans-serif" font-weight="700" font-size="28" fill="#000" stroke="none" letter-spacing="1">LET'S GO!</text></g><path class="dd-s" fill="#ff6b6b" stroke-width="3" d="M196 1l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/><path class="dd-s" fill="#bfe6ee" stroke-width="3" d="M262 63l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></span><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
-<div class="hb-me">
-<div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
-<ul class="hb-nums" id="hb-nums"></ul>
-<div id="hb-go" class="hb-go"></div>
-<div class="hb-diary" id="hb-diary" aria-label="Diary"></div></div>
-<div class="hb-cal" id="hb-cal" aria-label="Days you played and diary"></div>
-<div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
-</div></section>
-<section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
-<p class="hb-sub">Tap a jumble and watch GoUnscramble crack it, or roll a new set.</p>
-<div class="hb-chips" id="hb-chips"><button type="button" data-rack="lesnit">LESNIT</button><button type="button" data-rack="rnaedg">RNAEDG</button><button type="button" data-rack="asrtem">ASRTEM</button><button type="button" data-rack="mektra">MEKTRA</button><button type="button" data-rack="oerangs">OERANGS</button><button type="button" data-rack="scrambl?">SCRAMBL?</button></div><div class="hb-rollrow"><button type="button" class="hb-roll" id="hb-roll" aria-label="Show new scrambles"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.4-5.7"/><path d="M20 4v5h-5"/></svg><span>New scrambles</span></button></div>
-</section>
-<section class="hb-sec" aria-labelledby="hb-games"><div class="hb-head"><h2 id="hb-games">Play free puzzles</h2><a href="games.html">See all games &rsaquo;</a></div>
+<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
+<section class="hb-sec" id="s-games" aria-labelledby="hb-games"><div class="hb-head"><div><h2 id="hb-games">Puzzles &amp; Games</h2><p class="hb-sub">Free puzzles you can play right here.</p></div><a class="hb-arrow" href="games.html" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-teal" data-pop="300!" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
 <a class="hb-card c-yellow" href="games.html#sudoku"><span class="hb-ic">9&times;9</span><b>Sudoku</b><span>Three levels, from a gentle warm-up to a proper head-scratcher.</span><em>1 player</em></a>
@@ -220,20 +202,50 @@ HUB = """<div class="hub">
 <a class="hb-card c-teal" href="games.html#ttt"><span class="hb-ic">XO</span><b>Tic tac toe</b><span>Three in a row wins. Easy, hard, or two players on one device.</span><em>1-2 players</em></a>
 <a class="hb-card hb-more" data-pop="FREE!" href="account.html"><span class="hb-ic">&#9733;</span><b>Save your progress</b><span>Sign in free to keep your games and scores on every device.</span><em>Free account</em></a>
 </div></section>
-<section class="hb-sec" aria-labelledby="hb-retro"><div class="hb-head"><h2 id="hb-retro">Play free retro games</h2><a href="games.html#arcade">See all games &rsaquo;</a></div>
+<section class="hb-sec" id="s-retro" aria-labelledby="hb-retro"><div class="hb-head"><div><h2 id="hb-retro">Retro Games</h2><p class="hb-sub">Old-school arcade favourites with our own twist.</p></div><a class="hb-arrow" href="games.html#arcade" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-green" data-pop="NEW!" href="games.html#retrosnake"><span class="hb-ic">Sn</span><b>Retro Snake</b><span>Eat, grow and don't hit the walls or yourself. Gets faster as you go.</span><em>Arcade</em></a>
 <a class="hb-card c-orange" href="games.html#bricks"><span class="hb-ic">Br</span><b>Brick Smash</b><span>Bounce the ball, smash every brick and don't let it drop.</span><em>Arcade</em></a>
 <a class="hb-card c-pink" href="games.html#blaster"><span class="hb-ic">Sb</span><b>Star Blaster</b><span>Blast the invading aliens before they reach you. Hide behind the shields.</span><em>Arcade</em></a>
 <a class="hb-card c-yellow" href="games.html#muncher"><span class="hb-ic">Mm</span><b>Maze Muncher</b><span>Eat every dot, dodge the ghosts and grab a pellet to turn the tables.</span><em>Arcade</em></a>
 </div></section>
-<section class="hb-sec" aria-labelledby="hb-tools"><div class="hb-head"><h2 id="hb-tools">Free word tools</h2><a href="tools.html">All tools &rsaquo;</a></div>
+<section class="hb-sec" id="s-lists" aria-labelledby="hb-lists"><div class="hb-head"><div><h2 id="hb-lists">Word Lists</h2><p class="hb-sub">Browse words by length and first letter.</p></div><a class="hb-arrow" href="word-lists.html" aria-label="All word lists"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+<div class="hb-links">
+<a href="two-letter-words.html">2-letter words</a><a href="three-letter-words.html">3-letter words</a><a href="four-letter-words.html">4-letter words</a><a href="five-letter-words.html">5-letter words</a><a href="six-letter-words.html">6-letter words</a><a href="seven-letter-words.html">7-letter words</a><a href="eight-letter-words.html">8-letter words</a><a href="words-with-z.html">Words with Z</a><a href="words-with-q-without-u.html">Q without U</a><a href="words-with-j-and-x.html">Words with J and X</a>
+</div></section>
+<section class="hb-sec" id="s-tools" aria-labelledby="hb-tools"><div class="hb-head"><div><h2 id="hb-tools">Word Tools</h2><p class="hb-sub">Free helpers for writing and word games.</p></div><a class="hb-arrow" href="tools.html" aria-label="All tools"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-yellow" href="anagram-solver.html"><span class="hb-ic">ABC</span><b>Anagram solver</b><span>Find the words that use every one of your letters.</span></a>
 <a class="hb-card c-teal" href="word-counter.html"><span class="hb-ic">123</span><b>Word counter</b><span>Count words, characters and sentences as you type.</span></a>
 <a class="hb-card c-pink" href="case-converter.html"><span class="hb-ic">Aa</span><b>Case converter</b><span>Switch text to upper, lower, title or sentence case.</span></a>
 <a class="hb-card c-lilac" href="random-word-picker.html"><span class="hb-ic">?!</span><b>Random word picker</b><span>Pull random words for games, prompts and spelling tests.</span></a>
 </div></section>
+<section class="hb-sec" id="s-guides" aria-labelledby="hb-guides"><div class="hb-head"><div><h2 id="hb-guides">Tips &amp; Guides</h2><p class="hb-sub">Short guides to help you score more.</p></div><a class="hb-arrow" href="guides.html" aria-label="All guides"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+<div class="hb-grid">
+<a class="hb-card c-green" href="scrabble-tips.html"><b>Scrabble tips</b><span>Score more with short words, hooks and smart tile swaps.</span></a>
+<a class="hb-card c-yellow" href="wordle-tips.html"><b>Five-letter puzzle tips</b><span>Pick better starting words and narrow it down fast.</span></a>
+<a class="hb-card c-teal" href="crossword-help.html"><b>Crossword help</b><span>Fill the gaps with patterns, lengths and known letters.</span></a>
+<a class="hb-card c-pink" href="what-is-an-anagram.html"><b>What is an anagram?</b><span>How rearranged letters make new words, with examples.</span></a>
+</div></section>
+<section class="hb-sec" id="hb-prog" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><span class="dh-t">Daily Journal</span><svg class="dh-arrow" viewBox="0 0 64 54" width="64" height="54" aria-hidden="true" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6C10 30 28 46 52 42"/><path d="M52 42l-11-11M52 42l-13 9"/></svg></button><span class="hb-doodle" id="hb-doodle" aria-hidden="true"><svg viewBox="0 0 450 78" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 24h86M34 38h76M20 52h82"/><g class="dd-a"><path d="M126 22H330V6L432 38 330 70V54H126Z" transform="translate(5 5)" fill="#000" stroke="#000"/><path d="M126 22H330V6L432 38 330 70V54H126Z" fill="#ffd23f"/><text x="226" y="47" text-anchor="middle" font-family="Fredoka,Nunito,system-ui,sans-serif" font-weight="700" font-size="28" fill="#000" stroke="none" letter-spacing="1">LET'S GO!</text></g><path class="dd-s" fill="#ff6b6b" stroke-width="3" d="M196 1l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/><path class="dd-s" fill="#bfe6ee" stroke-width="3" d="M262 63l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></span><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
+<div class="hb-me">
+<div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
+<ul class="hb-nums" id="hb-nums"></ul>
+<div id="hb-go" class="hb-go"></div>
+<div class="hb-diary" id="hb-diary" aria-label="Diary"></div></div>
+<div class="hb-cal" id="hb-cal" aria-label="Days you played and diary"></div>
+<div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
+</div></section>
+<section class="hb-stats" aria-label="Today at a glance">
+<div data-t="Word list"><b>172,823</b><span>words in the list</span></div>
+<div class="hb-wx" id="hb-wx" data-t="Fun fact" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
+<div data-t="Fun facts"><b>300</b><span>word searches</span></div>
+<button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
+</section>
+<section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
+<p class="hb-sub">Tap a jumble and watch GoUnscramble crack it, or roll a new set.</p>
+<div class="hb-chips" id="hb-chips"><button type="button" data-rack="lesnit">LESNIT</button><button type="button" data-rack="rnaedg">RNAEDG</button><button type="button" data-rack="asrtem">ASRTEM</button><button type="button" data-rack="mektra">MEKTRA</button><button type="button" data-rack="oerangs">OERANGS</button><button type="button" data-rack="scrambl?">SCRAMBL?</button></div><div class="hb-rollrow"><button type="button" class="hb-roll" id="hb-roll" aria-label="Show new scrambles"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.4-5.7"/><path d="M20 4v5h-5"/></svg><span>New scrambles</span></button></div>
+</section>
 <section class="hb-sec" aria-labelledby="hb-facts"><h2 id="hb-facts">Did you know?</h2>
 <div class="hb-facts">
 <div class="hb-fact"><b>28</b><span>letters in the longest word in our list: <i>ethylenediaminetetraacetates</i>.</span></div>
@@ -244,17 +256,6 @@ HUB = """<div class="hub">
 <div class="hb-fact"><b>A-Z</b><span><i>Almost</i> has its letters in alphabetical order. So does <i>billowy</i>.</span></div>
 <div class="hb-fact"><b>96</b><span>two-letter words in the list. Learn them and your Scrabble score will thank you.</span></div>
 <div class="hb-fact"><b>8,636</b><span>five-letter words, which is why Wordle can keep surprising you.</span></div>
-</div></section>
-<section class="hb-sec" aria-labelledby="hb-lists"><div class="hb-head"><h2 id="hb-lists">Browse word lists</h2><a href="word-lists.html">All word lists &rsaquo;</a></div>
-<div class="hb-links">
-<a href="two-letter-words.html">2-letter words</a><a href="three-letter-words.html">3-letter words</a><a href="four-letter-words.html">4-letter words</a><a href="five-letter-words.html">5-letter words</a><a href="six-letter-words.html">6-letter words</a><a href="seven-letter-words.html">7-letter words</a><a href="eight-letter-words.html">8-letter words</a><a href="words-with-z.html">Words with Z</a><a href="words-with-q-without-u.html">Q without U</a><a href="words-with-j-and-x.html">Words with J and X</a>
-</div></section>
-<section class="hb-sec" aria-labelledby="hb-guides"><div class="hb-head"><h2 id="hb-guides">Tips and guides</h2><a href="guides.html">All guides &rsaquo;</a></div>
-<div class="hb-grid">
-<a class="hb-card c-green" href="scrabble-tips.html"><b>Scrabble tips</b><span>Score more with short words, hooks and smart tile swaps.</span></a>
-<a class="hb-card c-yellow" href="wordle-tips.html"><b>Five-letter puzzle tips</b><span>Pick better starting words and narrow it down fast.</span></a>
-<a class="hb-card c-teal" href="crossword-help.html"><b>Crossword help</b><span>Fill the gaps with patterns, lengths and known letters.</span></a>
-<a class="hb-card c-pink" href="what-is-an-anagram.html"><b>What is an anagram?</b><span>How rearranged letters make new words, with examples.</span></a>
 </div></section>
 </div>
 """
