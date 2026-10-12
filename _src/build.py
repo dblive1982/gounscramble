@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import guides as G
 
 import calcs as CALC
+import planners as PL
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("GU_OUT") or os.path.join(ROOT, "site")
 SITE = "https://gounscramble.com"
@@ -73,6 +74,7 @@ HEADER = """<!--header-->
 <a href="scientific-calculator.html" class="sub"><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h2M12 12h2M16 12h.01M8 16h2M12 16h2M16 16h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Scientific</a>
 <a href="percentage-calculator.html" class="sub"><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h2M12 12h2M16 12h.01M8 16h2M12 16h2M16 16h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Percentage</a>
 <p class="menu-h">More</p>
+<a href="planners.html"@@CUR_planners@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v17H6zM9 4V3h6v1M9.5 11l1.8 1.8L15 9M9.5 16.5h5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Planners</a>
 <a href="guides.html"@@CUR_guides@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4zM9 9h6M9 13h6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Guides</a>
 <a href="tools.html"@@CUR_tools@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6a4 4 0 0 0 5 5l-9 9-3-3 9-9a4 4 0 0 0-2-2zM4 20l3-3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>All tools</a>
 <a href="about.html"@@CUR_about@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v6M12 7.5h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>About</a>
@@ -283,6 +285,8 @@ HUB = """<div class="hub">
 </div>
 """
 
+_PLCOL='<h3>Planners</h3><ul><li><a href="planners.html">All planners</a></li>'+"".join('<li><a href="%s">%s</a></li>'%(x["file"],x["name"]) for x in PL.P)+"</ul>"
+
 def _hub_dir(hub):
     cols=[]
     for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-lists","Word lists"),("s-calc","Calculators"),("s-guides","Tips &amp; guides")):
@@ -300,7 +304,7 @@ def _hub_dir(hub):
     d=dict(cols); order=[]
     for sid,_h in cols:
         if sid=="s-guides": continue
-        order.append('<div class="hd-col">%s%s</div>'%(d[sid], d.get("s-guides","") if sid=="s-tools" else ""))
+        order.append('<div class="hd-col">%s%s</div>'%(d[sid], (d.get("s-guides","") if sid=="s-tools" else "")+(_PLCOL if sid=="s-calc" else "")))
     cols=order
     return '<nav class="hb-dir" aria-label="All games, tools and guides">'+"".join(cols)+'</nav>\n'
 _ABOUT='<div class="hd-col"><h3>About</h3><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="credits.html">Credits</a></li><li><a href="faq.html">FAQ</a></li></ul></div>'
@@ -334,12 +338,12 @@ HOME = """<main>
 @@HUB@@
 <div class="hm hm-after">
 <section class="about" aria-labelledby="ab-h"><h2 id="ab-h">What is <b>go</b>unscramble?</h2>
-<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its word unscrambler turns a jumble of letters into every word they can make, which is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games. Alongside it you will find word games and puzzles to play, and 70+ easy calculators for money, maths, health and everyday sums.</p>
+<p><b>go</b>unscramble is a free home for word tools, puzzles, calculators and printable planners. Its word unscrambler turns a jumble of letters into every word they can make, which is handy for Scrabble, Words With Friends, Wordle, crosswords and anagram games. Alongside it you will find word games and puzzles to play, and 70+ easy calculators for money, maths, health and everyday sums.</p>
 <h3>How to use it</h3>
 <p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Open Options to pick a scoring or narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
 <p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
-<p>Looking for more? Open the menu for the anagram solver, word games and puzzles, and the <a href="calculators.html">calculators</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
+<p>Looking for more? Open the menu for the anagram solver, word games and puzzles, the <a href="calculators.html">calculators</a> and the free <a href="planners.html">printable planners</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
 <p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
 </div>
 @@HOME_EXTRA@@
@@ -456,19 +460,6 @@ TOOLS_PAGE = """<main><div class="wrap">
 @@TOOLS_EXTRA@@
 </div></main>
 """
-
-PLANNERS = """<main><div class="wrap">
-<section class="prose">
-<h1>Planners</h1>
-<p>Printable planners to help you organise your week, money, meals and habits. Free printables and premium planner packs are on the way.</p>
-</section>
-<section class="block" style="margin-top:32px">
-<div class="cards"><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M7.5 14h9"/></svg></div><h3>Weekly planner</h3><p>Plan the week ahead, day by day.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M7.5 13.5h.01M12 13.5h.01M16.5 13.5h.01M7.5 17h.01M12 17h.01"/></svg></div><h3>Monthly planner</h3><p>A month at a glance with space for goals.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg></div><h3>Budget planner</h3><p>Track income, bills and savings.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M17 21V3c-2.5 1.5-3 5-3 8h3"/></svg></div><h3>Meal planner</h3><p>Plan meals and a shopping list for the week.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></div><h3>Habit tracker</h3><p>Build streaks one day at a time.</p><p><em>Coming soon</em></p></div><div class="card"><div class="tile ct"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5v4.5c3 2.5 9 2.5 12 0v-4.5"/></svg></div><h3>Study planner</h3><p>Organise revision, deadlines and goals.</p><p><em>Coming soon</em></p></div></div>
-</section>
-@@STAN@@
-</div></main>
-"""
-STAN_URL = ""  # set to the Stan Store link when the store is live
 
 ABOUT = """<main><div class="wrap"><article class="prose">
 <h1>About <b>go</b>unscramble</h1>
@@ -593,8 +584,8 @@ PAGES = [
          title="Free Online Calculators | GoUnscramble",
          desc="Free online calculators: salary, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and more. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
-         title="GoUnscramble: Word Unscrambler, Puzzles & Calculators",
-         desc="Free word unscrambler and anagram solver, plus word games, puzzles and 70 simple calculators for salary, mortgage, BMI, percentages and more. Fast, free and private."),
+         title="GoUnscramble: Word Unscrambler, Puzzles, Calculators & Planners",
+         desc="Free word unscrambler and anagram solver, plus word games, puzzles, 70+ calculators and free printable planners. Fast, free and private."),
     dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
          title="Anagram Solver | GoUnscramble",
          desc="Find the words that use every one of your letters. A free anagram solver with blank tile support."),
@@ -616,13 +607,15 @@ PAGES = [
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | GoUnscramble",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
-    dict(file="planners.html", page="planners", nav=None, noindex=True,
-         body=PLANNERS.replace("@@STAN@@", ('<p class="stan"><a class="hb-btn" href="%s" rel="noopener">Shop planner packs</a></p>' % STAN_URL) if STAN_URL else ""),
-         title="Printable Planners | GoUnscramble",
-         desc="Printable planners for the week, month, budget, meals, habits and study. Coming soon."),
+    dict(file="planners.html", page="planners", nav="planners", body=PL.hub(),
+         title="Free Printable Planners (PDF) | GoUnscramble",
+         desc="Free printable planners: weekly planner, monthly budget planner and habit tracker. Download a PDF in A4 or US Letter and print at home. No sign-up."),
+    dict(file="weekly-planner.html", page="planner", nav="planners", body=PL.page("weekly-planner"), title=PL.BY["weekly-planner"]["title"], desc=PL.BY["weekly-planner"]["desc"]),
+    dict(file="monthly-budget-planner.html", page="planner", nav="planners", body=PL.page("monthly-budget-planner"), title=PL.BY["monthly-budget-planner"]["title"], desc=PL.BY["monthly-budget-planner"]["desc"]),
+    dict(file="monthly-habit-tracker.html", page="planner", nav="planners", body=PL.page("monthly-habit-tracker"), title=PL.BY["monthly-habit-tracker"]["title"], desc=PL.BY["monthly-habit-tracker"]["desc"]),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | GoUnscramble",
-         desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, and 70+ everyday calculators."),
+         desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, 70+ everyday calculators and free printable planners."),
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | GoUnscramble",
          desc="How GoUnscramble handles what you type and what your browser sends."),
@@ -682,7 +675,7 @@ def seo_tags(p, url):
     ]
     graph = []
     if p["file"] == "index.html":
-        graph.append({"@type": "WebSite", "name": "GoUnscramble", "url": SITE + "/", "inLanguage": "en", "description": "Free word unscrambler, word tools, puzzles, games and calculators."})
+        graph.append({"@type": "WebSite", "name": "GoUnscramble", "url": SITE + "/", "inLanguage": "en", "description": "Free word unscrambler, word tools, puzzles, games, calculators and printable planners."})
     else:
         crumbs = [("Home", SITE + "/"), (p["title"].replace(" | GoUnscramble", ""), url)]
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
@@ -710,7 +703,7 @@ def build_page(p):
             .replace("@@CHEVRON@@", CHEVRON)
             .replace("@@CARDS@@", cards(p.get("skip"))))
     header = HEADER.replace("@@LOGO52@@", logo(52))
-    for key in ("home", "anagram", "games", "counter", "case", "random", "calculators", "tools", "guides", "about", "account"):
+    for key in ("home", "anagram", "games", "counter", "case", "random", "calculators", "planners", "tools", "guides", "about", "account"):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
     footer = FOOTER.replace("@@LOGO32@@", logo(32)).replace("@@SOCIAL@@", social_html())
     path = "" if p["file"] == "index.html" else p["file"]
