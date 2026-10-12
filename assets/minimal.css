@@ -702,3 +702,7 @@ body #sal-uk-out .cm-h{margin-bottom:4px}
 body .calc .cr:empty{margin:0}
 body .calc-about{margin-top:34px}
 body .calc-hero+.calc-about+.block{margin-top:34px}
+body .menu-list .menu-h{margin:12px 14px 4px;padding:0;font:600 11.5px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+body .menu-list .menu-x+a{margin-top:0}
+body .menu-list a.sub{padding-top:5px!important;padding-bottom:5px!important;font-size:14.5px!important;color:var(--muted)}
+body .menu-list a.sub:hover{color:var(--ink)}
