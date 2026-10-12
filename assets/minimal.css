@@ -798,3 +798,7 @@ body .site-footer .foot-brand{align-items:baseline;gap:8px}body .site-footer .fo
 body .site-footer .foot-c{font-size:19px;font-weight:400;color:var(--muted)}
 body .site-footer .foot-secure,body .site-footer .foot-legal{font-size:14px;line-height:1.5}
 @media(max-width:600px){body .site-footer .foot-c{font-size:21px}}
+/* calculator line icons */
+body .cards .tile.ct{display:grid;place-items:center;width:48px;min-width:48px;height:48px;padding:0}
+body .tile.ct svg.ic,body .hub .hb-ic svg.ic{color:#5170ff;display:block}
+body .hub .hb-ic{display:grid;place-items:center;width:44px;min-width:44px;padding:0}

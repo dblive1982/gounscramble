@@ -5,6 +5,8 @@ CATS = ["Financial", "Math", "Fitness & Health", "Date & Time", "Home & Building
 
 # slug, file, category, name, tile glyph, short card text, lede, about paragraphs, faqs
 C = []
+import calcicons
+
 def add(slug, file, cat, name, glyph, short, lede, about, faq, terms=None):
     C.append(dict(slug=slug, file=file, cat=cat, name=name, glyph=glyph, short=short, lede=lede, about=about, faq=faq, terms=terms or []))
 
@@ -360,7 +362,7 @@ def esc(s):
 
 
 def card(c):
-    return '<a class="card" href="%s"><div class="tile ct">%s</div><h3>%s</h3><p>%s</p></a>' % (c["file"], c["glyph"], c["name"], c["short"])
+    return '<a class="card" href="%s"><div class="tile ct">%s</div><h3>%s</h3><p>%s</p></a>' % (c["file"], calcicons.svg(c["slug"],26), c["name"], c["short"])
 
 
 def related(slug):
