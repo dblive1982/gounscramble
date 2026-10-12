@@ -516,3 +516,9 @@ body .gm #v-wordsearch .pill,body .gm .pill{background:#fff!important;box-shadow
 /* placeholder hides while the box is focused, returns when you click away */
 input:focus::placeholder,textarea:focus::placeholder{color:transparent!important;opacity:0!important}
 input::placeholder,textarea::placeholder{transition:opacity .12s}
+
+/* arcade controls and screen: site style */
+body .gm .ar-pad button{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:999px!important;box-shadow:var(--sh-s)!important;min-height:56px;font-weight:600;font-size:20px}
+body .gm .ar-pad button.dn{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important;transform:none!important;box-shadow:0 2px 6px rgba(81,112,255,.4)!important}
+body .gm .ar-pad button:only-child,body .gm .ar-pad button[aria-label="Launch ball"],body .gm .ar-pad button[aria-label="Fire"],body .gm .ar-pad button[aria-label="Flap"]{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important}
+body .gm .ar-scr{border:0!important;border-radius:22px;box-shadow:var(--sh)!important}
