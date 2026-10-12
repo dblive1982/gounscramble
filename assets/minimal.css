@@ -911,3 +911,8 @@ body .hm .about{margin-top:0;gap:12px}
 body .hm .about h2{margin-bottom:2px}
 body .hm .about h3{margin:16px 0 0}
 body .hm .about p{line-height:1.65}
+/* options always on show */
+body .hm .optrow{display:block;margin-top:14px}
+body .hm .optrow .free-badge{display:none}
+body .hero-band .opts{margin-top:0;padding:16px 16px 14px;gap:14px}
+@media(max-width:600px){body .hero-band .opts{padding:14px}.opts .og-grid{gap:10px}}

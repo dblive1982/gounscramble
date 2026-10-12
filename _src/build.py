@@ -287,8 +287,8 @@ HOME = """<main>
 <button class="go" type="submit" aria-label="Unscramble">GO</button>
 </form>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
-<div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
-<div class="opts" id="opts" hidden>
+<div class="optrow"><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
+<div class="opts" id="opts">
 <div class="og"><span class="og-t">Scoring</span>
 <div class="seg" id="o-seg" role="group" aria-label="Scoring"><button type="button" data-v="ena" aria-pressed="true">Scrabble</button><button type="button" data-v="wwf" aria-pressed="false">Words With Friends</button></div>
 <select id="o-dict" aria-label="Scoring" hidden><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></div>
