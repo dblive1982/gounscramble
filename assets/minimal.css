@@ -315,3 +315,7 @@ body .hm .go svg{width:22px;height:22px}
 body .hm .box{padding:10px 10px 10px 30px}
 body .hm .box input{padding:10px 0}
 @media (max-width:600px){body .hm .go{width:46px;height:46px}body .hm .go svg{width:20px;height:20px}body .hm .box{padding:7px 7px 7px 22px}}
+
+/* bring search + panels down a touch */
+.hero-brand{margin:0 0 48px}
+@media (max-width:600px){.hero-brand{margin:0 0 32px}}
