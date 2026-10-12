@@ -195,7 +195,7 @@ window.__mzPrint=()=>mzSvg(MZ.w,MZ.n,{print:true});
 /* ---------- Wordle Global ---------- */
 const WG={mode:"daily",ans:"",id:"",rows:[],cur:"",done:false,win:false,hc:false,ready:false,busy:false};
 const WGM=["Genius","Magnificent","Impressive","Splendid","Great","Phew"];
-const WGKB=["qwertyuiop","asdfghjkl","+zxcvbnm-"];
+const WGKB=["qwertyuiop","asdfghjkl","-zxcvbnm+"];
 function wgDay(){const d=new Date(),p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
 function wgYest(){const d=new Date();d.setDate(d.getDate()-1);const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
 function wgWords(){const a=window.WGD.a,o=[];for(let i=0;i<a.length;i+=5)o.push(a.substr(i,5));return o}
