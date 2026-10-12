@@ -74,7 +74,7 @@ HEADER = """<!--header-->
 </details>
 </nav>
 <a class="brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="26" height="26" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
-<div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="15.5" r="6.5" fill="currentColor"/><path d="M7.5 40c0-8.5 5.5-12.5 12.5-12.5S32.5 31.500 32.500 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
+<div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="17" r="7" fill="currentColor"/><path d="M6 40c0-9 6-14.5 14-14.5S34 31 34 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 
 </div></header>
 <!--/header-->
