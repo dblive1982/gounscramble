@@ -921,3 +921,7 @@ body .hero-band .opts{margin-top:0;padding:16px 16px 14px;gap:14px}
 .hm .t sup.s2{font-size:calc(var(--tw)*.25);letter-spacing:-.04em;right:2px}
 .hm .t.blank sup{color:#cfe0ff}
 .hm .pts.wwf{color:#2f6bff;border-color:#2f6bff}
+.hm .key{margin:2px 0 14px;font-size:13px;line-height:1.5;color:var(--muted)}
+.hm .key .k-s{font-weight:700;color:var(--ink)}
+.hm .key .k-w{font-weight:700;color:#2f6bff}
+.hm .key .k-w::before{content:"\00b7";margin:0 6px 0 0;color:var(--muted)}
