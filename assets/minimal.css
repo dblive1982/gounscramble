@@ -278,3 +278,23 @@ body .hero-band .hm-top{padding-top:0;padding-bottom:4px;gap:10px}
   .hub{margin-top:22px;gap:30px}
   body .hm .summary{margin-top:22px}
 }
+
+/* focus on the search: smaller logo, more air before the panels */
+.hero-brand{gap:10px;margin:0 0 24px}
+.hero-brand .cube{width:44px;height:44px}
+body .hero-band .hero-brand .wm,.hero-brand .wm{font-size:clamp(24px,5vw,32px)}
+body .site-header .brand .wm{font-size:18px}
+.brand .cube{width:22px;height:22px}
+body .hm .box{margin-top:2px}
+body .hm .hint{margin-top:10px}
+body .hm .optrow{margin-top:6px}
+body .home-res .empty,body .hm .empty{margin:30px 0 0;text-align:center;color:var(--muted)}
+.hub{margin-top:64px;gap:44px}
+.home-res{min-height:0}
+@media (max-width:600px){
+  .hero-brand{gap:8px;margin:0 0 20px}
+  .hero-brand .cube{width:36px;height:36px}
+  body .hero-band .hero-brand .wm,.hero-brand .wm{font-size:24px}
+  .hub{margin-top:44px;gap:34px}
+  body .hm .empty{margin-top:24px}
+}
