@@ -74,7 +74,7 @@ function tileHTML(r,o){
   let h='<div class="tiles" style="--n:'+r.w.length+'" aria-hidden="true">';
   for(let i=0;i<r.w.length;i++){
     const ch=r.w[i],bl=r.t[i];
-    h+='<span class="t'+(bl||hl.has(i)?" blank":"")+'">'+ch+(bl?"":"<sub"+(V[ch]>9?' class="s2"':"")+">"+V[ch]+"</sub>"+"<sup"+(WWF[ch]>9?' class="s2"':"")+">"+WWF[ch]+"</sup>")+"</span>";
+    h+='<span class="t'+(bl||hl.has(i)?" blank":"")+'">'+ch+(bl?"":"<sub"+(V[ch]>9?' class="s2"':"")+">"+V[ch]+"</sub>")+"</span>";
   }
   return h+"</div>";
 }

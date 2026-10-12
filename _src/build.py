@@ -317,7 +317,7 @@ HOME = """<main>
 <h3>How to use it</h3>
 <p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Use the options to narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
-<p>Each word shows its tile score, with the highest scoring words first. Every tile shows its Scrabble score at the bottom and its Words With Friends score in blue at the top. Words come from the ENABLE list, which is public domain.</p>
+<p>Each word shows its tile score, with the highest scoring words first. Every tile shows its Scrabble letter value, and each word shows its total for Scrabble in grey and for Words With Friends in blue. Words come from the ENABLE list, which is public domain.</p>
 <p>Looking for more? Open the menu for the anagram solver, word games and puzzles, the <a href="calculators.html">calculators</a> and the free <a href="planners.html">printable planners</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
 <p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
 </div>
