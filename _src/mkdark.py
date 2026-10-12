@@ -51,6 +51,7 @@ def walk(text):
             k+=1
         body=text[j+1:k-1]
         if head.startswith('@media') and 'prefers-color-scheme' in head: pass
+        elif head.startswith('@media') and 'print' in head: pass
         elif head.startswith('@media'):
             inner=walk(body)
             if inner: res.append(head+'{'+''.join(inner)+'}')
@@ -102,5 +103,6 @@ html[data-theme="dark"] body .cr-warn{background:#3a2a10!important;color:#f5c27a
 html[data-theme="dark"] body .acc summary em.on{background:#26305c!important;color:#b9c6ff!important}
 html[data-theme="dark"] body .sal-chips button[aria-pressed="true"]{background:#5170ff!important;color:#fff!important;border-color:#5170ff!important}
 '''
-open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n')
+PRINT='@media print{:root[data-theme="dark"]{color-scheme:light!important}html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] body[data-page]{background:#fff!important;background-image:none!important;color:#000!important}html[data-theme="dark"] #print-sheet,html[data-theme="dark"] #print-sheet *{color:#000!important}html[data-theme="dark"] #print-sheet .psl .cells i.d{background:#e6e6e6!important}html[data-theme="dark"] #print-sheet .psl .cells i{background:#fff!important}}\n'
+open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n'+PRINT)
 print(len(rules),'rules')

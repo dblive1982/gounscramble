@@ -98,7 +98,6 @@ html[data-theme="dark"] .gm a.tool{color:#e8eaed!important}
 html[data-theme="dark"] .gm #hm-in{color:#e8eaed!important}
 html[data-theme="dark"] .gm .tool .tag{color:#e8eaed!important}
 html[data-theme="dark"] .gm .tool[data-pop]::after{color:#e8eaed!important}
-@media print{html[data-theme="dark"] #print-sheet{color:#e8eaed!important}html[data-theme="dark"] #print-sheet h1{color:#e8eaed!important}html[data-theme="dark"] #print-sheet .pf{color:#c4c7cc!important}html[data-theme="dark"] #print-sheet .psl .cells i,html[data-theme="dark"] #print-sheet .psl .cells i.d{color:#e8eaed!important}}
 html[data-theme="dark"] .played::after{color:#e8eaed!important}
 html[data-theme="dark"] .gm .ar-help{color:#c4c7cc!important}
 html[data-theme="dark"] .ac{color:#e8eaed!important}
@@ -221,3 +220,4 @@ html[data-theme="dark"] body .hub .hb-go a{background:#2b3350!important;color:#9
 html[data-theme="dark"] .pl-card{background:#292a2d!important}
 html[data-theme="dark"] .pl-thumb{background:#292a2d!important}
 html[data-theme="dark"] .pl-hero figure{background:#292a2d!important}
+@media print{:root[data-theme="dark"]{color-scheme:light!important}html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] body[data-page]{background:#fff!important;background-image:none!important;color:#000!important}html[data-theme="dark"] #print-sheet,html[data-theme="dark"] #print-sheet *{color:#000!important}html[data-theme="dark"] #print-sheet .psl .cells i.d{background:#e6e6e6!important}html[data-theme="dark"] #print-sheet .psl .cells i{background:#fff!important}}

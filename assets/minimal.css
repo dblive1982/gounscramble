@@ -824,3 +824,4 @@ body .hub .hb-ic{display:grid;place-items:center;width:44px;min-width:44px;paddi
 /* game + category line icons */
 body .gm .tool .tb svg.ic,body .gm #v-wordsearch .cat .ico svg.ic{color:#5170ff;display:block}
 body .gm .tool .tb{display:grid;place-items:center;width:46px;min-width:46px;height:46px;padding:0}
+@media print{html,body{background:#fff!important;background-image:none!important}}

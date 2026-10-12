@@ -185,19 +185,23 @@
   #print-sheet .pwl{columns:3;list-style:none;margin:0;padding:0;font-size:12pt;font-weight:700;letter-spacing:.04em}
   #print-sheet .pwl li{margin:0 0 5pt;break-inside:avoid}
   #print-sheet .pwl li::before{content:"";display:inline-block;width:9pt;height:9pt;border:1pt solid #000;margin-right:7pt}
-  #print-sheet .pb3{display:grid;grid-template-columns:1fr 1fr;gap:16mm 10mm;justify-items:center}
-  #print-sheet .pt td{width:30mm;height:30mm;border:2pt solid #000}
+  #print-sheet .pb3{display:grid;grid-template-columns:1fr 1fr;gap:10mm 10mm;justify-items:center}
+  #print-sheet .pt td{width:20mm;height:20mm;border:2pt solid #000}
   #print-sheet .pt tr:first-child td{border-top:0}#print-sheet .pt tr:last-child td{border-bottom:0}
   #print-sheet .pt td:first-child{border-left:0}#print-sheet .pt td:last-child{border-right:0}
-  #print-sheet .pc{margin-bottom:10mm;border:2pt solid #000}
-  #print-sheet .pc td{padding:2mm}
-  #print-sheet .pc i{display:block;width:17mm;height:17mm;border:1.5pt solid #000;border-radius:50%}
+  #print-sheet .pc{margin-bottom:8mm;border:2pt solid #000}
+  #print-sheet .pc td{padding:1.4mm}
+  #print-sheet .pc i{display:block;width:13mm;height:13mm;border:1.5pt solid #000;border-radius:50%}
   #print-sheet .ph{text-align:center}
   #print-sheet .phw{display:flex;justify-content:center;gap:5mm;margin:10mm 0}
   #print-sheet .phw span{width:14mm;border-bottom:2.5pt solid #000;height:16mm}
   #print-sheet .pal{display:flex;flex-wrap:wrap;gap:4mm;justify-content:center}
   #print-sheet .pal b{width:12mm;height:12mm;border:1.2pt solid #000;border-radius:50%;display:grid;place-items:center;font-size:13pt}
-  #print-sheet .psl{width:170mm;margin:0 auto}
+  #print-sheet .psl{width:165mm;height:165mm;margin:0 auto;break-inside:avoid}
+  #print-sheet .psl .sl{position:relative;width:165mm;height:165mm;aspect-ratio:auto;overflow:hidden;border:2pt solid #000!important;border-radius:0!important}
+  #print-sheet .psl .sl .cells{position:absolute;inset:0;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr)}
+  #print-sheet .psl .sl .cells i{font-style:normal;font-weight:700;font-size:9pt;line-height:1;padding:1.2mm;border:.3pt solid #bbb;box-sizing:border-box}
+  #print-sheet .psl .sl svg{position:absolute;inset:0;width:100%;height:100%}
   #print-sheet .psl .sl{filter:grayscale(1) contrast(1.35);border-width:2pt;box-shadow:none}
   #print-sheet .psl .cells i,#print-sheet .psl .cells i.d{background:#fff!important;color:#000}
   #print-sheet .psl .cells i.d{background:#e6e6e6!important}

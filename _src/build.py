@@ -657,7 +657,7 @@ def asset_version(name):
 def seo_tags(p, url):
     """Open Graph, Twitter card and JSON-LD structured data for one page."""
     esc = lambda t: t.replace("&", "&amp;").replace('"', "&quot;")
-    img = SITE + "/assets/og.png"
+    img = SITE + "/assets/og.png?v=2"
     tags = [
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="GoUnscramble">',
@@ -667,7 +667,7 @@ def seo_tags(p, url):
         '<meta property="og:image" content="%s">' % img,
         '<meta property="og:image:width" content="1200">',
         '<meta property="og:image:height" content="630">',
-        '<meta property="og:image:alt" content="GoUnscramble: free word unscrambler">',
+        '<meta property="og:image:alt" content="GoUnscramble: word tools, puzzles, calculators and planners">',
         '<meta name="twitter:card" content="summary_large_image">',
         '<meta name="twitter:title" content="%s">' % esc(p["title"]),
         '<meta name="twitter:description" content="%s">' % esc(p["desc"]),
