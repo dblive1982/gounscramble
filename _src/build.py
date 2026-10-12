@@ -11,6 +11,7 @@ import hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import guides as G
 
+import calcs as CALC
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("GU_OUT") or os.path.join(ROOT, "site")
 SITE = "https://gounscramble.com"
@@ -64,6 +65,7 @@ HEADER = """<!--header-->
 <a href="word-counter.html"@@CUR_counter@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9M12 19V5M19 19v-7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Word counter</a>
 <a href="case-converter.html"@@CUR_case@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-12 5 12M5.8 14h6.4M16 18l2.5-6 2.5 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Case converter</a>
 <a href="random-word-picker.html"@@CUR_random@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM9 9h.01M15 15h.01M12 12h.01M9 15h.01M15 9h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Random word picker</a>
+<a href="calculators.html"@@CUR_calculators@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h2M12 12h2M16 12h.01M8 16h2M12 16h2M16 16h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Calculators</a>
 <hr>
 <a href="guides.html"@@CUR_guides@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4zM9 9h6M9 13h6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Guides</a>
 <a href="tools.html"@@CUR_tools@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6a4 4 0 0 0 5 5l-9 9-3-3 9-9a4 4 0 0 0-2-2zM4 20l3-3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>All tools</a>
@@ -153,6 +155,7 @@ TOOLS = [
     ("counter", "word-counter.html", "123", "Word counter", "Count words, characters, sentences and reading time."),
     ("case", "case-converter.html", "Cc", "Case converter", "Switch text between upper, lower, title and sentence case."),
     ("random", "random-word-picker.html", "Rnd", "Random word picker", "Pull random words, with an optional length."),
+    ("calculators", "calculators.html", "123", "Calculators", "Free money, maths, health and everyday calculators."),
 ]
 
 
@@ -223,6 +226,7 @@ HUB = """<div class="hub">
 <a class="hb-card c-teal" href="word-counter.html"><span class="hb-ic">123</span><b>Word counter</b><span>Count words, characters and sentences as you type.</span></a>
 <a class="hb-card c-pink" href="case-converter.html"><span class="hb-ic">Aa</span><b>Case converter</b><span>Switch text to upper, lower, title or sentence case.</span></a>
 <a class="hb-card c-lilac" href="random-word-picker.html"><span class="hb-ic">?!</span><b>Random word picker</b><span>Pull random words for games, prompts and spelling tests.</span></a>
+<a class="hb-card c-orange" href="calculators.html"><span class="hb-ic">=</span><b>Calculators</b><span>Salary, mortgage, percentage, BMI and 40 more.</span></a>
 </div></section>
 <section class="hb-sec" id="s-guides" aria-labelledby="hb-guides"><div class="hb-head"><div><h2 id="hb-guides">Tips &amp; Guides</h2><p class="hb-sub">Short guides to help you score more.</p></div><a class="hb-arrow" href="guides.html" aria-label="All guides"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
@@ -548,6 +552,9 @@ ACCOUNT = open(os.path.join(ROOT, "account_body.html"), encoding="utf-8").read()
 GAMES = open(os.path.join(ROOT, "games_body.html"), encoding="utf-8").read()
 
 PAGES = [
+    dict(file="calculators.html", page="calculators", nav="calculators", body=CALC.hub(),
+         title="Free Online Calculators | GoUnscramble",
+         desc="Free online calculators: salary, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and more. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
          title="GoUnscramble: Unscramble Letters Into Words",
          desc="Free word unscrambler. Type your jumbled letters and see every word they can make, with filters for starts with, ends with, contains and length."),
@@ -640,7 +647,7 @@ def seo_tags(p, url):
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]})
     tools = {"index.html", "anagram-solver.html", "random-word-picker.html", "word-counter.html", "case-converter.html"}
-    if p["file"] in tools:
+    if p["file"] in tools or p.get("app"):
         graph.append({"@type": "WebApplication", "name": p["title"].split(" | ")[0].split(":")[0], "url": url,
                       "description": p["desc"], "applicationCategory": "UtilitiesApplication",
                       "operatingSystem": "Any", "browserRequirements": "Requires JavaScript",
@@ -662,7 +669,7 @@ def build_page(p):
             .replace("@@CHEVRON@@", CHEVRON)
             .replace("@@CARDS@@", cards(p.get("skip"))))
     header = HEADER.replace("@@LOGO52@@", logo(52))
-    for key in ("home", "anagram", "games", "counter", "case", "random", "tools", "guides", "about", "account"):
+    for key in ("home", "anagram", "games", "counter", "case", "random", "calculators", "tools", "guides", "about", "account"):
         header = header.replace("@@CUR_%s@@" % key, ' aria-current="page"' if p["nav"] == key else "")
     footer = FOOTER.replace("@@LOGO32@@", logo(32)).replace("@@SOCIAL@@", social_html())
     path = "" if p["file"] == "index.html" else p["file"]
@@ -685,7 +692,7 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "minimal.css", "dark.css", "logo.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "salary.js", "minimal.css", "dark.css", "logo.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:
@@ -719,7 +726,9 @@ def sitemap(pages):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    pages = PAGES + guide_pages()
+    calc_pages = [dict(file=c["file"], page="calc", nav="calculators", body=CALC.body(c["slug"]), app=True,
+                       title=c["name"] + " | GoUnscramble", desc=c["lede"]) for c in CALC.C]
+    pages = PAGES + calc_pages + guide_pages()
     for p in pages:
         with open(os.path.join(OUT, p["file"]), "w", encoding="utf-8") as f:
             f.write(build_page(p))

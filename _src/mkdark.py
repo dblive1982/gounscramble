@@ -90,6 +90,9 @@ html[data-theme="dark"] body .gm .ttt button:nth-child(3n){border-right:0!import
 html[data-theme="dark"] body .gm .ttt button:nth-child(n+7){border-bottom:0!important}
 html[data-theme="dark"] body .gm .ttt button.win{background:#2d3a66!important}
 html[data-theme="dark"] body .gm .ttt button.O{color:#8aa0ff}
+html[data-theme="dark"] body .sc-k.fn{background:#35363a!important;box-shadow:none!important;color:#c4c7cc!important}
+html[data-theme="dark"] body .sc-k.eq{background:#5170ff!important;color:#fff!important}
+html[data-theme="dark"] body .sc-k.eq:active{background:#4059e8!important}
 '''
 open(os.path.join(root,'assets/dark.css'),'w').write(head+'\n'.join(rules)+'\n')
 print(len(rules),'rules')
