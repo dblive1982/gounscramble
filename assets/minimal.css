@@ -248,3 +248,9 @@ body .hm .reset{align-self:end;justify-self:start}
 .hub .hb-ic{min-width:42px;height:42px;border-radius:12px;font-size:14px}
 .hub .hb-mine,.hub .hb-cal,.hub .hb-fact{padding:14px;border-radius:16px}
 .hub{gap:38px}
+
+/* narrow screens: keep brand, Sign in and menu inside the bar */
+body[data-page="home"] .site-header .brand{display:none}
+.site-header .wrap{flex-wrap:nowrap}
+.brand{min-width:0;flex:0 1 auto}
+@media (max-width:420px){.site-header .wrap{padding:12px 14px}body .site-header .brand .wm{font-size:18px}.brand{gap:7px}.brand .cube{width:22px;height:22px}body .site-header .user-wrap{margin-right:0}body .site-header .user-btn{padding:8px 4px;font-size:15px}}
