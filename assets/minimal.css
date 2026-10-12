@@ -958,3 +958,9 @@ body .hero-band .hero-brand{margin:0 0 10px;gap:6px}
 body .hero-band .hm-top{gap:8px}
 body .hm.home-res{padding-top:6px}
 body .hm .optrow{margin-top:8px}
+/* scramble chips in even rows; matching gaps */
+.hub .hb-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hub .hb-chips button{text-align:center;padding:7px 4px;letter-spacing:.07em;white-space:nowrap}
+.hub .hb-chips button:nth-child(n+10){display:none}
+@media(min-width:720px){.hub .hb-chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.hub .hb-chips button:nth-child(n+10){display:block}.hub .hb-chips button{letter-spacing:.1em}
+.hub .hb-sec[aria-labelledby="hb-try"]{margin-top:-18px}}
