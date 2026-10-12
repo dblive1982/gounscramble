@@ -40,16 +40,17 @@ HEAD = """<!doctype html>
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 @@HOMECSS@@
+<link rel="stylesheet" href="assets/minimal.css">
 </head>
 <body data-page="@@PAGE@@">
 """
 
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="logo-img" src="assets/logo.png" width="700" height="595" alt="GO! Unscramble!"></a>
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="26" height="26" aria-hidden="true"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5f"/><path d="M12 28 50 50V94L12 72Z" fill="#ffd23f"/><path d="M50 50 88 28V72L50 94Z" fill="#8fd8f0"/></svg><span class="wm"><b>go</b>unscramble.com</span></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
@@ -261,11 +262,11 @@ HUB = """<div class="hub">
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
+<div class="hero-brand" aria-hidden="true"><svg class="cube" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5f"/><path d="M12 28 50 50V94L12 72Z" fill="#ffd23f"/><path d="M50 50 88 28V72L50 94Z" fill="#8fd8f0"/></svg><span class="wm"><b>go</b>unscramble.com</span></div>
 <form id="f" class="box" autocomplete="off">
-<svg class="mag" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
-<input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
+<input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="Type your letters, e.g. scrambl?" aria-label="Your letters">
 <button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
-<button class="go" type="submit">GO!</button>
+<button class="go" type="submit" aria-label="Unscramble"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
 </form>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
 <div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
@@ -455,7 +456,7 @@ PRIVACY = """<main><div class="wrap"><article class="prose">
 <h2>Server logs</h2>
 <p>Our hosting provider may keep standard server logs, such as your IP address and the pages requested, to keep the site running and secure.</p>
 <h2>Fonts</h2>
-<p>Pages load the Fredoka and Nunito fonts from Google Fonts, so your browser contacts Google to fetch them.</p>
+<p>Pages load the Inter font from Google Fonts, so your browser contacts Google to fetch them.</p>
 <h2>Advertising and analytics</h2>
 <p>This site is set up to show advertising from Google AdSense. Google and its advertising partners may use cookies and similar technologies to show ads, measure them and, where you allow it, personalise them. In the UK and the European Economic Area you will be asked for your choice through a consent message. You can learn how Google uses data from sites that use its services at <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>, and manage ad personalisation at <a href="https://adssettings.google.com">adssettings.google.com</a>.</p>
 <p>We do not use any other analytics tools at present. If that changes, we will update this page first.</p>
@@ -514,7 +515,7 @@ CREDITS = """<main><div class="wrap"><article class="prose">
 <p>The unscrambler uses ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
 <p>No other word lists are used at present. If licensed lists such as NWL or CSW are added, they will be credited here.</p>
 <h2>Fonts</h2>
-<p>The site uses Fredoka for headings and Nunito for text, both released under the SIL Open Font License and served by Google Fonts.</p>
+<p>The site uses Inter, released under the SIL Open Font License and served by Google Fonts.</p>
 </article></div></main>
 """
 
@@ -651,7 +652,7 @@ def build_page(p):
                  '<link rel="stylesheet" href="assets/account.css">\n<meta name="robots" content="noindex">' if acct else "")
     head = head.replace("@@HOMECSS@@", extra_css)
     if games:
-        head = head.replace("family=Fredoka:", "family=Press+Start+2P&amp;family=Fredoka:")
+        head = head.replace("family=Inter:", "family=Press+Start+2P&amp;family=Inter:")
     page = head + header + body + footer
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/home.js"></script><script src="assets/hub.js"></script>')
@@ -659,7 +660,7 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "logo.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "minimal.css", "logo.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:
