@@ -512,3 +512,7 @@ body .gm .mc{border:1px solid var(--line)!important;border-radius:14px!important
 body .gm .word span,body .gm .keys button,body .gm .pad button,body .gm .dice{border:1px solid var(--line)!important;box-shadow:0 2px 0 var(--line)!important}
 body .gm .sl{border:1px solid var(--line)!important;border-radius:18px}
 body .gm #v-wordsearch .pill,body .gm .pill{background:#fff!important;box-shadow:var(--sh-s)!important}
+
+/* placeholder hides while the box is focused, returns when you click away */
+input:focus::placeholder,textarea:focus::placeholder{color:transparent!important;opacity:0!important}
+input::placeholder,textarea::placeholder{transition:opacity .12s}
