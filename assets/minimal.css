@@ -948,3 +948,8 @@ body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:30px;padding
 /* narrower filter boxes, centred under the search */
 .opts .og-grid{grid-template-columns:repeat(4,minmax(0,76px))!important;justify-content:center;gap:8px}
 @media(min-width:720px){.opts .og-grid{grid-template-columns:repeat(4,minmax(0,96px))!important;gap:12px}}
+/* filter boxes and headings, a touch larger */
+.opts .og-grid{grid-template-columns:repeat(4,minmax(0,82px))!important;gap:7px}
+@media(min-width:720px){.opts .og-grid{grid-template-columns:repeat(4,minmax(0,108px))!important;gap:12px}}
+body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:33px;font-size:14px;padding:4px 8px}
+.opts .og-grid .opt{font-size:12px;gap:3px}
