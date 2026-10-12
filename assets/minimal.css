@@ -486,3 +486,4 @@ body .btn,body .btn-primary,body button.primary,body .ac .btn,body .ac button[ty
 .site-footer .wrap>.nav{display:none}
 .site-footer .wrap>.hb-dir{flex:1 1 100%;width:100%}
 body .site-footer .wrap{max-width:1040px}
+.hb-dir h3{border-bottom:0!important;padding-bottom:0!important;margin:0 0 16px!important}
