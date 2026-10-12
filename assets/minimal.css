@@ -936,3 +936,10 @@ body .hero-band .opts{background:transparent!important;border:0!important;box-sh
 body .hm .opts .og-grid input,body .hm .opts .og-grid select{font-size:14px;padding:8px 8px;min-width:0;height:40px;border-radius:12px!important}
 .opts .og-foot{border-top:0;padding-top:0;justify-content:center;gap:16px}
 @media(max-width:420px){body .hm .opts .og-grid input,body .hm .opts .og-grid select{font-size:13px;padding:8px 6px}.opts .og-grid .opt{font-size:10.5px}}
+/* shorter filter boxes */
+body .hm .opts .og-grid input,body .hm .opts .og-grid select{height:34px;padding:5px 8px;font-size:13px;border-radius:10px!important}
+.opts .og-grid{gap:6px}
+.opts .og-grid .opt{gap:3px}
+.opts .og-foot{gap:12px}
+.opts .sw{font-size:13px}
+body .hm .opts .reset{padding:6px 12px;font-size:13px}
