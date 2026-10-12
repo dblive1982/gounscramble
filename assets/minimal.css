@@ -881,3 +881,25 @@ body .gm .gtop #print[hidden]+#share{margin-left:auto}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 .calc-top h1{flex:1}
+/* home options panel */
+body .hero-band .opts{display:flex;flex-direction:column;gap:18px;text-align:left}
+body .hero-band .opts[hidden]{display:none!important}
+.opts .og{display:flex;flex-direction:column;gap:10px}
+.opts .og-t{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.opts .seg{display:flex;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
+.opts .seg button{flex:1;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:14px;padding:10px 8px;border-radius:999px;cursor:pointer}
+.opts .seg button[aria-pressed="true"]{background:#5170ff;color:#fff;box-shadow:0 1px 3px rgba(81,112,255,.4)}
+.opts .og-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:720px){.opts .og-grid{grid-template-columns:repeat(4,1fr)}}
+.opts .og-grid .opt{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.opts .og-grid input,.opts .og-grid select{width:100%;box-sizing:border-box}
+.opts .og-foot{flex-direction:row;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
+.opts .sw{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink)}
+.opts .sw-in{position:absolute;opacity:0;width:1px;height:1px}
+.opts .sw-tr{position:relative;width:42px;height:24px;border-radius:999px;background:#c5cad6;flex:none;transition:background .15s}
+.opts .sw-tr::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .15s}
+.opts .sw-in:checked+.sw-tr{background:#5170ff}
+.opts .sw-in:checked+.sw-tr::after{transform:translateX(18px)}
+.opts .sw-in:focus-visible+.sw-tr{outline:2px solid #5170ff;outline-offset:2px}
+.opts .reset{margin:0}
+.hub-prog{margin-top:36px}

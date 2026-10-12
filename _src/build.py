@@ -206,7 +206,7 @@ def letters_input(button_text):
 
 
 HUB = """<div class="hub">
-<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-calc">Calculators</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
+<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
 <section class="hb-sec" id="s-games" aria-labelledby="hb-games"><div class="hb-head"><div><h2 id="hb-games">Puzzles &amp; Games</h2><p class="hb-sub">Free puzzles you can play right here.</p></div><a class="hb-arrow" href="games.html" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-teal" data-pop="300!" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
@@ -236,21 +236,6 @@ HUB = """<div class="hub">
 <a class="hb-card c-pink" href="case-converter.html"><span class="hb-ic">Aa</span><b>Case converter</b><span>Switch text to upper, lower, title or sentence case.</span></a>
 <a class="hb-card c-lilac" href="random-word-picker.html"><span class="hb-ic">?!</span><b>Random word picker</b><span>Pull random words for games, prompts and spelling tests.</span></a>
 </div></section>
-<section class="hb-stats" aria-label="Today at a glance">
-<div data-t="Word list"><b>172,823</b><span>words in the list</span></div>
-<div class="hb-wx" id="hb-wx" data-t="Fun fact" aria-live="polite"><b>12</b><span>words hide in A, E, P, R, S</span></div>
-<div data-t="Fun facts"><b>300</b><span>word searches</span></div>
-<button type="button" class="hb-otd" id="hb-otd" data-t="Fun fact" disabled><b>0</b><span>vowels in <i>rhythms</i></span></button>
-</section>
-<section class="hb-sec" id="s-calc" aria-labelledby="hb-calc"><div class="hb-head"><div><h2 id="hb-calc">Calculators</h2><p class="hb-sub">70+ free calculators for money, maths, health, home and more.</p></div><a class="hb-arrow" href="calculators.html" aria-label="All calculators"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-<div class="hb-grid">
-<a class="hb-card c-orange" href="salary-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></svg></span><b>Salary calculator</b><span>Hourly, monthly and yearly pay, plus UK take-home.</span></a>
-<a class="hb-card c-green" href="mortgage-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7.5 9 7.5"/><path d="M5.5 9.5V20.5h13V9.5M10 20.5v-6h4v6"/></svg></span><b>Mortgage calculator</b><span>Monthly payment and total interest.</span></a>
-<a class="hb-card c-teal" href="scientific-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h.01"/></svg></span><b>Scientific calculator</b><span>Trig, logs, powers and brackets.</span></a>
-<a class="hb-card c-pink" href="percentage-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg></span><b>Percentage calculator</b><span>Percent of, change, increase and decrease.</span></a>
-<a class="hb-card c-lilac" href="bmi-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M8 11a4 4 0 018 0"/><path d="M12 11l2-2.5"/></svg></span><b>BMI calculator</b><span>Body mass index and a healthy range.</span></a>
-<a class="hb-card c-yellow" href="calculators.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span><b>All calculators</b><span>Over 40 free calculators in one place.</span></a>
-</div></section>
 <section class="hb-sec" id="s-guides" aria-labelledby="hb-guides"><div class="hb-head"><div><h2 id="hb-guides">Tips &amp; Guides</h2><p class="hb-sub">Short guides to help you score more.</p></div><a class="hb-arrow" href="guides.html" aria-label="All guides"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-green" href="scrabble-tips.html"><b>Scrabble tips</b><span>Score more with short words, hooks and smart tile swaps.</span></a>
@@ -258,30 +243,10 @@ HUB = """<div class="hub">
 <a class="hb-card c-teal" href="crossword-help.html"><b>Crossword help</b><span>Fill the gaps with patterns, lengths and known letters.</span></a>
 <a class="hb-card c-pink" href="what-is-an-anagram.html"><b>What is an anagram?</b><span>How rearranged letters make new words, with examples.</span></a>
 </div></section>
-<section class="hb-sec" id="hb-prog" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><svg class="dh-ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M14 7l3 3"/></svg><span class="dh-t">Daily journal</span></button><span class="hb-doodle" id="hb-doodle" aria-hidden="true"><svg viewBox="0 0 450 78" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 24h86M34 38h76M20 52h82"/><g class="dd-a"><path d="M126 22H330V6L432 38 330 70V54H126Z" transform="translate(5 5)" fill="#000" stroke="#000"/><path d="M126 22H330V6L432 38 330 70V54H126Z" fill="#ffd23f"/><text x="226" y="47" text-anchor="middle" font-family="Fredoka,Nunito,system-ui,sans-serif" font-weight="700" font-size="28" fill="#000" stroke="none" letter-spacing="1">LET'S GO!</text></g><path class="dd-s" fill="#ff6b6b" stroke-width="3" d="M196 1l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/><path class="dd-s" fill="#bfe6ee" stroke-width="3" d="M262 63l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></span><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
-<div class="hb-me">
-<div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
-<ul class="hb-nums" id="hb-nums"></ul>
-<div id="hb-go" class="hb-go"></div>
-<div class="hb-diary" id="hb-diary" aria-label="Diary"></div></div>
-<div class="hb-cal" id="hb-cal" aria-label="Days you played and diary"></div>
-<div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
-</div></section>
 <section class="hb-sec" aria-labelledby="hb-try"><h2 id="hb-try">Try a scramble</h2>
 <p class="hb-sub">Tap a jumble and watch <b>go</b>unscramble crack it, or roll a new set.</p>
 <div class="hb-chips" id="hb-chips"><button type="button" data-rack="lesnit">LESNIT</button><button type="button" data-rack="rnaedg">RNAEDG</button><button type="button" data-rack="asrtem">ASRTEM</button><button type="button" data-rack="mektra">MEKTRA</button><button type="button" data-rack="oerangs">OERANGS</button><button type="button" data-rack="scrambl?">SCRAMBL?</button></div><div class="hb-rollrow"><button type="button" class="hb-roll" id="hb-roll" aria-label="Show new scrambles"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.4-5.7"/><path d="M20 4v5h-5"/></svg><span>New scrambles</span></button></div>
 </section>
-<section class="hb-sec" aria-labelledby="hb-facts"><h2 id="hb-facts">Did you know?</h2>
-<div class="hb-facts">
-<div class="hb-fact"><b>28</b><span>letters in the longest word in our list: <i>ethylenediaminetetraacetates</i>.</span></div>
-<div class="hb-fact"><b>12</b><span>different words hide in the letters A, E, P, R and S, including <i>spare</i>, <i>pears</i> and <i>reaps</i>.</span></div>
-<div class="hb-fact"><b>5</b><span>words from LISTEN: <i>silent</i>, <i>enlist</i>, <i>tinsel</i>, <i>inlets</i> and <i>listen</i> itself.</span></div>
-<div class="hb-fact"><b>0</b><span>vowels in <i>rhythms</i>. The Y does all the work.</span></div>
-<div class="hb-fact"><b>10</b><span>letters in <i>typewriter</i>, the longest word you can type on the top row of a keyboard.</span></div>
-<div class="hb-fact"><b>A-Z</b><span><i>Almost</i> has its letters in alphabetical order. So does <i>billowy</i>.</span></div>
-<div class="hb-fact"><b>96</b><span>two-letter words in the list. Learn them and your Scrabble score will thank you.</span></div>
-<div class="hb-fact"><b>8,636</b><span>five-letter words, which is why Wordle can keep surprising you.</span></div>
-</div></section>
 </div>
 """
 
@@ -324,13 +289,18 @@ HOME = """<main>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
 <div class="optrow"><button class="chip" id="optbtn" type="button" aria-expanded="false" aria-controls="opts">Options <span class="car" aria-hidden="true">&#9662;</span></button><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
 <div class="opts" id="opts" hidden>
-<label class="opt chk"><input class="chk-box" id="o-safe" type="checkbox" checked><span>Hide offensive words</span></label>
-<label class="opt" style="grid-column:1/-1">Scoring<select id="o-dict" aria-label="Scoring"><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></label>
-<label class="opt">Length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
+<div class="og"><span class="og-t">Scoring</span>
+<div class="seg" id="o-seg" role="group" aria-label="Scoring"><button type="button" data-v="ena" aria-pressed="true">Scrabble</button><button type="button" data-v="wwf" aria-pressed="false">Words With Friends</button></div>
+<select id="o-dict" aria-label="Scoring" hidden><option value="ena">Scrabble scores (ENABLE list)</option><option value="wwf">Words With Friends scores (ENABLE list)</option></select></div>
+<div class="og"><span class="og-t">Narrow your results</span>
+<div class="og-grid">
 <label class="opt">Starts with<input id="o-starts" type="text" maxlength="8" placeholder="sc" autocapitalize="off"></label>
 <label class="opt">Ends with<input id="o-ends" type="text" maxlength="8" placeholder="le" autocapitalize="off"></label>
 <label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
-<button class="reset" id="clrf" type="button">Clear</button>
+<label class="opt">Word length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
+</div></div>
+<div class="og og-foot"><label class="sw"><input class="sw-in" id="o-safe" type="checkbox" checked><span class="sw-tr" aria-hidden="true"></span><span>Hide offensive words</span></label><button class="reset" id="clrf" type="button">Clear all</button></div>
+<script>(function(){var seg=document.getElementById("o-seg"),sel=document.getElementById("o-dict");function sync(){[].forEach.call(seg.children,function(b){b.setAttribute("aria-pressed",b.getAttribute("data-v")===sel.value?"true":"false")})}seg.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;sel.value=b.getAttribute("data-v");sync();sel.dispatchEvent(new Event("change",{bubbles:true}))});document.getElementById("clrf").addEventListener("click",function(){setTimeout(sync,0)})})();</script>
 </div></div>
 </div></section>
 <div class="hm home-res"><div id="out" aria-live="polite"></div></div>
@@ -345,6 +315,17 @@ HOME = """<main>
 <p>Each word shows its tile score, with the highest scoring words first. Choose Scrabble or Words With Friends scores to match your game. Words come from the ENABLE list, which is public domain.</p>
 <p>Looking for more? Open the menu for the anagram solver, word games and puzzles, the <a href="calculators.html">calculators</a> and the free <a href="planners.html">printable planners</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
 <p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
+</div>
+<div class="hub hub-prog">
+<section class="hb-sec" id="hb-prog" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><svg class="dh-ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M14 7l3 3"/></svg><span class="dh-t">Daily journal</span></button><span class="hb-doodle" id="hb-doodle" aria-hidden="true"><svg viewBox="0 0 450 78" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 24h86M34 38h76M20 52h82"/><g class="dd-a"><path d="M126 22H330V6L432 38 330 70V54H126Z" transform="translate(5 5)" fill="#000" stroke="#000"/><path d="M126 22H330V6L432 38 330 70V54H126Z" fill="#ffd23f"/><text x="226" y="47" text-anchor="middle" font-family="Fredoka,Nunito,system-ui,sans-serif" font-weight="700" font-size="28" fill="#000" stroke="none" letter-spacing="1">LET'S GO!</text></g><path class="dd-s" fill="#ff6b6b" stroke-width="3" d="M196 1l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/><path class="dd-s" fill="#bfe6ee" stroke-width="3" d="M262 63l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></span><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
+<div class="hb-me">
+<div class="hb-mine"><p id="hb-hi" class="hb-hi">Play a game or unscramble some letters and your days light up on the calendar.</p>
+<ul class="hb-nums" id="hb-nums"></ul>
+<div id="hb-go" class="hb-go"></div>
+<div class="hb-diary" id="hb-diary" aria-label="Diary"></div></div>
+<div class="hb-cal" id="hb-cal" aria-label="Days you played and diary"></div>
+<div class="hb-lock" id="hb-lock" hidden><span class="free-badge lock-free" aria-hidden="true">FREE!</span><b>Your progress is waiting</b><p>Sign in to see your activity, play calendar and saved games. Signed out, nothing is saved on this device.</p><div class="hb-lockbtns"><a class="hb-btn" href="account.html">Sign in</a><a class="hb-btn alt" href="account.html">Create free account</a></div></div>
+</div></section>
 </div>
 @@HOME_EXTRA@@
 </div>

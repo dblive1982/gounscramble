@@ -221,4 +221,5 @@ html[data-theme="dark"] .pl-card{background:#292a2d!important}
 html[data-theme="dark"] .pl-thumb{background:#292a2d!important}
 html[data-theme="dark"] .pl-hero figure{background:#292a2d!important}
 html[data-theme="dark"] body .ib{background:#292a2d!important}
+html[data-theme="dark"] .opts .sw-tr::after{background:#292a2d!important}
 @media print{:root[data-theme="dark"]{color-scheme:light!important}html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] body[data-page]{background:#fff!important;background-image:none!important;color:#000!important}html[data-theme="dark"] #print-sheet,html[data-theme="dark"] #print-sheet *{color:#000!important}html[data-theme="dark"] #print-sheet .psl .cells i.d{background:#e6e6e6!important}html[data-theme="dark"] #print-sheet .psl .cells i{background:#fff!important}}
