@@ -284,7 +284,7 @@ HUB = """<div class="hub">
 
 def _hub_dir(hub):
     cols=[]
-    for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-calc","Calculators"),("s-guides","Tips &amp; guides"),("s-lists","Word lists")):
+    for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-lists","Word lists"),("s-calc","Calculators"),("s-guides","Tips &amp; guides")):
         m=re.search(r'<section class="hb-sec" id="%s".*?</section>'%sid,hub,re.S)
         if not m: continue
         seg=m.group(0); items=[]
