@@ -454,3 +454,14 @@ body .hm .go{width:68px;height:68px}
 /* back to Albert Sans wordmark */
 .wm,body .site-header .brand .wm,body .hero-brand .wm,body .hero-band .hero-brand .wm,body .foot-logo .wm{font-family:'Albert Sans','Inter',system-ui,sans-serif!important;letter-spacing:-.01em}
 body .wm b{font-weight:800}
+
+/* results: smaller, light-blue tiles */
+body .hm .tiles{gap:5px;--tw:min(clamp(28px,7.6vw,36px),calc((100vw - 56px - (var(--n) - 1)*5px)/var(--n)))}
+body .hm .t{background:#d9ecff!important;border:1px solid #a9cdf2;box-shadow:0 2px 0 #a9cdf2;font-size:calc(var(--tw)*.5);color:var(--ink)}
+body .hm .t.blank{background:var(--primary)!important;border-color:var(--primary);box-shadow:0 2px 0 #d93a40;color:#fff!important}
+body .hm .gh{font-size:15px;gap:8px}
+body .hm .gh span{padding:2px 12px}
+body .hm .gh em{font-size:13px}
+body .hm .pts{font-size:13px}
+body .home-res #out:has(.summary){padding:4px 18px 18px;font-size:15px}
+body .hm .summary{font-size:15px}
