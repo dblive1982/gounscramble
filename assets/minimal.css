@@ -976,3 +976,5 @@ body .hm .opts .reset:hover{background:#d5e0ff}
 /* more room between the footer border and the directory headings */
 /* more room between the footer border and the directory headings */
 body .site-footer .wrap>.hb-dir{padding-top:30px}
+/* selected level / mode pill is clearly highlighted */
+body .gm .pill.on{background:#e3eaff!important;border-color:#8ea4ff!important;color:#2f49d6!important;font-weight:600!important}

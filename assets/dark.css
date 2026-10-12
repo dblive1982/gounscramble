@@ -223,6 +223,8 @@ html[data-theme="dark"] .pl-hero figure{background:#292a2d!important}
 html[data-theme="dark"] body .ib{background:#292a2d!important}
 html[data-theme="dark"] .opts .sw-tr::after{background:#292a2d!important}
 html[data-theme="dark"] body .hm .opts .reset{background:#2d3a66!important;border:1px solid #3a4a85!important;color:#9db0ff!important}
+html[data-theme="dark"] body .gm .pill.on{background:#2d3a66!important;color:#9db0ff!important}
+html[data-theme="dark"] body .gm .pill.on{background:#2d3a66!important;border-color:#5a72d6!important;color:#9db0ff!important}
 html[data-theme="dark"] body .gm .mz svg{background:#292a2d!important;color:#e8eaed!important}html[data-theme="dark"] body .gm .mz .mz-st{fill:#292a2d!important}html[data-theme="dark"] body .gm .mz .mz-me{stroke:#292a2d!important}html[data-theme="dark"] body .gm .mzpad button{background:#292a2d!important;color:#e8eaed!important;border-color:#3c4043!important}
 html[data-theme="dark"] body .hm .opts .reset{background:#2d3a66!important;border-color:#3a4a85!important;color:#9db0ff!important}
 html[data-theme="dark"] body .hero-band .opts{background:transparent!important;border:0!important;box-shadow:none!important}
