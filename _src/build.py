@@ -50,7 +50,7 @@ HEAD = """<!doctype html>
 
 HEADER = """<!--header-->
 <header class="site-header"><div class="wrap">
-<a class="brand" href="index.html" aria-label="GoUnscramble home"><img class="cube" src="assets/logo-cube.png" width="397" height="420" alt=""><img class="wm-img" src="assets/logo-word.png" width="1000" height="117" alt="gounscramble.com"></a>
+<a class="brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="26" height="26" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2.6"></circle><path d="M4.5 20c.8-4 3.8-6 7.5-6s6.7 2 7.5 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 <nav class="nav main-nav" aria-label="Main">
 <details class="menu">
@@ -263,7 +263,7 @@ HUB = """<div class="hub">
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
-<a class="hero-brand" href="index.html" aria-label="GoUnscramble home"><img class="cube" src="assets/logo-cube.png" width="397" height="420" alt=""><img class="wm-img" src="assets/logo-word.png" width="1000" height="117" alt="gounscramble.com"></a>
+<a class="hero-brand" href="index.html" aria-label="GoUnscramble home"><svg class="cube" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true"><g stroke="#fff" stroke-width="3" stroke-linejoin="round"><path d="M50 6 88 28 50 50 12 28Z" fill="#ff5a5a"/><path d="M12 28 50 50V94L12 72Z" fill="#fcdd2e"/><path d="M50 50 88 28V72L50 94Z" fill="#97e4f9"/></g></svg><span class="wm"><b>go</b>unscramble.com</span></a>
 <form id="f" class="box" autocomplete="off">
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. scrambl?" aria-label="Your letters">
 <button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
@@ -661,7 +661,7 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "minimal.css", "logo.png", "logo-cube.png", "logo-word.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "minimal.css", "logo.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:
