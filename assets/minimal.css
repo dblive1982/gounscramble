@@ -254,3 +254,9 @@ body[data-page="home"] .site-header .brand{display:none}
 .site-header .wrap{flex-wrap:nowrap}
 .brand{min-width:0;flex:0 1 auto}
 @media (max-width:420px){.site-header .wrap{padding:12px 14px}body .site-header .brand .wm{font-size:18px}.brand{gap:7px}.brand .cube{width:22px;height:22px}body .site-header .user-wrap{margin-right:0}body .site-header .user-btn{padding:8px 4px;font-size:15px}}
+
+/* cream result tiles, calmer search text */
+body .hm .t{background:#fdf0c4!important;border:1px solid #e4cf93;box-shadow:0 2px 0 #e4cf93;color:var(--ink)}
+body .hm .t.blank{background:var(--primary)!important;border-color:var(--primary);box-shadow:0 2px 0 #d93a40;color:#fff!important}
+body .hm .box input{letter-spacing:.01em}
+body .hm .box input::placeholder{letter-spacing:.01em}
