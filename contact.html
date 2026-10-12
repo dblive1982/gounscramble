@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=a5182195">
 
-<link rel="stylesheet" href="assets/minimal.css?v=c5ebe11f">
+<link rel="stylesheet" href="assets/minimal.css?v=bb3e6501">
 </head>
 <body data-page="contact">
 <!--header-->
@@ -88,7 +88,7 @@
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
 <script src="assets/app.js?v=ca36d5c8"></script>
-<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){m.removeAttribute("open")}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});if(window.matchMedia&&matchMedia("(hover:hover) and (pointer:fine)").matches){var t=null,sm=m.querySelector("summary");m.addEventListener("mouseenter",function(){clearTimeout(t);m.setAttribute("open","")});m.addEventListener("mouseleave",function(){t=setTimeout(c,250)});if(sm)sm.addEventListener("click",function(e){e.preventDefault();m.setAttribute("open","")})}})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
+<script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){if(!m.hasAttribute("open")||m.classList.contains("closing"))return;m.classList.add("closing");setTimeout(function(){m.removeAttribute("open");m.classList.remove("closing")},230)}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});var sm=m.querySelector("summary");if(sm)sm.addEventListener("click",function(e){if(m.hasAttribute("open")){e.preventDefault();c()}});})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}
 window.guMenu=function(){var s=on(),v=null;try{v=localStorage.getItem("gu-av")}catch(e){}
 if(o)o.hidden=!s;if(a)a.textContent=s?"Your account":"Sign in";if(!s){try{sessionStorage.removeItem("gu-nm")}catch(e){}}
