@@ -218,3 +218,11 @@ body .hero-band .box{box-shadow:0 30px 50px -12px rgba(70,90,140,.28),0 2px 6px 
 body .hm .go{width:68px;height:68px}
 .hero-brand{gap:22px;margin:14px 0 40px}
 body .hero-band .hm-top{max-width:760px;padding-top:30px}
+
+/* sign in / account: plain text link in the header */
+body .site-header .user-btn,body .site-header .user-btn.pic{width:auto;height:auto;min-height:0;background:none!important;background-image:none!important;border:0!important;border-radius:0;box-shadow:none;padding:8px 6px;display:inline-flex;align-items:center;color:var(--ink);font-family:var(--body);font-weight:500;font-size:16px;text-decoration:none}
+body .site-header .user-btn svg{display:none!important}
+body .site-header .user-btn:hover,body .site-header .user-wrap:hover .user-btn{background:none!important;color:var(--primary);text-decoration:underline;text-underline-offset:4px}
+body .hub #hb-acc{display:none!important}
+body .site-header .user-wrap{margin-right:6px}
+body .site-header .user-btn{white-space:nowrap}
