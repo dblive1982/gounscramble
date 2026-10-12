@@ -197,7 +197,7 @@ def letters_input(button_text):
 
 
 HUB = """<div class="hub">
-<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
+<nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-calc">Calculators</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
 <section class="hb-sec" id="s-games" aria-labelledby="hb-games"><div class="hb-head"><div><h2 id="hb-games">Puzzles &amp; Games</h2><p class="hb-sub">Free puzzles you can play right here.</p></div><a class="hb-arrow" href="games.html" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-teal" data-pop="300!" href="games.html#wordsearch"><span class="hb-ic">Ws</span><b>Word search</b><span>10 categories and 300 puzzles. Your progress is saved as you go.</span><em>1 player</em></a>
@@ -226,7 +226,15 @@ HUB = """<div class="hub">
 <a class="hb-card c-teal" href="word-counter.html"><span class="hb-ic">123</span><b>Word counter</b><span>Count words, characters and sentences as you type.</span></a>
 <a class="hb-card c-pink" href="case-converter.html"><span class="hb-ic">Aa</span><b>Case converter</b><span>Switch text to upper, lower, title or sentence case.</span></a>
 <a class="hb-card c-lilac" href="random-word-picker.html"><span class="hb-ic">?!</span><b>Random word picker</b><span>Pull random words for games, prompts and spelling tests.</span></a>
-<a class="hb-card c-orange" href="calculators.html"><span class="hb-ic">=</span><b>Calculators</b><span>Salary, mortgage, percentage, BMI and 40 more.</span></a>
+</div></section>
+<section class="hb-sec" id="s-calc" aria-labelledby="hb-calc"><div class="hb-head"><div><h2 id="hb-calc">Calculators</h2><p class="hb-sub">Free calculators for money, maths and health.</p></div><a class="hb-arrow" href="calculators.html" aria-label="All calculators"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div class="hb-grid">
+<a class="hb-card c-orange" href="salary-calculator.html"><span class="hb-ic">&pound;</span><b>Salary calculator</b><span>Hourly, monthly and yearly pay, plus UK take-home.</span></a>
+<a class="hb-card c-green" href="mortgage-calculator.html"><span class="hb-ic">Mtg</span><b>Mortgage calculator</b><span>Monthly payment and total interest.</span></a>
+<a class="hb-card c-teal" href="scientific-calculator.html"><span class="hb-ic">fx</span><b>Scientific calculator</b><span>Trig, logs, powers and brackets.</span></a>
+<a class="hb-card c-pink" href="percentage-calculator.html"><span class="hb-ic">%</span><b>Percentage calculator</b><span>Percent of, change, increase and decrease.</span></a>
+<a class="hb-card c-lilac" href="bmi-calculator.html"><span class="hb-ic">BMI</span><b>BMI calculator</b><span>Body mass index and a healthy range.</span></a>
+<a class="hb-card c-yellow" href="calculators.html"><span class="hb-ic">+</span><b>All calculators</b><span>Over 40 free calculators in one place.</span></a>
 </div></section>
 <section class="hb-sec" id="s-guides" aria-labelledby="hb-guides"><div class="hb-head"><div><h2 id="hb-guides">Tips &amp; Guides</h2><p class="hb-sub">Short guides to help you score more.</p></div><a class="hb-arrow" href="guides.html" aria-label="All guides"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
@@ -270,7 +278,7 @@ HUB = """<div class="hub">
 
 def _hub_dir(hub):
     cols=[]
-    for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-guides","Tips &amp; guides"),("s-lists","Word lists")):
+    for sid,title in (("s-games","Puzzles"),("s-retro","Retro games"),("s-tools","Word tools"),("s-calc","Calculators"),("s-guides","Tips &amp; guides"),("s-lists","Word lists")):
         m=re.search(r'<section class="hb-sec" id="%s".*?</section>'%sid,hub,re.S)
         if not m: continue
         seg=m.group(0); items=[]
