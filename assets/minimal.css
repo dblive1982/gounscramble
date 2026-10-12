@@ -211,3 +211,10 @@ body .ac .av{border:1px solid var(--line)!important;background:var(--soft)!impor
 body .ac{--display:'Inter',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--tile-face:#fff;--ink:#1c2230;font-weight:500}
 body .ac h1,body .ac h2,body .ac h3{font-family:var(--display)}
 body .tile,body .cards .tile,body .card:nth-child(n) .tile{transform:none!important;rotate:none!important}
+
+/* closer to the mock-up: taller bar, deeper soft shadow, more air around the brand */
+body .hm .box{padding:14px 14px 14px 36px;box-shadow:0 30px 50px -12px rgba(70,90,140,.28),0 2px 6px rgba(70,90,140,.08)}
+body .hero-band .box{box-shadow:0 30px 50px -12px rgba(70,90,140,.28),0 2px 6px rgba(70,90,140,.08)}
+body .hm .go{width:68px;height:68px}
+.hero-brand{gap:22px;margin:14px 0 40px}
+body .hero-band .hm-top{max-width:760px;padding-top:30px}
