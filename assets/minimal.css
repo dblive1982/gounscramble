@@ -1029,3 +1029,5 @@ body .site-footer .foot-logo .mark{height:22px}
 body .site-footer .foot-logo .wmimg{height:14px}
 @media(max-width:600px){body .site-footer .foot-c{font-size:14px}}
 body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
+#g-in,#g-up,#g-in iframe,#g-up iframe{color-scheme:light;background:transparent}
+#g-in,#g-up{display:flex;justify-content:center}
