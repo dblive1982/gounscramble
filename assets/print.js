@@ -9,7 +9,7 @@
   function cur() { var s = main.querySelector("section[id^='v-']:not([hidden])"); return s ? s.id.slice(2) : "games"; }
   function h(tag, cls, html) { return "<" + tag + (cls ? ' class="' + cls + '"' : "") + ">" + (html == null ? "" : html) + "</" + tag + ">"; }
   function page(title, note, body) {
-    return h("h1", "", title) + (note ? h("p", "pn", note) : "") + body + h("p", "pf", "Free puzzles and games at gounscramble.com");
+    return '<p class="pbrand"><img src="assets/logo.png" alt="" height="24"><img src="assets/wordmark.png" alt="gounscramble." height="14"></p>' + h("h1", "", title) + (note ? h("p", "pn", note) : "") + body + h("p", "pf", "Free puzzles and games at gounscramble.com");
   }
 
   var B = {

@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=51671dda">
 <link rel="stylesheet" href="assets/games.css?v=7456180d">
-<link rel="stylesheet" href="assets/minimal.css?v=7128dd4a">
+<link rel="stylesheet" href="assets/minimal.css?v=073396e7">
 <link rel="stylesheet" href="assets/dark.css?v=789f4efb">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
@@ -243,7 +243,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/progress.js?v=d4f6e6db"></script><script src="assets/games.js?v=bf9679d9"></script><script src="assets/arcade.js?v=0c48979b"></script><script src="assets/print.js?v=3917f9af"></script>
+<script src="assets/progress.js?v=d4f6e6db"></script><script src="assets/games.js?v=bf9679d9"></script><script src="assets/arcade.js?v=0c48979b"></script><script src="assets/print.js?v=46a580ad"></script>
 <script>(function(){var g=document.getElementById("theme-opts");if(!g)return;var bs=g.querySelectorAll("button");function d(){return document.documentElement.getAttribute("data-theme")==="dark"}function p(){bs.forEach(function(x){x.setAttribute("aria-pressed",String((x.getAttribute("data-t")==="dark")===d()))})}bs.forEach(function(x){x.addEventListener("click",function(){var n=x.getAttribute("data-t");document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("gu-theme",n)}catch(e){}p()})});p()})();</script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){if(!m.hasAttribute("open")||m.classList.contains("closing"))return;m.classList.add("closing");setTimeout(function(){m.removeAttribute("open");m.classList.remove("closing")},230)}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});var sm=m.querySelector("summary");if(sm)sm.addEventListener("click",function(e){if(m.hasAttribute("open")){e.preventDefault();c()}});})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}

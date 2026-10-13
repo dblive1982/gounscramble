@@ -1031,3 +1031,4 @@ body .site-footer .foot-logo .wmimg{height:14px}
 body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 #g-in,#g-up,#g-in iframe,#g-up iframe{color-scheme:light;background:transparent}
 #g-in,#g-up{display:flex;justify-content:center}
+#print-sheet .pbrand{display:flex;align-items:center;justify-content:flex-end;gap:6pt;margin:0 0 6pt}#print-sheet .pbrand img{width:auto;display:block}

@@ -39,7 +39,7 @@
     [].forEach.call(c.querySelectorAll("[id]"), function (e) { e.removeAttribute("id"); });
     [].forEach.call(c.querySelectorAll("button,.btns,.sc-pad,.sal-chips,.cf-hint,summary em,[hidden],script"), function (e) { e.remove(); });
     var d = new Date(), ds = d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-    sheet.innerHTML = "<h1>" + esc(title) + "</h1><p class='pn'>Calculated on " + esc(ds) + "</p><div class='pc-body'></div>" +
+    sheet.innerHTML = '<p class="pbrand"><img src="assets/logo.png" alt="" height="24"><img src="assets/wordmark.png" alt="gounscramble." height="14"></p>' + "<h1>" + esc(title) + "</h1><p class='pn'>Calculated on " + esc(ds) + "</p><div class='pc-body'></div>" +
       "<p class='pf'>Free calculators at gounscramble.com. For information only, not financial, tax, legal or medical advice.</p>";
     sheet.querySelector(".pc-body").appendChild(c);
     c.className = "pcalc";
