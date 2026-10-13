@@ -60,9 +60,8 @@
       var b = e.target.closest("[data-rack]"); if (!b || !f || !r) return;
       r.value = b.getAttribute("data-rack");
       r.dispatchEvent(new Event("input", { bubbles: true }));
-      if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event("submit", { cancelable: true }));
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+      // Only fill the box; the visitor taps GO to see the results.
+      window.scrollTo({ top: 0, behavior: "smooth" });    });
     if (roll) roll.addEventListener("click", function () {
       roll.classList.remove("spin"); void roll.offsetWidth; roll.classList.add("spin"); makeChips();
     });
