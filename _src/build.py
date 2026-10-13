@@ -649,7 +649,7 @@ def asset_version(name):
 def seo_tags(p, url):
     """Open Graph, Twitter card and JSON-LD structured data for one page."""
     esc = lambda t: t.replace("&", "&amp;").replace('"', "&quot;")
-    img = SITE + "/assets/og.png?v=3"
+    img = SITE + "/assets/og.png?v=4"
     tags = [
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="GoUnscramble">',
