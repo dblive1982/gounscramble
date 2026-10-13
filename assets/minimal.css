@@ -1010,3 +1010,11 @@ body .hero-band .hero-brand .mark{height:92px;margin-bottom:2px}
 body .foot-logo .mark{height:28px}
 @media(max-width:600px){body .hero-band .hero-brand .mark{height:78px}body .site-header .brand .mark{height:28px}}
 .wm b{color:var(--primary)}
+
+/* image wordmark */
+.wmimg{display:block;width:auto;flex:none}
+body .site-header .brand .wmimg{height:18px}
+body .site-footer .foot-logo .wmimg{height:15px}
+body .hero-brand .wmimg{height:34px}
+@media (min-width:700px){body .site-header .brand .wmimg{height:20px}body .hero-brand .wmimg{height:44px}}
+@media (max-width:420px){body .site-header .brand .wmimg{height:16px}body .hero-brand .wmimg{height:28px}}

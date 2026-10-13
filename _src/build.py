@@ -85,7 +85,7 @@ HEADER = """<!--header-->
 </div>
 </details>
 </nav>
-<a class="brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="22" height="26" alt="" decoding="async"><span class="wm"><b>go</b>unscramble.com</span></a>
+<a class="brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="22" height="26" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="116" height="18" alt="gounscramble." decoding="async"></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="17" r="7" fill="currentColor"/><path d="M6 40c0-9 6-14.5 14-14.5S34 31 34 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 
 </div></header>
@@ -116,7 +116,7 @@ def social_html():
 
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
-<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="19" height="22" alt="" decoding="async"><span class="wm"><b>go</b>unscramble.com</span></a></div>
+<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="19" height="22" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="100" height="15" alt="gounscramble." decoding="async"></a></div>
 <p class="foot-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg><span>Site secured using Encrypted HTTPS connection.</span></p>
 <p class="foot-legal"><b>Disclaimer:</b> everything on this site, including calculator results, word lists and tips, is for general information and entertainment only. It is not financial, tax, investment, legal, medical or other professional advice, and results may contain errors. We accept no responsibility for any loss or decision that comes from using it, so please check with a qualified professional before acting. See our <a href="terms.html">terms</a>.</p>
 <p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way.</p>
@@ -294,7 +294,7 @@ FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer 
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
-<a class="hero-brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="61" height="72" alt="" decoding="async"><span class="wm"><b>go</b>unscramble.com</span></a>
+<a class="hero-brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="61" height="72" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="260" height="40" alt="gounscramble." decoding="async"></a>
 <form id="f" class="box" autocomplete="off">
 <svg class="sico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#9aa1ae" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. read?" aria-label="Your letters">
