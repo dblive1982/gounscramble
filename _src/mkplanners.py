@@ -20,7 +20,19 @@ M = 14 * mm
 URL = "gounscramble.com/planners.html"
 
 
+def brand(c, W, H):
+    """Logo head + wordmark, top right."""
+    from reportlab.lib.utils import ImageReader
+    lg = ImageReader(os.path.join(root, "assets/logo.png")); wm = ImageReader(os.path.join(root, "assets/wordmark.png"))
+    lh = 11 * mm; lw = lh * 520 / 615
+    wh = 5.2 * mm; ww = wh * 900 / 139
+    x = W - M - ww - lw - 2.2 * mm; y = H - M - 12 * mm
+    c.drawImage(lg, x, y, lw, lh, mask="auto")
+    c.drawImage(wm, x + lw + 2.2 * mm, y + (lh - wh) / 2, ww, wh, mask="auto")
+
+
 def header(c, W, H, title, sub):
+    brand(c, W, H)
     c.setFillColor(BLUE); c.roundRect(M, H - M - 9 * mm, 10 * mm, 2.2 * mm, 1 * mm, stroke=0, fill=1)
     c.setFillColor(INK); c.setFont("B", 26); c.drawString(M, H - M - 21 * mm, title)
     c.setFillColor(MUT); c.setFont("R", 10.5); c.drawString(M, H - M - 28 * mm, sub)
