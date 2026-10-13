@@ -260,7 +260,7 @@
         example.setAttribute('aria-label', 'Try the example: letters ' + jumble.toUpperCase().split('').join(' '));
         input.placeholder = 'e.g. ' + jumble;
       }
-      example.addEventListener('click', function () { input.value = jumble; submitForm(form); });
+      example.addEventListener('click', function () { input.value = jumble; input.dispatchEvent(new Event('input', { bubbles: true })); });
     }
   }
 

@@ -17,8 +17,8 @@ const INIT={};
 function menu(o){var m=document.querySelector(".site-header .menu");if(m&&!o)m.removeAttribute("open")}
 function show(v){if(!TT[v])v="games";for(const k in TT)$("v-"+k).hidden=k!==v;$("ttl").textContent=TT[v];$("back").hidden=v==="games";
   
-  menu(false);if(INIT[v]){INIT[v]();INIT[v]=null}window.scrollTo(0,0);try{history.replaceState(null,"","#"+v);document.title=(v==="games"?"Free Puzzles & Games":TT[v]+" - Free Online")+" | GoUnscramble"}catch(e){}}
-$("back").addEventListener("click",()=>show("games"));
+  menu(false);if(INIT[v]){INIT[v]();INIT[v]=null}window.scrollTo(0,0);try{if(location.hash!=="#"+v&&!(v==="games"&&!location.hash)){history.pushState(null,"","#"+v);window._gd=(window._gd||0)+1}else history.replaceState(null,"","#"+v);document.title=(v==="games"?"Free Puzzles & Games":TT[v]+" - Free Online")+" | GoUnscramble"}catch(e){}}
+$("back").addEventListener("click",()=>{if(window._gd>0){window._gd--;history.back()}else show("games")});
 document.addEventListener("click",e=>{const a=e.target.closest("[data-v]");if(a){show(a.dataset.v);return}const g=e.target.closest("[data-go]");if(g)show(g.dataset.go)});
 function pills(host,opts,cur,fn){host.innerHTML="";opts.forEach(([v,l])=>{const b=document.createElement("button");b.type="button";b.className="pill"+(v===cur?" on":"");b.textContent=l;b.addEventListener("click",()=>{host.querySelectorAll(".pill").forEach(x=>x.classList.remove("on"));b.classList.add("on");fn(v)});host.appendChild(b)})}
 
