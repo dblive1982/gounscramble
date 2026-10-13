@@ -740,6 +740,13 @@ def build_page(p):
         except OSError:
             v = "0"
         page = page.replace('href="%s"' % fav, 'href="%s?v=%s"' % (fav, v))
+    def _ver_file(m):
+        try:
+            v = hashlib.md5(open(os.path.join(OUT, m.group(1)), "rb").read()).hexdigest()[:8]
+        except OSError:
+            return m.group(0)
+        return m.group(1) + "?v=" + v + '"'
+    page = re.sub(r'((?:assets/planners/[a-z0-9-]+\.webp)|(?:downloads/[a-z0-9-]+\.pdf))"', _ver_file, page)
     return page
 
 
