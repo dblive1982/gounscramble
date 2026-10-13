@@ -168,12 +168,26 @@ TOOLS = [
 ]
 
 
+TOOL_ICONS = {
+    "unscrambler": '<path d="M4 7h4v4H4zM10 7h4v4h-4zM16 7h4v4h-4z"/><path d="M5 17h14M15 14l4 3-4 3"/>',
+    "anagram": '<path d="M4 8h13M13 4l4 4-4 4"/><path d="M20 16H7M11 12l-4 4 4 4"/>',
+    "counter": '<path d="M4 6h16M4 11h16M4 16h9"/><path d="M16 19l1.6-4 1.6 4M16.5 18h2.2"/>',
+    "case": '<path d="M3 17l4-10 4 10M4.5 13.5h5"/><path d="M14 17v-6.5M14 12.8a2.6 2.6 0 112.6 3.9c-1.4 0-2.6-1-2.6-3.9z"/>',
+    "random": '<rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 8.5v.01M15.5 8.5v.01M12 12v.01M8.5 15.5v.01M15.5 15.5v.01"/>',
+    "calculators": '<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/>',
+}
+
+
+def tool_icon(key, size=26):
+    return '<svg class="ic" viewBox="0 0 24 24" width="%d" height="%d" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>' % (size, size, TOOL_ICONS[key])
+
+
 def cards(skip=None):
     out = ['<div class="cards">']
     for key, href, tile, name, text in TOOLS:
         if key == skip:
             continue
-        out.append('<a class="card" href="%s"><div class="tile">%s</div><h3>%s</h3><p>%s</p></a>' % (href, tile, name, text))
+        out.append('<a class="card" href="%s"><div class="tile ct">%s</div><h3>%s</h3><p>%s</p></a>' % (href, tool_icon(key), name, text))
     out.append("</div>")
     return "\n".join(out)
 
