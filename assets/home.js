@@ -115,8 +115,9 @@ function run(){
   render();
 }
 
-function saveQ(){try{const v=$("rack").value.trim(),u=new URL(location.href);if(v)u.searchParams.set("q",v);else u.searchParams.delete("q");history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(_){}}
-$("f").addEventListener("submit",e=>{e.preventDefault();run();saveQ();if(!results.length&&parseRack(rackText).n<2)$("rack").focus();else $("rack").blur()});
+function saveQ(push){try{const v=$("rack").value.trim(),u=new URL(location.href),cur=u.searchParams.get("q")||"";if(v)u.searchParams.set("q",v);else u.searchParams.delete("q");const url=u.pathname+u.search+u.hash;if(push&&v!==cur)history.pushState(null,"",url);else history.replaceState(null,"",url)}catch(_){}}
+window.addEventListener("popstate",()=>{try{const q=new URL(location.href).searchParams.get("q")||"";$("rack").value=q.slice(0,40);syncClr();run()}catch(_){}});
+$("f").addEventListener("submit",e=>{e.preventDefault();run();saveQ(true);if(!results.length&&parseRack(rackText).n<2)$("rack").focus();else $("rack").blur()});
 out.addEventListener("click",e=>{
   const li=e.target.closest(".w");
   if(li&&!e.target.closest(".look")){
