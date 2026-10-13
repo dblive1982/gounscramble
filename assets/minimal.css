@@ -1018,3 +1018,8 @@ body .site-footer .foot-logo .wmimg{height:15px}
 body .hero-brand .wmimg{height:34px}
 @media (min-width:700px){body .site-header .brand .wmimg{height:20px}body .hero-brand .wmimg{height:44px}}
 @media (max-width:420px){body .site-header .brand .wmimg{height:16px}body .hero-brand .wmimg{height:28px}}
+body .site-header .brand{gap:9px;align-items:center}
+body .site-footer .foot-brand{align-items:center;gap:12px}
+body .site-footer .foot-logo{display:inline-flex;align-items:center;gap:8px}
+body .site-footer .foot-logo .mark{height:26px}
+body .site-footer .foot-logo .wmimg{height:17px}
