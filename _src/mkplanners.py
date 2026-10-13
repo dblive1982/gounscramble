@@ -14,7 +14,7 @@ pdfmetrics.registerFont(TTFont("R", FD + "LiberationSans-Regular.ttf"))
 pdfmetrics.registerFont(TTFont("B", FD + "LiberationSans-Bold.ttf"))
 pdfmetrics.registerFont(TTFont("I", FD + "LiberationSans-Italic.ttf"))
 
-BLUE = HexColor("#5170ff"); SOFT = HexColor("#eaf0ff"); LINE = HexColor("#cfd6e4")
+BLUE = HexColor("#7c48b8"); SOFT = HexColor("#f1ebfa"); LINE = HexColor("#cfd6e4")
 INK = HexColor("#1c2230"); MUT = HexColor("#667085"); WHITE = HexColor("#ffffff")
 M = 14 * mm
 URL = "gounscramble.com/planners.html"
