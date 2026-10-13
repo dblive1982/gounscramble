@@ -427,6 +427,11 @@ HOME_EXTRA = """<section class="block narrow">
 </ul>
 </section>
 <section class="block narrow">
+<h2>Our dictionary</h2>
+<p>gounscramble uses <strong>ENABLE</strong>, the Enhanced North American Benchmark Lexicon. It is a free, public-domain word list of about 173,000 English words, widely used for word games and puzzles. Because it is public domain, we can use it freely and show you every word it contains.</p>
+<p>It is a general list, so it will not match any one game exactly. Some words that are valid in Collins (CSW) or the NASPA Word List may be missing, and a few ENABLE words may not be accepted in every game. Offensive words are hidden by default, and you can switch them back on with the toggle under the search box. Learn more in <a href="word-lists-explained.html">word lists explained</a> and <a href="credits.html">credits</a>.</p>
+</section>
+<section class="block narrow">
 <h2>Common questions</h2>
 @@FAQ@@
 <p><a href="faq.html">See all questions</a></p>
