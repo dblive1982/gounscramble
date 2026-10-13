@@ -1023,3 +1023,8 @@ body .site-footer .foot-brand{align-items:center;gap:12px}
 body .site-footer .foot-logo{display:inline-flex;align-items:center;gap:8px}
 body .site-footer .foot-logo .mark{height:26px}
 body .site-footer .foot-logo .wmimg{height:17px}
+body .site-footer .foot-brand{align-items:center;gap:10px}
+body .site-footer .foot-c{font-size:14px;line-height:1}
+body .site-footer .foot-logo .mark{height:22px}
+body .site-footer .foot-logo .wmimg{height:14px}
+@media(max-width:600px){body .site-footer .foot-c{font-size:14px}}
