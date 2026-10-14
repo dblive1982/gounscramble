@@ -1066,3 +1066,8 @@ body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,b
 .hb-cats a{color:var(--ink);text-decoration:none;font-size:15px;line-height:1.35}
 .hb-cats a:hover{color:#7c48b8;text-decoration:underline}
 .hb-cats .dir-more a{color:#7c48b8;font-weight:600}
+.hb-cats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px 10px}
+.hb-cats h3{font-size:15px;margin-bottom:6px}
+.hb-cats ul{gap:5px}
+.hb-cats a{font-size:13.5px;line-height:1.3}
+@media(min-width:720px){.hb-cats{gap:26px 24px}.hb-cats h3{font-size:17px}.hb-cats a{font-size:15px}}
