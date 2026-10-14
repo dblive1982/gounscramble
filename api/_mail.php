@@ -48,6 +48,38 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
     @mail($to, $subj, $body, $headers);
 }
 
+// Plain-text heads-up to the site owner when someone signs up. Never blocks or breaks sign-up.
+// Goes to "notify_to" in gu-config.php (kept out of Git) or, if that is not set, to hello@gounscramble.com.
+function gu_notify_signup(string $name, string $email, string $via, ?int $total = null): void {
+    try {
+        $c = config() ?: [];
+        $to = (string)($c['notify_to'] ?? 'hello@gounscramble.com');
+        if (!valid_email($to)) return;
+        $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
+        $one = static fn(string $v): string => trim(preg_replace('/[\r\n]+/', ' ', $v));
+        $text = "Someone just signed up to GoUnscramble.\r\n\r\n"
+            . "Name: " . $one($name) . "\r\n"
+            . "Email: " . $one($email) . "\r\n"
+            . "Method: " . $one($via) . "\r\n"
+            . "Time: " . date('D j M Y, H:i') . " (server time)\r\n"
+            . ($total !== null ? "Total accounts: " . $total . "\r\n" : '')
+            . "\r\n" . $site . "\r\n";
+        $subj = '=?UTF-8?B?' . base64_encode('New GoUnscramble sign-up') . '?=';
+        $b64 = chunk_split(base64_encode($text), 76, "\r\n");
+        if (!empty($c['smtp_user']) && !empty($c['smtp_pass'])) {
+            $sfrom = $c['smtp_user'];
+            $hdr = "From: GoUnscramble <$sfrom>\r\nTo: <$to>\r\nSubject: $subj\r\nDate: " . date('r')
+                . "\r\nMessage-ID: <" . bin2hex(random_bytes(12)) . "@gounscramble.com>\r\nMIME-Version: 1.0\r\n"
+                . "Content-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n";
+            if (gu_smtp($c, $sfrom, $to, $hdr . "\r\n" . $b64)) return;
+        }
+        $from = $c['mail_from'] ?? 'noreply@gounscramble.com';
+        @mail($to, $subj, $b64, "From: GoUnscramble <$from>\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64");
+    } catch (Throwable $e) {
+        error_log('gu_notify_signup failed: ' . $e->getMessage());
+    }
+}
+
 function gu_smtp(array $c, string $from, string $to, string $data): bool {
     $host = $c['smtp_host'] ?? 'smtp.hostinger.com';
     $port = (int)($c['smtp_port'] ?? 465);
