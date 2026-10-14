@@ -85,7 +85,7 @@ HEADER = """<!--header-->
 </div>
 </details>
 </nav>
-<a class="brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="22" height="26" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="116" height="18" alt="gounscramble." decoding="async"></a>
+<a class="brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="22" height="22" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="116" height="17" alt="gounscramble." decoding="async"></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="17" r="7" fill="currentColor"/><path d="M6 40c0-9 6-14.5 14-14.5S34 31 34 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 
 </div></header>
@@ -116,7 +116,7 @@ def social_html():
 
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
-<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="19" height="22" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="100" height="15" alt="gounscramble." decoding="async"></a></div>
+<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="19" height="19" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="100" height="15" alt="gounscramble." decoding="async"></a></div>
 <p class="foot-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg><span>Site secured using Encrypted HTTPS connection.</span></p>
 <p class="foot-legal"><b>Disclaimer:</b> everything on this site, including calculator results, word lists and tips, is for general information and entertainment only. It is not financial, tax, investment, legal, medical or other professional advice, and results may contain errors. We accept no responsibility for any loss or decision that comes from using it, so please check with a qualified professional before acting. See our <a href="terms.html">terms</a>.</p>
 <p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way.</p>
@@ -220,6 +220,7 @@ def letters_input(button_text):
 
 
 HUB = """<div class="hub">
+<nav class="hb-dir" aria-label="Browse by category"><div class="dir-col"><h3>Puzzles</h3><ul><li><a href="games.html#wordsearch">Word search</a></li><li><a href="games.html#wordle">Wordle Global</a></li><li><a href="games.html#crossword">Mini Crossword</a></li><li><a href="games.html#sudoku">Sudoku</a></li><li class="dir-more"><a href="games.html">More&hellip;</a></li></ul></div><div class="dir-col"><h3>Planners</h3><ul><li><a href="weekly-planner.html">Weekly planner</a></li><li><a href="monthly-budget-planner.html">Monthly budget planner</a></li><li><a href="monthly-habit-tracker.html">Monthly habit tracker</a></li><li class="dir-more"><a href="planners.html">More&hellip;</a></li></ul></div><div class="dir-col"><h3>Games</h3><ul><li><a href="games.html#hangman">Hangman</a></li><li><a href="games.html#connect4">Connect 4</a></li><li><a href="games.html#memory">Memory match</a></li><li><a href="games.html#maze">Maze</a></li><li class="dir-more"><a href="games.html">More&hellip;</a></li></ul></div><div class="dir-col"><h3>Retro games</h3><ul><li><a href="games.html#retrosnake">Snake</a></li><li><a href="games.html#blaster">Space Invaders</a></li><li><a href="games.html#bricks">Brick Smash</a></li><li><a href="games.html#runner">Offline Runner</a></li><li class="dir-more"><a href="games.html#arcade">More&hellip;</a></li></ul></div><div class="dir-col"><h3>Calculators</h3><ul><li><a href="salary-calculator.html">Salary calculator</a></li><li><a href="mortgage-calculator.html">Mortgage calculator</a></li><li><a href="percentage-calculator.html">Percentage calculator</a></li><li><a href="bmi-calculator.html">BMI calculator</a></li><li class="dir-more"><a href="calculators.html">More&hellip;</a></li></ul></div><div class="dir-col"><h3>Word lists</h3><ul><li><a href="two-letter-words.html">2-letter words</a></li><li><a href="three-letter-words.html">3-letter words</a></li><li><a href="five-letter-words.html">5-letter words</a></li><li><a href="words-with-z.html">Words with Z</a></li><li class="dir-more"><a href="word-lists.html">More&hellip;</a></li></ul></div></nav>
 <nav class="hb-jump" aria-label="Jump to a section"><a href="#s-games">Puzzles</a><a href="#s-retro">Retro games</a><a href="#s-lists">Word lists</a><a href="#s-tools">Word tools</a><a href="#s-calc">Calculators</a><a href="#s-guides">Guides</a><a href="#hb-prog">Your progress</a></nav>
 <section class="hb-sec" id="s-games" aria-labelledby="hb-games"><div class="hb-head"><div><h2 id="hb-games">Puzzles &amp; Games</h2><p class="hb-sub">Free puzzles you can play right here.</p></div><a class="hb-arrow" href="games.html" aria-label="See all games"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
@@ -308,7 +309,7 @@ FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer 
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
-<a class="hero-brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="61" height="72" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="260" height="40" alt="gounscramble." decoding="async"></a>
+<a class="hero-brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="61" height="61" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="260" height="38" alt="gounscramble." decoding="async"></a>
 <form id="f" class="box" autocomplete="off">
 <svg class="sico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#9aa1ae" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. read?" aria-label="Your letters">
@@ -779,7 +780,7 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "logo.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "logo.png", "wordmark.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:

@@ -1058,3 +1058,11 @@ body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 @media(min-width:720px){.opts .og-grid{grid-template-columns:repeat(3,minmax(0,108px)) minmax(0,150px)!important}}
 .opts .len-row select{padding-right:22px!important}
 body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,body[data-page="home"] .hm .about h2,body[data-page="home"] .block h2{font-size:clamp(23px,5.5vw,28px)!important;line-height:1.15}
+.hb-dir{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;margin:6px 0 34px;text-align:left}
+@media(min-width:720px){.hb-dir{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1000px){.hb-dir{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.hb-dir h3{margin:0 0 8px;font-size:17px;font-weight:700}
+.hb-dir ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hb-dir a{color:var(--ink);text-decoration:none;font-size:15px;line-height:1.35}
+.hb-dir a:hover{color:#7c48b8;text-decoration:underline}
+.hb-dir .dir-more a{color:#7c48b8;font-weight:600}
