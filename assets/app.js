@@ -346,6 +346,7 @@
         f.value = f.getAttribute('data-default') || '';
         f.dispatchEvent(new Event('input', { bubbles: true }));
       });
+      Array.prototype.forEach.call(scope.querySelectorAll('select.field#length'), function (f) { f.value = ''; });
       var out = $('results'); if (out) clear(out);
       var st = $('status'); if (st) st.textContent = '';
       // On phones and tablets, focusing a field pops up the keyboard, so only refocus with a mouse.
