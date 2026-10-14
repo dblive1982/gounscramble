@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=51671dda">
 <link rel="stylesheet" href="assets/home.css?v=4f0727da">
-<link rel="stylesheet" href="assets/minimal.css?v=ef2247a0">
+<link rel="stylesheet" href="assets/minimal.css?v=e2aef9d5">
 <link rel="stylesheet" href="assets/dark.css?v=789f4efb">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
@@ -92,9 +92,9 @@
 <label class="opt">Starts with<input id="o-starts" type="text" maxlength="8" placeholder="sc" autocapitalize="off"></label>
 <label class="opt">Ends with<input id="o-ends" type="text" maxlength="8" placeholder="le" autocapitalize="off"></label>
 <label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
-<label class="opt">Word length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
+<label class="opt">Word length<span class="len-row"><select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select><button class="x-clr" id="clrf" type="button" aria-label="Clear options" title="Clear options">×</button></span></label>
 </div></div>
-<div class="og og-foot"><span class="dict-grp"><span class="dict-lbl">Dictionary</span><label class="sw sw-dict"><span class="sw-side on" data-side="enable">US</span><input class="sw-in" id="o-uk" type="checkbox" aria-label="Dictionary: switch on for UK, off for US"><span class="sw-tr" aria-hidden="true"></span><span class="sw-side" data-side="extended">UK</span></label><input type="hidden" id="o-dict" value="enable"></span><label class="sw"><input class="sw-in" id="o-safe" type="checkbox" checked><span class="sw-tr" aria-hidden="true"></span><span>Hide offensive words</span></label><button class="reset" id="clrf" type="button">Clear</button></div>
+<div class="og og-foot"><span class="dict-grp"><span class="dict-lbl">Dictionary</span><label class="sw sw-dict"><span class="sw-side on" data-side="enable">US</span><input class="sw-in" id="o-uk" type="checkbox" aria-label="Dictionary: switch on for UK, off for US"><span class="sw-tr" aria-hidden="true"></span><span class="sw-side" data-side="extended">UK</span></label><input type="hidden" id="o-dict" value="enable"></span><label class="sw"><input class="sw-in" id="o-safe" type="checkbox" checked><span class="sw-tr" aria-hidden="true"></span><span>Hide offensive words</span></label></div>
 </div></div>
 </div></section>
 <div class="hm home-res"><div id="out" aria-live="polite"></div></div>
