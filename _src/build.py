@@ -195,8 +195,8 @@ def cards(skip=None):
 DICT_ROW = """<div class="dict-row">
 <label for="dictionary">Dictionary</label>
 <select id="dictionary" class="field">
-<option value="enable" selected>Standard: best for US Scrabble and Words With Friends</option>
-<option value="extended">Extended: more words, UK-friendly</option>
+<option value="enable" selected>Standard: Scrabble US &amp; Words With Friends</option>
+<option value="extended">Extended: Scrabble UK</option>
 </select>
 <label class="check"><input type="checkbox" id="hide-rude"> Hide offensive words</label>
 <p class="dict-note">Standard has about 173,000 words and Extended about 245,000. Neither is an official game list, so check disputed words against your own game.</p>
@@ -325,7 +325,7 @@ HOME = """<main>
 <label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
 <label class="opt">Word length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
 </div></div>
-<div class="og og-dict"><label class="opt">Dictionary<select id="o-dict"><option value="enable">Standard: best for US Scrabble and Words With Friends</option><option value="extended">Extended: more words, UK-friendly</option></select></label><p class="dict-note">Standard has about 173,000 words and Extended about 245,000. Neither is an official game list, so check disputed words against your own game.</p></div>
+<div class="og og-dict"><label class="opt">Dictionary<select id="o-dict"><option value="enable">Standard: Scrabble US &amp; Words With Friends</option><option value="extended">Extended: Scrabble UK</option></select></label><p class="dict-note">Standard has about 173,000 words and Extended about 245,000. Neither is an official game list, so check disputed words against your own game.</p></div>
 <div class="og og-foot"><label class="sw"><input class="sw-in" id="o-safe" type="checkbox" checked><span class="sw-tr" aria-hidden="true"></span><span>Hide offensive words</span></label><button class="reset" id="clrf" type="button">Clear all</button></div>
 </div></div>
 </div></section>
