@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=51671dda">
 
-<link rel="stylesheet" href="assets/minimal.css?v=64096a31">
+<link rel="stylesheet" href="assets/minimal.css?v=3c968079">
 <link rel="stylesheet" href="assets/dark.css?v=789f4efb">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
@@ -86,10 +86,11 @@
 <div class="dict-row">
 <label for="dictionary">Dictionary</label>
 <select id="dictionary" class="field">
-<option value="enable" selected>Standard: ENABLE (about 173,000 words)</option>
-<option value="extended">Extended: open list (about 245,000 words)</option>
+<option value="enable" selected>Standard: best for US Scrabble and Words With Friends</option>
+<option value="extended">Extended: more words, UK-friendly</option>
 </select>
 <label class="check"><input type="checkbox" id="hide-rude"> Hide offensive words</label>
+<p class="dict-note">Standard has about 173,000 words and Extended about 245,000. Neither is an official game list, so check disputed words against your own game.</p>
 </div>
 <div class="row"><button class="btn" type="submit">Pick words</button><button type="button" class="btn alt clear-btn" id="clear-all">Clear all</button></div>
 </form>

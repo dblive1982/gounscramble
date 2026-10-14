@@ -1037,3 +1037,6 @@ body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 .opts .og-dict .opt{display:flex;flex-direction:row;align-items:center;gap:10px;width:100%;font-size:13px;font-weight:600;color:var(--muted)}
 .opts .og-dict select{flex:1;min-width:0;height:40px}
 .prose pre.notice{white-space:pre-wrap;word-break:break-word;font:13px/1.5 var(--body);background:transparent;border-left:3px solid var(--line);padding:2px 0 2px 12px;margin:8px 0;color:var(--muted)}
+
+.opts .og-dict{flex-wrap:wrap}
+.dict-note{flex-basis:100%;margin:2px 0 0;font-size:13px;line-height:1.45;color:var(--muted);font-weight:400}
