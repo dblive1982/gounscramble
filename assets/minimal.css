@@ -1040,7 +1040,3 @@ body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 
 .opts .og-dict{flex-wrap:wrap}
 .dict-note{flex-basis:100%;margin:2px 0 0;font-size:13px;line-height:1.45;color:var(--muted);font-weight:400}
-
-/* combined list: words only in the extended list are shown lighter */
-.hm .w.ext .tiles .t,.hm .w.ext .pts{opacity:.55}
-.hm .key .k-x{font-weight:500;color:var(--muted);white-space:normal}
