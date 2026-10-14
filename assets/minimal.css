@@ -1057,3 +1057,4 @@ body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 .opts .og-grid{grid-template-columns:repeat(3,minmax(0,82px)) minmax(0,128px)!important}
 @media(min-width:720px){.opts .og-grid{grid-template-columns:repeat(3,minmax(0,108px)) minmax(0,150px)!important}}
 .opts .len-row select{padding-right:22px!important}
+body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,body[data-page="home"] .hm .about h2,body[data-page="home"] .block h2{font-size:clamp(23px,5.5vw,28px)!important;line-height:1.15}
