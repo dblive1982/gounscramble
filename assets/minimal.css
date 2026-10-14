@@ -1042,7 +1042,7 @@ body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 .dict-note{flex-basis:100%;margin:2px 0 0;font-size:13px;line-height:1.45;color:var(--muted);font-weight:400}
 
 /* Dictionary heading + US / UK sliding switch */
-.opts .og-dict{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.opts .og-dict{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}
 .opts .og-dict .dict-lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .opts .sw-dict{gap:10px}
 .opts .sw-side{font-size:14px;font-weight:600;color:var(--muted);transition:color .15s}
