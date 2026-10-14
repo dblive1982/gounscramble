@@ -1099,3 +1099,6 @@ body .menu-list .menu-x+a{margin-top:14px}
 .hm .optbtn{display:flex;align-items:center;gap:8px;margin:12px auto 0;padding:9px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:600 15px/1 Inter,system-ui,sans-serif;box-shadow:var(--sh-s);cursor:pointer}
 .hm .optbtn .chev{transition:transform .15s}
 .hm .optbtn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.hm .optbtn{margin:10px 0 0 0;padding:6px 12px;font-size:13px;gap:6px;width:fit-content}
+.hm .optbtn svg:first-child{width:15px;height:15px}
+.hm .optbtn .chev{width:13px;height:13px}
