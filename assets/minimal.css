@@ -1080,3 +1080,4 @@ body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,b
 .hb-cats h3{align-items:flex-start}
 .hb-cats{grid-template-columns:repeat(3,minmax(0,auto))!important;justify-content:center;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;gap:22px 20px}
 @media(min-width:720px){.hb-cats{gap:30px 48px}}
+.hub .hb-rule{order:-101;width:100%;height:0;border:0;border-top:1px solid var(--line);opacity:.7;margin:0}
