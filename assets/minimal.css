@@ -1118,3 +1118,4 @@ body[data-page="home"] .hm .about h3{font-size:16px}
 .hub .cats-h{order:-100;margin:0 0 -22px;font-family:var(--display);font-weight:700;letter-spacing:-.02em;text-align:left}
 body[data-page="home"] .hub .cats-h{font-size:clamp(19px,5vw,24px)}
 .hub .cats-h{margin:8px 0 -6px}
+.hub .hb-rule{margin-top:-20px}
