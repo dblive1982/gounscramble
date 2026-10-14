@@ -1112,3 +1112,4 @@ body .ac #out:hover{background:#363a43!important}
 .hb-cats{margin-bottom:0;gap:16px 20px}
 .hb-cats h3{margin-bottom:4px}
 .hb-cats ul{gap:3px}
+.hub .hb-sec[aria-labelledby="hb-try"]{margin-top:8px}
