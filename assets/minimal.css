@@ -1085,3 +1085,6 @@ body .site-footer .foot-logo .mark{height:18px!important;position:relative;top:2
 body .site-footer .foot-logo{gap:7px}
 body .site-header .brand .mark{height:24px;position:relative;top:1px}
 @media(max-width:600px){body .site-header .brand .mark{height:22px}}
+body .menu-list .menu-brand{position:absolute;top:37px;left:22px;display:flex;align-items:center;gap:8px;text-decoration:none;z-index:1}
+body .menu-list .menu-brand .mark{height:26px;width:auto}
+body .menu-list .menu-brand .wmimg{height:17px;width:auto}
