@@ -1078,3 +1078,5 @@ body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,b
 .hb-cats ul{align-items:flex-start;text-align:left}
 .hb-cats{text-align:left}
 .hb-cats h3{align-items:flex-start}
+.hb-cats{grid-template-columns:repeat(3,minmax(0,auto))!important;justify-content:center;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;gap:22px 20px}
+@media(min-width:720px){.hb-cats{gap:30px 48px}}
