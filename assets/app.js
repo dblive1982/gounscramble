@@ -275,7 +275,7 @@
     var form = $('tool-form'), out = $('results');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var count = Math.min(20, Math.max(1, parseInt(val('count'), 10) || 5));
+      var count = Math.min(100, Math.max(1, parseInt(val("count"), 10) || 5));
       var length = parseInt(val('length'), 10) || 0;
       note(out, 'Picking…');
       loadWords(dictKey()).then(function (words) {

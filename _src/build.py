@@ -391,7 +391,7 @@ RANDOM = """<main><div class="wrap">
 <p class="lede">Pull a handful of random words. Leave the length blank for any length.</p>
 <form id="tool-form" class="panel" novalidate>
 <div class="filters" style="border-top:0;padding-top:0">
-<div class="fgroup"><label for="count">How many words</label><input id="count" class="field" type="number" inputmode="numeric" min="1" max="20" value="5" data-default="5"></div>
+<div class="fgroup"><label for="count">How many words</label><input id="count" class="field" type="number" inputmode="numeric" min="1" max="100" value="5" data-default="5"></div>
 <div class="fgroup"><label for="length">Word length</label><select id="length" class="field"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></div>
 </div>
 @@DICT@@
