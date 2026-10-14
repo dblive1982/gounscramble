@@ -117,7 +117,7 @@ function run(){
 
 function saveQ(push){try{const v=$("rack").value.trim(),u=new URL(location.href),cur=u.searchParams.get("q")||"";if(v)u.searchParams.set("q",v);else u.searchParams.delete("q");const url=u.pathname+u.search+u.hash;if(push&&v!==cur)history.pushState(null,"",url);else history.replaceState(null,"",url)}catch(_){}}
 window.addEventListener("popstate",()=>{try{const q=new URL(location.href).searchParams.get("q")||"";$("rack").value=q.slice(0,40);syncClr();run()}catch(_){}});
-$("f").addEventListener("submit",e=>{e.preventDefault();run();saveQ(true);if(!results.length&&parseRack(rackText).n<2)$("rack").focus();else $("rack").blur()});
+$("f").addEventListener("submit",e=>{e.preventDefault();if($("o-dict").value==="extended"&&!W_EXT){out.innerHTML='<p class="empty">Loading word list...</p>';loadExt().then(run,()=>{$("o-dict").value="enable";syncPills();run()})}else run();saveQ(true);if(!results.length&&parseRack(rackText).n<2)$("rack").focus();else $("rack").blur()});
 out.addEventListener("click",e=>{
   const li=e.target.closest(".w");
   if(li&&!e.target.closest(".look")){
@@ -142,13 +142,10 @@ document.addEventListener("click",e=>{
   const ob=e.target.closest("#optbtn");
   if(ob){const on=ob.getAttribute("aria-expanded")!=="true";ob.setAttribute("aria-expanded",on);$("opts").hidden=!on;return}
   if(e.target.closest("#clr")){$("rack").value="";syncClr();run();saveQ();$("rack").focus();return}
-  if(e.target.closest("#clrf")){["o-starts","o-ends","o-has"].forEach(i=>$(i).value="");$("o-len").value="";$("o-safe").checked=true;run()}
+  if(e.target.closest("#clrf")){["o-starts","o-ends","o-has"].forEach(i=>$(i).value="");$("o-len").value="";$("o-safe").checked=true}
 });
 function syncClr(){$("clr").hidden=!$("rack").value}
 $("rack").addEventListener("input",syncClr);
-$("o-len").addEventListener("change",run);
-$("o-safe").addEventListener("change",run);
-document.querySelectorAll(".opt input").forEach(i=>i.addEventListener("input",run));
 
 
 
@@ -160,7 +157,7 @@ function loadExt(){if(W_EXT)return Promise.resolve();return fetch("words/extende
 function syncPills(){const uk=$("o-dict").value==="extended";$("o-uk").checked=uk;document.querySelectorAll("[data-side]").forEach(b=>b.classList.toggle("on",(b.dataset.side==="extended")===uk))}
 $("o-uk").addEventListener("change",()=>{$("o-dict").value=$("o-uk").checked?"extended":"enable";$("o-dict").dispatchEvent(new Event("change"))});
 $("o-dict").addEventListener("change",()=>{const v=$("o-dict").value;syncPills();try{localStorage.setItem("gu-dict",v)}catch(_){}
-  if(v==="extended"&&!W_EXT){out.innerHTML='<p class="empty">Loading word list...</p>';loadExt().then(run,()=>{$("o-dict").value="enable";run()})}else run()});
+  if(v==="extended"&&!W_EXT)loadExt().catch(()=>{})});
 syncClr();load();
 
 function load(){
