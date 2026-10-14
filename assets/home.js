@@ -157,8 +157,8 @@ try{const q=new URL(location.href).searchParams.get("q");if(q)$("rack").value=q.
 try{if(localStorage.getItem("gu-dict")==="extended")$("o-dict").value="extended"}catch(_){}
 syncPills();
 function loadExt(){if(W_EXT)return Promise.resolve();return fetch("words/extended.txt?v=1").then(r=>r.ok?r.text():Promise.reject()).then(t=>{W_EXT=t.split(/\s+/).filter(x=>/^[a-z]{2,15}$/.test(x))})}
-function syncPills(){document.querySelectorAll("[data-dict]").forEach(b=>{const on=b.dataset.dict===$("o-dict").value;b.classList.toggle("on",on);b.setAttribute("aria-checked",on?"true":"false")})}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-dict]");if(!b)return;$("o-dict").value=b.dataset.dict;$("o-dict").dispatchEvent(new Event("change"))});
+function syncPills(){const uk=$("o-dict").value==="extended";$("o-uk").checked=uk;document.querySelectorAll("[data-side]").forEach(b=>b.classList.toggle("on",(b.dataset.side==="extended")===uk))}
+$("o-uk").addEventListener("change",()=>{$("o-dict").value=$("o-uk").checked?"extended":"enable";$("o-dict").dispatchEvent(new Event("change"))});
 $("o-dict").addEventListener("change",()=>{const v=$("o-dict").value;syncPills();try{localStorage.setItem("gu-dict",v)}catch(_){}
   if(v==="extended"&&!W_EXT){out.innerHTML='<p class="empty">Loading word list...</p>';loadExt().then(run,()=>{$("o-dict").value="enable";run()})}else run()});
 syncClr();load();
