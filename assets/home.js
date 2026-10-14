@@ -157,7 +157,8 @@ function loadExt(){if(W_EXT)return Promise.resolve();return fetch("words/extende
 function syncPills(){const uk=$("o-dict").value==="extended";$("o-uk").checked=uk;document.querySelectorAll("[data-side]").forEach(b=>b.classList.toggle("on",(b.dataset.side==="extended")===uk))}
 $("o-uk").addEventListener("change",()=>{$("o-dict").value=$("o-uk").checked?"extended":"enable";$("o-dict").dispatchEvent(new Event("change"))});
 $("o-dict").addEventListener("change",()=>{const v=$("o-dict").value;syncPills();try{localStorage.setItem("gu-dict",v)}catch(_){}
-  if(v==="extended"&&!W_EXT)loadExt().catch(()=>{})});
+  if(v==="extended"&&!W_EXT){out.innerHTML='<p class="empty">Loading word list...</p>';loadExt().then(run,()=>{$("o-dict").value="enable";syncPills();run()})}else run()});
+$("o-safe").addEventListener("change",run);
 syncClr();load();
 
 function load(){
