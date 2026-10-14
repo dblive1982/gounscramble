@@ -1071,3 +1071,7 @@ body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,b
 .hb-cats ul{gap:5px}
 .hb-cats a{font-size:13.5px;line-height:1.3}
 @media(min-width:720px){.hb-cats{gap:26px 24px}.hb-cats h3{font-size:17px}.hb-cats a{font-size:15px}}
+.hb-cats{text-align:center}
+.hb-cats h3{display:flex;flex-direction:column;align-items:center;gap:6px}
+.hb-cats .ci{color:#7c48b8;width:28px;height:28px}
+.hb-cats ul{align-items:center}
