@@ -1108,3 +1108,7 @@ body .ac #out:hover{background:#b3261e!important}
 body .ac #out{background:#4a4f5a!important}
 body .ac #out:hover{background:#363a43!important}
 .hub .hb-sec[aria-labelledby="hb-try"]{order:-103;margin-top:0}
+.hub .hb-sec[aria-labelledby="hb-try"]{order:-99;margin-top:-14px}
+.hb-cats{margin-bottom:0;gap:16px 20px}
+.hb-cats h3{margin-bottom:4px}
+.hb-cats ul{gap:3px}
