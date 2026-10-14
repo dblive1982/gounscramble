@@ -96,7 +96,7 @@ function render(){
     const n=shown[L]||PAGE, part=list.slice(0,n);
     const best=list[0].s;
     h+='<section class="group"><div class="gh"><span>'+L+" letters</span><em>"+list.length.toLocaleString()+" word"+(list.length===1?"":"s")+" \u00b7 top score "+best+'</em></div><ul class="words">';
-    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+(r.f!==r.s?'<span class="pts wwf">'+r.f+"</span>":"")+"</li>";
+    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+'<span class="pts wwf">'+r.f+"</span>"+"</li>";
     h+="</ul>";
     if(list.length>n)h+='<button class="more" type="button" data-len="'+L+'">Show '+Math.min(PAGE,list.length-n)+" more</button>";
     h+="</section>";
