@@ -638,52 +638,52 @@ GAMES = open(os.path.join(ROOT, "games_body.html"), encoding="utf-8").read()
 
 PAGES = [
     dict(file="calculators.html", page="calculators", nav="calculators", body=CALC.hub(),
-         title="Free Online Calculators | GoUnscramble",
+         title="Free Online Calculators | gounscramble./",
          desc="Free online calculators: salary, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and more. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
-         title="GoUnscramble: Word Unscrambler, Puzzles, Calculators & Planners",
+         title="gounscramble./ | Word Unscrambler, Puzzles, Calculators & Planners",
          desc="Free word unscrambler and anagram solver, plus word games, puzzles, 70+ calculators and free printable planners. Fast, free and private."),
     dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
-         title="Anagram Solver | GoUnscramble",
+         title="Anagram Solver | gounscramble./",
          desc="Find the words that use every one of your letters. A free anagram solver with blank tile support."),
     dict(file="random-word-picker.html", page="random", nav="random", body=RANDOM, skip="random",
-         title="Random Word Picker | GoUnscramble",
+         title="Random Word Picker | gounscramble./",
          desc="Pull random words from the dictionary, with an optional word length."),
     dict(file="word-counter.html", page="counter", nav="counter", body=COUNTER, skip="counter",
-         title="Word Counter | GoUnscramble",
+         title="Word Counter | gounscramble./",
          desc="Count words, characters, sentences and paragraphs, and see the reading time. Free and private."),
     dict(file="case-converter.html", page="case", nav="case", body=CASE, skip="case",
-         title="Case Converter | GoUnscramble",
+         title="Case Converter | gounscramble./",
          desc="Switch text between upper case, lower case, title case and sentence case."),
     dict(file="account.html", page="account", nav="account", body=ACCOUNT, noindex=True,
-         title="Sign in | GoUnscramble",
+         title="Sign in | gounscramble./",
          desc="Sign in or create a free GoUnscramble account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
-         title="Free Puzzles & Games: Wordle Global, Mini Crossword | GoUnscramble",
+         title="Free Puzzles & Games: Wordle Global, Mini Crossword | gounscramble./",
          desc="Free puzzles and games you can play in your browser: Wordle Global (a daily five-letter word game), a daily Mini Crossword, word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
-         title="Free Word Tools | GoUnscramble",
+         title="Free Word Tools | gounscramble./",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
     dict(file="planners.html", page="planners", nav="planners", body=PL.hub(),
-         title="Free Printable Planners (PDF) | GoUnscramble",
+         title="Free Printable Planners (PDF) | gounscramble./",
          desc="Free printable planners: weekly planner, monthly budget planner and habit tracker. Download a PDF in A4 or US Letter and print at home. No sign-up."),
     dict(file="weekly-planner.html", page="planner", nav="planners", body=PL.page("weekly-planner"), title=PL.BY["weekly-planner"]["title"], desc=PL.BY["weekly-planner"]["desc"]),
     dict(file="monthly-budget-planner.html", page="planner", nav="planners", body=PL.page("monthly-budget-planner"), title=PL.BY["monthly-budget-planner"]["title"], desc=PL.BY["monthly-budget-planner"]["desc"]),
     dict(file="monthly-habit-tracker.html", page="planner", nav="planners", body=PL.page("monthly-habit-tracker"), title=PL.BY["monthly-habit-tracker"]["title"], desc=PL.BY["monthly-habit-tracker"]["desc"]),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
-         title="About | GoUnscramble",
+         title="About | gounscramble./",
          desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, 70+ everyday calculators and free printable planners."),
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
-         title="Privacy | GoUnscramble",
+         title="Privacy | gounscramble./",
          desc="How GoUnscramble handles what you type and what your browser sends."),
     dict(file="terms.html", page="terms", nav=None, body=cardify(TERMS),
-         title="Terms and Conditions | GoUnscramble",
+         title="Terms and Conditions | gounscramble./",
          desc="The terms for using GoUnscramble and its free word tools, games, calculators and optional accounts. Information only, not financial, legal or medical advice."),
     dict(file="contact.html", page="contact", nav=None, body=CONTACT,
-         title="Contact | GoUnscramble",
+         title="Contact | gounscramble./",
          desc="Get in touch with GoUnscramble."),
     dict(file="credits.html", page="credits", nav=None, body=cardify(CREDITS),
-         title="Credits | GoUnscramble",
+         title="Credits | gounscramble./",
          desc="Word list and font credits for GoUnscramble."),
 ]
 
@@ -717,14 +717,14 @@ def seo_tags(p, url):
     img = SITE + "/assets/og.png?v=5"
     tags = [
         '<meta property="og:type" content="website">',
-        '<meta property="og:site_name" content="GoUnscramble">',
+        '<meta property="og:site_name" content="gounscramble./">',
         '<meta property="og:title" content="%s">' % esc(p["title"]),
         '<meta property="og:description" content="%s">' % esc(p["desc"]),
         '<meta property="og:url" content="%s">' % url,
         '<meta property="og:image" content="%s">' % img,
         '<meta property="og:image:width" content="1200">',
         '<meta property="og:image:height" content="630">',
-        '<meta property="og:image:alt" content="GoUnscramble: word tools, puzzles, calculators and planners">',
+        '<meta property="og:image:alt" content="gounscramble./: word tools, puzzles, calculators and planners">',
         '<meta name="twitter:card" content="summary_large_image">',
         '<meta name="twitter:title" content="%s">' % esc(p["title"]),
         '<meta name="twitter:description" content="%s">' % esc(p["desc"]),
@@ -732,9 +732,9 @@ def seo_tags(p, url):
     ]
     graph = []
     if p["file"] == "index.html":
-        graph.append({"@type": "WebSite", "name": "GoUnscramble", "url": SITE + "/", "inLanguage": "en", "description": "Free word unscrambler, word tools, puzzles, games, calculators and printable planners."})
+        graph.append({"@type": "WebSite", "name": "gounscramble./", "url": SITE + "/", "inLanguage": "en", "description": "Free word unscrambler, word tools, puzzles, games, calculators and printable planners."})
     else:
-        crumbs = [("Home", SITE + "/"), (p["title"].replace(" | GoUnscramble", ""), url)]
+        crumbs = [("Home", SITE + "/"), (p["title"].replace(" | gounscramble./", ""), url)]
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "name": n, "item": u} for i, (n, u) in enumerate(crumbs)]})
     tools = {"index.html", "anagram-solver.html", "random-word-picker.html", "word-counter.html", "case-converter.html"}
@@ -808,11 +808,11 @@ def guide_pages():
     for fname, article in G.guide_bodies(words).items():
         title, desc = G.PAGE_META[fname]
         pages.append(dict(file=fname, page="guide", nav="guides", body=GUIDE_WRAP % article,
-                          title=title + " | GoUnscramble", desc=desc))
+                          title=title + " | gounscramble./", desc=desc))
     import wordpages as W
     for fname, (title, desc, article) in W.build(W.load(os.path.dirname(OUT) if False else OUT)).items():
         pages.append(dict(file=fname, page="guide", nav="guides", body=GUIDE_WRAP % article,
-                          title=title + " | GoUnscramble", desc=desc))
+                          title=title + " | gounscramble./", desc=desc))
     return pages
 
 
@@ -825,7 +825,7 @@ def sitemap(pages):
 def main():
     os.makedirs(OUT, exist_ok=True)
     calc_pages = [dict(file=c["file"], page="calc", nav="calculators", body=CALC.body(c["slug"]), app=True,
-                       title=c["name"] + " | GoUnscramble", desc=c["lede"]) for c in CALC.C]
+                       title=c["name"] + " | gounscramble./", desc=c["lede"]) for c in CALC.C]
     pages = PAGES + calc_pages + guide_pages()
     for p in pages:
         with open(os.path.join(OUT, p["file"]), "w", encoding="utf-8") as f:

@@ -249,7 +249,7 @@ def main():
             out = os.path.join(root, "downloads", "%s-%s.pdf" % (slug, sname))
             c = canvas.Canvas(out, pagesize=(W, H))
             c.setTitle({"weekly-planner": "Weekly planner", "monthly-budget-planner": "Monthly budget planner", "monthly-habit-tracker": "Monthly habit tracker"}[slug] + " | GoUnscramble")
-            c.setAuthor("GoUnscramble"); c.setSubject("Free printable planner from gounscramble.com")
+            c.setAuthor("gounscramble./"); c.setSubject("Free printable planner from gounscramble.com")
             fn(c, W, H); c.showPage(); c.save()
         # preview image from the A4 PDF
         pdf = os.path.join(root, "downloads", slug + "-a4.pdf")
