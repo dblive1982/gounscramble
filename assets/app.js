@@ -3,7 +3,7 @@
   'use strict';
   var page = document.body.getAttribute('data-page');
   var cache = {};
-  var DICTS = { enable: 'words/enable.txt' };
+  var DICTS = { enable: 'words/enable.txt', extended: 'words/extended.txt?v=1' };
   var MAX_SHOWN = 3000;
   var EXAMPLES = [["planet",["planet","platen"]],["garden",["garden","danger","gander"]],["orange",["orange","onager"]],["school",["school","cholos"]],["window",["window","widow"]],["bridge",["bridge","begird"]],["flower",["flower","fowler","reflow"]],["monkey",["monkey","money","keno"]],["castle",["castle","cleats","eclats"]],["silver",["silver","ervils","livers"]],["market",["market","armet","maker"]],["purple",["purple","pulper"]],["yellow",["yellow","lowly","welly"]],["winter",["winter","twiner"]],["summer",["summer","mures","muser"]],["doctor",["doctor","coot","cord"]],["family",["family","filmy","flamy"]],["island",["island","anils","dials"]],["jungle",["jungle","lunge","genu"]],["pocket",["pocket","coke","cope"]],["basket",["basket","abets","bakes"]],["candle",["candle","lanced"]],["dragon",["dragon","adorn","argon"]],["forest",["forest","fetors","fortes"]],["guitar",["guitar","tragi","airt"]],["hammer",["hammer","harem","herma"]],["insect",["insect","incest","nicest"]],["jacket",["jacket","cake","cate"]],["kitten",["kitten","kent","kine"]],["ladder",["ladder","larded","raddle"]],["magnet",["magnet","agent","ament"]],["nature",["nature","antre","tuner"]],["oyster",["oyster","storey","toyers"]],["pencil",["pencil","cline","ceil"]],["rabbit",["rabbit","rabbi","abri"]],["sister",["sister","resist"]],["tomato",["tomato","motto","atom"]],["valley",["valley","alley","leavy"]],["wizard",["wizard","arid","draw"]],["anchor",["anchor","archon","rancho"]],["beach",["beach","ache","bach"]],["cloud",["cloud","could"]],["dance",["dance","acned","caned"]],["eagle",["eagle","aglee"]],["fruit",["fruit","frit","rift"]],["grape",["grape","gaper","pager"]],["house",["house","hoes","hose"]]];
 
@@ -23,7 +23,7 @@
   try { hideRude = localStorage.getItem('gu-hide-rude') === '1'; } catch (err) { /* storage unavailable */ }
   function loadRude() {
     if (rude) return Promise.resolve(rude);
-    return fetch('words/offensive.txt').then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }).then(function (t) {
+    return fetch('words/offensive.txt?v=2').then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }).then(function (t) {
       var set = {}; t.split(/\s+/).forEach(function (x) { if (x) set[x] = true; });
       rude = set; return set;
     });
@@ -40,6 +40,13 @@
       hideRude = cb.checked;
       try { localStorage.setItem('gu-hide-rude', hideRude ? '1' : '0'); } catch (err) { /* ignore */ }
     });
+  }
+
+  function setupDictBox() {
+    var s = $('dictionary');
+    if (!s) return;
+    try { var d = localStorage.getItem('gu-dict'); if (d && DICTS[d]) s.value = d; } catch (err) { /* ignore */ }
+    s.addEventListener('change', function () { try { localStorage.setItem('gu-dict', s.value); } catch (err) { /* ignore */ } });
   }
 
   function dictKey() { var s = $('dictionary'); return s && s.value ? s.value : 'enable'; }
@@ -387,6 +394,7 @@
   setupTheme();
   setupClear();
   setupRudeBox();
+  setupDictBox();
   if (page === 'home') setupUnscramble('subset');
   else if (page === 'anagram') setupUnscramble('exact');
   else if (page === 'random') setupRandom();

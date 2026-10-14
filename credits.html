@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=51671dda">
 
-<link rel="stylesheet" href="assets/minimal.css?v=073396e7">
+<link rel="stylesheet" href="assets/minimal.css?v=64096a31">
 <link rel="stylesheet" href="assets/dark.css?v=789f4efb">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
@@ -77,8 +77,55 @@
 <main><div class="wrap"><article class="prose">
 <h1>Credits</h1>
 <div class="cards guide-cards">
-<div class="card"><h3>Word list</h3><p>The unscrambler uses ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
-<p>No other word lists are used at present. If licensed lists such as NWL or CSW are added, they will be credited here.</p></div>
+<div class="card"><h3>Word lists</h3><p>The standard word list is ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
+<p>The extended word list combines ENABLE with words from the English Speller Database (ESDB, formerly SCOWL), including spelling variants for American, British and Canadian English. Offensive words are flagged using the same database. Both are used under the notices below.</p>
+<p>The official US (NWL) and UK (CSW) tournament lists are not used, and the extended list is not a copy of any of them.</p>
+<h3>English Speller Database notice</h3>
+<pre class="notice">Copyright 2000-2026 by Kevin Atkinson
+
+Permission to use, copy, modify, distribute, and sell any part of the English
+Speller Database (ESDB, previously known as SCOWLv2), or word lists
+created from it, is hereby granted without fee, provided that the above
+copyright notice appears in all copies and that both the above copyright
+notice and this notice appear in supporting documentation.  Kevin Atkinson
+makes no representations about the suitability of this database for any
+purpose.  It is provided "as is" without express or implied warranty.
+
+ESDB is derived from many sources, most of which are in the Public Domain.
+Data from the Corpus of Contemporary American English (COCA) was also used.
+
+All data from COCA comes from 3-gram data that is not freely available;
+however, the usage is within the rights given by the NDA that was signed when
+purchasing the data.  More information on COCA is available at
+https://www.english-corpora.org/coca/.
+
+The primary source of words for ESDB comes from 12dicts and ENABLE2K.  Both
+are in the Public Domain, but Alan Beale &lt;biljir@pobox.com&gt; deserves special
+credit as he is the author of 12dicts and a major contributor to ENABLE2K.  In
+addition, he gave me an incredible amount of feedback and created a number of
+special lists in order to help improve the overall quality of ESDB.</pre>
+<h3>UK Advanced Cryptics Dictionary notice</h3>
+<pre class="notice">' applies.
+
+If you are distributing the database or results from the 
+database that is not a speller dictionary or generated word list, then both
+copyrights may apply depending on the parts you use.  In addition, the WordNet
+copyright MIGHT apply as WordNet was one of many sources used for the initial
+POS assignment.
+
+=== AU
+
+The initial information for Australian English comes from Benjamin Titze:
+
+  Copyright 2016 by Benjamin Titze
+
+  Permission to use, copy, modify, distribute and sell this array, the
+  associated software, and its documentation for any purpose is hereby
+  granted without fee, provided that the above copyright notice appears
+  in all copies and that both that copyright notice and this permission
+  notice appear in supporting documentation. Benjamin Titze makes no
+  representations about the suitability of this array for any
+  purpose. It is provided "as is" without express or implied warranty.</pre></div>
 <div class="card"><h3>Fonts</h3><p>The site uses Inter, released under the SIL Open Font License and served by Google Fonts.</p></div>
 </div>
 </article></div></main>
@@ -100,7 +147,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/app.js?v=342c92b9"></script>
+<script src="assets/app.js?v=8d149214"></script>
 <script>(function(){var g=document.getElementById("theme-opts");if(!g)return;var bs=g.querySelectorAll("button");function d(){return document.documentElement.getAttribute("data-theme")==="dark"}function p(){bs.forEach(function(x){x.setAttribute("aria-pressed",String((x.getAttribute("data-t")==="dark")===d()))})}bs.forEach(function(x){x.addEventListener("click",function(){var n=x.getAttribute("data-t");document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("gu-theme",n)}catch(e){}p()})});p()})();</script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){if(!m.hasAttribute("open")||m.classList.contains("closing"))return;m.classList.add("closing");setTimeout(function(){m.removeAttribute("open");m.classList.remove("closing")},230)}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});var sm=m.querySelector("summary");if(sm)sm.addEventListener("click",function(e){if(m.hasAttribute("open")){e.preventDefault();c()}});})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}

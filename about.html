@@ -31,7 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Albert+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v=51671dda">
 
-<link rel="stylesheet" href="assets/minimal.css?v=073396e7">
+<link rel="stylesheet" href="assets/minimal.css?v=64096a31">
 <link rel="stylesheet" href="assets/dark.css?v=789f4efb">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
@@ -79,7 +79,7 @@
 <p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 70 simple calculators for money, maths, health and everyday sums.</p>
 <div class="cards guide-cards">
 <div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
-<div class="card"><h3>Dictionaries</h3><p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p></div>
+<div class="card"><h3>Dictionaries</h3><p>Two word lists are available: standard (ENABLE, about 173,000 words) and extended (about 245,000 words, built from open sources). The official US (NWL) and UK (CSW) lists are not included.</p></div>
 <div class="card"><h3>Your privacy</h3><p>The tools run in your browser. The letters and text you type stay on your device. See the <a href="privacy.html">privacy page</a> for details.</p></div>
 <div class="card"><h3>Get in touch</h3><p>Spotted a missing word or a bug? Use the <a href="contact.html">contact page</a>.</p></div>
 </div>
@@ -102,7 +102,7 @@
 </div></footer>
 <!--/footer-->
 <script src="assets/engine.js?v=61b07276"></script>
-<script src="assets/app.js?v=342c92b9"></script>
+<script src="assets/app.js?v=8d149214"></script>
 <script>(function(){var g=document.getElementById("theme-opts");if(!g)return;var bs=g.querySelectorAll("button");function d(){return document.documentElement.getAttribute("data-theme")==="dark"}function p(){bs.forEach(function(x){x.setAttribute("aria-pressed",String((x.getAttribute("data-t")==="dark")===d()))})}bs.forEach(function(x){x.addEventListener("click",function(){var n=x.getAttribute("data-t");document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("gu-theme",n)}catch(e){}p()})});p()})();</script>
 <script>(function(){var m=document.querySelector(".menu");if(!m)return;function c(){if(!m.hasAttribute("open")||m.classList.contains("closing"))return;m.classList.add("closing");setTimeout(function(){m.removeAttribute("open");m.classList.remove("closing")},230)}m.addEventListener("click",function(e){if(e.target===m||e.target.closest(".menu-x"))c()});document.addEventListener("keydown",function(e){if(e.key==="Escape")c()});var sm=m.querySelector("summary");if(sm)sm.addEventListener("click",function(e){if(m.hasAttribute("open")){e.preventDefault();c()}});})();(function(){var o=document.getElementById("menu-out"),a=document.querySelector('.menu-list a[href="account.html"]'),u=document.querySelector(".user-btn");
 function on(){try{return localStorage.getItem("gu-in")==="1"}catch(e){return false}}

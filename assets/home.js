@@ -3,7 +3,7 @@
 const VAL={a:1,e:1,i:1,o:1,u:1,l:1,n:1,s:1,t:1,r:1,d:2,g:2,b:3,c:3,m:3,p:3,f:4,h:4,v:4,w:4,y:4,k:5,j:8,x:8,q:10,z:10};
 const WWF={a:1,b:4,c:4,d:2,e:1,f:4,g:3,h:3,i:1,j:10,k:5,l:2,m:4,n:2,o:1,p:4,q:10,r:1,s:1,t:1,u:2,v:5,w:4,x:8,y:3,z:10};
 let V=VAL;
-let BAD=new Set(), W_ENA=[], loaded=false;
+let BAD=new Set(), W_ENA=[], W_EXT=null, loaded=false;
 const PAGE=40;
 const $=id=>document.getElementById(id);
 const out=$("out");
@@ -35,7 +35,7 @@ function opts(){
 }
 
 function solve(text){
-  const WORDS=W_ENA;
+  const WORDS=($("o-dict")&&$("o-dict").value==="extended"&&W_EXT)?W_EXT:W_ENA;
   const rack=parseRack(text), o=opts(), res=[];
   const safe=$("o-safe").checked;
   const anyMode=rack.n<2&&(o.len||o.starts||o.ends||o.has);
@@ -154,15 +154,20 @@ document.querySelectorAll(".opt input").forEach(i=>i.addEventListener("input",ru
 
 ["o-starts","o-ends","o-has"].forEach(i=>$(i).value="");$("o-len").value="";$("o-safe").checked=true;
 try{const q=new URL(location.href).searchParams.get("q");if(q)$("rack").value=q.slice(0,40)}catch(_){}
+try{if(localStorage.getItem("gu-dict")==="extended")$("o-dict").value="extended"}catch(_){}
+function loadExt(){if(W_EXT)return Promise.resolve();return fetch("words/extended.txt?v=1").then(r=>r.ok?r.text():Promise.reject()).then(t=>{W_EXT=t.split(/\s+/).filter(x=>/^[a-z]{2,15}$/.test(x))})}
+$("o-dict").addEventListener("change",()=>{const v=$("o-dict").value;try{localStorage.setItem("gu-dict",v)}catch(_){}
+  if(v==="extended"&&!W_EXT){out.innerHTML='<p class="empty">Loading word list...</p>';loadExt().then(run,()=>{$("o-dict").value="enable";run()})}else run()});
 syncClr();load();
 
 function load(){
   Promise.all([
     fetch("words/enable.txt").then(r=>r.ok?r.text():Promise.reject()),
-    fetch("words/offensive.txt").then(r=>r.ok?r.text():"").catch(()=>"")
+    fetch("words/offensive.txt?v=2").then(r=>r.ok?r.text():"").catch(()=>"")
   ]).then(([w,b])=>{
     W_ENA=w.split(/\s+/).filter(x=>/^[a-z]{2,15}$/.test(x));
     BAD=new Set(b.split(/\s+/).filter(Boolean));
+    if($("o-dict").value==="extended")return loadExt().then(()=>{loaded=true;run()},()=>{$("o-dict").value="enable";loaded=true;run()});
     loaded=true;run();
   }).catch(()=>{out.innerHTML='<p class="empty">The word list could not be loaded. Please try again later.</p>'});
 }

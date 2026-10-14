@@ -195,9 +195,8 @@ def cards(skip=None):
 DICT_ROW = """<div class="dict-row">
 <label for="dictionary">Dictionary</label>
 <select id="dictionary" class="field">
-<option value="enable" selected>ENABLE (general English)</option>
-<option value="nwl" disabled>US and Canada (NWL), coming soon</option>
-<option value="csw" disabled>UK (CSW), coming soon</option>
+<option value="enable" selected>Standard: ENABLE (about 173,000 words)</option>
+<option value="extended">Extended: open list (about 245,000 words)</option>
 </select>
 <label class="check"><input type="checkbox" id="hide-rude"> Hide offensive words</label>
 </div>"""
@@ -325,6 +324,7 @@ HOME = """<main>
 <label class="opt">Contains<input id="o-has" type="text" maxlength="8" placeholder="ram" autocapitalize="off"></label>
 <label class="opt">Word length<select id="o-len"><option value="">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option></select></label>
 </div></div>
+<div class="og og-dict"><label class="opt">Dictionary<select id="o-dict"><option value="enable">Standard: ENABLE (about 173,000 words)</option><option value="extended">Extended: open list (about 245,000 words)</option></select></label></div>
 <div class="og og-foot"><label class="sw"><input class="sw-in" id="o-safe" type="checkbox" checked><span class="sw-tr" aria-hidden="true"></span><span>Hide offensive words</span></label><button class="reset" id="clrf" type="button">Clear all</button></div>
 </div></div>
 </div></section>
@@ -337,9 +337,9 @@ HOME = """<main>
 <h3>How to use it</h3>
 <p>Type your letters, then press GO. Use <b>?</b> or <b>*</b> for a blank tile. Tap any word to look up its meaning. Use the options to narrow results by length, start, end or letters inside.</p>
 <h3>Scores and word list</h3>
-<p>Each word shows its tile score, with the highest scoring words first. Every tile shows its Scrabble letter value, and a blue number appears above it when Words With Friends scores that letter differently. Each word shows its Scrabble total in grey and, when different, its Words With Friends total in blue. Words come from the ENABLE list, which is public domain.</p>
+<p>Each word shows its tile score, with the highest scoring words first. Every tile shows its Scrabble letter value, and a blue number appears above it when Words With Friends scores that letter differently. Each word shows its Scrabble total in grey and, when different, its Words With Friends total in blue. Words come from the standard ENABLE list (public domain) or, if you choose it under More options, our extended list of about 245,000 words built from open sources.</p>
 <p>Looking for more? Open the menu for the anagram solver, word games and puzzles, the <a href="calculators.html">calculators</a> and the free <a href="planners.html">printable planners</a>. <a href="about.html">Read more about <b>go</b>unscramble</a>.</p></section>
-<p class="fine">ENABLE and Words With Friends use the ENABLE word list (public domain). Words With Friends changes letter scores; Scrabble uses Scrabble scores. Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
+<p class="fine">The standard list is ENABLE (public domain) and is used for both Scrabble and Words With Friends results; Words With Friends only changes the letter scores. The extended list adds about 75,000 more words from open sources, including more British spellings, and is a guide rather than an official list. The official Scrabble US, UK and Collins lists are not included. If a letter in Starts with, Ends with or Contains is missing from your tiles, it is added. A wildcard tile scores 0.</p>
 </div>
 <div class="hub hub-prog">
 <section class="hb-sec" id="hb-prog" aria-labelledby="hb-me"><div class="hb-head"><h2 id="hb-me">Your progress</h2><button type="button" class="hb-dyhint" id="hb-dyhint" hidden aria-label="Write in your daily journal"><svg class="dh-ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/><path d="M14 7l3 3"/></svg><span class="dh-t">Daily journal</span></button><span class="hb-doodle" id="hb-doodle" aria-hidden="true"><svg viewBox="0 0 450 78" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 24h86M34 38h76M20 52h82"/><g class="dd-a"><path d="M126 22H330V6L432 38 330 70V54H126Z" transform="translate(5 5)" fill="#000" stroke="#000"/><path d="M126 22H330V6L432 38 330 70V54H126Z" fill="#ffd23f"/><text x="226" y="47" text-anchor="middle" font-family="Fredoka,Nunito,system-ui,sans-serif" font-weight="700" font-size="28" fill="#000" stroke="none" letter-spacing="1">LET'S GO!</text></g><path class="dd-s" fill="#ff6b6b" stroke-width="3" d="M196 1l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/><path class="dd-s" fill="#bfe6ee" stroke-width="3" d="M262 63l2.6 5.2 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></span><a id="hb-acc" href="account.html">Sign in to save it &rsaquo;</a></div>
@@ -472,7 +472,7 @@ ABOUT = """<main><div class="wrap"><article class="prose">
 <p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 70 simple calculators for money, maths, health and everyday sums.</p>
 <div class="cards guide-cards">
 <div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
-<div class="card"><h3>Dictionaries</h3><p>The unscrambler currently uses the ENABLE word list. US and Canada (NWL) and UK (CSW) dictionaries are planned.</p></div>
+<div class="card"><h3>Dictionaries</h3><p>Two word lists are available: standard (ENABLE, about 173,000 words) and extended (about 245,000 words, built from open sources). The official US (NWL) and UK (CSW) lists are not included.</p></div>
 <div class="card"><h3>Your privacy</h3><p>The tools run in your browser. The letters and text you type stay on your device. See the <a href="privacy.html">privacy page</a> for details.</p></div>
 <div class="card"><h3>Get in touch</h3><p>Spotted a missing word or a bug? Use the <a href="contact.html">contact page</a>.</p></div>
 </div>
@@ -574,9 +574,56 @@ CONTACT = """<main><div class="wrap"><article class="prose">
 
 CREDITS = """<main><div class="wrap"><article class="prose">
 <h1>Credits</h1>
-<h2>Word list</h2>
-<p>The unscrambler uses ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
-<p>No other word lists are used at present. If licensed lists such as NWL or CSW are added, they will be credited here.</p>
+<h2>Word lists</h2>
+<p>The standard word list is ENABLE, the Enhanced North American Benchmark Lexicon, which is in the public domain.</p>
+<p>The extended word list combines ENABLE with words from the English Speller Database (ESDB, formerly SCOWL), including spelling variants for American, British and Canadian English. Offensive words are flagged using the same database. Both are used under the notices below.</p>
+<p>The official US (NWL) and UK (CSW) tournament lists are not used, and the extended list is not a copy of any of them.</p>
+<h3>English Speller Database notice</h3>
+<pre class="notice">Copyright 2000-2026 by Kevin Atkinson
+
+Permission to use, copy, modify, distribute, and sell any part of the English
+Speller Database (ESDB, previously known as SCOWLv2), or word lists
+created from it, is hereby granted without fee, provided that the above
+copyright notice appears in all copies and that both the above copyright
+notice and this notice appear in supporting documentation.  Kevin Atkinson
+makes no representations about the suitability of this database for any
+purpose.  It is provided "as is" without express or implied warranty.
+
+ESDB is derived from many sources, most of which are in the Public Domain.
+Data from the Corpus of Contemporary American English (COCA) was also used.
+
+All data from COCA comes from 3-gram data that is not freely available;
+however, the usage is within the rights given by the NDA that was signed when
+purchasing the data.  More information on COCA is available at
+https://www.english-corpora.org/coca/.
+
+The primary source of words for ESDB comes from 12dicts and ENABLE2K.  Both
+are in the Public Domain, but Alan Beale &lt;biljir@pobox.com&gt; deserves special
+credit as he is the author of 12dicts and a major contributor to ENABLE2K.  In
+addition, he gave me an incredible amount of feedback and created a number of
+special lists in order to help improve the overall quality of ESDB.</pre>
+<h3>UK Advanced Cryptics Dictionary notice</h3>
+<pre class="notice">' applies.
+
+If you are distributing the database or results from the 
+database that is not a speller dictionary or generated word list, then both
+copyrights may apply depending on the parts you use.  In addition, the WordNet
+copyright MIGHT apply as WordNet was one of many sources used for the initial
+POS assignment.
+
+=== AU
+
+The initial information for Australian English comes from Benjamin Titze:
+
+  Copyright 2016 by Benjamin Titze
+
+  Permission to use, copy, modify, distribute and sell this array, the
+  associated software, and its documentation for any purpose is hereby
+  granted without fee, provided that the above copyright notice appears
+  in all copies and that both that copyright notice and this permission
+  notice appear in supporting documentation. Benjamin Titze makes no
+  representations about the suitability of this array for any
+  purpose. It is provided "as is" without express or implied warranty.</pre>
 <h2>Fonts</h2>
 <p>The site uses Inter, released under the SIL Open Font License and served by Google Fonts.</p>
 </article></div></main>
