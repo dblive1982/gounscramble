@@ -1041,11 +1041,12 @@ body .hm .gh span{background:#e5e7ed!important;color:#1c2230!important}
 .opts .og-dict{flex-wrap:wrap}
 .dict-note{flex-basis:100%;margin:2px 0 0;font-size:13px;line-height:1.45;color:var(--muted);font-weight:400}
 
-/* Dictionary heading + US / UK sliding switch */
-.opts .og-dict{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}
-.opts .og-dict .dict-lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.opts .sw-dict{gap:10px}
+/* Dictionary label + US / UK sliding switch, in the same row as Hide offensive words and Clear all */
+.opts .dict-grp{display:inline-flex;align-items:center;gap:10px}
+.opts .dict-lbl{font-size:14px;font-weight:600;color:var(--ink)}
+.opts .sw-dict{gap:8px}
 .opts .sw-side{font-size:14px;font-weight:600;color:var(--muted);transition:color .15s}
 .opts .sw-side.on{color:var(--ink);font-weight:700}
 .opts .sw-dict .sw-tr{background:#7c48b8}
 .opts .sw-dict .sw-in:not(:checked)+.sw-tr::after{transform:none}
+.opts .og-foot{row-gap:12px}
