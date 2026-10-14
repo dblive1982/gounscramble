@@ -19,7 +19,7 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
         . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1fa"><tr><td align="center" style="padding:24px 12px">'
         . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">'
         . '<tr><td align="center" style="background:#e6dcf6;border-radius:20px 20px 0 0;padding:26px 12px 22px">'
-        . '<img src="' . htmlspecialchars($logo, ENT_QUOTES, 'UTF-8') . '" width="74" height="88" alt="" style="display:block;border:0;height:88px;width:74px;margin:0 auto 12px">'
+        . '<img src="' . htmlspecialchars($logo, ENT_QUOTES, 'UTF-8') . '" width="64" height="64" alt="" style="display:block;border:0;height:64px;width:64px;margin:0 auto 12px">'
         . '<img src="' . htmlspecialchars($wm, ENT_QUOTES, 'UTF-8') . '" width="190" height="29" alt="gounscramble." style="display:block;border:0;height:29px;width:190px;margin:0 auto"></td></tr>'
         . '<tr><td style="background:#ffffff;border:1px solid #e0d8ee;border-top:0;border-radius:0 0 20px 20px;padding:28px 26px;font-family:Arial,Helvetica,sans-serif;color:#1c2230;font-size:16px;line-height:1.6">'
         . '<h1 style="margin:0 0 14px;font-size:26px;line-height:1.2;color:#1c2230">' . $h . '</h1>'

@@ -24,8 +24,8 @@ def brand(c, W, H):
     """Logo head + wordmark, top right."""
     from reportlab.lib.utils import ImageReader
     lg = ImageReader(os.path.join(root, "assets/logo.png")); wm = ImageReader(os.path.join(root, "assets/wordmark.png"))
-    lh = 11 * mm; lw = lh * 520 / 615
-    wh = 5.2 * mm; ww = wh * 900 / 139
+    lh = 11 * mm; lw = lh * 1.0
+    wh = 5.2 * mm; ww = wh * 900 / 131
     x = W - M - ww - lw - 2.2 * mm; y = H - M - 12 * mm
     c.drawImage(lg, x, y, lw, lh, mask="auto")
     c.drawImage(wm, x + lw + 2.2 * mm, y + (lh - wh) / 2, ww, wh, mask="auto")
