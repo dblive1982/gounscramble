@@ -25,7 +25,7 @@
   }
   var prof = null;
   function face(el, name, img) {
-    el.style.backgroundImage = img ? "url(" + img + ")" : "";
+    if (img) el.style.setProperty("background-image", "url(" + img + ")", "important"); else el.style.removeProperty("background-image");
     el.textContent = img ? "" : (name || "?").charAt(0).toUpperCase();
     el.classList.toggle("has", !!img);
   }
@@ -215,13 +215,13 @@
       if (!d.ok) { er.textContent = d.error || "Could not delete the account."; return; }
       try { localStorage.removeItem("gu-in"); localStorage.removeItem("gu-av"); localStorage.removeItem("gu-progress"); localStorage.removeItem("gu-ws"); localStorage.removeItem("gu-progress"); } catch (x) { /* ignore */ }
       prof = null; user = null;
-      var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; }
+      var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.removeProperty("background-image"); }
       if (window.guMenu) window.guMenu();
       $("sent-t").textContent = "Your account and everything saved with it has been deleted."; show("sent"); $("ac-ttl").textContent = "Account deleted"; document.title = "Account deleted | GoUnscramble";
     });
   });
   $("out").addEventListener("click", function () {
-    api("logout", {}).then(function () { if (window.GUP) GUP.clear(); prof = null; try { localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; setUser(null); });
+    api("logout", {}).then(function () { if (window.GUP) GUP.clear(); prof = null; try { localStorage.removeItem("gu-av"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.removeProperty("background-image"); } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; setUser(null); });
   });
 
   var m = /[?&]reset=([a-f0-9]{64})/.exec(location.search);
@@ -236,7 +236,7 @@
       if (!g) ["g-in", "or-in", "g-up", "or-up"].forEach(function (id) { $(id).hidden = true; });
       if (g && d.google_id) startGoogle(d.google_id);
       if (d.user) setUser(d.user);
-      else { try { localStorage.removeItem("gu-in"); localStorage.removeItem("gu-av"); localStorage.removeItem("gu-progress"); localStorage.removeItem("gu-ws"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.backgroundImage = ""; } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
+      else { try { localStorage.removeItem("gu-in"); localStorage.removeItem("gu-av"); localStorage.removeItem("gu-progress"); localStorage.removeItem("gu-ws"); } catch (e) { /* ignore */ } var ub = document.querySelector(".user-btn"); if (ub) { ub.classList.remove("pic"); ub.style.removeProperty("background-image"); } var mo = document.getElementById("menu-out"); if (mo) mo.hidden = true; show(token ? "reset" : (location.hash === "#signup" ? "signup" : "signin")); }
     })
     .catch(function () { $("ac-off").hidden = false; show(token ? "reset" : "signin"); });
 })();
