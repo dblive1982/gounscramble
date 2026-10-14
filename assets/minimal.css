@@ -1102,3 +1102,4 @@ body .menu-list .menu-x+a{margin-top:14px}
 .hm .optbtn{margin:10px 0 0 0;padding:6px 12px;font-size:13px;gap:6px;width:fit-content}
 .hm .optbtn svg:first-child{width:15px;height:15px}
 .hm .optbtn .chev{width:13px;height:13px}
+.hm .optbtn{margin:10px auto 0}
