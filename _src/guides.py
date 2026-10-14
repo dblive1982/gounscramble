@@ -220,7 +220,7 @@ WORD_LISTS = """<h1>Word lists explained: ENABLE, NWL and CSW</h1>
 <h2>CSW</h2>
 <p>CSW stands for Collins Scrabble Words, the list used for tournament play in the United Kingdom and most other countries outside North America. It is published by Collins and also licensed. It is generally larger than the North American list and has some different words. It is not included on this site, and our extended list is not a copy of it.</p>
 <h2>Our extended list</h2>
-<p>The extended list has about 245,000 words. It combines ENABLE with the open English Speller Database, including American, British and Canadian spellings, and leaves out proper nouns, abbreviations and anything with hyphens or apostrophes. It finds more words than the standard list, but it is a general word list and not an official game list, so some words in it may not be accepted in your game and some accepted words may be missing. It is a good guide when you want more options, and for competitive play you should always check the official list. Sources are on the <a href="credits.html">credits page</a>.</p>
+<p>The extended list has about 245,000 words. It combines ENABLE with the open English Speller Database, including American, British and Canadian spellings, and leaves out proper nouns, abbreviations and anything with hyphens or apostrophes. It finds more words than the standard list, but it is a general word list and not an official game list, so some words in it may not be accepted in your game and some accepted words may be missing. It is a good guide when you want more options, and for competitive play you should always check the official list. On the home page the standard and extended lists are combined, and words that are only in the extended part are shown lighter, so you can see which are the safer choices for your game. Sources are on the <a href="credits.html">credits page</a>.</p>
 <h2>What this means for you</h2>
 <ul>
 <li>Most common words appear in every list, so for everyday puzzles the differences are small.</li>
@@ -262,7 +262,7 @@ FAQ_ITEMS = [
     ("Where do the filters go?",
      "Press More options on the home page. There you can pick a dictionary and set starts with, ends with, contains and word length."),
     ("Which dictionary does the site use?",
-     "It has two lists. Standard is ENABLE, a public-domain list of about 173,000 words. Extended has about 245,000 words and is built from open sources, so it finds more words, including British spellings. The official US (NWL) and UK (CSW) lists are licensed and are not included. See word lists explained."),
+     "It uses a combined list of about 245,000 words: ENABLE (about 173,000 words, public domain) plus extra words from open sources, including British spellings. Words found only in the extra set are shown lighter. The official US (NWL) and UK (CSW) lists are licensed and are not included. See word lists explained."),
     ("A word I know is missing. Why?",
      "No list contains every word. Proper nouns, hyphenated words and very new words are often left out, and each game list makes different choices. You can tell us through the contact page."),
     ("Is every word the tool shows valid in my game?",
@@ -431,7 +431,7 @@ HOME_EXTRA = """<section class="block narrow">
 <section class="block narrow">
 <h2>Our dictionary</h2>
 <p>gounscramble uses <strong>ENABLE</strong>, the Enhanced North American Benchmark Lexicon. It is a free, public-domain word list of about 173,000 English words, widely used for word games and puzzles. Because it is public domain, we can use it freely and show you every word it contains.</p>
-<p>You can switch to our extended list of about 245,000 words under More options. It is built from open sources, finds more words, including British spellings, and is not a copy of any official list. Both are general lists, so neither will match any one game exactly. Some words that are valid in Collins (CSW) or the NASPA Word List may be missing, and a few ENABLE words may not be accepted in every game. Offensive words are hidden by default, and you can switch them back on with the toggle under the search box. Learn more in <a href="word-lists-explained.html">word lists explained</a> and <a href="credits.html">credits</a>.</p>
+<p>Results use a combined list of about 245,000 words: ENABLE plus extra words from open sources, including British spellings. Words found only in the extra set are shown lighter, and you can switch to standard words only under More options. The combined list is not a copy of any official list, so it will not match any one game exactly. Some words that are valid in Collins (CSW) or the NASPA Word List may be missing, and a few ENABLE words may not be accepted in every game. Offensive words are hidden by default, and you can switch them back on with the toggle under the search box. Learn more in <a href="word-lists-explained.html">word lists explained</a> and <a href="credits.html">credits</a>.</p>
 </section>
 <section class="block narrow">
 <h2>Common questions</h2>

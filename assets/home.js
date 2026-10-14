@@ -3,7 +3,7 @@
 const VAL={a:1,e:1,i:1,o:1,u:1,l:1,n:1,s:1,t:1,r:1,d:2,g:2,b:3,c:3,m:3,p:3,f:4,h:4,v:4,w:4,y:4,k:5,j:8,x:8,q:10,z:10};
 const WWF={a:1,b:4,c:4,d:2,e:1,f:4,g:3,h:3,i:1,j:10,k:5,l:2,m:4,n:2,o:1,p:4,q:10,r:1,s:1,t:1,u:2,v:5,w:4,x:8,y:3,z:10};
 let V=VAL;
-let BAD=new Set(), W_ENA=[], W_EXT=null, loaded=false;
+let BAD=new Set(), W_ENA=[], W_ALL=[], ENA=new Set(), loaded=false;
 const PAGE=40;
 const $=id=>document.getElementById(id);
 const out=$("out");
@@ -35,7 +35,7 @@ function opts(){
 }
 
 function solve(text){
-  const WORDS=($("o-dict")&&$("o-dict").value==="extended"&&W_EXT)?W_EXT:W_ENA;
+  const WORDS=$("o-std").checked?W_ENA:W_ALL;
   const rack=parseRack(text), o=opts(), res=[];
   const safe=$("o-safe").checked;
   const anyMode=rack.n<2&&(o.len||o.starts||o.ends||o.has);
@@ -91,12 +91,13 @@ function render(){
   const groups=new Map();
   for(const r of results){const L=r.w.length;if(!groups.has(L))groups.set(L,[]);groups.get(L).push(r)}
   let h='<p class="summary"><strong>'+total.toLocaleString()+" word"+(total===1?"":"s")+"</strong><span>"+(parseRack(rackText).n<2?"matching your filters":"from "+shownRack.replace(/[^A-Z?*_]/g,"").replace(/[*_]/g,"?"))+"</span></p>";
-  h+='<p class="key"><span class="k-s">Scrabble</span><span class="k-w">Words With Friends</span></p>';
+  const anyExt=!$("o-std").checked&&results.some(r=>!ENA.has(r.w));
+  h+='<p class="key"><span class="k-s">Scrabble</span><span class="k-w">Words With Friends</span>'+(anyExt?'<span class="k-x">Lighter words are only in the extended list, so check your game.</span>':"")+"</p>";
   for(const [L,list] of groups){
     const n=shown[L]||PAGE, part=list.slice(0,n);
     const best=list[0].s;
     h+='<section class="group"><div class="gh"><span>'+L+" letters</span><em>"+list.length.toLocaleString()+" word"+(list.length===1?"":"s")+" \u00b7 top score "+best+'</em></div><ul class="words">';
-    for(const r of part)h+='<li class="w" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+(r.f!==r.s?'<span class="pts wwf">'+r.f+"</span>":"")+"</li>";
+    for(const r of part)h+='<li class="w'+(ENA.has(r.w)?"":" ext")+'" aria-label="'+r.w+', '+r.s+' points in Scrabble, '+r.f+' in Words With Friends'+(ENA.has(r.w)?"":", extended list only")+'">'+tileHTML(r,fo)+'<span class="pts">'+r.s+"</span>"+(r.f!==r.s?'<span class="pts wwf">'+r.f+"</span>":"")+"</li>";
     h+="</ul>";
     if(list.length>n)h+='<button class="more" type="button" data-len="'+L+'">Show '+Math.min(PAGE,list.length-n)+" more</button>";
     h+="</section>";
@@ -154,20 +155,22 @@ document.querySelectorAll(".opt input").forEach(i=>i.addEventListener("input",ru
 
 ["o-starts","o-ends","o-has"].forEach(i=>$(i).value="");$("o-len").value="";$("o-safe").checked=true;
 try{const q=new URL(location.href).searchParams.get("q");if(q)$("rack").value=q.slice(0,40)}catch(_){}
-try{if(localStorage.getItem("gu-dict")==="extended")$("o-dict").value="extended"}catch(_){}
-function loadExt(){if(W_EXT)return Promise.resolve();return fetch("words/extended.txt?v=1").then(r=>r.ok?r.text():Promise.reject()).then(t=>{W_EXT=t.split(/\s+/).filter(x=>/^[a-z]{2,15}$/.test(x))})}
-$("o-dict").addEventListener("change",()=>{const v=$("o-dict").value;try{localStorage.setItem("gu-dict",v)}catch(_){}
-  if(v==="extended"&&!W_EXT){out.innerHTML='<p class="empty">Loading word list...</p>';loadExt().then(run,()=>{$("o-dict").value="enable";run()})}else run()});
+try{if(localStorage.getItem("gu-std")==="1")$("o-std").checked=true}catch(_){}
+$("o-std").addEventListener("change",()=>{try{localStorage.setItem("gu-std",$("o-std").checked?"1":"0")}catch(_){}run()});
 syncClr();load();
 
 function load(){
+  const words=u=>fetch(u).then(r=>r.ok?r.text():Promise.reject());
   Promise.all([
-    fetch("words/enable.txt").then(r=>r.ok?r.text():Promise.reject()),
-    fetch("words/offensive.txt?v=2").then(r=>r.ok?r.text():"").catch(()=>"")
-  ]).then(([w,b])=>{
-    W_ENA=w.split(/\s+/).filter(x=>/^[a-z]{2,15}$/.test(x));
+    words("words/enable.txt"),
+    words("words/extra.txt?v=1").catch(()=>""),
+    words("words/offensive.txt?v=2").catch(()=>"")
+  ]).then(([w,x,b])=>{
+    const ok=t=>/^[a-z]{2,15}$/.test(t);
+    W_ENA=w.split(/\s+/).filter(ok);
+    ENA=new Set(W_ENA);
+    W_ALL=W_ENA.concat(x.split(/\s+/).filter(ok));
     BAD=new Set(b.split(/\s+/).filter(Boolean));
-    if($("o-dict").value==="extended")return loadExt().then(()=>{loaded=true;run()},()=>{$("o-dict").value="enable";loaded=true;run()});
     loaded=true;run();
   }).catch(()=>{out.innerHTML='<p class="empty">The word list could not be loaded. Please try again later.</p>'});
 }
