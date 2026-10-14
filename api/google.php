@@ -35,7 +35,7 @@ if ($u) {
     $id = (int)$pdo->lastInsertId();
     $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
     [$wHtml, $wText] = gu_welcome_parts($email, ' with Google');
-    gu_email($email, 'Welcome to GoUnscramble', 'Welcome, ' . $name . '!', $wHtml, $wText, 'Start unscrambling', $site . '/');
+    gu_email($email, 'Welcome to gounscramble./', 'Welcome, ' . $name . '!', $wHtml, $wText, 'Start unscrambling', $site . '/');
     gu_notify_signup($name, $email, 'Google', (int)$pdo->query('SELECT COUNT(*) FROM users')->fetchColumn());
 }
 start_session();

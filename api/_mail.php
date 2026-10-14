@@ -27,10 +27,10 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
         . '</td></tr>'
         . '<tr><td align="center" style="padding:16px 8px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#667085">gounscramble. &middot; <a href="' . $site . '" style="color:#7c48b8">gounscramble.com</a></td></tr>'
         . '</table></td></tr></table></body></html>';
-    $text = $heading . "\n\n" . $paraText . ($btnUrl !== '' ? "\n\n" . $btnText . ": " . $btnUrl : '') . "\n\n-- GoUnscramble, " . $site . "\n";
+    $text = $heading . "\n\n" . $paraText . ($btnUrl !== '' ? "\n\n" . $btnText . ": " . $btnUrl : '') . "\n\n-- gounscramble./, " . $site . "\n";
 
     $b = 'gu' . bin2hex(random_bytes(8));
-    $headers = "From: GoUnscramble <$from>\r\n"
+    $headers = "From: \"gounscramble./\" <$from>\r\n"
         . "MIME-Version: 1.0\r\n"
         . "Content-Type: multipart/alternative; boundary=\"$b\"";
     $body = "--$b\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($text), 76, "\r\n")
@@ -40,7 +40,7 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
     // Prefer authenticated SMTP through a real mailbox (much better delivery); fall back to PHP mail().
     if (!empty($c['smtp_user']) && !empty($c['smtp_pass'])) {
         $sfrom = $c['smtp_user'];
-        $hdr = "From: GoUnscramble <$sfrom>\r\nTo: <$to>\r\nSubject: $subj\r\nDate: " . date('r')
+        $hdr = "From: \"gounscramble./\" <$sfrom>\r\nTo: <$to>\r\nSubject: $subj\r\nDate: " . date('r')
             . "\r\nMessage-ID: <" . bin2hex(random_bytes(12)) . "@gounscramble.com>\r\nMIME-Version: 1.0\r\n"
             . "Content-Type: multipart/alternative; boundary=\"$b\"\r\n";
         if (gu_smtp($c, $sfrom, $to, $hdr . "\r\n" . $body)) return;
@@ -57,24 +57,24 @@ function gu_notify_signup(string $name, string $email, string $via, ?int $total 
         if (!valid_email($to)) return;
         $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
         $one = static fn(string $v): string => trim(preg_replace('/[\r\n]+/', ' ', $v));
-        $text = "Someone just signed up to GoUnscramble.\r\n\r\n"
+        $text = "Someone just signed up to gounscramble./.\r\n\r\n"
             . "Name: " . $one($name) . "\r\n"
             . "Email: " . $one($email) . "\r\n"
             . "Method: " . $one($via) . "\r\n"
             . "Time: " . date('D j M Y, H:i') . " (server time)\r\n"
             . ($total !== null ? "Total accounts: " . $total . "\r\n" : '')
             . "\r\n" . $site . "\r\n";
-        $subj = '=?UTF-8?B?' . base64_encode('New GoUnscramble sign-up') . '?=';
+        $subj = '=?UTF-8?B?' . base64_encode('New gounscramble./ sign-up') . '?=';
         $b64 = chunk_split(base64_encode($text), 76, "\r\n");
         if (!empty($c['smtp_user']) && !empty($c['smtp_pass'])) {
             $sfrom = $c['smtp_user'];
-            $hdr = "From: GoUnscramble <$sfrom>\r\nTo: <$to>\r\nSubject: $subj\r\nDate: " . date('r')
+            $hdr = "From: \"gounscramble./\" <$sfrom>\r\nTo: <$to>\r\nSubject: $subj\r\nDate: " . date('r')
                 . "\r\nMessage-ID: <" . bin2hex(random_bytes(12)) . "@gounscramble.com>\r\nMIME-Version: 1.0\r\n"
                 . "Content-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n";
             if (gu_smtp($c, $sfrom, $to, $hdr . "\r\n" . $b64)) return;
         }
         $from = $c['mail_from'] ?? 'noreply@gounscramble.com';
-        @mail($to, $subj, $b64, "From: GoUnscramble <$from>\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64");
+        @mail($to, $subj, $b64, "From: \"gounscramble./\" <$from>\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64");
     } catch (Throwable $e) {
         error_log('gu_notify_signup failed: ' . $e->getMessage());
     }
@@ -125,10 +125,10 @@ function gu_welcome_parts(string $email, string $via = ''): array {
         ['Unscramble any letters', 'Type jumbled letters, with blank tiles if you like, and see every word they can make, grouped by length with Scrabble and Words With Friends scores.'],
         ['Games for one or two', 'Wordle Global, Mini Crossword, Word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Memory match, Hangman and more. Play the computer, or take turns with a friend on the same device.'],
         ['Your own profile', 'Add a picture, a short bio and your favourite game on your account page.'],
-        ['Free, with no spam', 'Everything on GoUnscramble is free. We only email you for things like password resets.'],
+        ['Free, with no spam', 'Everything on gounscramble./ is free. We only email you for things like password resets.'],
     ];
-    $html = '<p style="margin:0 0 6px">Your free GoUnscramble account is ready. Here is what it gives you:</p>';
-    $text = "Your free GoUnscramble account is ready. Here is what it gives you:\n";
+    $html = '<p style="margin:0 0 6px">Your free gounscramble./ account is ready. Here is what it gives you:</p>';
+    $text = "Your free gounscramble./ account is ready. Here is what it gives you:\n";
     foreach ($items as [$h, $t]) {
         $html .= '<h2 style="margin:20px 0 4px;font-size:19px;line-height:1.25;color:#1c2230">' . $h . '</h2><p style="margin:0">' . $t . '</p>';
         $text .= "\n" . $h . "\n" . $t . "\n";

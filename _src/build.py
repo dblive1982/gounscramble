@@ -58,7 +58,7 @@ HEADER = """<!--header-->
 <details class="menu">
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
 <div class="menu-list">
-<a class="menu-brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="34" height="34" alt="" decoding="async"></a>
+<a class="menu-brand" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="34" height="34" alt="" decoding="async"></a>
 <button type="button" class="menu-x" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></button>
 <a href="/"@@CUR_home@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Word unscrambler</a>
 <p class="menu-h">Word tools</p>
@@ -86,7 +86,7 @@ HEADER = """<!--header-->
 </div>
 </details>
 </nav>
-<a class="brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="22" height="22" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="116" height="17" alt="gounscramble." decoding="async"></a>
+<a class="brand" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="22" height="22" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="116" height="17" alt="gounscramble." decoding="async"></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="17" r="7" fill="currentColor"/><path d="M6 40c0-9 6-14.5 14-14.5S34 31 34 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 
 </div></header>
@@ -109,7 +109,7 @@ def social_html():
     for name, url, icon in SOCIAL:
         svg = '<svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true">%s</svg>' % icon
         if url:
-            out.append('<a class="social" href="%s" target="_blank" rel="noopener me" aria-label="GoUnscramble on %s">%s</a>' % (url, name, svg))
+            out.append('<a class="social" href="%s" target="_blank" rel="noopener me" aria-label="gounscramble./ on %s">%s</a>' % (url, name, svg))
         else:
             out.append('<span class="social" title="%s, coming soon">%s</span>' % (name, svg))
     return '<div class="socials">' + "".join(out) + "</div>"
@@ -117,7 +117,7 @@ def social_html():
 
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
-<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="19" height="19" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="100" height="15" alt="gounscramble." decoding="async"></a></div>
+<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="19" height="19" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="100" height="15" alt="gounscramble." decoding="async"></a></div>
 <p class="foot-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg><span>Site secured using Encrypted HTTPS connection.</span></p>
 <p class="foot-legal"><b>Disclaimer:</b> everything on this site, including calculator results, word lists and tips, is for general information and entertainment only. It is not financial, tax, investment, legal, medical or other professional advice, and results may contain errors. We accept no responsibility for any loss or decision that comes from using it, so please check with a qualified professional before acting. See our <a href="terms.html">terms</a>.</p>
 <p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way.</p>
@@ -311,7 +311,7 @@ FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer 
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
-<a class="hero-brand" href="/" aria-label="GoUnscramble home"><img class="mark" src="assets/logo.png" width="61" height="61" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="260" height="38" alt="gounscramble." decoding="async"></a>
+<a class="hero-brand" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="61" height="61" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="260" height="38" alt="gounscramble." decoding="async"></a>
 <form id="f" class="box" autocomplete="off">
 <svg class="sico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#9aa1ae" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. read?" aria-label="Your letters">
@@ -657,7 +657,7 @@ PAGES = [
          desc="Switch text between upper case, lower case, title case and sentence case."),
     dict(file="account.html", page="account", nav="account", body=ACCOUNT, noindex=True,
          title="Sign in | gounscramble./",
-         desc="Sign in or create a free GoUnscramble account."),
+         desc="Sign in or create a free gounscramble./ account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
          title="Free Puzzles & Games: Wordle Global, Mini Crossword | gounscramble./",
          desc="Free puzzles and games you can play in your browser: Wordle Global (a daily five-letter word game), a daily Mini Crossword, word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
@@ -672,19 +672,19 @@ PAGES = [
     dict(file="monthly-habit-tracker.html", page="planner", nav="planners", body=PL.page("monthly-habit-tracker"), title=PL.BY["monthly-habit-tracker"]["title"], desc=PL.BY["monthly-habit-tracker"]["desc"]),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | gounscramble./",
-         desc="About GoUnscramble, a free home for a word unscrambler, word tools, puzzles and games, 70+ everyday calculators and free printable planners."),
+         desc="About gounscramble./, a free home for a word unscrambler, word tools, puzzles and games, 70+ everyday calculators and free printable planners."),
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | gounscramble./",
-         desc="How GoUnscramble handles what you type and what your browser sends."),
+         desc="How gounscramble./ handles what you type and what your browser sends."),
     dict(file="terms.html", page="terms", nav=None, body=cardify(TERMS),
          title="Terms and Conditions | gounscramble./",
-         desc="The terms for using GoUnscramble and its free word tools, games, calculators and optional accounts. Information only, not financial, legal or medical advice."),
+         desc="The terms for using gounscramble./ and its free word tools, games, calculators and optional accounts. Information only, not financial, legal or medical advice."),
     dict(file="contact.html", page="contact", nav=None, body=CONTACT,
          title="Contact | gounscramble./",
-         desc="Get in touch with GoUnscramble."),
+         desc="Get in touch with gounscramble./."),
     dict(file="credits.html", page="credits", nav=None, body=cardify(CREDITS),
          title="Credits | gounscramble./",
-         desc="Word list and font credits for GoUnscramble."),
+         desc="Word list and font credits for gounscramble./."),
 ]
 
 

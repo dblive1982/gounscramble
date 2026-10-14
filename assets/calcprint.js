@@ -50,12 +50,12 @@
   window.addEventListener("beforeprint", build);
 
   sbtn.addEventListener("click", function () {
-    var url = location.origin + location.pathname, hero = document.querySelector("#calc .cr-hero, #sal-out .cr-hero, .calc .cr-hero"), text = "Try the " + title + " free on GoUnscramble";
+    var url = location.origin + location.pathname, hero = document.querySelector("#calc .cr-hero, #sal-out .cr-hero, .calc .cr-hero"), text = "Try the " + title + " free on gounscramble./";
     if (hero) {
       var k = hero.querySelector(".cr-k"), v = hero.querySelector(".cr-v");
-      if (k && v && v.textContent.trim()) text = title + ": " + k.textContent.trim() + " " + v.textContent.trim() + ". Try it free on GoUnscramble";
+      if (k && v && v.textContent.trim()) text = title + ": " + k.textContent.trim() + " " + v.textContent.trim() + ". Try it free on gounscramble./";
     }
-    var data = { title: "GoUnscramble: " + title, text: text, url: url };
+    var data = { title: "gounscramble./: " + title, text: text, url: url };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     var done = function () { (window.GUToast || function () {})("Link copied"); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy this link", url); });

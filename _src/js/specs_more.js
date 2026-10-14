@@ -291,7 +291,7 @@
   };
 
   CALCS.base64 = {
-    fields: [{ id: "m", label: "Action", t: "sel", opts: [["e", "Encode text to Base64"], ["d", "Decode Base64 to text"]], def: "e", wide: true }, { id: "t", label: "Your text", t: "area", rows: 5, def: "Hello, GoUnscramble!" }, { id: "u", label: "URL-safe Base64 (uses - and _)", t: "chk", def: "" }],
+    fields: [{ id: "m", label: "Action", t: "sel", opts: [["e", "Encode text to Base64"], ["d", "Decode Base64 to text"]], def: "e", wide: true }, { id: "t", label: "Your text", t: "area", rows: 5, def: "Hello, gounscramble./!" }, { id: "u", label: "URL-safe Base64 (uses - and _)", t: "chk", def: "" }],
     run: function (v) {
       var s = String(v.t); if (!s.trim()) return { err: "Enter some text." };
       try {

@@ -98,7 +98,7 @@
   function shareLabel(t) { (window.GUToast || function () {})(t); }
   if (sh) sh.addEventListener("click", function () {
     var k = cur(), name = ($("ttl") && $("ttl").textContent) || "a game", url = location.origin + location.pathname + (k === "games" ? "" : "#" + k);
-    var data = { title: "GoUnscramble: " + name, text: "Try " + name + " free on GoUnscramble", url: url };
+    var data = { title: "gounscramble./: " + name, text: "Try " + name + " free on gounscramble./", url: url };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     var done = function () { shareLabel("Link copied"); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { window.prompt("Copy this link", url); });

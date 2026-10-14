@@ -248,7 +248,7 @@ def main():
             W, H = landscape(sz) if land else sz
             out = os.path.join(root, "downloads", "%s-%s.pdf" % (slug, sname))
             c = canvas.Canvas(out, pagesize=(W, H))
-            c.setTitle({"weekly-planner": "Weekly planner", "monthly-budget-planner": "Monthly budget planner", "monthly-habit-tracker": "Monthly habit tracker"}[slug] + " | GoUnscramble")
+            c.setTitle({"weekly-planner": "Weekly planner", "monthly-budget-planner": "Monthly budget planner", "monthly-habit-tracker": "Monthly habit tracker"}[slug] + " | gounscramble./")
             c.setAuthor("gounscramble./"); c.setSubject("Free printable planner from gounscramble.com")
             fn(c, W, H); c.showPage(); c.save()
         # preview image from the A4 PDF

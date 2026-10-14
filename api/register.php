@@ -23,6 +23,6 @@ $_SESSION['uid'] = $id;
 $site = rtrim((config()['site'] ?? 'https://gounscramble.com'), '/');
 $safe = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 [$wHtml, $wText] = gu_welcome_parts($email, '');
-    gu_email($email, 'Welcome to GoUnscramble', 'Welcome, ' . $name . '!', $wHtml, $wText, 'Start unscrambling', $site . '/');
+    gu_email($email, 'Welcome to gounscramble./', 'Welcome, ' . $name . '!', $wHtml, $wText, 'Start unscrambling', $site . '/');
 gu_notify_signup($name, $email, 'Email and password', (int)$pdo->query('SELECT COUNT(*) FROM users')->fetchColumn());
 out(200, ['user' => ['name' => $name, 'email' => $email]]);

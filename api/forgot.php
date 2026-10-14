@@ -17,11 +17,11 @@ if ($u) {
     $c = config();
     $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
     $link = $site . '/account.html?reset=' . $token;
-    gu_email($email, 'Reset your GoUnscramble password',
+    gu_email($email, 'Reset your gounscramble./ password',
         'Choose a new password',
-        '<p style="margin:0 0 12px">Hi ' . htmlspecialchars($u['name'], ENT_QUOTES, 'UTF-8') . ', tap the button to choose a new GoUnscramble password. The link works for one hour.</p>'
+        '<p style="margin:0 0 12px">Hi ' . htmlspecialchars($u['name'], ENT_QUOTES, 'UTF-8') . ', tap the button to choose a new gounscramble./ password. The link works for one hour.</p>'
         . '<p style="margin:0">If you did not ask for this, you can ignore this email and your password will stay the same.</p>',
-        'Hi ' . $u['name'] . ", use this link to choose a new GoUnscramble password. It works for one hour.\n\nIf you did not ask for this, you can ignore this email.",
+        'Hi ' . $u['name'] . ", use this link to choose a new gounscramble./ password. It works for one hour.\n\nIf you did not ask for this, you can ignore this email.",
         'Choose a new password', $link);
 }
 // Same answer whether or not the email has an account.
