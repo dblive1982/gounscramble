@@ -1113,3 +1113,5 @@ body .ac #out:hover{background:#363a43!important}
 .hb-cats h3{margin-bottom:4px}
 .hb-cats ul{gap:3px}
 .hub .hb-sec[aria-labelledby="hb-try"]{margin-top:8px}
+body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,body[data-page="home"] .hm .about h2,body[data-page="home"] .block h2{font-size:clamp(19px,5vw,24px)!important}
+body[data-page="home"] .hm .about h3{font-size:16px}
