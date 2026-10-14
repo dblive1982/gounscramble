@@ -636,6 +636,7 @@ The initial information for Australian English comes from Benjamin Titze:
 
 ACCOUNT = open(os.path.join(ROOT, "account_body.html"), encoding="utf-8").read()
 GAMES = open(os.path.join(ROOT, "games_body.html"), encoding="utf-8").read()
+WORDBLOCK = open(os.path.join(ROOT, "wordblock_body.html"), encoding="utf-8").read()
 
 PAGES = [
     dict(file="calculators.html", page="calculators", nav="calculators", body=CALC.hub(),
@@ -662,6 +663,9 @@ PAGES = [
     dict(file="games.html", page="games", nav="games", body=GAMES,
          title="Free Puzzles & Games: Wordle Global, Mini Crossword | gounscramble./",
          desc="Free puzzles and games you can play in your browser: Wordle Global (a daily five-letter word game), a daily Mini Crossword, word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
+    dict(file="word-block.html", page="wordblock", nav="games", body=WORDBLOCK,
+         title="Word Block: Free Block Puzzle with Words | gounscramble./",
+         desc="Play Word Block, a free block puzzle game where the tiles are letters. Clear rows and columns, spell words for bonus points and build streaks."),
     dict(file="tools.html", page="tools", nav="tools", body=TOOLS_PAGE,
          title="Free Word Tools | gounscramble./",
          desc="Free word and text tools: word unscrambler, anagram solver, word counter, case converter and random word picker."),
@@ -771,8 +775,10 @@ def build_page(p):
     home = p["file"] == "index.html"
     games = p["file"] == "games.html"
     acct = p["file"] == "account.html"
+    wblk = p["file"] == "word-block.html"
     extra_css = ('<link rel="stylesheet" href="assets/home.css">' if home else
                  '<link rel="stylesheet" href="assets/games.css">' if games else
+                 '<link rel="stylesheet" href="assets/wordblock.css">' if wblk else
                  '<link rel="stylesheet" href="assets/account.css">\n<meta name="robots" content="noindex">' if acct else "")
     head = head.replace("@@HOMECSS@@", extra_css)
     if games:
@@ -782,9 +788,11 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/home.js"></script><script src="assets/hub.js"></script>')
     if games:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/games.js"></script><script src="assets/arcade.js"></script><script src="assets/print.js"></script>')
+    if wblk:
+        page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/wordblock.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "logo.png", "wordmark.png"):
+    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "wordblock.css", "wordblock.js", "logo.png", "wordmark.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:
