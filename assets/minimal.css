@@ -1075,3 +1075,4 @@ body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,b
 .hb-cats h3{display:flex;flex-direction:column;align-items:center;gap:6px}
 .hb-cats .ci{color:#7c48b8;width:28px;height:28px}
 .hb-cats ul{align-items:center}
+.hb-cats ul{align-items:flex-start;text-align:left}
