@@ -1115,3 +1115,5 @@ body .ac #out:hover{background:#363a43!important}
 .hub .hb-sec[aria-labelledby="hb-try"]{margin-top:8px}
 body[data-page="home"] .hub .hb-sec>h2,body[data-page="home"] .hub .hb-head h2,body[data-page="home"] .hm .about h2,body[data-page="home"] .block h2{font-size:clamp(19px,5vw,24px)!important}
 body[data-page="home"] .hm .about h3{font-size:16px}
+.hub .cats-h{order:-100;margin:0 0 -22px;font-family:var(--display);font-weight:700;letter-spacing:-.02em;text-align:left}
+body[data-page="home"] .hub .cats-h{font-size:clamp(19px,5vw,24px)}
