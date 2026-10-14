@@ -89,7 +89,7 @@ SCRABBLE = """<h1>Scrabble tips: score more with the tiles you have</h1>
 <h2>Watch what you open up</h2>
 <p>Every word you place creates new lines for your opponent. Putting a word next to a triple word square gives them a chance at a big score. Think about the hooks, the letters that can be added to the front or back of your word, before you play.</p>
 <h2>Which word list?</h2>
-<p>Official tournament lists exist for different regions, and a word that is valid in one may not be valid in another. This site uses the free ENABLE list by default, with a larger extended list built from open sources as an option, so use them for practice and learning, and check disputed words against the list your game uses. <a href="word-lists-explained.html">Word lists explained</a> has more.</p>
+<p>Official tournament lists exist for different regions, and a word that is valid in one may not be valid in another. This site offers a US Scrabble list (ENABLE) and a larger UK Scrabble list built from open sources, so use them for practice and learning, and check disputed words against the list your game uses. <a href="word-lists-explained.html">Word lists explained</a> has more.</p>
 """
 
 WORDLE = """<h1>Tips for five-letter word puzzles</h1>
@@ -214,13 +214,13 @@ WORD_LISTS = """<h1>Word lists explained: ENABLE, NWL and CSW</h1>
 <h2>Why different lists exist</h2>
 <p>A general dictionary tries to describe the language. A game word list tries to settle disputes: it is a fixed list that says which strings are allowed in play. Game lists include inflected forms (plurals and verb forms), exclude words that need capital letters or hyphens, and may include very rare words that appear in long dictionaries.</p>
 <h2>ENABLE</h2>
-<p>ENABLE stands for Enhanced North American Benchmark Lexicon. It is a free word list that is in the public domain, which means anyone can use it. It was created for use in word games and software. It contains about 173,000 words and is the standard list on this site.</p>
+<p>ENABLE stands for Enhanced North American Benchmark Lexicon. It is a free word list that is in the public domain, which means anyone can use it. It was created for use in word games and software. It contains about 173,000 words and is the US Scrabble list on this site.</p>
 <h2>NWL</h2>
 <p>NWL is the NASPA Word List, the official word list for tournament Scrabble in the United States and Canada. It is maintained by an organisation and is licensed, so it cannot be copied into a tool without permission. It is not included on this site.</p>
 <h2>CSW</h2>
 <p>CSW stands for Collins Scrabble Words, the list used for tournament play in the United Kingdom and most other countries outside North America. It is published by Collins and also licensed. It is generally larger than the North American list and has some different words. It is not included on this site, and our extended list is not a copy of it.</p>
-<h2>Our extended list</h2>
-<p>The extended list has about 245,000 words. It combines ENABLE with the open English Speller Database, including American, British and Canadian spellings, and leaves out proper nouns, abbreviations and anything with hyphens or apostrophes. It finds more words than the standard list, but it is a general word list and not an official game list, so some words in it may not be accepted in your game and some accepted words may be missing. It is a good guide when you want more options, and for competitive play you should always check the official list. Sources are on the <a href="credits.html">credits page</a>.</p>
+<h2>Our UK Scrabble list</h2>
+<p>The UK Scrabble list has about 245,000 words. It combines ENABLE with the open English Speller Database, including American, British and Canadian spellings, and leaves out proper nouns, abbreviations and anything with hyphens or apostrophes. It finds more words than the US Scrabble list, but it is a general word list and not an official game list, so some words in it may not be accepted in your game and some accepted words may be missing. It is a good guide when you want more options, and for competitive play you should always check the official list. Sources are on the <a href="credits.html">credits page</a>.</p>
 <h2>What this means for you</h2>
 <ul>
 <li>Most common words appear in every list, so for everyday puzzles the differences are small.</li>
@@ -262,7 +262,7 @@ FAQ_ITEMS = [
     ("Where do the filters go?",
      "Press More options on the home page. There you can pick a dictionary and set starts with, ends with, contains and word length."),
     ("Which dictionary does the site use?",
-     "It has two lists. Standard is ENABLE, a public-domain list of about 173,000 words. Extended has about 245,000 words and is built from open sources, so it finds more words, including British spellings. The official US (NWL) and UK (CSW) lists are licensed and are not included. See word lists explained."),
+     "It has two lists. US Scrabble is ENABLE, a public-domain list of about 173,000 words, and is the best match for Words With Friends. UK Scrabble has about 245,000 words and is built from open sources, so it finds more words, including British spellings. The official US (NWL) and UK (CSW) lists are licensed and are not included. See word lists explained."),
     ("A word I know is missing. Why?",
      "No list contains every word. Proper nouns, hyphenated words and very new words are often left out, and each game list makes different choices. You can tell us through the contact page."),
     ("Is every word the tool shows valid in my game?",
@@ -430,8 +430,8 @@ HOME_EXTRA = """<section class="block narrow">
 </section>
 <section class="block narrow">
 <h2>Our dictionary</h2>
-<p>gounscramble uses <strong>ENABLE</strong>, the Enhanced North American Benchmark Lexicon. It is a free, public-domain word list of about 173,000 English words, widely used for word games and puzzles. Because it is public domain, we can use it freely and show you every word it contains.</p>
-<p>You can switch to our extended list of about 245,000 words under More options. It is built from open sources, finds more words, including British spellings, and is not a copy of any official list. Both are general lists, so neither will match any one game exactly. Some words that are valid in Collins (CSW) or the NASPA Word List may be missing, and a few ENABLE words may not be accepted in every game. Offensive words are hidden by default, and you can switch them back on with the toggle under the search box. Learn more in <a href="word-lists-explained.html">word lists explained</a> and <a href="credits.html">credits</a>.</p>
+<p>The <strong>US Scrabble</strong> list in gounscramble is <strong>ENABLE</strong>, the Enhanced North American Benchmark Lexicon. It is a free, public-domain word list of about 173,000 English words, widely used for word games and puzzles. Because it is public domain, we can use it freely and show you every word it contains.</p>
+<p>The <strong>UK Scrabble</strong> list is larger, with about 245,000 words. It adds words from open sources, including British spellings, and is not a copy of any official list. Choose US Scrabble or UK Scrabble under More options. <strong>Words With Friends</strong> uses its own list, which is not published, and US Scrabble is the closest match, so use US Scrabble for Words With Friends. Both are general lists, so neither will match any one game exactly. Some words that are valid in Collins (CSW) or the NASPA Word List may be missing, and a few ENABLE words may not be accepted in every game. Offensive words are hidden by default, and you can switch them back on with the toggle under the search box. Learn more in <a href="word-lists-explained.html">word lists explained</a> and <a href="credits.html">credits</a>.</p>
 </section>
 <section class="block narrow">
 <h2>Common questions</h2>
