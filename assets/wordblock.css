@@ -1,5 +1,5 @@
 /* Word Block page. Uses the site tokens so light and dark both work. */
-.wb{--gold:#f5b700;--gold-ink:#2b1d00;--wb-cell:color-mix(in srgb,var(--ink) 7%,var(--card));--wb-tile:color-mix(in srgb,var(--primary) 30%,var(--card));--wb-edge:var(--primary);max-width:480px;margin:0 auto;padding:18px 16px 40px;display:flex;flex-direction:column;gap:14px;color:var(--ink);font-family:var(--body)}
+.wb{--gold:#f5b700;--gold-ink:#2b1d00;--wb-cell:color-mix(in srgb,var(--primary) 7%,var(--card));--wb-tile:color-mix(in srgb,var(--primary) 30%,var(--card));--wb-edge:var(--primary);max-width:480px;margin:0 auto;padding:18px 16px 40px;display:flex;flex-direction:column;gap:14px;color:var(--ink);font-family:var(--body)}
 .wb *{box-sizing:border-box}
 .wb [hidden]{display:none!important}
 .wb h1{margin:0;font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.5px}
@@ -16,8 +16,8 @@
 .wb .lab{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .wb .stat b{font:800 24px var(--display);font-variant-numeric:tabular-nums;line-height:1.15}
 .wb .boardwrap{position:relative}
-.wb .board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));gap:3px;padding:6px;background:var(--soft);border-radius:16px;aspect-ratio:1;touch-action:none}
-.wb .cell{position:relative;overflow:hidden;line-height:1;min-height:0;border-radius:7px;background:var(--wb-cell);display:flex;align-items:center;justify-content:center;font:800 clamp(16px,5.4vw,24px) var(--display);color:var(--ink);user-select:none;min-width:0}
+.wb .board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));gap:4px;padding:6px;background:color-mix(in srgb,var(--primary) 26%,var(--soft));border:2px solid color-mix(in srgb,var(--primary) 40%,var(--line));border-radius:16px;aspect-ratio:1;touch-action:none}
+.wb .cell{position:relative;overflow:hidden;line-height:1;min-height:0;border-radius:7px;background:var(--wb-cell);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--primary) 18%,transparent);display:flex;align-items:center;justify-content:center;font:800 clamp(16px,5.4vw,24px) var(--display);color:var(--ink);user-select:none;min-width:0}
 .wb .cell.f{background:var(--wb-tile);box-shadow:inset 0 -3px 0 var(--wb-edge)}
 .wb .cell.g{background:var(--wb-tile);opacity:.55}
 .wb .cell.pre{box-shadow:inset 0 0 0 2.5px var(--gold)}
