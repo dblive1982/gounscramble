@@ -5,7 +5,7 @@ from collections import Counter
 
 TILE = dict(zip("abcdefghijklmnopqrstuvwxyz", [1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10]))
 NUM = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
-SUB_LENGTHS = (4, 5, 6, 7)          # lengths that get a page per first letter
+SUB_LENGTHS = ()                    # no per-letter pages: they were near-duplicates, so only the overview pages are built
 HUB_LENGTHS = (4, 5, 6, 7, 8)       # lengths that get an overview page
 MIN_WORDS = 15                      # skip combinations with fewer words than this
 
@@ -96,7 +96,7 @@ def build(words):
         last = Counter(w[-1] for w in ws).most_common(3)
         pal = [w for w in ws if w == w[::-1]][:8]
         body = """<h1>%s-letter words</h1>
-<p>The ENABLE word list used by this site has %s %s-letter words. They make up about %.1f%% of the whole list. Choose a first letter below to see every %s-letter word that starts with it.</p>
+<p>The ENABLE word list used by this site has %s %s-letter words. They make up about %.1f%% of the whole list. The list below shows how many %s-letter words start with each letter.</p>
 <div class="notice"><p>Different games use different word lists. Check unusual words against the list your game uses.</p></div>
 <h2>%s-letter words by first letter</h2>
 <p class="jump">%s</p>
@@ -128,7 +128,7 @@ def build(words):
                 rows.append("<li>%d-letter words starting with %s (%s)</li>" % (n, L(l), fmt(cnt)))
         short = [w for w in ws if len(w) <= 3]
         body = """<h1>Words starting with %s</h1>
-<p>The ENABLE word list used by this site has %s words that start with <strong>%s</strong>, about %.1f%% of the list. Pick a word length below to see the full list. The shortest are listed here, and every longer length links to its own page where one exists.</p>
+<p>The ENABLE word list used by this site has %s words that start with <strong>%s</strong>, about %.1f%% of the list. The shortest words are listed here, with counts for every longer length and the highest scorers below.</p>
 <div class="notice"><p>Different games use different word lists. Check unusual words against the list your game uses.</p></div>
 <p class="jump">Jump to a letter: %s</p>
 <h2>Short words starting with %s</h2>
@@ -140,7 +140,7 @@ def build(words):
 %s""" % (L(l), fmt(len(ws)), L(l), 100.0 * len(ws) / total, " ".join('<a href="%s">%s</a>' % (f_start(x), x.upper()) if x != l else "<strong>%s</strong>" % x.upper() for x in letters),
          L(l), chips(short), L(l), "".join(rows), L(l), top_list(ws), footer_links())
         pages[f_start(l)] = ("Words Starting With %s" % L(l),
-            "%s words that start with %s, with short words listed and lists by length for four to seven letters." % (fmt(len(ws)), L(l)), body)
+            "%s words that start with %s, with the short words listed, counts by length and the highest-scoring words." % (fmt(len(ws)), L(l)), body)
 
     # ----- master index
     sec = ["<h1>Word lists</h1>",

@@ -9,3 +9,7 @@ RedirectMatch 404 ^/gu-config
 RewriteEngine On
 RewriteCond %{THE_REQUEST} \s/+index\.html[\s?]
 RewriteRule ^index\.html$ / [R=301,L]
+
+# Pages removed to focus the site: send old links to the nearest hub.
+RewriteRule ^(four|five|six|seven)-letter-words-starting-with-[a-z]\.html$ /word-lists.html [R=301,L]
+RewriteRule ^(amortization-calculator|auto-loan-calculator|average-calculator|bandwidth-calculator|base64-encode-decode|bmr-calculator|body-fat-calculator|btu-calculator|concrete-calculator|day-of-week-calculator|density-calculator|dew-point-calculator|discount-calculator|due-date-calculator|electricity-calculator|fraction-calculator|fuel-cost-calculator|gas-mileage-calculator|gpa-calculator|grade-calculator|gravel-calculator|heat-index-calculator|height-calculator|horsepower-calculator|hours-calculator|ideal-weight-calculator|inflation-calculator|interest-rate-calculator|mileage-calculator|mulch-calculator|ohms-law-calculator|pace-calculator|password-generator|percentage-change-calculator|random-number-generator|resistor-color-code-calculator|retirement-calculator|roman-numeral-converter|roofing-calculator|sales-tax-calculator|simple-interest-calculator|sleep-calculator|speed-distance-time-calculator|square-footage-calculator|stair-calculator|standard-deviation-calculator|subnet-calculator|tile-calculator|time-calculator|time-zone-calculator|tip-calculator|tire-size-calculator|triangle-calculator|url-encode-decode|vat-calculator|voltage-drop-calculator|wind-chill-calculator)\.html$ /calculators.html [R=301,L]

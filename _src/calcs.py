@@ -352,6 +352,9 @@ import calcs_more
 calcs_more.register(add)
 _REMAP = {"age": "Date & Time", "date-calculator": "Date & Time", "time": "Date & Time", "hours": "Date & Time", "fuel-cost": "Travel & Cars", "speed-distance-time": "Travel & Cars",
           "concrete": "Home & Building", "unit-converter": "Science & Weather", "subnet": "Web & Tech", "password": "Web & Tech"}
+# Keep a focused set of calculators with real depth; the rest were thin and repetitive.
+KEEP = {"salary", "income-tax", "mortgage", "loan", "compound-interest", "percentage", "scientific", "bmi", "calorie", "age", "date-calculator", "unit-converter"}
+C[:] = [_c for _c in C if _c["slug"] in KEEP]
 for _c in C:
     if _c["slug"] in _REMAP: _c["cat"] = _REMAP[_c["slug"]]
 BY = {c["slug"]: c for c in C}
@@ -439,10 +442,11 @@ def body(slug):
 
 def hub():
     parts = ['<main><div class="wrap">\n<section class="hero calc-hero">\n<h1>Free online calculators</h1>\n'
-             '<p class="lede">Simple, fast calculators for money, maths, health, building, travel, weather, electronics and everyday life. Everything runs in your browser, with no sign-up.</p>\n</section>']
+             '<p class="lede">Simple, fast calculators for money, maths, health, dates and everyday conversions. Everything runs in your browser, with no sign-up.</p>\n</section>']
     icons = {"Financial": "Money", "Math": "Maths", "Fitness & Health": "Fitness and health", "Other": "Everyday"}
     for cat in CATS:
         items = [c for c in C if c["cat"] == cat]
+        if not items: continue
         parts.append('<section class="block calc-cat">\n<h2>%s</h2>\n<div class="cards">%s</div>\n</section>' % (esc(cat), "".join(card(c) for c in items)))
     parts.append("</div></main>\n")
     return "\n".join(parts)

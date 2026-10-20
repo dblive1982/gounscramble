@@ -257,14 +257,14 @@ HUB = """<div class="hub">
 <a class="hb-card c-pink" href="case-converter.html"><span class="hb-ic">Aa</span><b>Case converter</b><span>Switch text to upper, lower, title or sentence case.</span></a>
 <a class="hb-card c-lilac" href="random-word-picker.html"><span class="hb-ic">?!</span><b>Random word picker</b><span>Pull random words for games, prompts and spelling tests.</span></a>
 </div></section>
-<section class="hb-sec" id="s-calc" aria-labelledby="hb-calc"><div class="hb-head"><div><h2 id="hb-calc">Calculators</h2><p class="hb-sub">70+ free calculators for money, maths, health, home and more.</p></div><a class="hb-arrow" href="calculators.html" aria-label="All calculators"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<section class="hb-sec" id="s-calc" aria-labelledby="hb-calc"><div class="hb-head"><div><h2 id="hb-calc">Calculators</h2><p class="hb-sub">Free calculators for money, maths, health and everyday sums.</p></div><a class="hb-arrow" href="calculators.html" aria-label="All calculators"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 <div class="hb-grid">
 <a class="hb-card c-orange" href="salary-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></svg></span><b>Salary calculator</b><span>Hourly, monthly and yearly pay, plus UK take-home.</span></a>
 <a class="hb-card c-green" href="mortgage-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7.5 9 7.5"/><path d="M5.5 9.5V20.5h13V9.5M10 20.5v-6h4v6"/></svg></span><b>Mortgage calculator</b><span>Monthly payment and total interest.</span></a>
 <a class="hb-card c-teal" href="scientific-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h.01"/></svg></span><b>Scientific calculator</b><span>Trig, logs, powers and brackets.</span></a>
 <a class="hb-card c-pink" href="percentage-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"/><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg></span><b>Percentage calculator</b><span>Percent of, change, increase and decrease.</span></a>
 <a class="hb-card c-lilac" href="bmi-calculator.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M8 11a4 4 0 018 0"/><path d="M12 11l2-2.5"/></svg></span><b>BMI calculator</b><span>Body mass index and a healthy range.</span></a>
-<a class="hb-card c-yellow" href="calculators.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span><b>All calculators</b><span>Over 40 free calculators in one place.</span></a>
+<a class="hb-card c-yellow" href="calculators.html"><span class="hb-ic"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></span><b>All calculators</b><span>All our free calculators in one place.</span></a>
 </div></section>
 <section class="hb-sec" id="s-guides" aria-labelledby="hb-guides"><div class="hb-head"><div><h2 id="hb-guides">Tips &amp; Guides</h2><p class="hb-sub">Short guides to help you score more.</p></div><a class="hb-arrow" href="guides.html" aria-label="All guides"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
 <div class="hb-grid">
@@ -474,7 +474,7 @@ TOOLS_PAGE = """<main><div class="wrap">
 
 ABOUT = """<main><div class="wrap"><article class="prose">
 <h1>About <b>go</b>unscramble</h1>
-<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and more than 70 simple calculators for money, maths, health and everyday sums.</p>
+<p><b>go</b>unscramble is a free home for word tools, puzzles and calculators. Its unscrambler turns jumbled letters into real words: type the letters you have, add a ? or * for any blank tile, and it lists every word they can make, longest first. You will also find word games and puzzles to play, and a small set of calculators for money, maths, health and everyday sums.</p>
 <div class="cards guide-cards">
 <div class="card"><h3>Narrow the list</h3><p>Open <em>More options</em> on the home page to choose a dictionary, or to filter by the letters a word starts with, ends with or contains, and by its length.</p></div>
 <div class="card"><h3>Dictionaries</h3><p>Two word lists are available: US Scrabble (ENABLE, about 173,000 words) and UK Scrabble (about 245,000 words, built from open sources). Words With Friends players should use US Scrabble. The official US (NWL) and UK (CSW) lists are not included.</p></div>
@@ -641,10 +641,10 @@ WORDBLOCK = open(os.path.join(ROOT, "wordblock_body.html"), encoding="utf-8").re
 PAGES = [
     dict(file="calculators.html", page="calculators", nav="calculators", body=CALC.hub(),
          title="Free Online Calculators | gounscramble./",
-         desc="Free online calculators: salary, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and more. Simple, fast and private."),
+         desc="Free online calculators: salary, income tax, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and unit converter. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
          title="gounscramble./ | Word Unscrambler, Puzzles, Calculators & Planners",
-         desc="Free word unscrambler and anagram solver, plus word games, puzzles, 70+ calculators and free printable planners. Fast, free and private."),
+         desc="Free word unscrambler and anagram solver, plus word games, puzzles, everyday calculators and free printable planners. Fast, free and private."),
     dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
          title="Anagram Solver | gounscramble./",
          desc="Find the words that use every one of your letters. A free anagram solver with blank tile support."),
@@ -677,7 +677,7 @@ PAGES = [
     dict(file="monthly-habit-tracker.html", page="planner", nav="planners", body=PL.page("monthly-habit-tracker"), title=PL.BY["monthly-habit-tracker"]["title"], desc=PL.BY["monthly-habit-tracker"]["desc"]),
     dict(file="about.html", page="about", nav="about", body=ABOUT,
          title="About | gounscramble./",
-         desc="About gounscramble./, a free home for a word unscrambler, word tools, puzzles and games, 70+ everyday calculators and free printable planners."),
+         desc="About gounscramble./, a free home for a word unscrambler, word tools, puzzles and games, everyday calculators and free printable planners."),
     dict(file="privacy.html", page="privacy", nav=None, body=cardify(PRIVACY),
          title="Privacy | gounscramble./",
          desc="How gounscramble./ handles what you type and what your browser sends."),
