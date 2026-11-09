@@ -59,7 +59,7 @@ HEADER = """<!--header-->
 <details class="menu">
 <summary aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></summary>
 <div class="menu-list">
-<a class="menu-brand" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="34" height="34" alt="" decoding="async"></a>
+<a class="menu-brand" href="/" aria-label="Go Unscramble home"><img class="cmx" src="assets/logo-comic-sm.png" width="50" height="42" alt="Go! Unscramble!" decoding="async"></a>
 <button type="button" class="menu-x" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg></button>
 <a href="/"@@CUR_home@@><svg class="mi" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Word unscrambler</a>
 <p class="menu-h">Word tools</p>
@@ -720,7 +720,7 @@ def asset_version(name):
 def seo_tags(p, url):
     """Open Graph, Twitter card and JSON-LD structured data for one page."""
     esc = lambda t: t.replace("&", "&amp;").replace('"', "&quot;")
-    img = SITE + "/assets/og.png?v=5"
+    img = SITE + "/assets/og.png?v=6"
     tags = [
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="gounscramble./">',
