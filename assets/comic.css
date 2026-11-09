@@ -75,3 +75,4 @@ html body .hero-band .opts .x{background:#fff!important;border:2px solid #0b0b0b
 html body .hero-band .opts .len-row select{min-width:84px;width:auto;height:34px;padding:0 22px 0 10px;box-sizing:border-box}
 html body .hero-band .opts .og-grid{gap:6px;flex-wrap:wrap}html body .hero-band .opts .x{width:34px;height:34px;flex:none}html body .hero-band .opts .opt input{max-width:100%}
 html body .hero-band .opts .len-row{display:flex;align-items:center;gap:6px}html body .hero-band .opts .len-row select{min-width:78px!important;padding:0 16px 0 8px!important}html body .hero-band .opts .og-grid{gap:4px}html body .hero-band .opts .opt input{min-width:0}
+html body .hero-band .opts{padding:14px 10px!important}html body .hero-band .opts .x{width:30px!important;height:30px!important;margin-left:-2px}
