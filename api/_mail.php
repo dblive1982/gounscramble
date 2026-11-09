@@ -6,28 +6,26 @@ function gu_email(string $to, string $subject, string $heading, string $paraHtml
     $c = config() ?: [];
     $site = rtrim($c['site'] ?? 'https://gounscramble.com', '/');
     $from = $c['mail_from'] ?? 'noreply@gounscramble.com';
-    $logo = $site . '/assets/logo.png';
+    $logo = $site . '/assets/logo-comic.png';
     $h = htmlspecialchars($heading, ENT_QUOTES, 'UTF-8');
     $btn = '';
     if ($btnText !== '' && $btnUrl !== '') {
         $u = htmlspecialchars($btnUrl, ENT_QUOTES, 'UTF-8');
         $t = htmlspecialchars($btnText, ENT_QUOTES, 'UTF-8');
-        $btn = '<p style="margin:26px 0 6px"><a href="' . $u . '" style="display:inline-block;background:#7c48b8;color:#ffffff;text-decoration:none;font-weight:700;font-size:17px;padding:13px 30px;border-radius:999px;font-family:Arial,Helvetica,sans-serif">' . $t . '</a></p>';
+        $btn = '<p style="margin:26px 0 6px"><a href="' . $u . '" style="display:inline-block;background:#ffee00;color:#130228;border:2px solid #130228;text-decoration:none;font-weight:800;font-size:17px;padding:12px 30px;border-radius:999px;font-family:Arial,Helvetica,sans-serif">' . $t . '</a></p>';
     }
-    $wm = $site . '/assets/wordmark.png';
-    $html = '<!doctype html><html><head><meta charset="utf-8"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light"></head><body style="margin:0;padding:0;background:#f4f1fa">'
-        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1fa"><tr><td align="center" style="padding:24px 12px">'
+    $html = '<!doctype html><html><head><meta charset="utf-8"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light"></head><body style="margin:0;padding:0;background:#f1f1f5">'
+        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f1f1f5"><tr><td align="center" style="padding:24px 12px">'
         . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">'
-        . '<tr><td align="center" style="background:#e6dcf6;border-radius:20px 20px 0 0;padding:26px 12px 22px">'
-        . '<img src="' . htmlspecialchars($logo, ENT_QUOTES, 'UTF-8') . '" width="64" height="64" alt="" style="display:block;border:0;height:64px;width:64px;margin:0 auto 12px">'
-        . '<img src="' . htmlspecialchars($wm, ENT_QUOTES, 'UTF-8') . '" width="190" height="29" alt="gounscramble." style="display:block;border:0;height:29px;width:190px;margin:0 auto"></td></tr>'
-        . '<tr><td style="background:#ffffff;border:1px solid #e0d8ee;border-top:0;border-radius:0 0 20px 20px;padding:28px 26px;font-family:Arial,Helvetica,sans-serif;color:#1c2230;font-size:16px;line-height:1.6">'
+        . '<tr><td align="center" style="background:#130228;border-radius:20px 20px 0 0;padding:26px 12px 22px">'
+        . '<img src="' . htmlspecialchars($logo, ENT_QUOTES, 'UTF-8') . '" width="190" height="159" alt="Go! Unscramble!" style="display:block;border:0;height:159px;width:190px;margin:0 auto"></td></tr>'
+        . '<tr><td style="background:#ffffff;border:2px solid #130228;border-top:0;border-radius:0 0 20px 20px;padding:28px 26px;font-family:Arial,Helvetica,sans-serif;color:#1c2230;font-size:16px;line-height:1.6">'
         . '<h1 style="margin:0 0 14px;font-size:26px;line-height:1.2;color:#1c2230">' . $h . '</h1>'
         . $paraHtml . $btn
         . '</td></tr>'
-        . '<tr><td align="center" style="padding:16px 8px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#667085">gounscramble. &middot; <a href="' . $site . '" style="color:#7c48b8">gounscramble.com</a></td></tr>'
+        . '<tr><td align="center" style="padding:16px 8px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#667085">Go! Unscramble! &middot; <a href="' . $site . '" style="color:#0b63b8">gounscramble.com</a></td></tr>'
         . '</table></td></tr></table></body></html>';
-    $text = $heading . "\n\n" . $paraText . ($btnUrl !== '' ? "\n\n" . $btnText . ": " . $btnUrl : '') . "\n\n-- gounscramble./, " . $site . "\n";
+    $text = $heading . "\n\n" . $paraText . ($btnUrl !== '' ? "\n\n" . $btnText . ": " . $btnUrl : '') . "\n\n-- Go! Unscramble!, " . $site . "\n";
 
     $b = 'gu' . bin2hex(random_bytes(8));
     $headers = "From: \"gounscramble./\" <$from>\r\n"

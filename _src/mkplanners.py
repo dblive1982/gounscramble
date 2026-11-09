@@ -14,21 +14,19 @@ pdfmetrics.registerFont(TTFont("R", FD + "LiberationSans-Regular.ttf"))
 pdfmetrics.registerFont(TTFont("B", FD + "LiberationSans-Bold.ttf"))
 pdfmetrics.registerFont(TTFont("I", FD + "LiberationSans-Italic.ttf"))
 
-BLUE = HexColor("#7c48b8"); SOFT = HexColor("#f1ebfa"); LINE = HexColor("#cfd6e4")
+BLUE = HexColor("#0b63b8"); SOFT = HexColor("#fff3a8"); LINE = HexColor("#cfd6e4")
 INK = HexColor("#1c2230"); MUT = HexColor("#667085"); WHITE = HexColor("#ffffff")
 M = 14 * mm
 URL = "gounscramble.com/planners.html"
 
 
 def brand(c, W, H):
-    """Logo head + wordmark, top right."""
+    """Go! Unscramble! comic logo, top right."""
     from reportlab.lib.utils import ImageReader
-    lg = ImageReader(os.path.join(root, "assets/logo.png")); wm = ImageReader(os.path.join(root, "assets/wordmark.png"))
-    lh = 11 * mm; lw = lh * 1.0
-    wh = 5.2 * mm; ww = wh * 900 / 131
-    x = W - M - ww - lw - 2.2 * mm; y = H - M - 12 * mm
+    lg = ImageReader(os.path.join(root, "assets/logo-comic.png"))
+    lh = 15 * mm; lw = lh * 5534 / 4640
+    x = W - M - lw; y = H - M - 15.5 * mm
     c.drawImage(lg, x, y, lw, lh, mask="auto")
-    c.drawImage(wm, x + lw + 2.2 * mm, y + (lh - wh) / 2, ww, wh, mask="auto")
 
 
 def header(c, W, H, title, sub):
