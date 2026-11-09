@@ -77,4 +77,4 @@ html body .hero-band .opts .og-grid{gap:6px;flex-wrap:wrap}html body .hero-band 
 html body .hero-band .opts .len-row{display:flex;align-items:center;gap:6px}html body .hero-band .opts .len-row select{min-width:78px!important;padding:0 16px 0 8px!important}html body .hero-band .opts .og-grid{gap:4px}html body .hero-band .opts .opt input{min-width:0}
 html body .hero-band .opts{padding:14px 10px!important}html body .hero-band .opts .x{width:30px!important;height:30px!important;margin-left:-2px}
 html body .hero-band .box #rack,html body .hero-band .box #rack:focus,html body .hero-band .box #rack:focus-visible,html body .hero-band .box input:focus,html body .hero-band .box input:focus-visible{outline:none!important;border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important}
-html body .hero-band .box:focus-within{box-shadow:5px 5px 0 #000,0 0 0 4px var(--yel)!important}
+html body .hero-band .box:focus-within{box-shadow:5px 5px 0 #000!important}
