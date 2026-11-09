@@ -66,3 +66,12 @@ html body .tile.ct svg.ic,html body .hub .hb-ic svg.ic{color:var(--blu)!importan
 html body .site-header .brand .cmx{height:54px}
 :root:not([data-theme="dark"]) body main h1,:root:not([data-theme="dark"]) body main h2,:root:not([data-theme="dark"]) body main h3{color:var(--navy)!important}
 .foot-logo .cmx{height:40px;width:auto;display:block}
+html body .hero-band .opts{background:var(--cream)!important;border:3px solid #0b0b0b!important;box-shadow:5px 5px 0 #000!important;border-radius:20px!important;padding:16px!important;color:#161320!important;margin-top:14px}
+html body .hero-band .opts *{color:#161320}
+html body .hero-band .opts .opt,html body .hero-band .opts label.opt{background:transparent!important;border:0!important;box-shadow:none!important;font-weight:700;color:#161320!important}
+html body .hero-band .opts .og-t{font-weight:800;color:var(--navy)!important}
+html body .hero-band .opts input,html body .hero-band .opts select{background:#fff!important;border:2px solid #0b0b0b!important;color:#161320!important;box-shadow:none!important}
+html body .hero-band .opts .x{background:#fff!important;border:2px solid #0b0b0b!important}
+html body .hero-band .opts .len-row select{min-width:84px;width:auto;height:34px;padding:0 22px 0 10px;box-sizing:border-box}
+html body .hero-band .opts .og-grid{gap:6px;flex-wrap:wrap}html body .hero-band .opts .x{width:34px;height:34px;flex:none}html body .hero-band .opts .opt input{max-width:100%}
+html body .hero-band .opts .len-row{display:flex;align-items:center;gap:6px}html body .hero-band .opts .len-row select{min-width:78px!important;padding:0 16px 0 8px!important}html body .hero-band .opts .og-grid{gap:4px}html body .hero-band .opts .opt input{min-width:0}
