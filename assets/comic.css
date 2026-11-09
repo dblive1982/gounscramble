@@ -1,6 +1,6 @@
 /* Go! Unscramble! comic theme: navy header and footer, cream cards with hard shadows, yellow buttons. Loads last. */
 :root:not([data-theme="dark"]),:root[data-theme="light"]{
-  --navy:#130228;--cream:#fffbea;--yel:#ffee00;--sky:#45b0e6;--blu:#0b63b8;--pg:#f1f1f5;
+  --navy:#130228;--cream:#fffbea;--yel:#ffee00;--sky:#45b0e6;--blu:#0b63b8;--pg:#e2e2d3;
   --bg:var(--pg);--band:var(--pg);--card:var(--cream);--soft:#ece6cf;--line:#0b0b0b;--ink:#161320;--heading:#130228;--muted:#555064;
   --primary:var(--blu);--green:var(--blu);--green-dark:#084a8c;--tile-bg:var(--yel);--tile-face:var(--navy);--on-accent:#0b0b0b;
   --sh:4px 4px 0 #0b0b0b;--sh-s:3px 3px 0 #0b0b0b}
@@ -78,3 +78,5 @@ html body .hero-band .opts .len-row{display:flex;align-items:center;gap:6px}html
 html body .hero-band .opts{padding:14px 10px!important}html body .hero-band .opts .x{width:30px!important;height:30px!important;margin-left:-2px}
 html body .hero-band .box #rack,html body .hero-band .box #rack:focus,html body .hero-band .box #rack:focus-visible,html body .hero-band .box input:focus,html body .hero-band .box input:focus-visible{outline:none!important;border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important}
 html body .hero-band .box:focus-within{box-shadow:5px 5px 0 #000!important}
+:root:not([data-theme="dark"]) html,:root:not([data-theme="dark"]) body,html:not([data-theme="dark"]) body[data-page],html:not([data-theme="dark"]) body{background:#e2e2d3!important;background-image:none!important}
+html:not([data-theme="dark"]){background:#e2e2d3!important;background-image:none!important}
