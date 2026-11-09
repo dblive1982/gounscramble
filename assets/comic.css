@@ -1,0 +1,68 @@
+/* Go! Unscramble! comic theme: navy header and footer, cream cards with hard shadows, yellow buttons. Loads last. */
+:root:not([data-theme="dark"]),:root[data-theme="light"]{
+  --navy:#130228;--cream:#fffbea;--yel:#ffee00;--sky:#45b0e6;--blu:#0b63b8;--pg:#f1f1f5;
+  --bg:var(--pg);--band:var(--pg);--card:var(--cream);--soft:#ece6cf;--line:#0b0b0b;--ink:#161320;--heading:#130228;--muted:#555064;
+  --primary:var(--blu);--green:var(--blu);--green-dark:#084a8c;--tile-bg:var(--yel);--tile-face:var(--navy);--on-accent:#0b0b0b;
+  --sh:4px 4px 0 #0b0b0b;--sh-s:3px 3px 0 #0b0b0b}
+:root:not([data-theme="dark"]) body{background:var(--pg)}
+:root:not([data-theme="dark"]) :focus-visible{outline:3px solid var(--blu);outline-offset:3px}
+
+/* Header and hero: one navy block with the logo on it */
+.site-header,body[data-page="home"] .site-header{background:var(--navy)!important;border:0!important;border-bottom:3px solid #0b0b0b!important}
+.site-header .wrap{padding:8px 16px;min-height:66px}
+.site-header .brand{display:flex;align-items:center}
+.site-header .brand .cmx{height:50px;width:auto;display:block}
+body[data-page="home"] .site-header{border-bottom:0!important}
+body[data-page="home"] .site-header .brand{visibility:hidden}
+.main-nav summary,.site-header .user-btn{width:44px;height:44px;background:var(--yel)!important;color:#0b0b0b!important;border:2px solid #0b0b0b!important;box-shadow:3px 3px 0 #000!important}
+.main-nav summary:hover,.site-header .user-btn:hover,.site-header .main-nav .menu[open] summary,.site-header .user-wrap:hover .user-btn{background:#fff!important}
+.hero-band{background:var(--navy)!important;border-bottom:3px solid #0b0b0b!important;padding-bottom:34px}
+body .hero-band .hm-top{padding-top:0}
+.hero-brand{margin:-6px 0 22px}
+.hero-brand .cmx{width:min(300px,72vw);height:auto;display:block;margin:0 auto}
+body .hero-band .box{background:#fff;border:3px solid #0b0b0b;box-shadow:5px 5px 0 #000}
+body .hm .go{width:auto;min-width:64px;height:48px;padding:0 16px;border-radius:999px;background:var(--yel);color:#0b0b0b;border:3px solid #0b0b0b;box-shadow:3px 3px 0 #000;font-weight:900;letter-spacing:.02em}
+body .hm .go:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+body .hm .go:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+body .hero-band .opt,body .hero-band .hm .opt{background:#fff;color:#0b0b0b;border:2px solid #0b0b0b;box-shadow:2px 2px 0 #000}
+.hero-band .hint,.hero-band .note,.hero-band .hm p{color:#e6e2f2}
+body .hero-band .opts{background:var(--cream);border:3px solid #0b0b0b;box-shadow:5px 5px 0 #000}
+
+/* Cards, panels, tools */
+:root:not([data-theme="dark"]) body .card,:root:not([data-theme="dark"]) body a.card,:root:not([data-theme="dark"]) body .panel,:root:not([data-theme="dark"]) .gm .tool,:root:not([data-theme="dark"]) .tool,:root:not([data-theme="dark"]) .stat,:root:not([data-theme="dark"]) .notice,:root:not([data-theme="dark"]) .lookup{background:var(--cream)!important;border:2px solid #0b0b0b!important;border-radius:18px!important;box-shadow:4px 4px 0 #0b0b0b!important}
+:root:not([data-theme="dark"]) body a.card:hover{background:#fff!important;box-shadow:6px 6px 0 #0b0b0b!important;transform:translate(-1px,-1px)!important}
+:root:not([data-theme="dark"]) body .card .icon,:root:not([data-theme="dark"]) body .card-icon{background:var(--yel)!important;border:2px solid #0b0b0b!important;color:#0b0b0b!important}
+
+/* Buttons and pills */
+:root:not([data-theme="dark"]) body .btn,:root:not([data-theme="dark"]) body button.btn,:root:not([data-theme="dark"]) body .gm .go,:root:not([data-theme="dark"]) body .gm button.go{background:var(--yel)!important;color:#0b0b0b!important;border:2px solid #0b0b0b!important;box-shadow:3px 3px 0 #0b0b0b!important;font-weight:800}
+:root:not([data-theme="dark"]) body .btn:hover,:root:not([data-theme="dark"]) body .gm .go:hover{background:#fff35c!important;transform:translate(-1px,-1px)}
+:root:not([data-theme="dark"]) body .btn.alt,:root:not([data-theme="dark"]) body .more summary,:root:not([data-theme="dark"]) .pill,:root:not([data-theme="dark"]) .gm .pill,:root:not([data-theme="dark"]) .gm .back{background:#fff!important;color:#0b0b0b!important;border:2px solid #0b0b0b!important;box-shadow:2px 2px 0 #0b0b0b!important;font-weight:700}
+:root:not([data-theme="dark"]) body .btn.alt:hover,:root:not([data-theme="dark"]) .pill:hover{background:#ffd8b0!important}
+:root:not([data-theme="dark"]) .go-tag{background:var(--yel);color:#0b0b0b;border:2px solid #0b0b0b;border-radius:8px}
+:root:not([data-theme="dark"]) .prose a,:root:not([data-theme="dark"]) .explore a,:root:not([data-theme="dark"]) .hub a{color:var(--blu)}
+:root:not([data-theme="dark"]) h1,:root:not([data-theme="dark"]) h2,:root:not([data-theme="dark"]) h3{color:var(--navy);font-weight:800}
+:root:not([data-theme="dark"]) input,:root:not([data-theme="dark"]) select,:root:not([data-theme="dark"]) textarea{border:2px solid #0b0b0b!important;background:#fff}
+
+/* Footer */
+.site-footer{background:var(--navy)!important;border-top:3px solid #0b0b0b!important;margin-top:48px;color:#e6e2f2}
+.site-footer .wrap,.site-footer .nav a,.site-footer a,.site-footer p,.site-footer .foot-c{color:#e6e2f2!important}
+.site-footer a:hover{color:var(--yel)!important}
+.site-footer h2,.site-footer h3,.site-footer strong{color:#fff!important}
+.menu-brand .cmx{height:42px;width:auto}
+
+/* Stronger overrides for the buttons the minimal theme styles with !important */
+html body .main-nav summary,html body .site-header .user-btn,html body .site-header .user-btn.pic{width:44px!important;height:44px!important;padding:0!important;border-radius:50%!important;background-color:var(--yel)!important;background-image:none!important;color:#0b0b0b!important;border:2px solid #0b0b0b!important;box-shadow:3px 3px 0 #000!important;display:inline-flex!important;align-items:center;justify-content:center}
+html body .site-header .user-btn.pic{background-size:cover!important;background-position:center!important;background-color:#fff!important}
+html body .site-header .user-btn:not(.pic) svg{display:block!important;width:26px;height:26px}
+html body .main-nav summary:hover,html body .site-header .user-btn:hover{background-color:#fff!important;text-decoration:none!important}
+html body .hm .go,html body .hm .go:hover,html body .hm .go:active,html body .hm .go:focus{background:var(--yel)!important;color:#0b0b0b!important;border:3px solid #0b0b0b!important;box-shadow:3px 3px 0 #000!important;filter:none!important;font-size:17px}
+html body .hm .go:hover{background:#fff35c!important;box-shadow:4px 4px 0 #000!important}
+html body .hero-band .box input{border:0!important;background:transparent!important;box-shadow:none!important}
+html body .ac .go,html body .ac .pill,html body .gm .go,html body .gm button.go,html body .btn,html body button.btn{background:var(--yel)!important;color:#0b0b0b!important;border:2px solid #0b0b0b!important;box-shadow:3px 3px 0 #000!important}
+html body .btn.alt,html body .more summary{background:#fff!important;color:#0b0b0b!important}
+html body .hero-band .box{border:3px solid #0b0b0b!important;box-shadow:5px 5px 0 #000!important;background:#fff!important}
+html body .t{background:var(--yel)!important;color:var(--navy)!important;border-color:#0b0b0b!important;box-shadow:0 2px 0 #0b0b0b!important}
+html body .tile.ct svg.ic,html body .hub .hb-ic svg.ic{color:var(--blu)!important}
+html body .site-header .brand .cmx{height:54px}
+:root:not([data-theme="dark"]) body main h1,:root:not([data-theme="dark"]) body main h2,:root:not([data-theme="dark"]) body main h3{color:var(--navy)!important}
+.foot-logo .cmx{height:40px;width:auto;display:block}

@@ -34,7 +34,7 @@ HEAD = """<!doctype html>
 <meta name="description" content="@@DESC@@">
 <link rel="canonical" href="@@CANON@@">
 @@SEO@@
-<meta name="theme-color" content="#7c48b8">
+<meta name="theme-color" content="#130228">
 <meta name="google-adsense-account" content="ca-pub-6517978259411056">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6517978259411056" crossorigin="anonymous"></script>
 <link rel="icon" href="favicon.png" type="image/png">
@@ -47,6 +47,7 @@ HEAD = """<!doctype html>
 @@HOMECSS@@
 <link rel="stylesheet" href="assets/minimal.css">
 <link rel="stylesheet" href="assets/dark.css">
+<link rel="stylesheet" href="assets/comic.css">
 <script>try{if(localStorage.getItem("gu-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 </head>
 <body data-page="@@PAGE@@">
@@ -86,7 +87,7 @@ HEADER = """<!--header-->
 </div>
 </details>
 </nav>
-<a class="brand" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="22" height="22" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="116" height="17" alt="gounscramble." decoding="async"></a>
+<a class="brand" href="/" aria-label="Go Unscramble home"><img class="cmx" src="assets/logo-comic-sm.png" width="62" height="52" alt="Go! Unscramble!" decoding="async"></a>
 <div class="user-wrap"><a class="user-btn" href="account.html" aria-label="Sign in or your account"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="17" r="7" fill="currentColor"/><path d="M6 40c0-9 6-14.5 14-14.5S34 31 34 40z" fill="currentColor"/></svg><span class="ub-t">Sign in</span></a><div class="user-pop" id="user-pop" role="menu" hidden><p class="up-n" id="up-n">Hi there</p><a href="account.html" role="menuitem">Your account</a><button type="button" id="up-out" role="menuitem">Sign out</button></div></div>
 
 </div></header>
@@ -117,7 +118,7 @@ def social_html():
 
 FOOTER = """<!--footer-->
 <footer class="site-footer"><div class="wrap">
-<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="19" height="19" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="100" height="15" alt="gounscramble." decoding="async"></a></div>
+<div class="foot-brand"><span class="foot-c">&copy; 2026</span><a class="foot-logo" href="/" aria-label="Go Unscramble home"><img class="cmx" src="assets/logo-comic-sm.png" width="52" height="44" alt="Go! Unscramble!" decoding="async"></a></div>
 <p class="foot-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg><span>Site secured using Encrypted HTTPS connection.</span></p>
 <p class="foot-legal"><b>Disclaimer:</b> everything on this site, including calculator results, word lists and tips, is for general information and entertainment only. It is not financial, tax, investment, legal, medical or other professional advice, and results may contain errors. We accept no responsibility for any loss or decision that comes from using it, so please check with a qualified professional before acting. See our <a href="terms.html">terms</a>.</p>
 <p class="foot-legal">We are not affiliated with SCRABBLE&reg;, Mattel, Spear, Hasbro, or Zynga with Friends in any way.</p>
@@ -312,12 +313,12 @@ FOOTER=FOOTER.replace('<footer class="site-footer"><div class="wrap">','<footer 
 HOME = """<main>
 <section class="hero-band"><div class="board hm hm-top">
 <h1 class="vh">Word unscrambler: unscramble letters into words</h1>
-<a class="hero-brand" href="/" aria-label="gounscramble./ home"><img class="mark" src="assets/logo.png" width="61" height="61" alt="" decoding="async"><img class="wmimg" src="assets/wordmark.png" width="260" height="38" alt="gounscramble." decoding="async"></a>
+<a class="hero-brand" href="/" aria-label="Go Unscramble home"><img class="cmx" src="assets/logo-comic.png" width="300" height="252" alt="Go! Unscramble!" decoding="async"></a>
 <form id="f" class="box" autocomplete="off">
 <svg class="sico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#9aa1ae" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
 <input id="rack" type="text" inputmode="text" enterkeyhint="search" maxlength="15" spellcheck="false" autocapitalize="off" placeholder="e.g. read?" aria-label="Your letters">
 <button class="x" id="clr" type="button" aria-label="Clear letters" hidden><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#000" stroke-width="2.6" stroke-linecap="round"/></svg></button>
-<button class="go" type="submit" aria-label="Unscramble">GO</button>
+<button class="go" type="submit" aria-label="Unscramble">GO!</button>
 </form>
 <p class="hint">Enter letters (use <i>?</i> or <i>*</i> as a wildcard). Max letters 15.</p>
 <div class="optrow"><span class="free-badge" aria-label="Free to use, no sign-up needed">FREE!</span>
@@ -792,7 +793,7 @@ def build_page(p):
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/wordblock.js"></script>')
     if acct:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/account.js"></script>')
-    for name in ("styles.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "wordblock.css", "wordblock.js", "logo.png", "wordmark.png"):
+    for name in ("styles.css", "comic.css", "engine.js", "app.js", "home.css", "home.js", "games.css", "games.js", "arcade.js", "print.js", "progress.js", "hub.js", "account.css", "account.js", "calc.js", "calcprint.js", "salary.js", "minimal.css", "dark.css", "wordblock.css", "wordblock.js", "logo.png", "wordmark.png"):
         page = page.replace("assets/%s\"" % name, "assets/%s?v=%s\"" % (name, asset_version(name)))
     for fav in ("favicon.png", "favicon-192.png", "apple-touch-icon.png"):
         try:
