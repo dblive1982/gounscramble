@@ -16,6 +16,7 @@ import planners as PL
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("GU_OUT") or os.path.join(ROOT, "site")
 SITE = "https://gounscramble.com"
+REVIEWED_TEXT = "10 November 2026"  # update when page text is reviewed
 
 CHEVRON = ('<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" '
            'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>')
@@ -570,11 +571,26 @@ TERMS = """<main><div class="wrap"><article class="prose">
 
 CONTACT = """<main><div class="wrap"><article class="prose">
 <h1>Contact</h1>
-<p>Questions, corrections or word suggestions? We would like to hear from you.</p>
+<p>Questions, corrections or word suggestions? We would like to hear from you. This is a small, independent site and a real person reads the messages.</p>
 <div class="cards guide-cards">
-<div class="card"><h3>Email us</h3><p>Send an email to <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>.</p></div>
-<div class="card"><h3>Missing or wrong word?</h3><p>If you think a word is missing or wrong, tell us the word and the game or dictionary you are using, and we will take a look. We read every message, but we cannot promise a reply to each one.</p></div>
+<div class="card"><h3>Email us</h3><p>Send an email to <a href="mailto:hello@gounscramble.com">hello@gounscramble.com</a>. We read every message, but we cannot promise a reply to each one.</p></div>
+<div class="card"><h3>Missing or wrong word?</h3><p>If you think a word is missing or wrong, tell us the word and the game or dictionary you are using, and we will take a look.</p></div>
+<div class="card"><h3>Found a mistake or a bug?</h3><p>Tell us which page you were on, what you typed in, what you expected and what you saw instead. A note of your device and browser helps us reproduce it. If a calculator gives a result that looks wrong, we want to know.</p></div>
 </div>
+<h2>What we can help with</h2>
+<ul>
+<li>Corrections to word lists, guides, calculators and planners.</li>
+<li>Problems using a tool, game or printable on your phone, tablet or computer.</li>
+<li>Questions about how the tools work. Start with the <a href="how-to-unscramble-words.html">guide to unscrambling words</a> and the <a href="faq.html">FAQ</a>.</li>
+<li>Privacy questions. See the <a href="privacy.html">privacy page</a> for what we collect and how to ask for your data to be removed.</li>
+</ul>
+<h2>What we cannot do</h2>
+<ul>
+<li>We cannot give personal financial, tax, legal or medical advice. The calculators are for general information, so check important decisions with a qualified professional.</li>
+<li>We will never ask for your password. If someone claiming to be us does, do not reply.</li>
+</ul>
+<h2>How we handle corrections</h2>
+<p>When we confirm a mistake we fix it, then update the page&rsquo;s &ldquo;last reviewed&rdquo; date. You can read more about who we are and how the tools work on the <a href="about.html">about page</a>.</p>
 </article></div></main>
 """
 
@@ -642,9 +658,9 @@ WORDBLOCK = open(os.path.join(ROOT, "wordblock_body.html"), encoding="utf-8").re
 PAGES = [
     dict(file="calculators.html", page="calculators", nav="calculators", body=CALC.hub(),
          title="Free Online Calculators | gounscramble./",
-         desc="Free online calculators: salary, income tax, mortgage, loan, compound interest, percentage, scientific, BMI, calorie, age, date and unit converter. Simple, fast and private."),
+         desc="Free online calculators for salary, income tax, mortgage, loans, savings, percentages, BMI, calories, dates and units. Simple, fast and private."),
     dict(file="index.html", page="home", nav="home", body=HOME,
-         title="gounscramble./ | Word Unscrambler, Puzzles, Calculators & Planners",
+         title="gounscramble./ | Word Unscrambler, Puzzles & Calculators",
          desc="Free word unscrambler and anagram solver, plus word games, puzzles, everyday calculators and free printable planners. Fast, free and private."),
     dict(file="anagram-solver.html", page="anagram", nav="anagram", body=ANAGRAM, skip="anagram",
          title="Anagram Solver | gounscramble./",
@@ -662,8 +678,8 @@ PAGES = [
          title="Sign in | gounscramble./",
          desc="Sign in or create a free gounscramble./ account."),
     dict(file="games.html", page="games", nav="games", body=GAMES,
-         title="Free Puzzles & Games: Wordle Global, Mini Crossword | gounscramble./",
-         desc="Free puzzles and games you can play in your browser: Wordle Global (a daily five-letter word game), a daily Mini Crossword, word search, Sudoku, Snakes and ladders, Connect 4, Tic tac toe, Maze, Memory match and Hangman, plus retro arcade games like Retro Snake, Brick Smash and Star Blaster."),
+         title="Free Puzzles & Games: Wordle, Crossword | gounscramble./",
+         desc="Free puzzles and games to play in your browser: Wordle Global, a daily Mini Crossword, word search, Sudoku, Connect 4, Hangman, retro arcade games and more."),
     dict(file="word-block.html", page="wordblock", nav="games", body=WORDBLOCK,
          title="Word Block: Free Block Puzzle with Words | gounscramble./",
          desc="Play Word Block, a free block puzzle game where the tiles are letters. Clear rows and columns, spell words for bonus points and build streaks."),
@@ -784,6 +800,12 @@ def build_page(p):
     head = head.replace("@@HOMECSS@@", extra_css)
     if games:
         head = head.replace("family=Inter:", "family=Press+Start+2P&amp;family=Inter:")
+    if p["page"] not in ("home", "account", "wordblock", "privacy", "terms", "credits", "contact", "games"):
+        reviewed = ('<div class="wrap"><p class="reviewed">Last reviewed %s by the Go Unscramble team. '
+                    '<a href="about.html">About us</a> &middot; <a href="contact.html">Report a mistake</a></p></div>' % REVIEWED_TEXT)
+        if "</main>" in body:
+            head_part, _, tail = body.rpartition("</main>")
+            body = head_part + reviewed + "</main>" + tail
     page = head + header + body + footer
     if home:
         page = page.replace('<script src="assets/app.js"></script>', '<script src="assets/progress.js"></script><script src="assets/home.js"></script><script src="assets/hub.js"></script>')
@@ -827,9 +849,25 @@ def guide_pages():
 
 
 def sitemap(pages):
-    urls = [SITE + "/" if p["file"] == "index.html" else SITE + "/" + p["file"] for p in pages if not p.get("noindex")]
+    """lastmod only moves when a page's content changes (state kept in lastmod.json next to build.py)."""
+    import hashlib, json, re as _re
+    state_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lastmod.json")
+    try: state = json.load(open(state_path))
+    except Exception: state = {}
+    today = datetime.date.today().isoformat()
+    rows = []
+    for p in pages:
+        if p.get("noindex"): continue
+        u = SITE + "/" if p["file"] == "index.html" else SITE + "/" + p["file"]
+        raw = open(os.path.join(OUT, p["file"]), encoding="utf-8").read()
+        h = hashlib.sha1(_re.sub(r"\?v=[0-9a-f]{6,}", "", raw).encode("utf-8")).hexdigest()[:16]
+        old = state.get(u)
+        if not old or old.get("h") != h: old = {"h": h, "d": today}
+        state[u] = old
+        rows.append((u, old["d"]))
+    open(state_path, "w").write(json.dumps(state, indent=0, sort_keys=True) + "\n")
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "".join("  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n" % (u, datetime.date.today().isoformat()) for u in urls) + "</urlset>\n")
+            + "".join("  <url><loc>%s</loc><lastmod>%s</lastmod></url>\n" % r for r in rows) + "</urlset>\n")
 
 
 def main():

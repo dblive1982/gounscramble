@@ -80,3 +80,28 @@ html body .hero-band .box #rack,html body .hero-band .box #rack:focus,html body 
 html body .hero-band .box:focus-within{box-shadow:5px 5px 0 #000!important}
 :root:not([data-theme="dark"]) html,:root:not([data-theme="dark"]) body,html:not([data-theme="dark"]) body[data-page],html:not([data-theme="dark"]) body{background:#e2e2d3!important;background-image:none!important}
 html:not([data-theme="dark"]){background:#e2e2d3!important;background-image:none!important}
+
+
+/* ===== More comic (light theme only). Kept calm so text stays easy to read and nothing competes with content or ads. ===== */
+/* Headline with a yellow marker stroke under it, like a comic caption */
+:root:not([data-theme="dark"]) body main h1{text-decoration:underline;text-decoration-color:var(--yel);text-decoration-thickness:.3em;text-underline-offset:-.14em;text-decoration-skip-ink:none}
+:root:not([data-theme="dark"]) body main .prose h2,:root:not([data-theme="dark"]) body main article h2{display:flex;align-items:center;gap:10px}
+:root:not([data-theme="dark"]) body main .prose h2::before,:root:not([data-theme="dark"]) body main article h2::before{content:"";flex:none;width:16px;height:16px;background:var(--yel);border:2px solid #0b0b0b;transform:rotate(12deg);box-shadow:2px 2px 0 #0b0b0b;border-radius:3px}
+/* Panels: pop up on hover, press down on click */
+:root:not([data-theme="dark"]) body a.card:hover,:root:not([data-theme="dark"]) body .tile:hover{transform:translate(-2px,-2px) rotate(-.4deg)!important}
+:root:not([data-theme="dark"]) body a.card:active,:root:not([data-theme="dark"]) body .btn:active{transform:translate(2px,2px)!important;box-shadow:1px 1px 0 #0b0b0b!important}
+/* Tip and note boxes as speech bubbles */
+:root:not([data-theme="dark"]) body .prose .note,:root:not([data-theme="dark"]) body main .tip{position:relative;background:#fff;border:2px solid #0b0b0b;border-radius:14px;padding:12px 16px;box-shadow:3px 3px 0 #0b0b0b;margin:18px 0 22px}
+:root:not([data-theme="dark"]) body .prose .note::after,:root:not([data-theme="dark"]) body main .tip::after{content:"";position:absolute;left:26px;bottom:-12px;width:16px;height:16px;background:#fff;border-right:2px solid #0b0b0b;border-bottom:2px solid #0b0b0b;transform:rotate(45deg)}
+/* Review line at the end of a page: a small caption box */
+.reviewed{margin:28px 0 0;padding:10px 14px;border:2px dashed #0b0b0b;border-radius:12px;background:var(--cream);font-size:.9rem;color:#3d3550;display:inline-block}
+.reviewed a{color:var(--blu);font-weight:700}
+/* Footer edge: a zig-zag comic panel border */
+.site-footer{position:relative;margin-top:60px!important}
+.site-footer::before{content:"";position:absolute;left:0;right:0;top:-17px;height:17px;background:linear-gradient(135deg,var(--navy) 50%,transparent 50%) 0 0/24px 17px repeat-x,linear-gradient(225deg,var(--navy) 50%,transparent 50%) 0 0/24px 17px repeat-x;pointer-events:none}
+/* Result numbers pop in (motion off for people who ask for less) */
+@keyframes gu-pop{0%{transform:scale(.92);opacity:.4}60%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+:root:not([data-theme="dark"]) body .result,:root:not([data-theme="dark"]) body .res,:root:not([data-theme="dark"]) body #out>*{animation:gu-pop .28s ease-out}
+@media (prefers-reduced-motion:reduce){:root:not([data-theme="dark"]) body *{animation:none!important;transition:none!important}}
+/* Keep sticker-style effects tidy on small screens */
+@media (max-width:480px){.site-footer::before{height:12px;top:-12px;background-size:18px 12px}}

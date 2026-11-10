@@ -492,6 +492,16 @@ CASE_EXTRA = """<section class="block narrow">
 """
 
 TOOLS_EXTRA = """<section class="block narrow">
+<h2>Which tool should I use?</h2>
+<ul>
+<li><b>Stuck in a word game?</b> Use the <a href="/">word unscrambler</a> with your letters. Add a ? or * for a blank tile.</li>
+<li><b>Looking for every word you can make?</b> The <a href="anagram-solver.html">anagram solver</a> lists them, longest first.</li>
+<li><b>Checking an essay or post?</b> Paste it into the <a href="word-counter.html">word counter</a> for words, characters, sentences and reading time.</li>
+<li><b>Fixing capital letters?</b> The <a href="case-converter.html">case converter</a> changes text to UPPER, lower, Title or Sentence case in one click.</li>
+<li><b>Need an idea or a fair pick?</b> The <a href="random-word-picker.html">random word picker</a> draws words from the same dictionary.</li>
+</ul>
+</section>
+<section class="block narrow">
 <h2>About these tools</h2>
 <p>Everything here runs in your browser, so the letters and text you type stay on your device. There is nothing to install, and an account is optional.</p>
 <p>The <strong>word unscrambler</strong> and <strong>anagram solver</strong> share a dictionary of about 173,000 words and support blank tiles. The <strong>random word picker</strong> draws from the same list. The <strong>word counter</strong> and <strong>case converter</strong> work on any text you paste in.</p>

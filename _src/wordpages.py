@@ -150,6 +150,12 @@ def build(words):
     for n in SUB_LENGTHS:
         sec.append('<h2>%s-letter words by first letter</h2><div class="jump">%s</div>' % (NUM[n].capitalize(), " ".join('<a href="%s">%s</a>' % (f_ls(n, l), l.upper()) for l in letters if len(by_ls.get((n, l), [])) >= MIN_WORDS)))
     sec.append('<h2>Special letters</h2><div class="jump"><a href="words-with-q-without-u.html">Words with Q but no U</a> <a href="words-with-z.html">Words with Z</a> <a href="words-with-j-and-x.html">Words with J and X</a></div>')
+    sec.append('<h2>How to use the word lists</h2>'
+               '<p>These lists are handy when you are stuck in a word game, setting a puzzle or just curious. Pick a length to see every word of that size, or pick a first letter to see the words that start with it. Each page shows how many words it holds and highlights the short and high-scoring ones, which are the words that win games.</p>'
+               '<ul><li><b>For Scrabble and Words With Friends:</b> learn the two-letter and three-letter lists first. They let you fit tiles into tight spaces and score on more turns.</li>'
+               '<li><b>For tricky letters:</b> use the special-letter lists for Q without U, Z, and J and X.</li>'
+               '<li><b>For the family-friendly version:</b> use the &ldquo;Hide offensive words&rdquo; switch on any list page. Your choice is remembered on your device.</li></ul>'
+               '<p>The lists come from the ENABLE word list, which suits US Scrabble and Words With Friends. If you play by UK Scrabble rules, a word can be valid there and missing here, so check it in the <a href="/">word unscrambler</a> with the UK dictionary selected.</p>')
     sec.append('<p>Learn how the lists work on the <a href="word-lists-explained.html">word lists explained</a> page, or <a href="/">unscramble your own letters</a>.</p>')
     pages["word-lists.html"] = ("Word Lists by Length and First Letter",
         "Browse word lists by length and first letter: two to eight letter words and words starting with every letter, from the ENABLE list.", "\n".join(sec))
